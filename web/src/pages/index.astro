@@ -1,0 +1,65 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import FeatureCard from '@/components/FeatureCard.astro';
+import { translation } from '@/i18n/utils';
+
+const _ = translation('zh');
+---
+
+<Layout
+  title={_.site.title}
+  description={_.site.description}
+  lang="zh"
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-primary-50 via-white to-blue-50">
+    <div class="mx-auto max-w-6xl px-4 py-20 text-center">
+      <h1 class="mb-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+        {_.home.hero_title}
+      </h1>
+      <p class="mx-auto mb-10 max-w-2xl text-lg text-gray-600">
+        {_.home.hero_subtitle}
+      </p>
+      <div class="flex items-center justify-center gap-4">
+        <a href="/download/" class="rounded-lg bg-primary-600 px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 transition-all">
+          {_.home.hero_cta}
+        </a>
+        <a href="/about/" class="rounded-lg border border-gray-300 bg-white px-8 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all">
+          {_.home.hero_secondary}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-12 text-center text-3xl font-bold text-gray-900">{_.home.features_title}</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {_.home.features.map((f, i) => (
+          <FeatureCard
+            key={i}
+            icon={['compress','watermark','convert','rename','key','history'][i]}
+            title={f.title}
+            description={f.desc}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="bg-primary-600 py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-10 text-center text-2xl font-bold text-white">{_.home.stats_title}</h2>
+      <div class="grid gap-8 sm:grid-cols-4">
+        {_.home.stats.map((s) => (
+          <div class="text-center text-white">
+            <div class="text-4xl font-bold">{s.value}</div>
+            <div class="mt-2 text-sm text-primary-100">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

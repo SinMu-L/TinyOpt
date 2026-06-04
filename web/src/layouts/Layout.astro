@@ -1,0 +1,86 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { translation } from '@/i18n/utils';
+import '@/styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  lang?: 'zh' | 'en';
+  ogImage?: string;
+  noindex?: boolean;
+  canonical?: string;
+}
+
+const { title, description, lang = 'zh', ogImage, noindex, canonical } = Astro.props;
+const _ = translation(lang);
+const siteTitle = _.site.title;
+const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+const locale = lang === 'en' ? 'en-US' : 'zh-CN';
+const baseUrl = 'https://tinyjpg-compressor.com';
+---
+
+<!DOCTYPE html>
+<html lang={locale}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content={locale} />
+  <meta property="og:site_name" content={siteTitle} />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+  {canonical && <link rel="canonical" href={canonical} />}
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": siteTitle,
+    "operatingSystem": "Windows 10/11",
+    "applicationCategory": "MultimediaApplication",
+    "description": description,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "TinyJPG Team"
+    }
+  })}></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
+  <link rel="alternate icon" href="/favicon.ico" sizes="any" />
+
+  <!-- Alternate language links -->
+  <link rel="alternate" hreflang="x-default" href={baseUrl} />
+  <link rel="alternate" hreflang="zh-CN" href={`${baseUrl}${Astro.url.pathname.startsWith('/en') ? Astro.url.pathname.replace(/^\/en/, '') || '/' : Astro.url.pathname}`} />
+  <link rel="alternate" hreflang="en-US" href={`${baseUrl}${Astro.url.pathname.startsWith('/en') ? Astro.url.pathname : '/en' + (Astro.url.pathname === '/' ? '' : Astro.url.pathname)}`} />
+</head>
+<body class="flex min-h-screen flex-col">
+  <Header lang={lang} />
+  <main class="flex-1">
+    <slot />
+  </main>
+  <Footer lang={lang} />
+</body>
+</html>

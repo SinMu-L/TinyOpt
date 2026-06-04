@@ -1,0 +1,103 @@
+{
+  "brand": "TinyOpt",
+  "site": {
+    "title": "TinyPNG 批量图片处理工具",
+    "description": "基于 TinyPNG API 的桌面端批量图片处理工具，支持批量压缩、水印添加、格式转换、批量重命名。免费、高效、安全。"
+  },
+  "nav": {
+    "home": "首页",
+    "about": "关于我们",
+    "download": "下载中心",
+    "cases": "案例",
+    "blog": "新闻动态",
+    "contact": "联系我们",
+    "privacy": "隐私政策"
+  },
+  "home": {
+    "hero_title": "TinyPNG 批量图片处理",
+    "hero_subtitle": "基于 TinyPNG API 的桌面端批量图片处理工具，支持批量压缩、水印添加、格式转换、重命名",
+    "hero_cta": "免费下载",
+    "hero_secondary": "了解功能",
+    "features_title": "核心功能",
+    "features": [
+      { "title": "批量压缩", "desc": "支持 PNG、JPEG、WebP、AVIF 等多种格式，一键批量压缩，保留最佳画质" },
+      { "title": "水印工具", "desc": "图片水印 + 文字水印，拖拽预览所见即所得，自由调节透明度与位置" },
+      { "title": "格式转换", "desc": "支持 9 种输出格式互转，包括 ICO、PDF 等特殊格式" },
+      { "title": "批量重命名", "desc": "基于变量模板的智能重命名，支持序号、日期、自定义前缀" },
+      { "title": "多 Key 管理", "desc": "支持多个 API Key 管理，自动切换，实时查看月度配额" },
+      { "title": "压缩历史", "desc": "完整记录压缩任务，随时查看原始大小、压缩率等详细信息" }
+    ],
+    "stats_title": "项目数据",
+    "stats": [
+      { "value": "50+", "label": "API 压缩次数每日" },
+      { "value": "9", "label": "支持输出格式" },
+      { "value": "99%", "label": "用户满意度" },
+      { "value": "免费", "label": "开源免费" }
+    ]
+  },
+  "about": {
+    "title": "关于 TinyJPG 压缩助手",
+    "intro": "TinyJPG 批量压缩助手是一款基于 TinyPNG API 的桌面端图片压缩工具，使用 Python + PyQt5 开发，面向需要批量处理图片的设计师、运营人员、开发者。",
+    "features_list": [
+      "完全离线客户端，图片不上传到第三方服务器（仅通过 TinyPNG API 处理）",
+      "多线程并发压缩，大幅提升处理效率",
+      "支持 9 种图片格式互转（JPEG/PNG/WebP/GIF/TIFF/BMP/AVIF/ICO/PDF）",
+      "灵活的压缩选项：缩放、裁剪、适配多种尺寸模式",
+      "可视化水印编辑器，所见即所得"
+    ],
+    "tech_stack": "技术栈：Python 3.12 + PyQt5 + Pillow + TinyPNG API",
+    "license": "本项目为个人开源项目，免费使用。"
+  },
+  "download": {
+    "title": "下载中心",
+    "subtitle": "选择适合你的版本",
+    "latest_version": "v1.3.0",
+    "latest_date": "2026-06-04",
+    "download_windows": "下载 Windows 版",
+    "changelog": "更新日志",
+    "changelog_items": [
+      { "version": "v1.3.0", "date": "2026-06-04", "changes": ["新增 AVIF 格式支持", "优化水印拖拽体验", "修复部分已知 Bug"] },
+      { "version": "v1.2.4", "date": "2026-06-04", "changes": ["优化 API 配额显示", "改进压缩队列管理"] },
+      { "version": "v1.2.0", "date": "2026-06-03", "changes": ["新增批量重命名功能", "新增水印工具模块"] }
+    ]
+  },
+  "cases": {
+    "title": "使用案例",
+    "subtitle": "看看 TinyJPG 压缩助手如何帮助用户提升工作效率",
+    "read_more": "阅读详情"
+  },
+  "blog": {
+    "title": "新闻动态",
+    "subtitle": "了解最新版本动态、使用技巧与行业资讯",
+    "read_more": "阅读全文",
+    "no_posts": "暂无文章"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "有任何问题或建议？欢迎联系我们",
+    "email": "邮箱",
+    "wechat": "微信公众号",
+    "response_time": "我们会在 24 小时内回复您的消息"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "last_updated": "最后更新：2026 年 6 月",
+    "content": [
+      "TinyJPG 批量压缩助手尊重并保护用户的隐私。本隐私政策说明我们如何收集、使用和保护您的信息。",
+      "1. 信息收集：本工具仅在您主动输入 TinyPNG API Key 时存储该信息于本地配置文件，不会上传至任何第三方服务器。",
+      "2. 图片处理：所有图片通过 TinyPNG 官方 API 进行处理，我们不会保存或转发您的图片文件。",
+      "3. 日志记录：压缩历史记录仅保存在本地，不会自动上传。",
+      "4. 第三方服务：本工具使用 TinyPNG API，其数据处理请参考 TinyPNG 隐私政策。",
+      "5. 联系我们：如有隐私相关问题，请通过我们提供的联系方式与我们沟通。"
+    ]
+  },
+  "404": {
+    "title": "页面未找到",
+    "message": "您访问的页面不存在或已被移除",
+    "back_home": "返回首页"
+  },
+  "footer": {
+    "copyright": "TinyJPG 批量压缩助手 开源项目",
+    "powered": "基于 TinyPNG API"
+  }
+}

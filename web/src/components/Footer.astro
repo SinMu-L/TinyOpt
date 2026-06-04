@@ -1,0 +1,40 @@
+---
+import { translation } from '@/i18n/utils';
+
+export interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const _ = translation(lang);
+---
+
+<footer class="border-t border-gray-100 bg-gray-50">
+  <div class="mx-auto max-w-6xl px-4 py-8">
+    <div class="grid gap-8 sm:grid-cols-3">
+      <div>
+        <h3 class="mb-3 text-sm font-semibold text-gray-900">TinyJPG</h3>
+        <p class="text-sm text-gray-500">{_.home.hero_subtitle}</p>
+      </div>
+      <div>
+        <h3 class="mb-3 text-sm font-semibold text-gray-900">{_.nav.contact}</h3>
+        <ul class="space-y-2 text-sm text-gray-500">
+          <li>Email: sinmu.li@foxmail.com</li>
+          <li><a href="https://github.com" class="hover:text-primary-600 transition-colors">GitHub</a></li>
+
+        </ul>
+      </div>
+      <div>
+        <h3 class="mb-3 text-sm font-semibold text-gray-900">{lang === 'en' ? 'Links' : '相关链接'}</h3>
+        <ul class="space-y-2 text-sm text-gray-500">
+          <li><a href={lang === 'en' ? '/en/privacy/' : '/privacy/'} class="hover:text-primary-600 transition-colors">{_.nav.privacy}</a></li>
+          <li><a href="https://tinypng.com" class="hover:text-primary-600 transition-colors" target="_blank">TinyPNG</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-8 border-t border-gray-200 pt-6 text-center text-xs text-gray-400">
+      <p>&copy; {new Date().getFullYear()} {_.footer.copyright}</p>
+      <p class="mt-1">{_.footer.powered}</p>
+    </div>
+  </div>
+</footer>

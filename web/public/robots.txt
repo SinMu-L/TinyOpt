@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tinyjpg-compressor.com/sitemap.xml

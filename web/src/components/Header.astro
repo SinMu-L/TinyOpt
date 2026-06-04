@@ -1,0 +1,50 @@
+---
+import { translation } from '@/i18n/utils';
+
+export interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const _ = translation(lang);
+const pathname = Astro.url.pathname;
+
+function isActive(path: string): boolean {
+  if (path === '/') return pathname === '/' || pathname === '/en/';
+  return pathname.startsWith(path);
+}
+---
+
+<header class="sticky top-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <a href={lang === 'en' ? '/en/' : '/'} class="flex items-center gap-2 text-lg font-bold text-primary-600 hover:text-primary-700">
+      <img src="/images/logo.svg" alt="TinyOpt" class="h-8 w-8" />
+      {_.brand}
+    </a>
+
+    <div class="flex items-center gap-6 text-sm font-medium text-gray-600">
+      <a href={lang === 'en' ? '/en/' : '/'} class={`hover:text-primary-600 transition-colors ${isActive('/') && (pathname === '/' || pathname === '/en/') ? 'text-primary-600' : ''}`}>
+        {_.nav.home}
+      </a>
+      <a href={lang === 'en' ? '/en/about/' : '/about/'} class={`hover:text-primary-600 transition-colors ${isActive('/about') ? 'text-primary-600' : ''}`}>
+        {_.nav.about}
+      </a>
+      <a href={lang === 'en' ? '/en/download/' : '/download/'} class={`hover:text-primary-600 transition-colors ${isActive('/download') ? 'text-primary-600' : ''}`}>
+        {_.nav.download}
+      </a>
+      <a href={lang === 'en' ? '/en/cases/' : '/cases/'} class={`hover:text-primary-600 transition-colors ${isActive('/cases') ? 'text-primary-600' : ''}`}>
+        {_.nav.cases}
+      </a>
+      <a href={lang === 'en' ? '/en/blog/' : '/blog/'} class={`hover:text-primary-600 transition-colors ${isActive('/blog') ? 'text-primary-600' : ''}`}>
+        {_.nav.blog}
+      </a>
+      <a href={lang === 'en' ? '/en/contact/' : '/contact/'} class={`hover:text-primary-600 transition-colors ${isActive('/contact') ? 'text-primary-600' : ''}`}>
+        {_.nav.contact}
+      </a>
+
+      <a href={lang === 'en' ? '/' : '/en/'} class="ml-2 rounded-full border border-gray-300 px-3 py-1 text-xs hover:bg-gray-50 transition-colors">
+        {lang === 'en' ? '中文' : 'EN'}
+      </a>
+    </div>
+  </nav>
+</header>

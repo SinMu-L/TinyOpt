@@ -1,0 +1,32 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { translation } from '@/i18n/utils';
+
+const _ = translation('zh');
+---
+
+<Layout title={_.about.title} description={_.site.description} lang="zh">
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-3xl px-4">
+      <h1 class="mb-8 text-3xl font-bold text-gray-900">{_.about.title}</h1>
+      <p class="mb-8 text-lg leading-relaxed text-gray-600">{_.about.intro}</p>
+
+      <h2 class="mb-4 text-xl font-semibold text-gray-900">{_.features_title || '功能特点'}</h2>
+      <ul class="mb-8 space-y-3">
+        {_.about.features_list.map((item) => (
+          <li class="flex items-start gap-3 text-gray-600">
+            <svg class="mt-1 h-5 w-5 shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="rounded-lg bg-gray-50 p-6 text-sm text-gray-500">
+        <p class="mb-2">{_.about.tech_stack}</p>
+        <p>{_.about.license}</p>
+      </div>
+    </div>
+  </section>
+</Layout>
