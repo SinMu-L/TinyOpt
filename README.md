@@ -1,5 +1,7 @@
 # TinyJPG 批量压缩助手
 
+> 🌐 [seojeck.com](https://seojeck.com) — 官方网站
+
 一款 Windows 桌面工具，集**图片批量压缩**、**水印添加**、**批量重命名**于一体，基于 TinyPNG API 实现高效的图片无损压缩。
 
 ## 功能
@@ -30,7 +32,7 @@
 
 ## 快速使用
 
-1. 从 [Releases](https://github.com/user/repo/releases) 下载最新版 exe，直接运行（无需安装）
+1. 从 [Releases](https://github.com/SinMu-L/TinyOpt/releases) 下载最新版 exe，直接运行（无需安装）
 2. 在「密钥管理」中添加你的 TinyPNG API Key（免费申请：https://tinypng.com/developers）
 3. 切换到「压缩任务」添加图片，设置输出目录和参数，点击「开始压缩」
 4. 水印工具和批量重命名分别在对应标签页操作
