@@ -6,7 +6,7 @@ import datetime
 current_date = datetime.datetime.now().strftime('%Y%m%d')
 
 # 定义你的基础版本号
-version = "v1.3.1"
+version = "v1.3.2"
 
 # 拼接成最终的程序名称：TinyJPG_Compressor_v1.0.0_20260529
 app_name = f"TinyJPG_Compressor_{version}_{current_date}"
