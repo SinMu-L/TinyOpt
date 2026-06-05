@@ -1,121 +1,117 @@
 ---
-title: Image Format Conversion Guide — When to Use JPEG, PNG, WebP, or AVIF
+title: JPEG, PNG, WebP, or AVIF? A Real-World Benchmark of 9 Image Formats
 date: 2026-06-08
 lang: en
-description: A practical guide to choosing the right image format. Compare JPEG, PNG, WebP, AVIF, and more to balance quality, file size, and compatibility.
-tags: [image-format, webperf, guide]
+description: A practical format comparison with real benchmark data. JPEG vs PNG vs WebP vs AVIF vs GIF — which format should you use, and when? Includes TinyJPG's 9-format conversion.
+tags: [image-format, webperf, guide, benchmark]
 ---
 
-## Introduction
+Choosing the wrong image format is one of the most common — and most easily fixable — performance mistakes on the web. The right format can cut your page weight in half with zero visible quality loss.
 
-Choosing the right image format is one of the most impactful performance decisions you can make. With TinyJPG Compressor supporting 9 output formats — JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, and PDF — knowing which one to use can save bandwidth, improve load times, and preserve image quality.
+I tested a 2.4MB photographic image across every major format using TinyJPG Compressor. Here are the results.
 
-## 1. Real-World Comparison
+## Real-World Format Benchmark
 
-> **Experience** — Practical format comparison with real images
+| Format | Size | Reduction | Visual Quality | Best For |
+|--------|------|-----------|---------------|----------|
+| Original | 2.4 MB | — | 100% | — |
+| JPEG (Q85) | 380 KB | 84% | Excellent | Photos, universal compatibility |
+| PNG-24 | 1.8 MB | 25% | Lossless | Screenshots, icons, transparency |
+| **WebP** | **260 KB** | **89%** | **Excellent** | **Web use — best all-rounder** |
+| **AVIF** | **190 KB** | **92%** | **Excellent** | **Cutting-edge web, max compression** |
+| GIF | 4.1 MB | -70% | Poor (photo) | Simple animations only |
 
-I tested a 2.4MB photographic image across all major formats using TinyJPG Compressor. Here are the results:
+**Key takeaway**: WebP is the sweet spot for most web use. AVIF goes further but has lower browser coverage. JPEG remains a reliable fallback.
 
-| Format | Size | Reduction | Quality (visual) |
-|--------|------|-----------|-----------------|
-| Original | 2.4 MB | — | 100% |
-| JPEG (Q85) | 380 KB | 84% | Excellent |
-| PNG-24 | 1.8 MB | 25% | Lossless |
-| WebP | 260 KB | 89% | Excellent |
-| AVIF | 190 KB | 92% | Excellent |
-| GIF | 4.1 MB | -70% | Poor (photo) |
+👉 [Download TinyJPG and test formats yourself](/download/)
 
-**Key takeaway**: WebP and AVIF offer the best compression ratios, but compatibility varies.
-
-## 2. Format Deep Dive
-
-> **Expertise** — Technical characteristics of each format
-
-### JPEG (.jpg)
-- **Best for**: Photographs, complex gradients
-- **Compression**: Lossy, adjustable quality
-- **Pros**: Universal browser support, small file size
-- **Cons**: No transparency, no animation
-
-### PNG (.png)
-- **Best for**: Screenshots, icons, graphics with text
-- **Compression**: Lossless
-- **Pros**: Full transparency support, perfect quality
-- **Cons**: Larger file size than JPEG for photos
-
-### WebP (.webp)
-- **Best for**: Web use — photos and graphics
-- **Compression**: Lossy or lossless
-- **Pros**: 25-35% smaller than JPEG at same quality
-- **Cons**: Limited legacy browser support
-
-### AVIF (.avif)
-- **Best for**: Cutting-edge web applications
-- **Compression**: Lossy or lossless (AV1 codec)
-- **Pros**: Best compression ratio, HDR support
-- **Cons**: Limited browser support (Chrome, Firefox)
-
-### Additional Formats
-
-| Format | Primary Use |
-|--------|------------|
-| **GIF** | Simple animations |
-| **TIFF** | Print publishing, archival |
-| **BMP** | Legacy compatibility |
-| **ICO** | Windows icons, favicons |
-| **PDF** | Documents, presentations |
-
-## 3. Format Selection Guide
-
-> **Authoritativeness** — Professional recommendations
+## Format by Use Case
 
 ### Web Development
-
 ```
-Photos on your site → WebP (with JPEG fallback)
-Icons and logos → PNG 32px-64px (or SVG when possible)
+Photos → WebP (with JPEG fallback)
+Icons → PNG 32-64px (SVG preferred when possible)
 Hero images → AVIF (with WebP fallback)
 Screenshots → PNG or WebP lossless
+Favicons → ICO (TinyJPG supports ICO output)
 ```
 
 ### E-Commerce
-
 ```
-Product photos → JPEG (Q80-85)
+Product photos → JPEG Q80-85
 Product thumbnails → WebP
 Banners → WebP
 Transparent overlays → PNG
 ```
 
 ### Print & Publishing
-
 ```
 Print-ready → TIFF or high-quality JPEG
 Archival → PNG lossless or TIFF
-Documents → PDF
+Documents → PDF (TinyJPG converts images to PDF)
 ```
 
-### Conversion Notes for TinyJPG
+## 01. WebP — The Current Sweet Spot
 
-When converting **BMP** files, TinyJPG automatically converts them to PNG first before compression — no manual step needed.
+WebP reduces file size by 25-35% compared to JPEG at the same quality. Chrome, Firefox, Edge, and Safari all support it — covering roughly 96% of browsers.
 
-ICO and PDF outputs are processed locally via Pillow (not the TinyPNG API), which means:
-- ICO: Converted with RGBA support, 256x256px default
-- PDF: Converted at 150 DPI resolution, RGB color space
+If you're still defaulting to JPEG for web images, switching to WebP is the single easiest optimization with the biggest impact.
 
-## 4. Important Considerations
+## 02. AVIF — Maximum Compression
 
-> **Trustworthiness** — Honest about trade-offs
+AVIF uses the AV1 codec and achieves significantly better compression than WebP. The trade-off: slightly lower browser adoption (Safari's support is still maturing).
 
-- **AVIF and WebP** are not supported in all browsers — always provide fallbacks
-- **Lossy compression** is irreversible — keep original files for archival
-- **Format conversion** cannot improve quality, only preserve or reduce it
-- TinyJPG's format conversion maintains the original dimensions unless you enable resize
+Use AVIF for hero images and large banners where every kilobyte counts. Always provide a WebP or JPEG fallback.
+
+## 03. JPEG — Still Relevant
+
+JPEG isn't going away. It offers universal browser support and excellent compression for photographic content. Use it as your fallback format and for audiences that need maximum compatibility.
+
+Rule of thumb: JPEG Q80-85 is the sweet spot where quality and file size meet.
+
+## 04. PNG — When You Need Transparency
+
+PNG is the go-to for screenshots, icons, and graphics with text. It's lossless, supports full alpha transparency, but produces larger files than JPEG for photos.
+
+For web use: prefer WebP for photos, use PNG only when you need transparency or pixel-perfect rendering.
+
+## 05. Special Formats: ICO, PDF, TIFF, BMP, GIF
+
+| Format | Primary Use | Note |
+|--------|-------------|------|
+| **ICO** | Windows icons, favicons | Processed locally by Pillow, 256x256 RGBA |
+| **PDF** | Documents, presentations | Processed locally, 150 DPI RGB |
+| **TIFF** | Print publishing, archival | High quality, large files |
+| **BMP** | Legacy compatibility | Avoid for web, auto-converted to PNG by TinyJPG |
+| **GIF** | Simple animations | Poor for photos, use WebP/AVIF for animated images |
+
+## Important Notes
+
+- AVIF and WebP need fallbacks for legacy browsers
+- Lossy compression is irreversible — keep originals for archival
+- Format conversion can't improve quality, only preserve or reduce it
+- TinyJPG maintains original dimensions unless resize is enabled
+- BMP files are auto-converted to PNG before compression
+
+## FAQ
+
+**01. Which format is best for website photos?**
+WebP. It's supported by 96%+ of browsers, compresses 25-35% better than JPEG, and is easy to serve with a JPEG fallback.
+
+**02. Is AVIF ready for production use?**
+Yes, with fallbacks. Chrome and Firefox have solid AVIF support. Safari is catching up. Serve AVIF with WebP fallback for best coverage.
+
+**03. Does format conversion affect image dimensions?**
+No. TinyJPG preserves original dimensions during format conversion. Use the resize option separately if you need to change dimensions.
+
+**04. Can I convert multiple images to different formats in one batch?**
+One batch uses one output format. Run separate batches for different formats.
+
+**05. What formats does TinyJPG support for input and output?**
+Input: JPG, PNG, WebP, AVIF, BMP, GIF, TIFF. Output: JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF.
 
 ## Summary
 
-The best format depends on your specific use case. For web use, WebP is currently the sweet spot for quality vs. size vs. compatibility. For maximum compression, AVIF leads the pack. And for universal compatibility, JPEG and PNG remain reliable choices.
+The best format depends on your use case. For web: WebP is the sweet spot. For maximum compression: AVIF. For universal compatibility: JPEG. For transparency: PNG.
 
-With TinyJPG Compressor's 9-format support, you can test different formats and find the perfect balance for your needs.
-
-Download: [TinyJPG Compressor](/en/download/)
+Download [TinyJPG Compressor](/download/) and benchmark formats with your own images.

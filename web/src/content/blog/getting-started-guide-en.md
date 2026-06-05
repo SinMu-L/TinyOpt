@@ -1,95 +1,92 @@
 ---
-title: Getting Started with TinyJPG Compressor — From Download to First Compression in 3 Minutes
-date: 2026-06-11
+title: First Time Using TinyJPG? From Download to Compressing 150 Images in Under 10 Minutes
+date: 2026-06-09
 lang: en
-description: A complete beginner's guide to TinyJPG Compressor — covering download, API Key setup, and your first batch compression step by step.
-tags: [beginner, guide, tutorial]
+description: A complete beginner's guide to TinyJPG Compressor. Download, get your API key, and run your first batch compression — all in under 10 minutes.
+tags: [beginners-guide, getting-started, tutorial]
 ---
 
-## Introduction
+The first time I opened TinyJPG, I had 150 event photos that needed to go into the company CMS. Each file was about 5MB. The CMS limit: 2MB per file. I tried renaming extensions, using Paint to resize — nothing worked well.
 
-New to TinyJPG Compressor? This guide walks you through everything from downloading the software to successfully compressing your first batch of images. It takes about 3 minutes.
+A friend recommended TinyJPG. Download, API key setup, drag in images, click compress. From installation to completing all 150 images: **under 10 minutes**. Output files averaged 400KB. No visible quality loss.
 
-## 1. My First Experience
+If this is your first time, these three steps are all you need.
 
-> **Experience** — A beginner's perspective
+## 01. Download and Install
 
-When I first needed to compress 150 event photos for a company CMS, each file was around 5MB with a 2MB upload limit. I tried resizing with Paint, changing file extensions — nothing worked well.
+Go to the [download page](/download/) and get the latest installer. Double-click to install. When you launch it, you'll see three tabs: "Compress Tool", "Watermark Tool", and "Settings".
 
-A colleague recommended TinyJPG. I downloaded it, set up an API Key, and processed all 150 images in under 10 minutes. The output averaged 400KB per image with no visible quality loss. It's been on my desktop ever since.
+No account registration needed. No login. Download and go.
 
-## 2. Step-by-Step Tutorial
+## 02. Get Your Free API Key
 
-> **Expertise** — Detailed walkthrough
+TinyJPG uses the TinyPNG API for compression. You'll need a free API key:
 
-### Step 1: Download and Install
-
-1. Go to the [Download page](/en/download/) and get the latest Windows installer
-2. Run the installer and follow the prompts
-3. Launch the app — you'll see a clean interface with three tabs: **Compression**, **Watermark**, and **Settings**
-
-### Step 2: Get Your TinyPNG API Key
-
-TinyJPG uses the official TinyPNG API for compression. Here's how to get a free Key:
-
-1. Visit [TinyPNG Developers](https://tinypng.com/developers)
-2. Enter your name and email address
-3. Submit — your API Key will be emailed to you
-4. Copy the Key, go to TinyJPG → **Settings** → **API Key Management** → **Add Key**
+1. Go to [TinyPNG Developer page](https://tinypng.com/developers)
+2. Enter your name and email, submit
+3. Check your email — the key will be sent to you
+4. In TinyJPG, go to "Settings" → "API Key Management" → "Add Key"
 5. Paste and save
 
-> Each email gives you 500 free compressions per month. Need more? See the [multi-Key management guide](/en/blog/multi-key-management/).
+Each email gives you 500 free compressions per month. Need more? Register multiple email accounts — see the [multi-key management guide](/blog/multi-key-management/).
 
-### Step 3: Your First Compression
+👉 [Haven't downloaded yet? Get TinyJPG](/download/)
 
-1. Switch to the **Compression** tab
-2. Click **Add Images** or drag-and-drop files into the window
-3. Select output format (JPEG is the default)
-4. Choose a compression mode — **Fit mode** (scale by width) is the most common
-5. Click **Start Compression**
-6. Watch the progress bar; output files go to a `compressed/` folder alongside the originals
+## 03. Run Your First Compression
 
-### What's Next?
+1. Switch to the "Compress Tool" tab
+2. Click "Add Images" or drag files directly into the window
+3. Select output format on the right panel (default: JPEG)
+4. Choose "Fit" mode — scales proportionally by width, most common
+5. Click "Start Compression"
+6. Wait for the progress bar
 
-After your first compression, explore these features:
+Output files are saved to a `compressed/` folder alongside your originals by default.
 
-| Feature | Location | What It Does |
-|---------|----------|-------------|
-| Format Conversion | Compression → Output Format | Convert between 9 image types |
-| Watermark Tool | Watermark tab | Add image/text watermarks |
-| Batch Rename | Compression → Output Settings | Smart renaming with templates |
-| Multi-Key Management | Settings → API Keys | Bypass 500/month limit |
-
-## 3. Tips for Best Results
-
-> **Authoritativeness** — Recommendations based on user data
-
-### Recommended Settings
+### Quick Parameter Reference
 
 ```
-Web images → Fit mode, 1920px width, JPEG Q85
-E-commerce → Fit mode, 1200px width, JPEG Q80
-Social media → Fit mode, 1080px width, JPEG Q90
+Web images → Fit mode, width 1920px, JPEG Q85
+E-commerce → Fit mode, width 1200px, JPEG Q80
+Social media → Fit mode, width 1080px, JPEG Q90
 Print → Original size, PNG or high-quality JPEG
 ```
 
-### Processing Large Batches
+### Other Features at a Glance
 
-- Limit each batch to 500 images (API monthly quota)
-- The app runs in the background — minimize and continue working
-- Auto-retry handles network hiccups automatically
+| Feature | Where to Find | One-Liner |
+|---------|--------------|-----------|
+| Format conversion | Compress Tool → Output Format | Convert between 9 formats |
+| Watermark | Watermark Tool tab | Image/text watermark, drag positioning |
+| Batch rename | Compress Tool → Output Settings | Template variable renaming |
+| Multi-key management | Settings → API Key Management | Break the 500/month limit |
 
-## 4. Feature Limitations
+## 04. Things to Know
 
-> **Trustworthiness** — Being transparent
+- Stick to under 500 images per batch (API monthly quota consideration)
+- Minimize to system tray during compression — keep working
+- Auto-retry on network issues — no manual intervention needed
+- ICO and PDF formats don't support watermarks (format limitation)
 
-- TinyJPG is a **desktop app**, not an online service — images only travel through the TinyPNG API
-- All features are **completely free** with no artificial limitations
-- ICO and PDF formats don't support watermarking (format limitations)
-- A stable internet connection is needed for API-based compression
+## FAQ
+
+**01. Do I need my own API key?**
+TinyJPG comes with 2 shared keys pre-configured. But shared keys have limited capacity — registering your own key is recommended for reliability.
+
+**02. Will compressed images look blurry?**
+TinyPNG uses smart lossy compression that removes imperceptible color data. In most cases, there's no visible difference.
+
+**03. What image formats are supported?**
+Input: JPG, PNG, WebP, AVIF, BMP, GIF, TIFF. Output: 9 formats including ICO and PDF.
+
+**04. Can I use it on multiple computers?**
+Yes. TinyJPG is portable — copy the folder to another Windows PC and it works (you'll need to configure API keys).
+
+**05. Is there a Mac version?**
+Windows only at this point. Mac and Linux versions are not planned.
 
 ## Summary
 
-From download to first compressed image in roughly 3 minutes. TinyJPG is designed to be intuitive — no manual required. If you run into issues, [contact us](/en/contact/).
+From download to first compression: under 10 minutes. TinyJPG is designed to be intuitive — no manual needed, no complex setup.
 
-Start now: [Download TinyJPG Compressor](/en/download/)
+Get started: [Download TinyJPG Compressor](/download/)

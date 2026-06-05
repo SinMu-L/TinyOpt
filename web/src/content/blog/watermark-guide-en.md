@@ -1,97 +1,85 @@
 ---
-title: TinyJPG Watermark Tool Guide — Professional Image Protection with Drag & Drop
+title: Still Adding Watermarks One by One in Photoshop? 200 Images in 3 Minutes with Drag & Drop
 date: 2026-06-05
 lang: en
-description: A comprehensive guide to TinyJPG's watermark tool, covering image watermark, text watermark, drag-and-drop positioning, opacity adjustment, and batch processing.
-tags: [watermark, guide, image-protection]
+description: Batch watermark images with TinyJPG's visual watermark tool. No Photoshop needed — drag to position, adjust opacity and scale, output 200 images in under 3 minutes.
+tags: [watermark, guide, image-protection, batch-processing]
 ---
 
-## Introduction
+Watermarking is a must — designers protect their portfolio, e-commerce operators prevent image theft, marketing teams enforce brand consistency.
 
-Whether you're a designer showcasing your portfolio or an e-commerce operator batch-processing product images, adding watermarks is essential for copyright protection. TinyJPG Compressor's built-in visual watermark tool lets you add professional watermarks without Photoshop.
+But most people still use Photoshop: record an action, adjust positions, batch process. A session takes at least 30 minutes.
 
-## 1. Real-World Experience
+TinyJPG has a built-in visual watermark tool. No Photoshop, no action scripts. 200 images? Drag them in, position the watermark, click start. Done in 3 minutes.
 
-> **Experience** — Hands-on walkthrough of a typical watermarking task
+| Comparison | Photoshop | TinyJPG |
+|-----------|----------|---------|
+| Learning curve | Need to master actions/scripts | Drag & drop |
+| 200 images | At least 30 min | ~2 min |
+| Steps | Record action → set params → batch → verify | Add images → select watermark → position → start |
+| File size impact | Varies | Only 3-5% increase |
 
-Last week I needed to add a unified watermark to 200 product renders. Using Photoshop would have taken at least 30 minutes (recording an action + batch processing). With TinyJPG's watermark tool, the entire process took under 3 minutes.
+## 01. Three Watermark Types for Every Scenario
 
-### The Workflow
+| Type | When to Use | Advantage |
+|------|-------------|-----------|
+| **Image watermark** | Brand logo, team badge | Supports transparent PNG, no color loss |
+| **Text watermark** | Copyright notice, URL, contact info | Any Windows font, flexible size and color |
+| **Combined** | Logo + copyright text together | Dual protection in one pass |
 
-1. Switch to the "Watermark Tool" tab
-2. Select watermark type (Image Watermark)
-3. Choose a PNG logo file
-4. Drag to the ideal position in the preview area (bottom-right)
-5. Set opacity to 70%, scale to 10%
-6. Click "Start Adding Watermarks"
+Last week I needed to watermark 200 product renders. I chose "Image watermark" — uploaded a PNG logo, dragged it to the bottom-right, set 70% opacity and 10% scale. Clicked start. Output in 2 minutes.
 
-### Results
+## 02. Drag Positioning: What You See Is What You Get
 
-| Metric | Value |
-|--------|-------|
-| Images processed | 200 |
-| Time taken | ~2 min |
-| File size increase | ~3-5% (negligible) |
+No need to enter pixel coordinates. Drag the watermark in the preview area:
 
-## 2. Core Features In-Depth
+- **Bottom-right**: Most common, minimal visual interference
+- **Center**: Best anti-theft, but covers the image
+- **Tile**: For high-value assets — cropping won't remove it
 
-> **Expertise** — Technical deep dive
+The tool auto-clamps margins (20px default), so the watermark never overflows. Position, opacity, and scale are all live-previewed — drag and see the result immediately.
 
-### 2.1 Three Watermark Types
+👉 [Download TinyJPG and watermark your images](/download/)
 
-| Type | Use Case | Advantage |
-|------|---------|-----------|
-| **Image Watermark** | Logo, Brand | Supports transparent PNG, retains original colors |
-| **Text Watermark** | Copyright notice, URL | Supports any Windows font, flexible styling |
-| **Combined** | Logo + Copyright text | Dual protection in one pass |
+## 03. Professional Watermark Parameters
 
-### 2.2 Visual Drag & Drop Positioning
-
-The position system uses a proportional coordinate system (0-1 range) based on image dimensions:
-- Automatic margin clamping (20px default) prevents overflow
-- Real-time WYSIWYG rendering
-- Smooth drag interaction with visual feedback
-
-### 2.3 Opacity & Scaling
-
-- **Opacity**: 0-100% adjustable; 70% is the sweet spot between visibility and aesthetics
-- **Scale**: Percentage of original image width; 8-15% recommended
-
-## 3. Professional Recommendations
-
-> **Authoritativeness** — Industry best practices
-
-### 3.1 Position Strategy
-
-- **Bottom-right**: Least intrusive, follows reading patterns (default)
-- **Center**: Best anti-theft protection but impacts viewing
-- **Tile**: Ideal for high-value assets, prevents cropping
-
-### 3.2 Opacity Guidelines
-
+Opacity guidelines:
 ```
-Product images → 60-70% opacity
-Portfolio → 40-50% (balance aesthetics & protection)
-High-value assets → 30-40% + tile mode
+Product images → 60-70% (visible but unobtrusive)
+Portfolio previews → 40-50% (balance aesthetics & protection)
+High-value assets → 30-40% + tile mode (crop-proof)
 ```
 
-### 3.3 Text Watermark Tips
+Font size: 3-5% of image width
+Recommended fonts: Arial, Segoe UI, Helvetica
+Font color: White with semi-transparent shadow background
 
-- Use sans-serif fonts (Arial, Segoe UI)
-- Font size: 3-5% of image width
-- White text with semi-transparent background works best
+## 04. Security and Limitations
 
-## 4. Transparency
+- All watermarking is done locally — images never leave your computer
+- Batch processing supported for all common formats (ICO and PDF excluded due to format limitations)
+- Output is high-quality JPEG (quality=95), balancing size and quality
+- Not a full design tool, but covers 90% of daily batch watermarking needs
 
-> **Trustworthiness** — Honest about limitations
+## FAQ
 
-- Watermarking is 100% local — images never leave your computer
-- Batch processing supported for all formats except ICO and PDF
-- Output is saved as high-quality JPEG (quality=95) balancing size and quality
-- Not a full-featured design tool, but covers 90% of daily watermarking needs
+**01. Can I use different watermarks in one batch?**
+One batch uses one watermark configuration. Run separate batches for different watermarks.
+
+**02. Does watermark position adapt to different image sizes?**
+Yes. Position uses a proportional coordinate system based on image dimensions — same relative position across different sizes.
+
+**03. Does it support transparent PNG watermarks?**
+Yes. PNG works best for image watermarks — transparency is preserved.
+
+**04. Can I rotate the watermark?**
+Not currently. Rotate your watermark image in another tool before importing.
+
+**05. Are originals overwritten?**
+No. Watermarked images are saved to the `compressed/` output directory. Originals remain unchanged.
 
 ## Summary
 
-TinyJPG's watermark tool may not replace Photoshop for complex tasks, but for 90% of daily batch watermarking needs, it's simple, fast, and effective — with zero learning curve thanks to the drag-and-drop interface.
+TinyJPG's watermark tool isn't meant to replace Photoshop. It's meant to free you from repetitive batch work. Drag, click, done.
 
-Download now: [TinyJPG Compressor](/en/download/)
+Download now: [TinyJPG Compressor](/download/)

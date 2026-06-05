@@ -1,100 +1,106 @@
 ---
-title: How to Maximize Your TinyPNG Free Quota? Multi-Key Management Guide
+title: Only 500 Free Compressions Per Month? 3 Tricks to Process 3,500 Images with Multi-Key Management
 date: 2026-06-06
 lang: en
-description: Learn how TinyJPG's multi-Key management and concurrent compression can help you break through the 500-image monthly limit and supercharge your batch processing.
-tags: [API Key, productivity, optimization]
+description: Stuck with TinyPNG's 500-image monthly limit? Use multi-key management and concurrent compression to scale your monthly capacity to thousands and cut processing time by 3x.
+tags: [API Key, productivity, optimization, batch-processing]
 ---
 
-## Introduction
+TinyPNG gives each free account 500 compressions per month. Fine for personal use. But when you need to batch-compress thousands of product images at once, it's a hard limit.
 
-TinyPNG offers 500 free compressions per account per month — sufficient for personal use, but limiting when you need to process thousands of images. TinyJPG's multi-Key management with concurrent compression is designed to solve exactly this problem.
+Last month I needed to compress 3,200 product images for an e-commerce project. A single key only covers 500 — I'd need 7 keys and 7 separate runs. Processing them one by one would take hours.
 
-## 1. Real-World Experience
-
-> **Experience** — A practical case study
-
-Last month I needed to compress 3,200 product images for an e-commerce project. With a single API Key limited to 500 compressions, I'd need 7 accounts — and processing them one by one would take hours.
-
-Using TinyJPG's multi-Key feature, I registered 7 free Keys, configured them in the app, and started compression. Thanks to the 3-thread concurrent engine, all 3,200 images were processed in under 15 minutes.
-
-### Key Benefits
+With TinyJPG's multi-key management, I registered 7 free keys, configured them in the app, and started a single batch. 3 concurrent threads, **all 3,200 images done in under 15 minutes**.
 
 | Metric | Single Key | Multi-Key Concurrent |
 |--------|-----------|---------------------|
 | Monthly quota | 500 images | 3,500 images |
 | 1,000 images time | ~30 min | ~5 min |
-| Effort | Manual Key switching | One-click |
+| Operations | Manual switching, multiple runs | One-click, one run |
+| Attention needed | Watch every batch | Background, unattended |
 
-## 2. How Multi-Key Management Works
+## 01. How Multi-Key Auto-Rotation Works
 
-> **Expertise** — Technical implementation
+TinyJPG's KeyManager does one thing in the background: cycles through keys, always picking one that's available.
 
-### 2.1 Automatic Key Rotation
+**Core logic**:
+- Keys are arranged in a ring, tasks distributed in order
+- Exhausted keys are automatically skipped
+- Invalid keys are disabled — no retries wasted
+- Each key processes one image at a time, no interference
 
-The `KeyManager` implements an efficient round-robin scheduler:
-
-1. **Fair scheduling**: Cursor-based circular allocation balances usage
-2. **Smart skipping**: Automatically skips exhausted or disabled Keys
-3. **Retry protection**: Automatically retries timeouts and network errors
-4. **Real-time monitoring**: Updates Compression-Count after each request
-
-### 2.2 Concurrent Compression Model
-
+**Concurrency model**:
 ```
-Available Keys → Determines concurrency (max 3)
-Each Key processes one image independently
-Failed tasks auto-switch to next Key
+Available keys → decides concurrency (max 3)
+3 keys → 3 images compressed simultaneously
+7 keys → still 3 threads (API rate limit), but more capacity to rotate
 ```
 
-Concurrency = max(1, min(available Keys, 3, total images))
+**Error handling**:
 
-### 2.3 Error Handling
+| Issue | What happens |
+|-------|-------------|
+| Quota exceeded | Auto-disable key, switch to next |
+| Invalid key | Auto-disable, no retry |
+| Timeout | Release key, retry after 1s |
+| All keys exhausted | Clean error message, no waiting |
 
-| Error | Handling |
-|-------|----------|
-| QUOTA_EXCEEDED | Auto-disable Key, switch to next |
-| INVALID_KEY | Auto-disable (prevents repeated failures) |
-| TIMEOUT | Release Key, retry after delay |
-| NETWORK | Same as timeout |
+👉 [Download TinyJPG and set up your first key](/download/)
 
-## 3. Best Practices
+## 02. Where to Get Multiple Free Keys
 
-> **Authoritativeness** — Expert recommendations
+Each TinyPNG email account = one free API key.
 
-### 3.1 Getting Multiple Keys
-
-Each TinyPNG account provides one free API Key:
-
-1. Use Gmail aliases (`yourname+1@gmail.com`)
-2. Register with different email addresses
-3. Share quota with colleagues
-
-### 3.2 Key Configuration Strategy
-
+**Recommended**: Gmail aliases
 ```
-Start with 3-5 Keys
-Set monthly limit to 500 each
-Use descriptive remarks: Work, Personal, Backup...
+yourname+1@gmail.com
+yourname+2@gmail.com
+yourname+3@gmail.com
 ```
+All emails arrive in your main inbox — no need to manage multiple mailboxes.
 
-### 3.3 Quota Monitoring
+**Alternative**: Share with friends or family, pool everyone's keys together.
 
+**Start with**: 3-5 keys. Add more when your workload grows.
+
+## 03. Day-to-Day Key Management
+
+Simple rules:
+- Set each key's monthly limit to 500
+- Give each key a remark ("Work", "Backup", etc.)
 - Click "Refresh Usage" before each batch
-- Add new Keys before existing ones run out
-- Keep at least 1 backup Key for emergencies
+- Keep at least 1 spare key ready
 
-## 4. Security & Limitations
+All keys are stored locally in `.tinypng_compressor_config.json` — never uploaded anywhere.
 
-> **Trustworthiness** — Transparent disclosure
+## The pattern behind this problem
 
-- API Keys are **stored locally only** in `.tinypng_compressor_config.json` — never uploaded to any server
-- Each TinyPNG account provides 500 free compressions per month
-- Max concurrency is 3 threads (aligned with API rate limits)
-- 2 shared Keys are built-in, but registering your own is recommended for reliability
+The root cause is recurring: **free tools are designed for occasional individual use, but your workload has already exceeded that threshold.**
+
+The fix is straightforward:
+1. Stack multiple keys for total capacity
+2. Use concurrent compression to cut total time
+3. Let the tool manage key states automatically
+
+## FAQ
+
+**01. Does multi-key concurrent compression hit TinyPNG's rate limits?**
+No. TinyJPG caps concurrency at 3 threads, well within TinyPNG API limits.
+
+**02. What are the shared keys? Are they safe?**
+TinyJPG comes with 2 shared keys so you can try it immediately. For production use, register your own keys.
+
+**03. What if a key runs out of quota mid-batch?**
+KeyManager automatically detects quota exhaustion, disables that key, and switches to the next available one. The compression task continues uninterrupted.
+
+**04. Are my API keys exposed?**
+Keys are stored only in the local config file. They are never sent to any third party.
+
+**05. When is the monthly quota reset?**
+TinyPNG free quotas reset monthly based on your registration date. Click "Refresh Usage" in the app to see the latest status.
 
 ## Summary
 
-Multi-Key management is one of TinyJPG's most practical features. With minimal setup, you can expand monthly capacity from 500 to thousands of images while the concurrent engine delivers 3x faster processing.
+Multi-key management is the most direct way to break through TinyPNG's 500-image free limit. With minimal setup, expand your monthly capacity to thousands and cut processing time by 3x.
 
-Get started: [Download TinyJPG Compressor](/en/download/)
+Get started: [Download TinyJPG Compressor](/download/)
