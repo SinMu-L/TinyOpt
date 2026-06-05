@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
-const SITE = 'https://tinyjpg-compressor.com';
+const SITE = 'https://seojeck.com';
 
 export const GET: APIRoute = async () => {
   const blogPosts = await getCollection('blog');

@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import preact from '@astrojs/preact';
 
 export default defineConfig({
-  site: 'https://tinyjpg-compressor.com',
+  site: 'https://seojeck.com',
   integrations: [
     tailwind(),
     preact(),
