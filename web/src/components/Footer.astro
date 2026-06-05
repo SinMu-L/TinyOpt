@@ -20,7 +20,7 @@ const _ = translation(lang);
         <h3 class="mb-3 text-sm font-semibold text-gray-900">{_.nav.contact}</h3>
         <ul class="space-y-2 text-sm text-gray-500">
           <li>Email: sinmu.li@foxmail.com</li>
-          <li><a href="https://github.com" class="hover:text-primary-600 transition-colors">GitHub</a></li>
+          <li><a href="https://github.com/SinMu-L/TinyOpt" class="hover:text-primary-600 transition-colors" target="_blank">GitHub</a></li>
 
         </ul>
       </div>
@@ -28,6 +28,7 @@ const _ = translation(lang);
         <h3 class="mb-3 text-sm font-semibold text-gray-900">{lang === 'en' ? 'Links' : '相关链接'}</h3>
         <ul class="space-y-2 text-sm text-gray-500">
           <li><a href={lang === 'en' ? '/en/privacy/' : '/privacy/'} class="hover:text-primary-600 transition-colors">{_.nav.privacy}</a></li>
+          <li><a href={lang === 'en' ? '/en/terms/' : '/terms/'} class="hover:text-primary-600 transition-colors">{_.nav.terms}</a></li>
           <li><a href="https://tinypng.com" class="hover:text-primary-600 transition-colors" target="_blank">TinyPNG</a></li>
         </ul>
       </div>

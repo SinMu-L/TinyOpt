@@ -11,7 +11,7 @@ const _ = translation('en');
       <h1 class="mb-8 text-2xl sm:text-3xl font-bold text-gray-900">{_.about.title}</h1>
       <p class="mb-8 text-lg leading-relaxed text-gray-600">{_.about.intro}</p>
 
-      <h2 class="mb-4 text-xl font-semibold text-gray-900">Features</h2>
+      <h2 class="mb-4 text-xl font-semibold text-gray-900">{_.features_title || 'Features'}</h2>
       <ul class="mb-8 space-y-3">
         {_.about.features_list.map((item) => (
           <li class="flex items-start gap-3 text-gray-600">
@@ -22,6 +22,12 @@ const _ = translation('en');
           </li>
         ))}
       </ul>
+
+      <div class="mb-8 rounded-lg bg-gray-50 p-6 text-sm leading-relaxed text-gray-600">
+        <p class="mb-3">{_.about.project_bg}</p>
+        <p class="mb-3">{_.about.philosophy}</p>
+        <p>{_.about.github}</p>
+      </div>
 
       <div class="rounded-lg bg-gray-50 p-6 text-sm text-gray-500">
         <p class="mb-2">{_.about.tech_stack}</p>

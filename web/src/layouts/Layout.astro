@@ -70,6 +70,7 @@ const baseUrl = 'https://seojeck.com';
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
   <link rel="alternate icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/images/logo.svg" />
 
   <!-- Alternate language links -->
   <link rel="alternate" hreflang="x-default" href={baseUrl} />
@@ -82,5 +83,40 @@ const baseUrl = 'https://seojeck.com';
     <slot />
   </main>
   <Footer lang={lang} />
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 z-50 hidden border-t border-gray-200 bg-white px-4 py-4 shadow-lg lg:px-8">
+    <div class="mx-auto flex max-w-6xl flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm text-gray-600">
+        {lang === 'en'
+          ? 'We use cookies to improve your experience and for Google AdSense. By continuing, you agree to our '
+          : '我们使用 Cookie 来提升您的体验并用于 Google AdSense。继续使用即表示您同意我们的 '}
+        <a href={lang === 'en' ? '/en/privacy/' : '/privacy/'} class="underline hover:text-primary-600">{lang === 'en' ? 'Privacy Policy' : '隐私政策'}</a>
+        {lang === 'en' ? ' and ' : ' 和 '}
+        <a href={lang === 'en' ? '/en/terms/' : '/terms/'} class="underline hover:text-primary-600">{lang === 'en' ? 'Terms of Service' : '服务条款'}</a>.
+      </p>
+      <div class="flex shrink-0 gap-2">
+        <button id="cookie-accept" class="rounded-lg bg-primary-600 px-5 py-2 text-xs font-semibold text-white hover:bg-primary-700 transition-all">{lang === 'en' ? 'Accept' : '接受'}</button>
+        <button id="cookie-decline" class="rounded-lg border border-gray-300 bg-white px-5 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-50 transition-all">{lang === 'en' ? 'Decline' : '拒绝'}</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      if (localStorage.getItem('cookie_consent')) return;
+      var banner = document.getElementById('cookie-consent');
+      if (!banner) return;
+      banner.classList.remove('hidden');
+      document.getElementById('cookie-accept').addEventListener('click', function() {
+        localStorage.setItem('cookie_consent', 'accepted');
+        banner.classList.add('hidden');
+      });
+      document.getElementById('cookie-decline').addEventListener('click', function() {
+        localStorage.setItem('cookie_consent', 'declined');
+        banner.classList.add('hidden');
+      });
+    })();
+  </script>
 </body>
 </html>

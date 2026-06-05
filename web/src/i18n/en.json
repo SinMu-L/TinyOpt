@@ -12,7 +12,9 @@
     "blog": "Blog",
     "contact": "Contact",
     "menu": "Menu",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "terms": "Terms of Service",
+    "terms_short": "Terms"
   },
   "home": {
     "hero_title": "Batch Image Processing with TinyPNG",
@@ -46,6 +48,9 @@
       "Flexible compression options: scale, crop, fit modes",
       "Visual watermark editor with real-time preview"
     ],
+    "project_bg": "This project started in late 2025. The author frequently needed to process large volumes of images in daily work, and existing tools were either too limited or too complex. So we decided to build a comprehensive desktop tool integrating compression, watermarking, format conversion, and batch renaming. After multiple iterations, TinyJPG has evolved into a feature-rich and stable image processing tool.",
+    "philosophy": "Our design philosophy is 'simple and efficient' — open and use, no complex configuration needed; batch processing, one-click completion of the entire workflow. Making image processing no longer a bottleneck in design work.",
+    "github": "This project is fully open-source on GitHub. Stars, Issues, and contributions are welcome.",
     "tech_stack": "Tech Stack: Python 3.12 + PyQt5 + Pillow + TinyPNG API",
     "license": "This is a personal open-source project, free to use."
   },
@@ -77,6 +82,7 @@
     "title": "Contact Us",
     "subtitle": "Questions or suggestions? Get in touch",
     "email": "Email",
+    "address": "Address",
     "wechat": "WeChat Official",
     "response_time": "We will respond within 24 hours"
   },
@@ -90,6 +96,20 @@
       "3. Logging: Compression history is stored locally and never automatically uploaded.",
       "4. Third-Party Services: This tool uses the TinyPNG API. Please refer to TinyPNG's privacy policy for their data handling.",
       "5. Contact: For privacy-related questions, please reach out through our contact channels."
+    ]
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "last_updated": "Last updated: June 2026",
+    "content": [
+      "Welcome to TinyJPG Compressor (hereinafter referred to as 'the Tool'). By using this Tool, you agree to the following terms.",
+      "1. Service Description: This Tool is a desktop image compression utility based on the TinyPNG API, providing image compression, format conversion, watermarking, and batch renaming.",
+      "2. Free to Use: This Tool is a personal open-source project, completely free to use with no charges. TinyPNG API free quotas are determined by TinyPNG official.",
+      "3. Disclaimer: The Tool is provided 'as is' without any warranty, express or implied. Any consequences arising from the use of this Tool are the sole responsibility of the user.",
+      "4. Intellectual Property: The open-source code of this Tool is released under the corresponding open-source license. Images processed using this Tool are owned by the user.",
+      "5. Third-Party Services: This Tool calls the TinyPNG API for image compression. Please also comply with TinyPNG's terms of service.",
+      "6. Changes to Terms: We reserve the right to modify these terms at any time. Material changes will be announced on the website.",
+      "7. Contact: For any questions, please contact us at sinmu.li@foxmail.com."
     ]
   },
   "404": {

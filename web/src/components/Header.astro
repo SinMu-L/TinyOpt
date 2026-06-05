@@ -22,6 +22,7 @@ const navItems = [
   { label: _.nav.cases, href: lang === 'en' ? '/en/cases/' : '/cases/', active: isActive('/cases') },
   { label: _.nav.blog, href: lang === 'en' ? '/en/blog/' : '/blog/', active: isActive('/blog') },
   { label: _.nav.contact, href: lang === 'en' ? '/en/contact/' : '/contact/', active: isActive('/contact') },
+  { label: _.nav.terms_short, href: lang === 'en' ? '/en/terms/' : '/terms/', active: isActive('/terms') },
 ];
 const langHref = lang === 'en'
   ? pathname.replace(/^\/en/, '') || '/'
@@ -54,6 +55,9 @@ const langLabel = lang === 'en' ? '中文' : 'EN';
       </a>
       <a href={lang === 'en' ? '/en/contact/' : '/contact/'} class={`hover:text-primary-600 transition-colors ${isActive('/contact') ? 'text-primary-600' : ''}`}>
         {_.nav.contact}
+      </a>
+      <a href={lang === 'en' ? '/en/terms/' : '/terms/'} class={`hover:text-primary-600 transition-colors ${isActive('/terms') ? 'text-primary-600' : ''}`}>
+        {_.nav.terms_short}
       </a>
 
       <a href={langHref} class="ml-2 rounded-full border border-gray-300 px-3 py-1 text-xs hover:bg-gray-50 transition-colors">
