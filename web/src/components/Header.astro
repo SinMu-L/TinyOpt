@@ -1,5 +1,6 @@
 ---
 import { translation } from '@/i18n/utils';
+import MobileMenu from './MobileMenu.tsx';
 
 export interface Props {
   lang: 'zh' | 'en';
@@ -13,16 +14,29 @@ function isActive(path: string): boolean {
   if (path === '/') return pathname === '/' || pathname === '/en/';
   return pathname.startsWith(path);
 }
+
+const navItems = [
+  { label: _.nav.home, href: lang === 'en' ? '/en/' : '/', active: isActive('/') && (pathname === '/' || pathname === '/en/') },
+  { label: _.nav.about, href: lang === 'en' ? '/en/about/' : '/about/', active: isActive('/about') },
+  { label: _.nav.download, href: lang === 'en' ? '/en/download/' : '/download/', active: isActive('/download') },
+  { label: _.nav.cases, href: lang === 'en' ? '/en/cases/' : '/cases/', active: isActive('/cases') },
+  { label: _.nav.blog, href: lang === 'en' ? '/en/blog/' : '/blog/', active: isActive('/blog') },
+  { label: _.nav.contact, href: lang === 'en' ? '/en/contact/' : '/contact/', active: isActive('/contact') },
+];
+const langHref = lang === 'en'
+  ? pathname.replace(/^\/en/, '') || '/'
+  : '/en' + (pathname === '/' ? '' : pathname);
+const langLabel = lang === 'en' ? '中文' : 'EN';
 ---
 
-<header class="sticky top-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur-md">
+  <header class="sticky top-0 z-50 border-b border-gray-100 bg-white lg:bg-white/80 lg:backdrop-blur-md">
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
     <a href={lang === 'en' ? '/en/' : '/'} class="flex items-center gap-2 text-lg font-bold text-primary-600 hover:text-primary-700">
       <img src="/images/logo.svg" alt="TinyOpt" class="h-8 w-8" />
       {_.brand}
     </a>
 
-    <div class="flex items-center gap-6 text-sm font-medium text-gray-600">
+    <div class="hidden lg:flex lg:items-center lg:gap-6 text-sm font-medium text-gray-600">
       <a href={lang === 'en' ? '/en/' : '/'} class={`hover:text-primary-600 transition-colors ${isActive('/') && (pathname === '/' || pathname === '/en/') ? 'text-primary-600' : ''}`}>
         {_.nav.home}
       </a>
@@ -42,9 +56,17 @@ function isActive(path: string): boolean {
         {_.nav.contact}
       </a>
 
-      <a href={lang === 'en' ? '/' : '/en/'} class="ml-2 rounded-full border border-gray-300 px-3 py-1 text-xs hover:bg-gray-50 transition-colors">
-        {lang === 'en' ? '中文' : 'EN'}
+      <a href={langHref} class="ml-2 rounded-full border border-gray-300 px-3 py-1 text-xs hover:bg-gray-50 transition-colors">
+        {langLabel}
       </a>
     </div>
+
+    <MobileMenu
+      client:load
+      navItems={navItems}
+      langHref={langHref}
+      langLabel={langLabel}
+      menuLabel={_.nav.menu}
+    />
   </nav>
 </header>

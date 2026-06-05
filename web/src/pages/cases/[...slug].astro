@@ -17,10 +17,10 @@ const { Content } = await item.render();
 ---
 
 <Layout title={item.data.title} description={item.data.description} lang={item.data.lang}>
-  <article class="bg-white py-20">
+  <article class="bg-white py-12 sm:py-20">
     <div class="mx-auto max-w-3xl px-4">
       <div class="mb-2 text-sm text-gray-400">{item.data.date.toLocaleDateString('zh-CN')}</div>
-      <h1 class="mb-6 text-3xl font-bold text-gray-900">{item.data.title}</h1>
+      <h1 class="mb-6 text-2xl sm:text-3xl font-bold text-gray-900">{item.data.title}</h1>
       <div class="prose prose-gray max-w-none">
         <Content />
       </div>

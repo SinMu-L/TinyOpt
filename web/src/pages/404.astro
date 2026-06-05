@@ -9,9 +9,9 @@ const t = translation(lang);
 ---
 
 <Layout title={t['404'].title} description={t['404'].message} lang={lang as 'zh' | 'en'} noindex>
-  <section class="flex items-center justify-center bg-white py-32">
+  <section class="flex items-center justify-center bg-white py-20 sm:py-32">
     <div class="text-center">
-      <div class="mb-4 text-8xl font-bold text-primary-200">404</div>
+      <div class="mb-4 text-6xl sm:text-8xl font-bold text-primary-200">404</div>
       <h1 class="mb-4 text-2xl font-bold text-gray-900">{t['404'].title}</h1>
       <p class="mb-8 text-gray-500">{t['404'].message}</p>
       <a href={lang === 'en' ? '/en/' : '/'} class="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-700 transition-all">
