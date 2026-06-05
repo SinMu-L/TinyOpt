@@ -1,0 +1,47 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install PyQt5 Pillow requests PyInstaller
+
+      - name: Inject version from git tag
+        shell: pwsh
+        run: |
+          $tag = "$env:GITHUB_REF_NAME"
+          Write-Host "Building version: $tag"
+          $content = Get-Content -Path TinyJPG_Compressor.spec -Raw
+          $content = $content -replace 'version = ".*"', "version = `"$tag`""
+          Set-Content -Path TinyJPG_Compressor.spec -Value $content
+
+      - name: Build executable
+        run: |
+          python -m PyInstaller TinyJPG_Compressor.spec
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: dist/*.exe
+          generate_release_notes: true
