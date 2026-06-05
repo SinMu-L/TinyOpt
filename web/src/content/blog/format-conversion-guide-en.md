@@ -1,6 +1,6 @@
 ---
 title: JPEG, PNG, WebP, or AVIF? A Real-World Benchmark of 9 Image Formats
-date: 2026-06-08
+date: 2026-06-05
 lang: en
 description: A practical format comparison with real benchmark data. JPEG vs PNG vs WebP vs AVIF vs GIF — which format should you use, and when? Includes TinyJPG's 9-format conversion.
 tags: [image-format, webperf, guide, benchmark]

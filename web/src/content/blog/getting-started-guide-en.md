@@ -1,6 +1,6 @@
 ---
 title: First Time Using TinyJPG? From Download to Compressing 150 Images in Under 10 Minutes
-date: 2026-06-09
+date: 2026-06-05
 lang: en
 description: A complete beginner's guide to TinyJPG Compressor. Download, get your API key, and run your first batch compression — all in under 10 minutes.
 tags: [beginners-guide, getting-started, tutorial]

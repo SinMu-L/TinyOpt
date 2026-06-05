@@ -1,6 +1,6 @@
 ---
 title: JPEG、PNG、WebP 还是 AVIF？9 种图片格式实测对比，一张表看懂怎么选
-date: 2026-06-08
+date: 2026-06-05
 lang: zh
 description: 用实测数据对比 JPEG、PNG、WebP、AVIF 等 9 种图片格式，告诉你不同场景该选哪个格式，附 TinyJPG 格式转换实操推荐。
 tags: [图片格式, 性能优化, 使用指南, 实测对比]
