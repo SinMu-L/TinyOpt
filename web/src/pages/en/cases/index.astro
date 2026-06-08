@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 
 const _ = translation('en');
 const cases = (await getCollection('cases'))
-  .filter((c) => c.data.lang === 'en' && !c.data.draft)
+  .filter((c) => c.data.lang === 'en' && !c.data.draft && c.data.date <= new Date())
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 

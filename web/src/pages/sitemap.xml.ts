@@ -4,8 +4,11 @@ import { getCollection } from 'astro:content';
 const SITE = 'https://seojeck.com';
 
 export const GET: APIRoute = async () => {
-  const blogPosts = await getCollection('blog');
-  const casePosts = await getCollection('cases');
+  const now = new Date();
+  const blogPosts = (await getCollection('blog'))
+    .filter((p) => !p.data.draft && p.data.date <= now);
+  const casePosts = (await getCollection('cases'))
+    .filter((p) => !p.data.draft && p.data.date <= now);
 
   const staticPages = [
     { url: '/', changefreq: 'weekly', priority: '1.0' },

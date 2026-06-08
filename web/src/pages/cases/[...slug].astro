@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 export async function getStaticPaths() {
   const items = await getCollection('cases');
   return items
-    .filter((c) => !c.data.draft)
+    .filter((c) => !c.data.draft && c.data.date <= new Date())
     .map((item) => ({
       params: { slug: item.slug },
       props: { item },
