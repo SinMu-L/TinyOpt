@@ -4,6 +4,7 @@ import preact from '@astrojs/preact';
 
 export default defineConfig({
   site: 'https://seojeck.com',
+  trailingSlash: 'always',
   integrations: [
     tailwind(),
     preact(),
