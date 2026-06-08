@@ -80,6 +80,25 @@ const baseUrl = 'https://seojeck.com';
   <link rel="alternate" hreflang="x-default" href={baseUrl} />
   <link rel="alternate" hreflang="zh-CN" href={`${baseUrl}${Astro.url.pathname.startsWith('/en') ? Astro.url.pathname.replace(/^\/en/, '') || '/' : Astro.url.pathname}`} />
   <link rel="alternate" hreflang="en-US" href={`${baseUrl}${Astro.url.pathname.startsWith('/en') ? Astro.url.pathname : '/en' + (Astro.url.pathname === '/' ? '' : Astro.url.pathname)}`} />
+
+  <!-- Google Analytics (loaded only with cookie consent) -->
+  <script>
+    window.__loadGA = function() {
+      if (window.__gaLoaded) return;
+      window.__gaLoaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-S9N29VS8B8';
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-S9N29VS8B8');
+    };
+    if (localStorage.getItem('cookie_consent') === 'accepted') {
+      window.__loadGA();
+    }
+  </script>
 </head>
 <body class="flex min-h-screen flex-col">
   <Header lang={lang} />
@@ -114,6 +133,7 @@ const baseUrl = 'https://seojeck.com';
       banner.classList.remove('hidden');
       document.getElementById('cookie-accept').addEventListener('click', function() {
         localStorage.setItem('cookie_consent', 'accepted');
+        window.__loadGA && window.__loadGA();
         banner.classList.add('hidden');
       });
       document.getElementById('cookie-decline').addEventListener('click', function() {
