@@ -2,6 +2,7 @@
 title: How a Web Developer Reduced Image Size by 60% with TinyJPG
 date: 2026-06-04
 lang: en
+translationKey: web-developer
 description: A frontend developer uses TinyJPG Compressor to reduce website image size by 60%, dramatically improving page load performance.
 ---
 

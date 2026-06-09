@@ -2,6 +2,7 @@
 title: 图片太大拖慢网站？5 个压缩技巧让体积减 80% 肉眼看不出区别
 date: 2026-06-03
 lang: zh
+translationKey: image-optimization-tips
 description: 5 个实用的图片压缩技巧，从格式选择到参数调优，在不牺牲画质的前提下把图片体积压到最小。附实测数据对比。
 tags: [使用技巧, 图片优化, 性能优化]
 ---

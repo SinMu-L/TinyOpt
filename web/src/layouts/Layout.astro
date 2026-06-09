@@ -8,12 +8,13 @@ export interface Props {
   title: string;
   description: string;
   lang?: 'zh' | 'en';
+  langHref?: string;
   ogImage?: string;
   noindex?: boolean;
   canonical?: string;
 }
 
-const { title, description, lang = 'zh', ogImage, noindex, canonical } = Astro.props;
+const { title, description, lang = 'zh', langHref, ogImage, noindex, canonical } = Astro.props;
 const _ = translation(lang);
 const siteTitle = _.site.title;
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
@@ -101,7 +102,7 @@ const baseUrl = 'https://seojeck.com';
   </script>
 </head>
 <body class="flex min-h-screen flex-col">
-  <Header lang={lang} />
+  <Header lang={lang} langHref={langHref} />
   <main class="flex-1">
     <slot />
   </main>

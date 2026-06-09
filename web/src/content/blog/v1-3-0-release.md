@@ -2,6 +2,7 @@
 title: TinyJPG 压缩助手 v1.3.0 正式发布
 date: 2026-06-04
 lang: zh
+translationKey: v1-3-0-release
 description: 新版本 v1.3.0 正式发布，新增 AVIF 格式支持，优化水印工具体验，修复多个 Bug。
 tags: [版本发布, v1.3.0, AVIF]
 ---

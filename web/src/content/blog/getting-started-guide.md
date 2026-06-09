@@ -2,6 +2,7 @@
 title: 第一次用 TinyJPG？从下载到压缩完 150 张图，只需 3 分钟
 date: 2026-06-05
 lang: zh
+translationKey: getting-started-guide
 description: TinyJPG 批量压缩助手的新手入门教程。下载→申请 Key→首次压缩，全流程 3 分钟搞定，附常见问题解答。
 tags: [新手教程, 入门指南, 使用教程]
 ---

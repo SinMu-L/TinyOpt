@@ -2,6 +2,7 @@
 title: 每周处理 500+ 张图？这 7 个场景说明你该用桌面工具而不是在线压缩
 date: 2026-06-05
 lang: zh
+translationKey: comparison-vs-online-tools
 description: 还在用在线工具一张张压缩图片？从批量限制到隐私风险，7 个场景帮你判断是否该切换到桌面工具。
 tags: [工具对比, 桌面端, 在线工具, 批量处理]
 ---

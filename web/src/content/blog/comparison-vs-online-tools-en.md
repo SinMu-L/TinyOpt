@@ -2,6 +2,7 @@
 title: Processing 500+ Images a Week? 7 Signs You Need a Desktop Tool, Not an Online Compressor
 date: 2026-06-05
 lang: en
+translationKey: comparison-vs-online-tools
 description: Still compressing images one by one with online tools? From batch limits to privacy risks, here are 7 scenarios that tell you it's time to switch to a desktop tool.
 tags: [comparison, desktop-tools, online-tools, batch-processing]
 ---

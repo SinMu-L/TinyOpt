@@ -2,6 +2,7 @@
 title: Web 开发者如何使用 TinyJPG 优化网站图片
 date: 2026-06-04
 lang: zh
+translationKey: web-developer
 description: 一位前端开发者使用 TinyJPG 压缩助手将网站图片体积减少 60%，大幅提升页面加载速度。
 ---
 

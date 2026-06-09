@@ -2,6 +2,7 @@
 title: 还在 PS 一张张加水印？200 张图 3 分钟搞定，拖拽定位一键输出
 date: 2026-06-05
 lang: zh
+translationKey: watermark-guide
 description: 用 TinyJPG 的可视化水印工具批量为图片添加版权水印，无需 Photoshop，拖拽定位、透明度和缩放可调，200 张图不到 3 分钟。
 tags: [水印工具, 使用指南, 图片保护, 批量处理]
 ---

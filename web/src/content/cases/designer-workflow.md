@@ -2,6 +2,7 @@
 title: 设计师如何用水印工具保护作品版权
 date: 2026-06-03
 lang: zh
+translationKey: designer-workflow
 description: 设计师使用 TinyJPG 水印工具批量为作品添加版权水印，一键完成图片压缩与版权保护。
 ---
 

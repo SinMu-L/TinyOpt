@@ -4,9 +4,10 @@ import MobileMenu from './MobileMenu.tsx';
 
 export interface Props {
   lang: 'zh' | 'en';
+  langHref?: string;
 }
 
-const { lang } = Astro.props;
+const { lang, langHref: overrideLangHref } = Astro.props;
 const _ = translation(lang);
 const pathname = Astro.url.pathname;
 
@@ -24,9 +25,10 @@ const navItems = [
   { label: _.nav.contact, href: lang === 'en' ? '/en/contact/' : '/contact/', active: isActive('/contact') },
   { label: _.nav.terms_short, href: lang === 'en' ? '/en/terms/' : '/terms/', active: isActive('/terms') },
 ];
-const langHref = lang === 'en'
+const fallbackLangHref = lang === 'en'
   ? pathname.replace(/^\/en/, '') || '/'
   : '/en' + (pathname === '/' ? '' : pathname);
+const langHref = overrideLangHref ?? fallbackLangHref;
 const langLabel = lang === 'en' ? '中文' : 'EN';
 ---
 

@@ -2,6 +2,7 @@
 title: 500 Photos and Still Renaming One by One with F2? 10 Seconds with Template Variables
 date: 2026-06-04
 lang: en
+translationKey: batch-rename-productivity
 description: Batch rename thousands of images in seconds using TinyJPG's template variables {name}, {index}, and {date}. Manual renaming takes 30 minutes — templates take 10 seconds.
 tags: [batch-rename, productivity, file-management]
 ---

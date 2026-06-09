@@ -2,6 +2,7 @@
 title: 500 张照片还在 F2 一张张改名？10 秒搞定，模板变量一次配好
 date: 2026-06-04
 lang: zh
+translationKey: batch-rename-productivity
 description: 用 TinyJPG 的批量重命名功能，{name}、{index}、{date} 三个模板变量搞定上千张图片命名，手动改需要半小时，模板改只要 10 秒。
 tags: [批量重命名, 工作效率, 文件管理]
 ---

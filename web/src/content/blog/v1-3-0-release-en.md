@@ -2,6 +2,7 @@
 title: TinyJPG Compressor v1.3.0 Released
 date: 2026-06-04
 lang: en
+translationKey: v1-3-0-release
 description: Version 1.3.0 is now available with AVIF support, improved watermark tool, and various bug fixes.
 tags: [release, v1.3.0, AVIF]
 ---
