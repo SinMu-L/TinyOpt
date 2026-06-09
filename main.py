@@ -26,6 +26,8 @@ from PyQt5.QtGui import (
     QPixmap, QPainter, QPen
 )
 
+from i18n import T, set_language, get_language, on_language_change
+
 import requests
 from PIL import Image, ImageDraw, ImageFont
 
@@ -386,30 +388,27 @@ class KeyManager:
 class AddKeyDialog(QDialog):
     def __init__(self, parent=None, edit_mode=False, key_data=None):
         super().__init__(parent)
-        self.setWindowTitle("编辑密钥" if edit_mode else "添加密钥")
+        self.edit_mode = edit_mode
         self.setMinimumWidth(450)
         self.key_data = key_data
 
         layout = QFormLayout(self)
 
         self.key_input = QLineEdit()
-        self.key_input.setPlaceholderText("输入 Tinify API Key")
         self.key_input.setEchoMode(QLineEdit.Password)
         if key_data:
             self.key_input.setText(key_data["key"])
-        layout.addRow("API Key:", self.key_input)
+        layout.addRow(T("add_key_dialog.api_key") + ":", self.key_input)
 
         self.remark_input = QLineEdit()
-        self.remark_input.setPlaceholderText("可选，用于区分不同密钥（如：工作、个人）")
         if key_data:
             self.remark_input.setText(key_data.get("remark", ""))
-        layout.addRow("备注:", self.remark_input)
+        layout.addRow(T("add_key_dialog.remark") + ":", self.remark_input)
 
         self.limit_input = QSpinBox()
         self.limit_input.setRange(1, 10000)
         self.limit_input.setValue(key_data.get("monthly_limit", 500) if key_data else 500)
-        self.limit_input.setSuffix(" 次/月")
-        layout.addRow("每月额度:", self.limit_input)
+        layout.addRow(T("add_key_dialog.monthly_limit") + ":", self.limit_input)
 
         buttons = QDialogButtonBox(
             QDialogButtonBox.Ok | QDialogButtonBox.Cancel, self
@@ -418,12 +417,20 @@ class AddKeyDialog(QDialog):
         buttons.rejected.connect(self.reject)
         layout.addRow(buttons)
 
+        self.retranslate()
+
+    def retranslate(self):
+        self.setWindowTitle(T("add_key_dialog.title_edit" if self.edit_mode else "add_key_dialog.title_add"))
+        self.key_input.setPlaceholderText(T("add_key_dialog.api_key_placeholder"))
+        self.remark_input.setPlaceholderText(T("add_key_dialog.remark_placeholder"))
+        self.limit_input.setSuffix(T("add_key_dialog.times_month"))
+
     def validate_and_accept(self):
         if not self.key_input.text().strip():
-            QMessageBox.warning(self, "警告", "API Key 不能为空！")
+            QMessageBox.warning(self, T("app.warning"), T("add_key_dialog.warning_empty"))
             return
         if len(self.key_input.text().strip()) < 10:
-            QMessageBox.warning(self, "警告", "API Key 格式似乎不正确，请检查！")
+            QMessageBox.warning(self, T("app.warning"), T("add_key_dialog.warning_invalid"))
             return
         self.accept()
 
@@ -438,13 +445,17 @@ class AddKeyDialog(QDialog):
 class HistoryDialog(QDialog):
     def __init__(self, history, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("📊 压缩历史")
+        self.setWindowTitle(T("dialog_history.title"))
         self.setMinimumSize(700, 400)
 
         layout = QVBoxLayout(self)
         table = QTableWidget()
         table.setColumnCount(6)
-        table.setHorizontalHeaderLabels(["时间", "文件数", "成功", "失败", "原始大小", "压缩后大小"])
+        table.setHorizontalHeaderLabels([
+            T("dialog_history.col_time"), T("dialog_history.col_files"),
+            T("dialog_history.col_success"), T("dialog_history.col_fail"),
+            T("dialog_history.col_original"), T("dialog_history.col_compressed"),
+        ])
         table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         for i in range(1, 6):
             table.horizontalHeader().setSectionResizeMode(i, QHeaderView.ResizeToContents)
@@ -463,7 +474,7 @@ class HistoryDialog(QDialog):
             table.setItem(row, 5, QTableWidgetItem(format_size(record.get("compressed_size", 0))))
 
         layout.addWidget(table)
-        close_btn = QPushButton("关闭")
+        close_btn = QPushButton(T("dialog_history.close"))
         close_btn.clicked.connect(self.accept)
         layout.addWidget(close_btn, alignment=Qt.AlignRight)
 
@@ -567,7 +578,7 @@ class CompressWorker(QThread):
             target_mime = "image/png"
 
         if Path(file_path).suffix.lower() not in supported_ext:
-            self.log.emit(f"⏭ 跳过不支持的类型: {file_path}", False)
+            self.log.emit(T("worker.skip_type", path=file_path), False)
             return None
 
         input_path = Path(file_path)
@@ -578,7 +589,7 @@ class CompressWorker(QThread):
             output_path = input_path.parent / output_name
 
         if output_path.exists() and not self.overwrite:
-            self.log.emit(f"⏭ 跳过已存在文件: {output_path}", False)
+            self.log.emit(T("worker.skip_exists", path=str(output_path)), False)
             return None
 
         try:
@@ -592,7 +603,7 @@ class CompressWorker(QThread):
                 with open(file_path, "rb") as f:
                     image_data = f.read()
         except Exception as e:
-            self.log.emit(f"❌ 读取文件失败: {file_path} - {e}", True)
+            self.log.emit(T("worker.read_failed", path=file_path, error=str(e)), True)
             return {"success": False, "original_size": 0, "compressed_size": 0}
 
         max_attempts = max(len(self.key_manager.keys) * 2, 4)
@@ -603,13 +614,13 @@ class CompressWorker(QThread):
             key = self.key_manager.acquire_key()
             if key is None:
                 if attempt == 0:
-                    self.log.emit("❌ 没有可用的密钥（请添加有效的 API Key）", True)
+                    self.log.emit(T("worker.no_available_key"), True)
                 else:
-                    self.log.emit(f"❌ 所有可用密钥额度已用完或无效: {input_path.name}", True)
+                    self.log.emit(T("worker.all_keys_exhausted", name=input_path.name), True)
                 return {"success": False, "original_size": original_size, "compressed_size": 0}
 
             key_id = key.get("remark") or key["key"][:8]
-            self.log.emit(f"🔄 [密钥:{key_id}] 正在压缩: {input_path.name}", False)
+            self.log.emit(T("worker.compressing", key=key_id, name=input_path.name), False)
 
             actual_mime = "image/png" if pil_only else target_mime
             success, compressed_data, count, error = self.compress_image(
@@ -635,7 +646,7 @@ class CompressWorker(QThread):
                         with open(output_path, "wb") as f:
                             f.write(compressed_data)
                 except Exception as e:
-                    self.log.emit(f"❌ 写入文件失败: {output_path} - {e}", True)
+                    self.log.emit(T("worker.write_failed", path=str(output_path), error=str(e)), True)
                     self.key_manager.release_key(key["key"])
                     return {"success": False, "original_size": original_size, "compressed_size": 0}
 
@@ -643,31 +654,33 @@ class CompressWorker(QThread):
                 saved = original_size - compressed_size
                 saved_percent = (saved / original_size) * 100
                 self.log.emit(
-                    f"✅ {input_path.name} | {original_size//1024}KB → {compressed_size//1024}KB | 节省 {saved_percent:.1f}%",
+                    T("worker.compress_success", name=input_path.name,
+                      original=original_size // 1024, compressed=compressed_size // 1024,
+                      percent=f"{saved_percent:.1f}"),
                     False,
                 )
                 return {"success": True, "original_size": original_size, "compressed_size": compressed_size}
             else:
                 error_msgs = {
-                    "QUOTA_EXCEEDED": "本月额度已用完",
-                    "INVALID_KEY": "密钥无效",
-                    "TIMEOUT": "请求超时",
-                    "NETWORK": "网络错误",
-                    "HTTP_413": "图片超过大小限制",
-                    "HTTP_415": "不支持的图片格式",
+                    "QUOTA_EXCEEDED": T("worker.error_quota"),
+                    "INVALID_KEY": T("worker.error_invalid_key"),
+                    "TIMEOUT": T("worker.error_timeout"),
+                    "NETWORK": T("worker.error_network"),
+                    "HTTP_413": T("worker.error_413"),
+                    "HTTP_415": T("worker.error_415"),
                 }
                 msg = error_msgs.get(error, error)
 
                 if error in ("QUOTA_EXCEEDED", "INVALID_KEY"):
                     self.key_manager.disable_key(key["key"])
-                    self.log.emit(f"⚠ [密钥:{key_id}] {msg}，尝试下一个...", True)
+                    self.log.emit(T("worker.key_warning", key=key_id, error=msg), True)
                 elif error in ("TIMEOUT", "NETWORK"):
                     self.key_manager.release_key(key["key"])
-                    self.log.emit(f"⚠ [密钥:{key_id}] {msg}，重试中({attempt+1}/{max_attempts})...", True)
+                    self.log.emit(T("worker.key_retry", key=key_id, error=msg, attempt=attempt + 1, max=max_attempts), True)
                     time.sleep(1)
                 else:
                     self.key_manager.release_key(key["key"])
-                    self.log.emit(f"❌ [密钥:{key_id}] {msg}", True)
+                    self.log.emit(T("worker.key_failed", key=key_id, error=msg), True)
                     return {"success": False, "original_size": original_size, "compressed_size": 0}
 
         return {"success": False, "original_size": original_size, "compressed_size": 0}
@@ -686,7 +699,7 @@ class CompressWorker(QThread):
         if num_workers <= 1:
             for fp in self.file_paths:
                 if self._is_cancelled:
-                    self.log.emit("⚠ 用户取消了压缩任务", False)
+                    self.log.emit(T("worker.compress_cancelled"), False)
                     break
                 result = self.process_one_file(fp)
                 if result is None:
@@ -702,7 +715,7 @@ class CompressWorker(QThread):
                 self.progress.emit(self._completed, self._total)
                 self.key_usage_updated.emit()
         else:
-            self.log.emit(f"🚀 启用 {num_workers} 个并发线程进行压缩", False)
+            self.log.emit(T("worker.concurrent_start", count=num_workers), False)
 
             def safe_process(fp):
                 if self._is_cancelled:
@@ -713,7 +726,7 @@ class CompressWorker(QThread):
                 futures = {executor.submit(safe_process, fp): fp for fp in self.file_paths}
                 for future in as_completed(futures):
                     if self._is_cancelled:
-                        self.log.emit("⚠ 用户取消了压缩任务", False)
+                        self.log.emit(T("worker.compress_cancelled"), False)
                         for f in futures:
                             f.cancel()
                         break
@@ -783,22 +796,22 @@ class WatermarkWorker(QThread):
             try:
                 self._loaded_wm_image = Image.open(self.watermark_image_path)
             except Exception as e:
-                self.log.emit(f"❌ 无法加载水印图片: {self.watermark_image_path} - {e}", True)
+                self.log.emit(T("worker.watermark_failed", name=Path(self.watermark_image_path).name, error=str(e)), True)
                 self.finished_signal.emit({"total": total, "success": 0, "fail": total,
                                            "original_size": 0, "compressed_size": 0})
                 return
 
         for idx, fp in enumerate(self.file_paths):
             if self._is_cancelled:
-                self.log.emit("⚠ 用户取消了水印任务", False)
+                self.log.emit(T("worker.watermark_cancelled"), False)
                 break
 
-            self.log.emit(f"🔄 处理中: {Path(fp).name}", False)
+            self.log.emit(T("worker.watermark_processing", name=Path(fp).name), False)
             try:
                 original_size = os.path.getsize(fp)
                 ext = Path(fp).suffix.lower()
                 if ext in (".ico", ".pdf"):
-                    self.log.emit(f"⏭ 跳过不支持格式: {Path(fp).name}", False)
+                    self.log.emit(T("worker.watermark_skip_format", name=Path(fp).name), False)
                     fail += 1
                     self.progress.emit(idx + 1, total)
                     continue
@@ -821,7 +834,7 @@ class WatermarkWorker(QThread):
                     out_path = Path(fp).parent / f"{stem}_watermarked{ext}"
 
                 if out_path.exists() and not self.overwrite:
-                    self.log.emit(f"⏭ 跳过已存在文件: {out_path.name}", False)
+                    self.log.emit(T("worker.watermark_skip_exists", name=out_path.name), False)
                     fail += 1
                     self.progress.emit(idx + 1, total)
                     continue
@@ -831,10 +844,10 @@ class WatermarkWorker(QThread):
                 total_original += original_size
                 total_compressed += compressed_size
                 success += 1
-                self.log.emit(f"✅ {Path(fp).name} | 水印添加完成", False)
+                self.log.emit(T("worker.watermark_success", name=Path(fp).name), False)
 
             except Exception as e:
-                self.log.emit(f"❌ 处理失败: {Path(fp).name} - {e}", True)
+                self.log.emit(T("worker.watermark_failed", name=Path(fp).name, error=str(e)), True)
                 fail += 1
 
             self.progress.emit(idx + 1, total)
@@ -870,7 +883,7 @@ class RenameWorker(QThread):
 
         for i, fp in enumerate(self.file_paths):
             if self._is_cancelled:
-                self.log.emit("⚠ 用户取消了重命名任务", False)
+                self.log.emit(T("worker.rename_cancelled"), False)
                 break
 
             p = Path(fp)
@@ -887,17 +900,17 @@ class RenameWorker(QThread):
             new_path = parent / new_name
 
             if new_path.exists() and new_path.resolve() != p.resolve():
-                self.log.emit(f"⏭ 目标文件已存在: {new_name}", False)
+                self.log.emit(T("worker.rename_skip_exists", name=new_name), False)
                 fail += 1
                 self.progress.emit(i + 1, total)
                 continue
 
             try:
                 os.rename(fp, str(new_path))
-                self.log.emit(f"✅ {p.name} → {new_name}", False)
+                self.log.emit(T("worker.rename_success", old=p.name, new=new_name), False)
                 success += 1
             except Exception as e:
-                self.log.emit(f"❌ 重命名失败: {p.name} - {e}", True)
+                self.log.emit(T("worker.rename_failed", name=p.name, error=str(e)), True)
                 fail += 1
 
             self.progress.emit(i + 1, total)
@@ -996,7 +1009,7 @@ class PositionPreviewWidget(QWidget):
             f = painter.font()
             f.setPointSize(10)
             painter.setFont(f)
-            painter.drawText(self.rect(), Qt.AlignCenter, "添加图片后可预览位置")
+            painter.drawText(self.rect(), Qt.AlignCenter, T("app.position_preview_hint"))
 
         if self._wm_pixmap and not self._wm_pixmap.isNull() and self._img_rect:
             wm_rect = self._wm_display_rect()
@@ -1083,7 +1096,6 @@ class PositionPreviewWidget(QWidget):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("🐼 TinyJPG 批量压缩助手")
         self.setMinimumSize(900, 700)
 
         self.worker = None
@@ -1092,6 +1104,8 @@ class MainWindow(QMainWindow):
 
         self.init_ui()
         self.load_settings()
+        on_language_change(self.retranslate_ui)
+        self.retranslate_ui()
 
     def init_ui(self):
         central = QWidget()
@@ -1100,8 +1114,14 @@ class MainWindow(QMainWindow):
         root.setContentsMargins(0, 0, 0, 0)
         root.setSpacing(0)
 
+        sidebar_widget = QWidget()
+        sidebar_widget.setFixedWidth(140)
+        sidebar_layout = QVBoxLayout(sidebar_widget)
+        sidebar_layout.setContentsMargins(0, 0, 0, 0)
+        sidebar_layout.setSpacing(0)
+
         self.sidebar = QListWidget()
-        self.sidebar.setFixedWidth(140)
+        self.sidebar.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.sidebar.setStyleSheet("""
             QListWidget {
                 background: #2c3e50;
@@ -1122,15 +1142,39 @@ class MainWindow(QMainWindow):
                 background: #34495e;
             }
         """)
-        self.sidebar.addItem("📁  压缩任务")
-        self.sidebar.addItem("💧  水印工具")
-        self.sidebar.addItem("📝  批量重命名")
-        self.sidebar.addItem("🔑  密钥管理")
-        self.sidebar.addItem("📊  压缩历史")
+        self.sidebar.addItem("📁  " + T("sidebar.compress").strip())
+        self.sidebar.addItem("💧  " + T("sidebar.watermark").strip())
+        self.sidebar.addItem("📝  " + T("sidebar.rename").strip())
+        self.sidebar.addItem("🔑  " + T("sidebar.key_manage").strip())
+        self.sidebar.addItem("📊  " + T("sidebar.history").strip())
         self.sidebar.setCurrentRow(0)
         self.sidebar.currentRowChanged.connect(self.on_sidebar_changed)
+        self.lang_combo = QComboBox()
+        self.lang_combo.addItem("中文", "zh")
+        self.lang_combo.addItem("English", "en")
+        self.lang_combo.setCurrentIndex(0 if get_language() == "zh" else 1)
+        self.lang_combo.currentIndexChanged.connect(self._on_lang_changed)
+        self.lang_combo.setStyleSheet("""
+            QComboBox {
+                background: #34495e;
+                color: #ecf0f1;
+                border: none;
+                padding: 8px;
+                font-size: 12px;
+            }
+            QComboBox::drop-down {
+                border: none;
+            }
+            QComboBox QAbstractItemView {
+                background: #2c3e50;
+                color: #ecf0f1;
+                selection-background-color: #3498db;
+            }
+        """)
+        sidebar_layout.addWidget(self.sidebar, 1)
+        sidebar_layout.addWidget(self.lang_combo)
 
-        root.addWidget(self.sidebar)
+        root.addWidget(sidebar_widget)
 
         self.stack = QStackedWidget()
         self.stack.addWidget(self.build_compression_page())  # 0
@@ -1140,59 +1184,187 @@ class MainWindow(QMainWindow):
         self.stack.addWidget(self.build_history_page())      # 4
         root.addWidget(self.stack, 1)
 
+    def _rebuild_format_combo(self, combo):
+        combo.clear()
+        for key in FORMATS:
+            label_key = "format." + (key if key else "raw")
+            combo.addItem(T(label_key), key)
+        saved = self.config.get("target_format", DEFAULT_FORMAT)
+        idx = combo.findData(saved)
+        if idx >= 0:
+            combo.setCurrentIndex(idx)
+
+    def _rebuild_resize_method_combo(self, combo):
+        combo.clear()
+        for key in RESIZE_METHODS:
+            label_key = "resize." + key
+            text = T(label_key).split(" —")[0]
+            combo.addItem(text, key)
+
+    def _on_lang_changed(self, idx):
+        lang = self.lang_combo.itemData(idx)
+        set_language(lang)
+        self.config['language'] = lang
+        save_config(self.config)
+
+    def retranslate_ui(self):
+        self.setWindowTitle(T('app.title'))
+        self.sidebar.item(0).setText('\U0001f4c1  ' + T('sidebar.compress').strip())
+        self.sidebar.item(1).setText('\U0001f4a7  ' + T('sidebar.watermark').strip())
+        self.sidebar.item(2).setText('\U0001f4dd  ' + T('sidebar.rename').strip())
+        self.sidebar.item(3).setText('\U0001f511  ' + T('sidebar.key_manage').strip())
+        self.sidebar.item(4).setText('\U0001f4ca  ' + T('sidebar.history').strip())
+        self._retranslate_compression_page()
+        self._retranslate_watermark_page()
+        self._retranslate_rename_page()
+        self._retranslate_key_page()
+        self._retranslate_history_page()
+
+    def _retranslate_compression_page(self):
+        self.output_group.setTitle(T('compress.page_title'))
+        self.output_dir_input.setPlaceholderText(T('app.output_dir_placeholder'))
+        self.browse_output_btn.setText(T('app.browse'))
+        self.overwrite_checkbox.setText(T('app.overwrite'))
+        self._cp_label_format.setText(T('compress.format_label'))
+        self._rebuild_format_combo(self.format_combo)
+        self.resize_checkbox.setText(T('app.resize'))
+        self._cp_label_resize_method.setText(T('compress.resize_method_label'))
+        self._rebuild_resize_method_combo(self.resize_method_combo)
+        self._cp_label_width.setText(T('compress.width_label'))
+        self._cp_label_height.setText(T('compress.height_label'))
+        self.resize_width_input.setSpecialValueText(T('app.auto'))
+        self.resize_height_input.setSpecialValueText(T('app.auto'))
+        self.resize_width_input.setSuffix(T('app.px'))
+        self.resize_height_input.setSuffix(T('app.px'))
+        self.file_group.setTitle(T('compress.task_title'))
+        self.log_group.setTitle(T('compress.log_title'))
+        self.compress_btn.setText(T('compress.start_btn'))
+        self.cancel_btn.setText(T('compress.cancel_btn'))
+        self.add_files_btn.setText(T('app.add_files'))
+        self.add_folder_btn.setText(T('app.add_folder'))
+        self.remove_selected_btn.setText(T('app.remove_selected'))
+        self.clear_all_btn.setText(T('app.clear_list'))
+        self.update_file_summary()
+
+    def _retranslate_watermark_page(self):
+        self.wm_settings_group.setTitle(T('watermark.page_title'))
+        self._wm_label_type.setText(T('watermark.type') + ':')
+        self.wm_type_image.setText(T('watermark.type_image'))
+        self.wm_type_text.setText(T('watermark.type_text'))
+        self.wm_type_both.setText(T('watermark.type_both'))
+        self._wm_label_image.setText(T('watermark.image_label') + ':')
+        self.wm_image_path_input.setPlaceholderText(T('watermark.image_placeholder'))
+        self.wm_image_browse_btn.setText(T('app.browse'))
+        self._wm_label_text.setText(T('watermark.text_label') + ':')
+        self.wm_text_input.setPlaceholderText(T('watermark.text_placeholder'))
+        self.wm_font_btn.setText(T('watermark.font_btn'))
+        self._wm_label_font_size.setText(T('watermark.font_size') + ':')
+        self._wm_label_margin_x.setText(T('watermark.margin_x') + ':')
+        self._wm_label_margin_y.setText(T('watermark.margin_y') + ':')
+        self._wm_label_opacity.setText(T('watermark.opacity') + ':')
+        self._wm_label_scale.setText(T('watermark.scale') + ':')
+        self.wm_scale_spin.setSuffix(T('watermark.percent'))
+        self._wm_label_output_dir.setText(T('app.output_dir') + ':')
+        self.wm_output_dir.setPlaceholderText(T('app.output_dir_placeholder'))
+        self.wm_output_browse.setText(T('app.browse'))
+        self.wm_overwrite.setText(T('app.overwrite_original'))
+        self.wm_file_group.setTitle(T('watermark.task_title'))
+        self.wm_start_btn.setText(T('watermark.start_btn'))
+        self.wm_cancel_btn.setText(T('watermark.cancel_btn'))
+        self.wm_add_btn.setText(T('app.add_files'))
+        self.wm_remove_btn.setText(T('app.remove_selected'))
+        self.wm_clear_btn.setText(T('app.clear_list'))
+        self._wm_update_count()
+
+    def _retranslate_rename_page(self):
+        self.rn_settings_group.setTitle(T('rename.page_title'))
+        self._rn_label_pattern.setText(T('rename.pattern') + ':')
+        self.rn_pattern_input.setPlaceholderText(T('rename.pattern_placeholder'))
+        self._rn_label_insert_var.setText(T('app.insert_var') + ':')
+        self.hint.setText(T('rename.hint'))
+        self._rn_label_start_index.setText(T('app.start_index') + ':')
+        self._rn_label_pad_digits.setText(T('app.pad_digits') + ':')
+        self._rn_label_date_format.setText(T('app.date_format') + ':')
+        self.rn_file_group.setTitle(T('rename.task_title'))
+        self.rn_file_table.setHorizontalHeaderLabels([
+            T('app.original_name'), T('app.new_name'), T('app.path'),
+        ])
+        self.rn_start_btn.setText(T('rename.start_btn'))
+        self.rn_add_btn.setText(T('app.add_files'))
+        self.rn_folder_btn.setText(T('app.add_folder'))
+        self.rn_remove_btn.setText(T('app.remove_selected'))
+        self.rn_clear_btn.setText(T('app.clear_list'))
+        self._rn_update_count()
+
+    def _retranslate_key_page(self):
+        self.key_table.setHorizontalHeaderLabels([
+            T('key.table_remark'), T('key.table_key'),
+            T('key.table_usage'), T('key.table_status'),
+        ])
+        self.add_key_btn.setText(T('key.add_btn'))
+        self.edit_key_btn.setText(T('key.edit_btn'))
+        self.remove_key_btn.setText(T('key.remove_btn'))
+        self.toggle_key_btn.setText(T('key.toggle_btn'))
+        self.refresh_quota_btn.setText(T('key.refresh_btn'))
+        self.update_key_status()
+
+    def _retranslate_history_page(self):
+        self.history_table.setHorizontalHeaderLabels([
+            T('history.table_time'), T('history.table_files'),
+            T('history.table_success'), T('history.table_fail'),
+            T('history.table_original'), T('history.table_compressed'),
+        ])
+        self.refresh_history_btn.setText(T('history.refresh_btn'))
+        self.clear_history_btn.setText(T('history.clear_btn'))
+
     def build_compression_page(self):
         page = QWidget()
         layout = QVBoxLayout(page)
 
-        output_group = QGroupBox("📁 输出设置")
-        output_layout = QVBoxLayout(output_group)
+        self.output_group = QGroupBox()
+        output_layout = QVBoxLayout(self.output_group)
 
         row1 = QHBoxLayout()
         self.output_dir_input = QLineEdit()
-        self.output_dir_input.setPlaceholderText("留空则覆盖原文件")
-        self.browse_output_btn = QPushButton("浏览...")
+        self.browse_output_btn = QPushButton()
         self.browse_output_btn.clicked.connect(self.browse_output_dir)
-        self.overwrite_checkbox = QCheckBox("覆盖已存在的文件")
-        row1.addWidget(QLabel("输出目录:"))
+        self.overwrite_checkbox = QCheckBox()
+        row1.addWidget(QLabel(T('app.output_dir')))
         row1.addWidget(self.output_dir_input)
         row1.addWidget(self.browse_output_btn)
         row1.addWidget(self.overwrite_checkbox)
         output_layout.addLayout(row1)
 
         row2 = QHBoxLayout()
-        row2.addWidget(QLabel("格式:"))
+        self._cp_label_format = QLabel()
+        row2.addWidget(self._cp_label_format)
         self.format_combo = QComboBox()
-        for key, fmt in FORMATS.items():
-            self.format_combo.addItem(fmt["label"], key)
-        self.format_combo.setCurrentText(FORMATS[DEFAULT_FORMAT]["label"])
+        self._rebuild_format_combo(self.format_combo)
         row2.addWidget(self.format_combo)
 
         row2.addSpacing(16)
-        self.resize_checkbox = QCheckBox("调整尺寸")
+        self.resize_checkbox = QCheckBox()
         self.resize_checkbox.toggled.connect(self.on_resize_toggled)
         row2.addWidget(self.resize_checkbox)
 
-        row2.addWidget(QLabel("方法:"))
+        self._cp_label_resize_method = QLabel()
+        row2.addWidget(self._cp_label_resize_method)
         self.resize_method_combo = QComboBox()
-        for key, label in RESIZE_METHODS.items():
-            self.resize_method_combo.addItem(label.split(" —")[0], key)
-        self.resize_method_combo.setCurrentIndex(0)
+        self._rebuild_resize_method_combo(self.resize_method_combo)
         row2.addWidget(self.resize_method_combo)
 
         self.resize_width_input = QSpinBox()
         self.resize_width_input.setRange(0, 10000)
         self.resize_width_input.setValue(0)
-        self.resize_width_input.setSpecialValueText("自动")
-        self.resize_width_input.setSuffix(" px")
-        row2.addWidget(QLabel("宽:"))
+        self._cp_label_width = QLabel(T('compress.width_label'))
+        row2.addWidget(self._cp_label_width)
         row2.addWidget(self.resize_width_input)
 
         self.resize_height_input = QSpinBox()
         self.resize_height_input.setRange(0, 10000)
         self.resize_height_input.setValue(0)
-        self.resize_height_input.setSpecialValueText("自动")
-        self.resize_height_input.setSuffix(" px")
-        row2.addWidget(QLabel("高:"))
+        self._cp_label_height = QLabel(T('compress.height_label'))
+        row2.addWidget(self._cp_label_height)
         row2.addWidget(self.resize_height_input)
 
         for w in [self.resize_method_combo, self.resize_width_input,
@@ -1201,12 +1373,12 @@ class MainWindow(QMainWindow):
 
         row2.addStretch()
         output_layout.addLayout(row2)
-        layout.addWidget(output_group)
+        layout.addWidget(self.output_group)
 
         splitter = QSplitter(Qt.Vertical)
 
-        file_group = QGroupBox("📋 待压缩图片列表")
-        file_layout = QVBoxLayout(file_group)
+        self.file_group = QGroupBox()
+        file_layout = QVBoxLayout(self.file_group)
         self.file_list_widget = QListWidget()
         self.file_list_widget.setDragEnabled(True)
         self.file_list_widget.setAcceptDrops(True)
@@ -1215,7 +1387,7 @@ class MainWindow(QMainWindow):
         file_layout.addWidget(self.file_list_widget)
 
         info_bar = QHBoxLayout()
-        self.file_count_label = QLabel("共 0 个文件")
+        self.file_count_label = QLabel()
         self.file_total_size_label = QLabel("")
         info_bar.addWidget(self.file_count_label)
         info_bar.addWidget(self.file_total_size_label)
@@ -1223,13 +1395,13 @@ class MainWindow(QMainWindow):
         file_layout.addLayout(info_bar)
 
         btn_bar = QHBoxLayout()
-        self.add_files_btn = QPushButton("📎 添加图片")
+        self.add_files_btn = QPushButton()
         self.add_files_btn.clicked.connect(self.add_files)
-        self.add_folder_btn = QPushButton("📁 添加文件夹")
+        self.add_folder_btn = QPushButton()
         self.add_folder_btn.clicked.connect(self.add_folder)
-        self.remove_selected_btn = QPushButton("🗑 移除选中")
+        self.remove_selected_btn = QPushButton()
         self.remove_selected_btn.clicked.connect(self.remove_selected)
-        self.clear_all_btn = QPushButton("清空列表")
+        self.clear_all_btn = QPushButton()
         self.clear_all_btn.clicked.connect(self.clear_all)
         btn_bar.addWidget(self.add_files_btn)
         btn_bar.addWidget(self.add_folder_btn)
@@ -1237,25 +1409,25 @@ class MainWindow(QMainWindow):
         btn_bar.addWidget(self.clear_all_btn)
         file_layout.addLayout(btn_bar)
 
-        splitter.addWidget(file_group)
+        splitter.addWidget(self.file_group)
 
-        log_group = QGroupBox("📝 压缩日志")
-        log_layout = QVBoxLayout(log_group)
+        self.log_group = QGroupBox()
+        log_layout = QVBoxLayout(self.log_group)
         self.log_text = QTextEdit()
         self.log_text.setReadOnly(True)
         self.log_text.setFont(QFont("Consolas", 9))
         log_layout.addWidget(self.log_text)
-        splitter.addWidget(log_group)
+        splitter.addWidget(self.log_group)
         splitter.setSizes([350, 180])
 
         layout.addWidget(splitter, 1)
 
         ctrl = QHBoxLayout()
-        self.compress_btn = QPushButton("🚀 开始压缩")
+        self.compress_btn = QPushButton()
         self.compress_btn.setStyleSheet(
             "background-color: #4CAF50; color: white; font-weight: bold; padding: 8px 16px;"
         )
-        self.cancel_btn = QPushButton("⏹ 取消")
+        self.cancel_btn = QPushButton()
         self.cancel_btn.setEnabled(False)
         self.cancel_btn.setStyleSheet("background-color: #f44336; color: white; padding: 8px 16px;")
         self.compress_btn.clicked.connect(self.start_compress)
@@ -1276,16 +1448,17 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(page)
 
         # ── Settings group ──
-        settings_group = QGroupBox("💧 水印设置")
-        settings_layout = QVBoxLayout(settings_group)
+        self.wm_settings_group = QGroupBox()
+        settings_layout = QVBoxLayout(self.wm_settings_group)
 
         # Type selection
         type_layout = QHBoxLayout()
-        type_layout.addWidget(QLabel("类型:"))
+        self._wm_label_type = QLabel()
+        type_layout.addWidget(self._wm_label_type)
         self.wm_type_group = QButtonGroup(self)
-        self.wm_type_image = QRadioButton("图片水印")
-        self.wm_type_text = QRadioButton("文字水印")
-        self.wm_type_both = QRadioButton("图片+文字")
+        self.wm_type_image = QRadioButton()
+        self.wm_type_text = QRadioButton()
+        self.wm_type_both = QRadioButton()
         self.wm_type_group.addButton(self.wm_type_image, 0)
         self.wm_type_group.addButton(self.wm_type_text, 1)
         self.wm_type_group.addButton(self.wm_type_both, 2)
@@ -1301,11 +1474,11 @@ class MainWindow(QMainWindow):
         self.wm_image_row = QWidget()
         wm_img_layout = QHBoxLayout(self.wm_image_row)
         wm_img_layout.setContentsMargins(0, 0, 0, 0)
-        wm_img_layout.addWidget(QLabel("水印图片:"))
+        self._wm_label_image = QLabel()
+        wm_img_layout.addWidget(self._wm_label_image)
         self.wm_image_path_input = QLineEdit()
-        self.wm_image_path_input.setPlaceholderText("选择 PNG/图片作为水印...")
         wm_img_layout.addWidget(self.wm_image_path_input)
-        self.wm_image_browse_btn = QPushButton("浏览...")
+        self.wm_image_browse_btn = QPushButton()
         self.wm_image_browse_btn.clicked.connect(self.on_wm_browse_image)
         wm_img_layout.addWidget(self.wm_image_browse_btn)
         self.wm_image_preview = QLabel()
@@ -1319,12 +1492,12 @@ class MainWindow(QMainWindow):
         self.wm_text_row.setVisible(False)
         wm_txt_layout = QHBoxLayout(self.wm_text_row)
         wm_txt_layout.setContentsMargins(0, 0, 0, 0)
-        wm_txt_layout.addWidget(QLabel("文字内容:"))
+        self._wm_label_text = QLabel()
+        wm_txt_layout.addWidget(self._wm_label_text)
         self.wm_text_input = QLineEdit()
-        self.wm_text_input.setPlaceholderText("输入水印文字...")
         self.wm_text_input.textChanged.connect(self._rebuild_wm_preview)
         wm_txt_layout.addWidget(self.wm_text_input)
-        self.wm_font_btn = QPushButton("选择字体...")
+        self.wm_font_btn = QPushButton()
         self.wm_font_btn.clicked.connect(self.on_wm_select_font)
         wm_txt_layout.addWidget(self.wm_font_btn)
         self.wm_font_size_spin = QSpinBox()
@@ -1332,7 +1505,8 @@ class MainWindow(QMainWindow):
         self.wm_font_size_spin.setValue(48)
         self.wm_font_size_spin.setSuffix(" px")
         self.wm_font_size_spin.valueChanged.connect(self._rebuild_wm_preview)
-        wm_txt_layout.addWidget(QLabel("字号:"))
+        self._wm_label_font_size = QLabel()
+        wm_txt_layout.addWidget(self._wm_label_font_size)
         wm_txt_layout.addWidget(self.wm_font_size_spin)
         self.wm_color_btn = QPushButton()
         self.wm_color_btn.setFixedSize(28, 28)
@@ -1349,7 +1523,8 @@ class MainWindow(QMainWindow):
         # Controls row (margin, opacity, scale)
         controls_row = QHBoxLayout()
 
-        controls_row.addWidget(QLabel("边距 X:"))
+        self._wm_label_margin_x = QLabel()
+        controls_row.addWidget(self._wm_label_margin_x)
         self.wm_margin_x = QSpinBox()
         self.wm_margin_x.setRange(0, 500)
         self.wm_margin_x.setValue(20)
@@ -1359,7 +1534,8 @@ class MainWindow(QMainWindow):
         controls_row.addWidget(self.wm_margin_x)
 
         controls_row.addSpacing(12)
-        controls_row.addWidget(QLabel("Y:"))
+        self._wm_label_margin_y = QLabel()
+        controls_row.addWidget(self._wm_label_margin_y)
         self.wm_margin_y = QSpinBox()
         self.wm_margin_y.setRange(0, 500)
         self.wm_margin_y.setValue(20)
@@ -1369,7 +1545,8 @@ class MainWindow(QMainWindow):
         controls_row.addWidget(self.wm_margin_y)
 
         controls_row.addSpacing(20)
-        controls_row.addWidget(QLabel("透明度:"))
+        self._wm_label_opacity = QLabel()
+        controls_row.addWidget(self._wm_label_opacity)
         self.wm_opacity_slider = QSlider(Qt.Horizontal)
         self.wm_opacity_slider.setRange(1, 100)
         self.wm_opacity_slider.setValue(80)
@@ -1381,7 +1558,8 @@ class MainWindow(QMainWindow):
         controls_row.addWidget(self.wm_opacity_label)
 
         controls_row.addSpacing(20)
-        controls_row.addWidget(QLabel("缩放:"))
+        self._wm_label_scale = QLabel()
+        controls_row.addWidget(self._wm_label_scale)
         self.wm_scale_spin = QSpinBox()
         self.wm_scale_spin.setRange(1, 100)
         self.wm_scale_spin.setValue(15)
@@ -1394,23 +1572,23 @@ class MainWindow(QMainWindow):
 
         # Output settings
         output_layout = QHBoxLayout()
-        output_layout.addWidget(QLabel("输出目录:"))
+        self._wm_label_output_dir = QLabel()
+        output_layout.addWidget(self._wm_label_output_dir)
         self.wm_output_dir = QLineEdit()
-        self.wm_output_dir.setPlaceholderText("留空则覆盖原文件")
         output_layout.addWidget(self.wm_output_dir)
-        self.wm_output_browse = QPushButton("浏览...")
+        self.wm_output_browse = QPushButton()
         self.wm_output_browse.clicked.connect(self.on_wm_browse_output)
         output_layout.addWidget(self.wm_output_browse)
-        self.wm_overwrite = QCheckBox("覆盖原文件")
+        self.wm_overwrite = QCheckBox()
         output_layout.addWidget(self.wm_overwrite)
         output_layout.addStretch()
         settings_layout.addLayout(output_layout)
 
-        layout.addWidget(settings_group)
+        layout.addWidget(self.wm_settings_group)
 
         # ── File list ──
-        file_group = QGroupBox("📋 待处理图片列表")
-        file_layout = QVBoxLayout(file_group)
+        self.wm_file_group = QGroupBox()
+        file_layout = QVBoxLayout(self.wm_file_group)
         self.wm_file_list = QListWidget()
         self.wm_file_list.setAcceptDrops(True)
         self.wm_file_list.setDragEnabled(True)
@@ -1419,32 +1597,32 @@ class MainWindow(QMainWindow):
         file_layout.addWidget(self.wm_file_list)
 
         info_bar = QHBoxLayout()
-        self.wm_file_count = QLabel("共 0 个文件")
+        self.wm_file_count = QLabel()
         info_bar.addWidget(self.wm_file_count)
         info_bar.addStretch()
         file_layout.addLayout(info_bar)
 
         btn_bar = QHBoxLayout()
-        self.wm_add_btn = QPushButton("📎 添加图片")
+        self.wm_add_btn = QPushButton()
         self.wm_add_btn.clicked.connect(self.on_wm_add_files)
-        self.wm_remove_btn = QPushButton("🗑 移除选中")
+        self.wm_remove_btn = QPushButton()
         self.wm_remove_btn.clicked.connect(self.on_wm_remove_selected)
-        self.wm_clear_btn = QPushButton("清空列表")
+        self.wm_clear_btn = QPushButton()
         self.wm_clear_btn.clicked.connect(self.on_wm_clear)
         btn_bar.addWidget(self.wm_add_btn)
         btn_bar.addWidget(self.wm_remove_btn)
         btn_bar.addWidget(self.wm_clear_btn)
         btn_bar.addStretch()
         file_layout.addLayout(btn_bar)
-        layout.addWidget(file_group, 1)
+        layout.addWidget(self.wm_file_group, 1)
 
         # ── Buttons ──
         ctrl = QHBoxLayout()
-        self.wm_start_btn = QPushButton("🚀 开始添加水印")
+        self.wm_start_btn = QPushButton()
         self.wm_start_btn.setStyleSheet(
             "background-color: #4CAF50; color: white; font-weight: bold; padding: 8px 16px;"
         )
-        self.wm_cancel_btn = QPushButton("⏹ 取消")
+        self.wm_cancel_btn = QPushButton()
         self.wm_cancel_btn.setEnabled(False)
         self.wm_cancel_btn.setStyleSheet("background-color: #f44336; color: white; padding: 8px 16px;")
         self.wm_start_btn.clicked.connect(self.on_wm_start)
@@ -1475,21 +1653,22 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(page)
 
         # ── Settings ──
-        settings_group = QGroupBox("📝 重命名规则")
-        settings_layout = QVBoxLayout(settings_group)
+        self.rn_settings_group = QGroupBox()
+        settings_layout = QVBoxLayout(self.rn_settings_group)
 
         # Pattern
         pattern_layout = QHBoxLayout()
-        pattern_layout.addWidget(QLabel("命名模式:"))
+        self._rn_label_pattern = QLabel()
+        pattern_layout.addWidget(self._rn_label_pattern)
         self.rn_pattern_input = QLineEdit()
-        self.rn_pattern_input.setPlaceholderText('例如: product_{index} 或 {name}_{index}')
         self.rn_pattern_input.textChanged.connect(self.on_rn_preview)
         pattern_layout.addWidget(self.rn_pattern_input)
         settings_layout.addLayout(pattern_layout)
 
         # Variable insert buttons
         var_layout = QHBoxLayout()
-        var_layout.addWidget(QLabel("插入变量:"))
+        self._rn_label_insert_var = QLabel()
+        var_layout.addWidget(self._rn_label_insert_var)
         self.rn_ins_name = QPushButton("{name}")
         self.rn_ins_name.clicked.connect(lambda: self.rn_insert_var("{name}"))
         self.rn_ins_index = QPushButton("{index}")
@@ -1503,13 +1682,14 @@ class MainWindow(QMainWindow):
         settings_layout.addLayout(var_layout)
 
         # Hint
-        hint = QLabel("提示: {name}=原文件名  {index}=序号  {date}=当前日期")
-        hint.setStyleSheet("color: #888; font-size: 11px;")
-        settings_layout.addWidget(hint)
+        self.hint = QLabel()
+        self.hint.setStyleSheet("color: #888; font-size: 11px;")
+        settings_layout.addWidget(self.hint)
 
         # Numeric options
         num_layout = QHBoxLayout()
-        num_layout.addWidget(QLabel("起始序号:"))
+        self._rn_label_start_index = QLabel()
+        num_layout.addWidget(self._rn_label_start_index)
         self.rn_start_index = QSpinBox()
         self.rn_start_index.setRange(0, 999999)
         self.rn_start_index.setValue(1)
@@ -1517,7 +1697,8 @@ class MainWindow(QMainWindow):
         num_layout.addWidget(self.rn_start_index)
 
         num_layout.addSpacing(12)
-        num_layout.addWidget(QLabel("数字位数:"))
+        self._rn_label_pad_digits = QLabel()
+        num_layout.addWidget(self._rn_label_pad_digits)
         self.rn_pad_digits = QSpinBox()
         self.rn_pad_digits.setRange(1, 10)
         self.rn_pad_digits.setValue(3)
@@ -1526,7 +1707,8 @@ class MainWindow(QMainWindow):
         num_layout.addWidget(QLabel(" (001)"))
 
         num_layout.addSpacing(12)
-        num_layout.addWidget(QLabel("日期格式:"))
+        self._rn_label_date_format = QLabel()
+        num_layout.addWidget(self._rn_label_date_format)
         self.rn_date_format = QComboBox()
         self.rn_date_format.addItem("YYYYMMDD", "%Y%m%d")
         self.rn_date_format.addItem("YYYY-MM-DD", "%Y-%m-%d")
@@ -1537,15 +1719,17 @@ class MainWindow(QMainWindow):
         num_layout.addStretch()
         settings_layout.addLayout(num_layout)
 
-        layout.addWidget(settings_group)
+        layout.addWidget(self.rn_settings_group)
 
         # ── File list (table with preview) ──
-        file_group = QGroupBox("📋 文件列表")
-        file_layout = QVBoxLayout(file_group)
+        self.rn_file_group = QGroupBox()
+        file_layout = QVBoxLayout(self.rn_file_group)
 
         self.rn_file_table = QTableWidget()
         self.rn_file_table.setColumnCount(3)
-        self.rn_file_table.setHorizontalHeaderLabels(["原文件名", "→ 新文件名", "路径"])
+        self.rn_file_table.setHorizontalHeaderLabels([
+            T('app.original_name'), T('app.new_name'), T('app.path'),
+        ])
         self.rn_file_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         self.rn_file_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
         self.rn_file_table.setColumnHidden(2, True)  # hidden path column
@@ -1556,19 +1740,19 @@ class MainWindow(QMainWindow):
         file_layout.addWidget(self.rn_file_table)
 
         info_bar = QHBoxLayout()
-        self.rn_file_count = QLabel("共 0 个文件")
+        self.rn_file_count = QLabel()
         info_bar.addWidget(self.rn_file_count)
         info_bar.addStretch()
         file_layout.addLayout(info_bar)
 
         btn_bar = QHBoxLayout()
-        self.rn_add_btn = QPushButton("📎 添加文件")
+        self.rn_add_btn = QPushButton()
         self.rn_add_btn.clicked.connect(self.on_rn_add_files)
-        self.rn_folder_btn = QPushButton("📁 添加文件夹")
+        self.rn_folder_btn = QPushButton()
         self.rn_folder_btn.clicked.connect(self.on_rn_add_folder)
-        self.rn_remove_btn = QPushButton("🗑 移除选中")
+        self.rn_remove_btn = QPushButton()
         self.rn_remove_btn.clicked.connect(self.on_rn_remove_selected)
-        self.rn_clear_btn = QPushButton("清空列表")
+        self.rn_clear_btn = QPushButton()
         self.rn_clear_btn.clicked.connect(self.on_rn_clear)
         btn_bar.addWidget(self.rn_add_btn)
         btn_bar.addWidget(self.rn_folder_btn)
@@ -1577,11 +1761,11 @@ class MainWindow(QMainWindow):
         btn_bar.addStretch()
         file_layout.addLayout(btn_bar)
 
-        layout.addWidget(file_group, 1)
+        layout.addWidget(self.rn_file_group, 1)
 
         # ── Buttons ──
         ctrl = QHBoxLayout()
-        self.rn_start_btn = QPushButton("🚀 开始重命名")
+        self.rn_start_btn = QPushButton()
         self.rn_start_btn.setStyleSheet(
             "background-color: #4CAF50; color: white; font-weight: bold; padding: 8px 16px;"
         )
@@ -1608,7 +1792,10 @@ class MainWindow(QMainWindow):
 
         self.key_table = QTableWidget()
         self.key_table.setColumnCount(4)
-        self.key_table.setHorizontalHeaderLabels(["备注", "密钥", "已用/限额", "状态"])
+        self.key_table.setHorizontalHeaderLabels([
+            T('key.table_remark'), T('key.table_key'),
+            T('key.table_usage'), T('key.table_status'),
+        ])
         self.key_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         self.key_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
         self.key_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
@@ -1620,15 +1807,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.key_table, 1)
 
         btn_layout = QHBoxLayout()
-        self.add_key_btn = QPushButton("➕ 添加密钥")
+        self.add_key_btn = QPushButton()
         self.add_key_btn.clicked.connect(self.add_key_dialog)
-        self.edit_key_btn = QPushButton("✏️ 编辑密钥")
+        self.edit_key_btn = QPushButton()
         self.edit_key_btn.clicked.connect(self.edit_key_dialog)
-        self.remove_key_btn = QPushButton("🗑 删除密钥")
+        self.remove_key_btn = QPushButton()
         self.remove_key_btn.clicked.connect(self.remove_key)
-        self.toggle_key_btn = QPushButton("⏸ 禁用/启用")
+        self.toggle_key_btn = QPushButton()
         self.toggle_key_btn.clicked.connect(self.toggle_key)
-        self.refresh_quota_btn = QPushButton("🔄 刷新额度")
+        self.refresh_quota_btn = QPushButton()
         self.refresh_quota_btn.clicked.connect(self.refresh_quota)
 
         btn_layout.addWidget(self.add_key_btn)
@@ -1650,9 +1837,11 @@ class MainWindow(QMainWindow):
 
         self.history_table = QTableWidget()
         self.history_table.setColumnCount(6)
-        self.history_table.setHorizontalHeaderLabels(
-            ["时间", "文件数", "成功", "失败", "原始大小", "压缩后大小"]
-        )
+        self.history_table.setHorizontalHeaderLabels([
+            T('history.table_time'), T('history.table_files'),
+            T('history.table_success'), T('history.table_fail'),
+            T('history.table_original'), T('history.table_compressed'),
+        ])
         self.history_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         for i in range(1, 6):
             self.history_table.horizontalHeader().setSectionResizeMode(i, QHeaderView.ResizeToContents)
@@ -1662,9 +1851,9 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.history_table, 1)
 
         btn_bar = QHBoxLayout()
-        self.refresh_history_btn = QPushButton("🔄 刷新")
+        self.refresh_history_btn = QPushButton()
         self.refresh_history_btn.clicked.connect(self.refresh_history_table)
-        self.clear_history_btn = QPushButton("🗑 清空历史")
+        self.clear_history_btn = QPushButton()
         self.clear_history_btn.clicked.connect(self.clear_history)
         btn_bar.addWidget(self.refresh_history_btn)
         btn_bar.addWidget(self.clear_history_btn)
@@ -1683,8 +1872,8 @@ class MainWindow(QMainWindow):
 
     def on_wm_browse_image(self):
         path, _ = QFileDialog.getOpenFileName(
-            self, "选择水印图片", "",
-            "图片文件 (*.png *.jpg *.jpeg *.webp *.gif *.bmp);;所有文件 (*.*)"
+            self, T("app.select_watermark_image_title"), "",
+            T("app.watermark_image_filter"),
         )
         if path:
             self.wm_image_path_input.setText(path)
@@ -1698,7 +1887,7 @@ class MainWindow(QMainWindow):
         font, ok = QFontDialog.getFont()
         if ok:
             self.wm_font_family = font.family()
-            self.wm_font_btn.setText(f"字体: {font.family()}")
+            self.wm_font_btn.setText(T("watermark.font_label", name=font.family()))
             self.wm_font_size_spin.setValue(font.pointSize())
             self._rebuild_wm_preview()
 
@@ -1722,14 +1911,14 @@ class MainWindow(QMainWindow):
         pass
 
     def on_wm_browse_output(self):
-        dir_path = QFileDialog.getExistingDirectory(self, "选择输出目录")
+        dir_path = QFileDialog.getExistingDirectory(self, T("app.select_output_dir"))
         if dir_path:
             self.wm_output_dir.setText(dir_path)
 
     def on_wm_add_files(self):
         files, _ = QFileDialog.getOpenFileNames(
-            self, "选择图片文件", "",
-            "图片文件 (*.jpg *.jpeg *.png *.webp *.gif *.tiff *.tif *.bmp *.avif);;所有文件 (*.*)",
+            self, T("app.select_image_files"), "",
+            T("app.image_files_filter"),
         )
         for f in files:
             self._wm_add_item(f)
@@ -1760,7 +1949,7 @@ class MainWindow(QMainWindow):
         self._wm_update_preview()
 
     def _wm_update_count(self):
-        self.wm_file_count.setText(f"共 {self.wm_file_list.count()} 个文件")
+        self.wm_file_count.setText(T("app.file_count", count=self.wm_file_list.count()))
 
     def _wm_update_preview(self):
         if self.wm_file_list.count() > 0:
@@ -1835,7 +2024,7 @@ class MainWindow(QMainWindow):
     def on_wm_start(self):
         paths = self._wm_get_paths()
         if not paths:
-            QMessageBox.warning(self, "警告", "请先添加要处理的图片！")
+            QMessageBox.warning(self, T("app.warning"), T("app.add_files_first_wm"))
             return
 
         wm_type_id = self.wm_type_group.checkedId()
@@ -1843,10 +2032,10 @@ class MainWindow(QMainWindow):
         wm_type = type_map.get(wm_type_id, "image")
 
         if wm_type in ("image", "both") and not self.wm_image_path_input.text():
-            QMessageBox.warning(self, "警告", "请选择水印图片！")
+            QMessageBox.warning(self, T("app.warning"), T("app.select_watermark_image"))
             return
         if wm_type in ("text", "both") and not self.wm_text_input.text().strip():
-            QMessageBox.warning(self, "警告", "请输入水印文字！")
+            QMessageBox.warning(self, T("app.warning"), T("app.enter_watermark_text"))
             return
 
         font_path = find_font_path(self.wm_font_family)
@@ -1894,16 +2083,16 @@ class MainWindow(QMainWindow):
         self.wm_cancel_btn.setEnabled(False)
         self.wm_progress.setVisible(False)
         self._wm_log(f"\n{'='*50}")
-        self._wm_log(f"✅ 水印处理完成！")
-        self._wm_log(f"   总文件数: {stats['total']}")
-        self._wm_log(f"   成功: {stats['success']}")
-        self._wm_log(f"   失败: {stats['fail']}")
-        QMessageBox.information(self, "完成", f"水印添加完成，成功 {stats['success']} 张！")
+        self._wm_log(T("watermark.finished"))
+        self._wm_log(T("compress.stats_total", count=stats['total']))
+        self._wm_log(T("compress.stats_success", count=stats['success']))
+        self._wm_log(T("compress.stats_fail", count=stats['fail']))
+        QMessageBox.information(self, T("app.done"), T("watermark.done_msg", count=stats['success']))
 
     def on_wm_cancel(self):
         if hasattr(self, 'wm_worker') and self.wm_worker and self.wm_worker.isRunning():
             self.wm_worker.cancel()
-            self._wm_log("⏹ 正在取消水印处理...")
+            self._wm_log(T("worker.cancel_watermark"))
 
     # ── Rename handlers ──
 
@@ -1935,8 +2124,8 @@ class MainWindow(QMainWindow):
 
     def on_rn_add_files(self):
         files, _ = QFileDialog.getOpenFileNames(
-            self, "选择文件", "",
-            "所有文件 (*.*)",
+            self, T("app.select_image_files"), "",
+            T("app.all_files_filter"),
         )
         for f in files:
             self._rn_add_item(f)
@@ -1944,7 +2133,7 @@ class MainWindow(QMainWindow):
         self.on_rn_preview()
 
     def on_rn_add_folder(self):
-        folder = QFileDialog.getExistingDirectory(self, "选择文件夹")
+        folder = QFileDialog.getExistingDirectory(self, T("app.select_folder"))
         if folder:
             count = 0
             for root, dirs, files in os.walk(folder):
@@ -1955,7 +2144,7 @@ class MainWindow(QMainWindow):
             self._rn_update_count()
             self.on_rn_preview()
             if count > 0:
-                self._rn_log(f"✅ 已添加文件夹，共找到 {count} 个文件")
+                self._rn_log(T("rename.add_folder_result", count=count))
 
     def _rn_add_item(self, file_path):
         if not os.path.isfile(file_path):
@@ -1982,7 +2171,7 @@ class MainWindow(QMainWindow):
         self._rn_update_count()
 
     def _rn_update_count(self):
-        self.rn_file_count.setText(f"共 {self.rn_file_table.rowCount()} 个文件")
+        self.rn_file_count.setText(T("app.file_count", count=self.rn_file_table.rowCount()))
 
     def _rn_get_paths(self):
         paths = []
@@ -1995,17 +2184,17 @@ class MainWindow(QMainWindow):
     def on_rn_start(self):
         paths = self._rn_get_paths()
         if not paths:
-            QMessageBox.warning(self, "警告", "请先添加要重命名的文件！")
+            QMessageBox.warning(self, T("app.warning"), T("app.add_files_first_rn"))
             return
 
         pattern = self.rn_pattern_input.text().strip()
         if not pattern:
-            QMessageBox.warning(self, "警告", "请输入命名模式！")
+            QMessageBox.warning(self, T("app.warning"), T("app.enter_pattern"))
             return
 
         if "{name}" not in pattern and "{index}" not in pattern and "{date}" not in pattern:
             reply = QMessageBox.question(
-                self, "确认", "命名模式中未包含任何变量，所有文件将被重命名为相同名称，是否继续？",
+                self, T("app.confirm"), T("app.no_variables_in_pattern"),
                 QMessageBox.Yes | QMessageBox.No,
             )
             if reply == QMessageBox.No:
@@ -2040,11 +2229,11 @@ class MainWindow(QMainWindow):
         self.rn_start_btn.setEnabled(True)
         self.rn_progress.setVisible(False)
         self._rn_log(f"\n{'='*50}")
-        self._rn_log(f"✅ 重命名完成！")
-        self._rn_log(f"   总文件数: {stats['total']}")
-        self._rn_log(f"   成功: {stats['success']}")
-        self._rn_log(f"   失败: {stats['fail']}")
-        QMessageBox.information(self, "完成", f"重命名完成，成功 {stats['success']} 个文件！")
+        self._rn_log(T("rename.finished"))
+        self._rn_log(T("compress.stats_total", count=stats['total']))
+        self._rn_log(T("compress.stats_success", count=stats['success']))
+        self._rn_log(T("compress.stats_fail", count=stats['fail']))
+        QMessageBox.information(self, T("app.done"), T("rename.done_msg", count=stats['success']))
         self.on_rn_clear()
 
     # ── Original handlers (updated) ──
@@ -2072,6 +2261,10 @@ class MainWindow(QMainWindow):
                 self.resize_method_combo.setCurrentIndex(method_idx)
             self.resize_width_input.setValue(saved_resize.get("width", 0))
             self.resize_height_input.setValue(saved_resize.get("height", 0))
+        saved_lang = self.config.get("language", "zh")
+        idx = self.lang_combo.findData(saved_lang)
+        if idx >= 0:
+            self.lang_combo.setCurrentIndex(idx)
         self.refresh_key_table()
         self.key_manager.refresh_all_usage()
         self.refresh_key_table()
@@ -2100,7 +2293,7 @@ class MainWindow(QMainWindow):
             key_item.setToolTip(k["key"])
             self.key_table.setItem(row, 1, key_item)
 
-            usage_text = f"{k['monthly_usage']} / {k['monthly_limit']}"
+            usage_text = T("app.key_usage", usage=k['monthly_usage'], limit=k['monthly_limit'])
             usage_item = QTableWidgetItem(usage_text)
             remaining = k["monthly_limit"] - k["monthly_usage"]
             if remaining <= 0:
@@ -2111,7 +2304,7 @@ class MainWindow(QMainWindow):
                 usage_item.setForeground(QBrush(QColor("#4CAF50")))
             self.key_table.setItem(row, 2, usage_item)
 
-            status = "✅ 启用" if k["enabled"] else "⛔ 禁用"
+            status = T("app.key_status_enabled") if k["enabled"] else T("app.key_status_disabled")
             status_item = QTableWidgetItem(status)
             if not k["enabled"]:
                 status_item.setForeground(QBrush(QColor("#f44336")))
@@ -2133,7 +2326,7 @@ class MainWindow(QMainWindow):
 
     def clear_history(self):
         reply = QMessageBox.question(
-            self, "确认清空", "确定要清空所有压缩历史记录吗？",
+            self, T("history.confirm_clear"), T("app.confirm_clear_history"),
             QMessageBox.Yes | QMessageBox.No,
         )
         if reply == QMessageBox.Yes:
@@ -2155,10 +2348,7 @@ class MainWindow(QMainWindow):
             for k in self.key_manager.keys
             if k["enabled"]
         )
-        self.key_status_label.setText(
-            f"共 {total} 个密钥 | {enabled} 个启用 | {available} 个可用 | "
-            f"总剩余额度: {remaining_total}/{limit_total}"
-        )
+        self.key_status_label.setText(T("app.key_remaining", total=total, enabled=enabled, available=available, remaining=remaining_total, limit_total=limit_total))
 
     def update_file_summary(self):
         count = self.file_list_widget.count()
@@ -2167,8 +2357,8 @@ class MainWindow(QMainWindow):
             fp = self.file_list_widget.item(i).data(Qt.UserRole)
             if fp and os.path.isfile(fp):
                 total_size += os.path.getsize(fp)
-        self.file_count_label.setText(f"共 {count} 个文件")
-        self.file_total_size_label.setText(f"总计: {format_size(total_size)}")
+        self.file_count_label.setText(T("app.file_count", count=count))
+        self.file_total_size_label.setText(T("app.file_total", size=format_size(total_size)) if total_size > 0 else "")
 
     def add_item_to_list(self, file_path):
         if not os.path.isfile(file_path):
@@ -2196,17 +2386,17 @@ class MainWindow(QMainWindow):
             data = dialog.get_data()
             existing_keys = [k["key"] for k in self.key_manager.keys]
             if data["key"] in existing_keys:
-                QMessageBox.warning(self, "警告", "该 API Key 已存在！")
+                QMessageBox.warning(self, T("app.warning"), T("app.key_exists"))
                 return
             self.key_manager.add_key(data["key"], data["remark"], data["monthly_limit"])
             self.refresh_key_table()
             self.save_settings()
-            self.log(f"✅ 已添加密钥: {data['remark'] or data['key'][:8]}...")
+            self.log(T("key.added", remark=data['remark'] or data['key'][:8]))
 
     def edit_key_dialog(self):
         row = self.key_table.currentRow()
         if row < 0:
-            QMessageBox.warning(self, "提示", "请先选择一个密钥")
+            QMessageBox.warning(self, T("app.warning"), T("app.select_key_first"))
             return
         key_data = self.key_manager.keys[row]
         dialog = AddKeyDialog(self, edit_mode=True, key_data=key_data)
@@ -2215,77 +2405,77 @@ class MainWindow(QMainWindow):
             if data["key"] != key_data["key"] and any(
                 k["key"] == data["key"] for k in self.key_manager.keys
             ):
-                QMessageBox.warning(self, "警告", "该 API Key 已存在！")
+                QMessageBox.warning(self, T("app.warning"), T("app.key_exists"))
                 return
             key_data["key"] = data["key"]
             key_data["remark"] = data["remark"]
             key_data["monthly_limit"] = data["monthly_limit"]
             self.refresh_key_table()
             self.save_settings()
-            self.log(f"✅ 已更新密钥: {data['remark'] or data['key'][:8]}...")
+            self.log(T("key.updated", remark=data['remark'] or data['key'][:8]))
 
     def remove_key(self):
         row = self.key_table.currentRow()
         if row < 0:
-            QMessageBox.warning(self, "提示", "请先选择一个密钥")
+            QMessageBox.warning(self, T("app.warning"), T("app.select_key_first"))
             return
         key = self.key_manager.keys[row]
         remark = key.get("remark") or key["key"][:8]
         reply = QMessageBox.question(
-            self, "确认删除", f"确定要删除密钥「{remark}」吗？",
+            self, T("app.confirm"), T("key.confirm_delete", remark=remark),
             QMessageBox.Yes | QMessageBox.No,
         )
         if reply == QMessageBox.Yes:
             self.key_manager.remove_key(row)
             self.refresh_key_table()
             self.save_settings()
-            self.log(f"🗑 已删除密钥: {remark}")
+            self.log(T("key.deleted", remark=remark))
 
     def toggle_key(self):
         row = self.key_table.currentRow()
         if row < 0:
-            QMessageBox.warning(self, "提示", "请先选择一个密钥")
+            QMessageBox.warning(self, T("app.warning"), T("app.select_key_first"))
             return
         self.key_manager.toggle_key(row)
         self.refresh_key_table()
         self.save_settings()
         key = self.key_manager.keys[row]
-        status = "启用" if key["enabled"] else "禁用"
+        status = T("key.enabled_status") if key["enabled"] else T("key.disabled_status")
         remark = key.get("remark") or key["key"][:8]
-        self.log(f"⏸ 已{status}密钥: {remark}")
+        self.log(T("key.toggled", status=status, remark=remark))
 
     def refresh_quota(self):
         if not self.key_manager.keys:
-            QMessageBox.warning(self, "提示", "没有密钥可刷新")
+            QMessageBox.warning(self, T("app.warning"), T("key.no_keys"))
             return
         self.refresh_quota_btn.setEnabled(False)
-        self.refresh_quota_btn.setText("⏳ 刷新中...")
+        self.refresh_quota_btn.setText(T("key.refreshing"))
         QApplication.processEvents()
 
         self.key_manager.refresh_all_usage()
         self.refresh_key_table()
         self.save_settings()
 
-        self.refresh_quota_btn.setText("🔄 刷新额度")
+        self.refresh_quota_btn.setText(T("key.refresh_btn"))
         self.refresh_quota_btn.setEnabled(True)
-        self.log("✅ 已刷新所有密钥的当前使用额度")
+        self.log(T("key.refresh_done"))
 
     def browse_output_dir(self):
-        dir_path = QFileDialog.getExistingDirectory(self, "选择输出目录")
+        dir_path = QFileDialog.getExistingDirectory(self, T("app.select_output_dir"))
         if dir_path:
             self.output_dir_input.setText(dir_path)
 
     def add_files(self):
         files, _ = QFileDialog.getOpenFileNames(
-            self, "选择图片文件", "",
-            "图片文件 (*.jpg *.jpeg *.png *.webp *.gif *.tiff *.tif *.bmp *.avif);;所有文件 (*.*)",
+            self, T("app.select_image_files"), "",
+            T("app.image_files_filter"),
         )
         for f in files:
             self.add_item_to_list(f)
         self.update_file_summary()
 
     def add_folder(self):
-        folder = QFileDialog.getExistingDirectory(self, "选择包含图片的文件夹")
+        folder = QFileDialog.getExistingDirectory(self, T("app.select_folder"))
         if folder:
             supported_ext = SUPPORTED_EXTENSIONS
             count = 0
@@ -2297,7 +2487,8 @@ class MainWindow(QMainWindow):
                         if self.file_list_widget.count() > count_before:
                             count += 1
             self.update_file_summary()
-            self.log(f"✅ 已添加文件夹，共找到 {count} 张图片")
+            if count > 0:
+                self.log(T("app.folder_added", count=count))
 
     def remove_selected(self):
         for item in self.file_list_widget.selectedItems():
@@ -2317,14 +2508,13 @@ class MainWindow(QMainWindow):
     def start_compress(self):
         if not self.key_manager.get_available_keys():
             QMessageBox.warning(
-                self, "警告",
-                "没有可用的 API Key！\n请先在「密钥管理」中添加有效的密钥并确保额度未用完。\n可在 https://tinypng.com/developers 免费获取",
+                self, T("app.warning"), T("app.no_keys_available"),
             )
             return
 
         file_paths = self.get_file_paths()
         if not file_paths:
-            QMessageBox.warning(self, "警告", "请先添加要压缩的图片！")
+            QMessageBox.warning(self, T("app.warning"), T("app.add_files_first"))
             return
 
         oversize_files = [fp for fp in file_paths if os.path.getsize(fp) > MAX_FREE_SIZE]
@@ -2333,10 +2523,10 @@ class MainWindow(QMainWindow):
                 f"  • {Path(fp).name} ({format_size(os.path.getsize(fp))})"
                 for fp in oversize_files[:5]
             )
-            extra = f"\n  ... 及其他 {len(oversize_files)-5} 个" if len(oversize_files) > 5 else ""
+            extra = T("compress.and_others", count=len(oversize_files) - 5) if len(oversize_files) > 5 else ""
             reply = QMessageBox.warning(
-                self, "文件大小警告",
-                f"以下 {len(oversize_files)} 个文件超过 TinyPNG 免费版 5MB 限制，可能压缩失败：\n\n{names}{extra}\n\n是否继续？",
+                self, T("compress.oversize_warning_title"),
+                T("compress.oversize_warning_msg", count=len(oversize_files), files=names + extra),
                 QMessageBox.Yes | QMessageBox.No,
             )
             if reply == QMessageBox.No:
@@ -2368,9 +2558,10 @@ class MainWindow(QMainWindow):
                 resize_params = params
 
         available_count = len(self.key_manager.get_available_keys())
-        fmt_label = FORMATS[target_format]["label"]
-        resize_label = f" + 调整尺寸({resize_params['method']})" if resize_params else ""
-        self.log(f"🚀 开始压缩任务，共 {len(file_paths)} 个文件，可用密钥 {available_count} 个，输出格式: {fmt_label}{resize_label}")
+        label_key = "format." + (target_format if target_format else "raw")
+        fmt_label = T(label_key)
+        resize_label = T("compress.resize_label", method=resize_params['method']) if resize_params else ""
+        self.log(T("compress.start_log", total=len(file_paths), keys=available_count, format=fmt_label, resize=resize_label))
 
         self.worker = CompressWorker(
             self.key_manager, file_paths, output_dir, overwrite,
@@ -2385,7 +2576,7 @@ class MainWindow(QMainWindow):
     def cancel_compress(self):
         if self.worker and self.worker.isRunning():
             self.worker.cancel()
-            self.log("⏹ 正在取消压缩...")
+            self.log(T("worker.cancel_compress"))
 
     def update_progress(self, current, total):
         self.progress_bar.setMaximum(total)
@@ -2397,20 +2588,20 @@ class MainWindow(QMainWindow):
         self.progress_bar.setVisible(False)
 
         self.log("\n" + "=" * 50)
-        self.log(f"📊 压缩完成！")
-        self.log(f"   总文件数: {stats['total']}")
-        self.log(f"   成功: {stats['success']}")
-        self.log(f"   失败: {stats['fail']}")
+        self.log(T("compress.finished"))
+        self.log(T("compress.stats_total", count=stats['total']))
+        self.log(T("compress.stats_success", count=stats['success']))
+        self.log(T("compress.stats_fail", count=stats['fail']))
 
         if stats["original_size"] > 0:
             saved = stats["original_size"] - stats["compressed_size"]
             saved_percent = (saved / stats["original_size"]) * 100
-            self.log(f"   原始大小: {stats['original_size'] / (1024*1024):.2f} MB")
-            self.log(f"   压缩后大小: {stats['compressed_size'] / (1024*1024):.2f} MB")
-            self.log(f"   节省空间: {saved / (1024*1024):.2f} MB ({saved_percent:.1f}%)")
+            self.log(T("compress.stats_original", size=stats['original_size'] / (1024*1024)))
+            self.log(T("compress.stats_compressed", size=stats['compressed_size'] / (1024*1024)))
+            self.log(T("compress.stats_saved", size=saved / (1024*1024), percent=f"{saved_percent:.1f}"))
 
         self.log("=" * 50)
-        QMessageBox.information(self, "压缩完成", f"成功压缩 {stats['success']} 张图片！")
+        QMessageBox.information(self, T("compress.finished"), T("compress.msg_done", count=stats['success']))
 
         record = {
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
