@@ -18,6 +18,7 @@ function isActive(path: string): boolean {
 
 const navItems = [
   { label: _.nav.home, href: lang === 'en' ? '/en/' : '/', active: isActive('/') && (pathname === '/' || pathname === '/en/') },
+  { label: _.nav.tool, href: lang === 'en' ? '/en/tool/' : '/tool/', active: isActive('/tool') },
   { label: _.nav.about, href: lang === 'en' ? '/en/about/' : '/about/', active: isActive('/about') },
   { label: _.nav.download, href: lang === 'en' ? '/en/download/' : '/download/', active: isActive('/download') },
   { label: _.nav.cases, href: lang === 'en' ? '/en/cases/' : '/cases/', active: isActive('/cases') },
@@ -42,6 +43,9 @@ const langLabel = lang === 'en' ? '中文' : 'EN';
     <div class="hidden lg:flex lg:items-center lg:gap-6 text-sm font-medium text-gray-600">
       <a href={lang === 'en' ? '/en/' : '/'} class={`hover:text-primary-600 transition-colors ${isActive('/') && (pathname === '/' || pathname === '/en/') ? 'text-primary-600' : ''}`}>
         {_.nav.home}
+      </a>
+      <a href={lang === 'en' ? '/en/tool/' : '/tool/'} class={`hover:text-primary-600 transition-colors ${isActive('/tool') ? 'text-primary-600' : ''}`}>
+        {_.nav.tool}
       </a>
       <a href={lang === 'en' ? '/en/about/' : '/about/'} class={`hover:text-primary-600 transition-colors ${isActive('/about') ? 'text-primary-600' : ''}`}>
         {_.nav.about}

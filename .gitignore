@@ -16,6 +16,10 @@ electron-dist/
 # Astro (web site)
 web/.astro/
 web/dist/
+web/.vercel/
+
+# Runtime config
+.tinypng_compressor_config.json
 
 
 
