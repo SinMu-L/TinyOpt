@@ -1,0 +1,48 @@
+---
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+const { items } = Astro.props as { items: FaqItem[] };
+---
+
+<div class="mx-auto max-w-3xl">
+  {items.map((item, i) => (
+    <div class="faq-item border-b border-gray-200">
+      <button
+        class="faq-btn flex w-full items-center justify-between py-5 text-left text-base font-medium text-gray-900 hover:text-primary-600 transition-colors"
+        aria-expanded="false"
+      >
+        <span class="pr-4">{item.q}</span>
+        <svg class="faq-icon h-5 w-5 shrink-0 text-gray-400 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div class="faq-answer overflow-hidden transition-all duration-300" style="max-height: 0; opacity: 0;">
+        <p class="pb-5 text-sm leading-relaxed text-gray-600">{item.a}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.faq-btn').forEach((b) => {
+        b.setAttribute('aria-expanded', 'false');
+        b.nextElementSibling.style.maxHeight = '0';
+        b.nextElementSibling.style.opacity = '0';
+        b.querySelector('.faq-icon').classList.remove('rotate-180');
+      });
+      if (!expanded) {
+        btn.setAttribute('aria-expanded', 'true');
+        const answer = btn.nextElementSibling;
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        answer.style.opacity = '1';
+        btn.querySelector('.faq-icon').classList.add('rotate-180');
+      }
+    });
+  });
+</script>

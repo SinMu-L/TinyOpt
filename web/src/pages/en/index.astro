@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import FeatureCard from '@/components/FeatureCard.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
 import { translation } from '@/i18n/utils';
 
 const _ = translation('en');
@@ -11,26 +12,105 @@ const _ = translation('en');
   description={_.site.description}
   lang="en"
 >
-  <section class="bg-gradient-to-br from-primary-50 via-white to-blue-50">
-    <div class="mx-auto max-w-6xl px-4 py-20 text-center">
-      <h1 class="mb-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-        {_.home.hero_title}
-      </h1>
-      <p class="mx-auto mb-10 max-w-2xl text-lg text-gray-600">
-        {_.home.hero_subtitle}
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="/en/download/" class="rounded-lg bg-primary-600 px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 transition-all">
-          {_.home.hero_cta}
-        </a>
-        <a href="/en/about/" class="rounded-lg border border-gray-300 bg-white px-8 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all">
-          {_.home.hero_secondary}
-        </a>
+  <!-- Hero -->
+  <section class="overflow-hidden bg-gradient-to-br from-primary-50 via-white to-blue-50">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:py-20 lg:py-24">
+      <div class="lg:flex lg:items-center lg:gap-12">
+        <div class="lg:w-1/2 lg:pr-8">
+          <h1 class="mb-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+            {_.home.hero_title}
+          </h1>
+          <p class="mb-8 text-lg text-gray-600">
+            {_.home.hero_subtitle}
+          </p>
+          <div class="flex flex-col sm:flex-row items-center gap-4">
+            <a href="/en/download/" class="rounded-lg bg-primary-600 px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 transition-all">
+              {_.home.hero_cta}
+            </a>
+            <a href="/en/about/" class="rounded-lg border border-gray-300 bg-white px-8 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all">
+              {_.home.hero_secondary}
+            </a>
+          </div>
+        </div>
+
+        <!-- Desktop App Mockup -->
+        <div class="mt-12 lg:mt-0 lg:w-1/2">
+          <div class="relative mx-auto max-w-md">
+            <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+              <div class="flex items-center gap-2 border-b border-gray-100 bg-gray-50 px-4 py-3">
+                <div class="flex gap-1.5">
+                  <span class="h-3 w-3 rounded-full bg-red-400"></span>
+                  <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+                  <span class="h-3 w-3 rounded-full bg-green-400"></span>
+                </div>
+                <span class="mx-auto text-xs font-medium text-gray-400">TinyOpt v1.5</span>
+              </div>
+              <div class="flex">
+                <div class="hidden w-36 border-r border-gray-100 bg-gray-50/50 p-3 sm:block">
+                  <div class="space-y-2">
+                    {['Compress', 'Watermark', 'Convert', 'Rename'].map((label) => (
+                      <div class="flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-medium text-gray-600 shadow-sm">
+                        <span class="h-2 w-2 rounded-full bg-primary-400"></span>
+                        {label}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div class="flex-1 p-4">
+                  <div class="mb-3 rounded-lg border-2 border-dashed border-gray-200 bg-gray-50/50 px-4 py-6 text-center">
+                    <svg class="mx-auto mb-2 h-8 w-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    <p class="text-xs text-gray-400">Drop images or folders here</p>
+                  </div>
+                  <div class="grid grid-cols-3 gap-2">
+                    {['photo-1.jpg', 'photo-2.png', 'banner.webp'].map((name, i) => (
+                      <div class="rounded-lg border border-gray-100 bg-white p-2 text-center shadow-sm">
+                        <div class={`mx-auto mb-1 h-10 w-full rounded-md ${['bg-blue-100', 'bg-green-100', 'bg-purple-100'][i]}`}></div>
+                        <p class="truncate text-[10px] text-gray-400">{name}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="mt-3 flex items-center justify-between rounded-lg bg-primary-50 px-3 py-2">
+                    <span class="text-xs font-medium text-primary-700">3 files ready</span>
+                    <span class="rounded-md bg-primary-600 px-3 py-1 text-xs font-semibold text-white">Compress</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -bottom-3 -right-3 rounded-full bg-green-500 px-4 py-1.5 text-xs font-semibold text-white shadow-lg">
+              100% Free
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- How It Works -->
   <section class="bg-white py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-4 text-center text-3xl font-bold text-gray-900">{_.home.how_title}</h2>
+      <p class="mx-auto mb-12 max-w-xl text-center text-gray-500">Download → Drag → Compress — done in three steps</p>
+      <div class="grid gap-8 md:grid-cols-3">
+        {_.home.how_steps.map((step, i) => (
+          <div class="relative rounded-xl border border-gray-100 bg-white p-6 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+            <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary-50 text-primary-600">
+              {step.icon === 'download' && <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>}
+              {step.icon === 'upload' && <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>}
+              {step.icon === 'check' && <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+            </div>
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 flex h-6 w-6 items-center justify-center rounded-full bg-primary-600 text-xs font-bold text-white">{i + 1}</span>
+            <h3 class="mb-2 text-lg font-semibold text-gray-900">{step.title}</h3>
+            <p class="text-sm leading-relaxed text-gray-500">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="bg-gray-50 py-20">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-12 text-center text-3xl font-bold text-gray-900">{_.home.features_title}</h2>
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -46,6 +126,7 @@ const _ = translation('en');
     </div>
   </section>
 
+  <!-- Stats -->
   <section class="bg-primary-600 py-16">
     <div class="mx-auto max-w-6xl px-4">
       <h2 class="mb-10 text-center text-2xl font-bold text-white">{_.home.stats_title}</h2>
@@ -54,6 +135,44 @@ const _ = translation('en');
           <div class="text-center text-white">
             <div class="text-4xl font-bold">{s.value}</div>
             <div class="mt-2 text-sm text-primary-100">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-4 text-center text-3xl font-bold text-gray-900">{_.home.faq_title}</h2>
+      <p class="mx-auto mb-12 max-w-xl text-center text-gray-500">Common questions about TinyOpt</p>
+      <FaqAccordion items={_.home.faq_items} />
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="bg-gray-50 py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-4 text-center text-3xl font-bold text-gray-900">{_.home.social_title}</h2>
+      <p class="mx-auto mb-12 max-w-xl text-center text-gray-500">{_.home.social_desc}</p>
+      <div class="grid gap-8 md:grid-cols-3">
+        {_.home.social_testimonials.map((item) => (
+          <div class="rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+            <div class="mb-4 flex items-center gap-1 text-yellow-400">
+              {[...Array(5)].map(() => (
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+              ))}
+            </div>
+            <p class="mb-4 text-sm leading-relaxed text-gray-600">"{item.content}"</p>
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-primary-600">
+                {item.name[0]}
+              </div>
+              <div>
+                <div class="text-sm font-semibold text-gray-900">{item.name}</div>
+                <div class="text-xs text-gray-400">{item.role}</div>
+              </div>
+            </div>
           </div>
         ))}
       </div>

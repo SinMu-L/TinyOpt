@@ -3,7 +3,7 @@ title: 500 Photos and Still Renaming One by One with F2? 10 Seconds with Templat
 date: 2026-06-04
 lang: en
 translationKey: batch-rename-productivity
-description: Batch rename thousands of images in seconds using TinyJPG's template variables {name}, {index}, and {date}. Manual renaming takes 30 minutes — templates take 10 seconds.
+description: Batch rename thousands of images in seconds using TinyOpt's template variables {name}, {index}, and {date}. Manual renaming takes 30 minutes — templates take 10 seconds.
 tags: [batch-rename, productivity, file-management]
 ---
 
@@ -11,9 +11,9 @@ Camera output: `_DSC0001.jpg`. Screenshot: `screenshot_20260607_143322.jpg`. Dow
 
 Manual renaming: Select → F2 → Type → Confirm. Repeat 500 times.
 
-Last week I had 500 photos that needed to be named "ProjectName_Sequence_Date." With TinyJPG's batch rename feature, it took 10 seconds to configure and one click to execute.
+Last week I had 500 photos that needed to be named "ProjectName_Sequence_Date." With TinyOpt's batch rename feature, it took 10 seconds to configure and one click to execute.
 
-| Comparison | Manual Rename | TinyJPG |
+| Comparison | Manual Rename | TinyOpt |
 |-----------|--------------|---------|
 | 500 files | 20-30 minutes | 10 seconds |
 | Workflow | F2 → Type → Confirm × 500 | Configure once, execute all |
@@ -22,7 +22,7 @@ Last week I had 500 photos that needed to be named "ProjectName_Sequence_Date." 
 
 ## 01. Just Three Template Variables
 
-TinyJPG offers three variables that cover 90% of renaming needs:
+TinyOpt offers three variables that cover 90% of renaming needs:
 
 | Variable | Description | Example Output |
 |----------|-------------|---------------|
@@ -38,7 +38,7 @@ Result: 2026_Portfolio_001_20260607.jpg
      ...
 ```
 
-👉 [Download TinyJPG and rename your files in bulk](/download/)
+👉 [Download TinyOpt and rename your files in bulk](/download/)
 
 ## 02. Advanced Configuration
 
@@ -99,4 +99,4 @@ Yes. Enable the rename option in the compression task, and all operations comple
 
 Batch renaming isn't high-tech, but it saves more time in daily work than most features. Three template variables, configure once, automate forever.
 
-Download now: [TinyJPG Compressor](/download/)
+Download now: [TinyOpt Compressor](/download/)

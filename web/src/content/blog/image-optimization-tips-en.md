@@ -24,13 +24,13 @@ The same photo in different formats:
 
 **WebP is the best bang for your buck** — 25-35% smaller than JPEG at the same quality, with 96%+ browser coverage. If you're still using JPEG everywhere, switching to WebP is the single easiest optimization you can make.
 
-👉 [TinyJPG supports 9 formats. Download and try it.](/download/)
+👉 [TinyOpt supports 9 formats. Download and try it.](/download/)
 
 ## 02. Don't Upload Images Larger Than Display Size
 
 Uploading a 4000px-wide image that displays at 800px wastes 5x the bandwidth every time someone loads your page.
 
-**The fix**: Resize to your actual display dimensions before compressing. TinyJPG's "Fit" mode scales proportionally by target width — one step, done.
+**The fix**: Resize to your actual display dimensions before compressing. TinyOpt's "Fit" mode scales proportionally by target width — one step, done.
 
 Recommended sizes:
 ```
@@ -56,13 +56,13 @@ Archive → PNG lossless
 
 One image at a time is fine. Hundreds? Manual processing becomes the bottleneck itself.
 
-TinyJPG supports batch drag-and-drop. Hundreds of images in one drag, one click. Combined with multi-key rotation, even thousands of images are a single operation.
+TinyOpt supports batch drag-and-drop. Hundreds of images in one drag, one click. Combined with multi-key rotation, even thousands of images are a single operation.
 
 ## 05. Combine Rename and Format Conversion into Your Compression Workflow
 
 Many people compress first, then realize they need to rename and convert separately — doubling the work.
 
-TinyJPG lets you do all three in one task: compress + format convert + batch rename. Configure once, done.
+TinyOpt lets you do all three in one task: compress + format convert + batch rename. Configure once, done.
 
 ## FAQ
 
@@ -85,4 +85,4 @@ Any image over 100KB benefits from compression. For web use, images over 500KB s
 
 Image compression isn't magic. Pick the right format, control dimensions, use sensible parameters, and batch your workflow. These four things alone will transform your page load performance.
 
-Get started: [Download TinyJPG Compressor](/download/)
+Get started: [Download TinyOpt Compressor](/download/)

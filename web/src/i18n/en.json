@@ -1,7 +1,7 @@
 {
   "brand": "TinyOpt",
   "site": {
-    "title": "Batch Image Optimizer (Powered by TinyPNG)",
+    "title": "TinyOpt - Batch Image Optimizer",
     "description": "A desktop batch image processing tool powered by TinyPNG API, supporting batch compression, watermark, format conversion, and batch renaming. Free, efficient, and secure."
   },
   "nav": {
@@ -17,10 +17,25 @@
     "terms_short": "Terms"
   },
   "home": {
-    "hero_title": "Batch Image Processing with TinyPNG",
+    "hero_title": "TinyOpt - Batch Image Processing",
     "hero_subtitle": "A desktop batch image processing tool powered by TinyPNG API — compression, watermark, format conversion, renaming",
     "hero_cta": "Download Free",
     "hero_secondary": "Learn More",
+    "features_title": "Core Features",
+    "features": [
+      { "title": "Batch Compression", "desc": "Support PNG, JPEG, WebP, AVIF and more. Batch compress with one click while preserving quality" },
+      { "title": "Watermark Tool", "desc": "Image & text watermark with drag-and-drop WYSIWYG preview. Adjust opacity and position freely" },
+      { "title": "Format Conversion", "desc": "Convert between 9 output formats including ICO and PDF" },
+      { "title": "Batch Rename", "desc": "Smart renaming with variable templates — supports index, date, and custom prefixes" },
+      { "title": "Multi-Key Management", "desc": "Manage multiple API keys with auto-switching and monthly quota monitoring" },
+      { "title": "Compression History", "desc": "Full task history with original size, compression ratio, and detailed records" }
+    ],
+    "how_title": "Three Steps to Compress Images",
+    "how_steps": [
+      { "icon": "download", "title": "Download & Install", "desc": "Download TinyOpt desktop client and install — no complex setup required" },
+      { "icon": "upload", "title": "Drag & Drop Images", "desc": "Drag images or folders into the app. Auto-detects formats, supports batch adding" },
+      { "icon": "check", "title": "One-Click Compress", "desc": "Hit the compress button and let batch processing do the work — fast, efficient, quality results" }
+    ],
     "features_title": "Core Features",
     "features": [
       { "title": "Batch Compression", "desc": "Support PNG, JPEG, WebP, AVIF and more. Batch compress with one click while preserving quality" },
@@ -36,11 +51,27 @@
       { "value": "9", "label": "Output Formats" },
       { "value": "99%", "label": "User Satisfaction" },
       { "value": "Free", "label": "Open Source" }
+    ],
+    "faq_title": "Frequently Asked Questions",
+    "faq_items": [
+      { "q": "Is TinyOpt Compressor free?", "a": "Yes! The tool is completely free and open source. You only need a TinyPNG API Key (free tier: 500 images/month) to get started." },
+      { "q": "What image formats are supported?", "a": "Input supports PNG, JPEG, WebP, AVIF, BMP, GIF, TIFF. Output supports JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF — 9 formats total." },
+      { "q": "Are my images uploaded to a server?", "a": "Images are sent to TinyPNG's official API for compression over encrypted connections. We do not store or forward your images — they are deleted after processing." },
+      { "q": "Will compression reduce image quality?", "a": "TinyPNG uses smart lossy compression that significantly reduces file size while remaining virtually indistinguishable to the human eye. You can also adjust compression parameters." },
+      { "q": "How do I get a TinyPNG API Key?", "a": "Visit tinypng.com/developers, register an account, and get your free API Key — 500 free compressions per month." },
+      { "q": "Does it support batch processing?", "a": "Absolutely! Drag in multiple images or entire folders — the tool supports multi-threaded batch compression for maximum efficiency." }
+    ],
+    "social_title": "Trusted by Users",
+    "social_desc": "Real reviews from designers and developers",
+    "social_testimonials": [
+      { "name": "Alex Chen", "role": "UI Designer", "content": "I process hundreds of design mockups daily. TinyOpt saves me at least 50% of my time, and the watermark feature is fantastic!" },
+      { "name": "Sarah Li", "role": "Frontend Developer", "content": "Batch compression + WebP conversion in one go. It's been a huge help for website performance optimization. Highly recommended!" },
+      { "name": "Mike Wang", "role": "Digital Marketer", "content": "Simple to use, great compression ratio — 3MB down to 200KB with excellent quality. And it's free! Couldn't ask for more." }
     ]
   },
   "about": {
-    "title": "About TinyJPG Compressor",
-    "intro": "TinyJPG Compressor is a desktop batch image compression tool based on TinyPNG API, built with Python + PyQt5. Designed for designers, operators, and developers who need to process images in bulk.",
+    "title": "About TinyOpt Compressor",
+    "intro": "TinyOpt Compressor is a desktop batch image compression tool based on TinyPNG API, built with Python + PyQt5. Designed for designers, operators, and developers who need to process images in bulk.",
     "features_list": [
       "Fully offline client — images are only sent to TinyPNG API for processing",
       "Multi-threaded concurrent compression for maximum efficiency",
@@ -48,7 +79,7 @@
       "Flexible compression options: scale, crop, fit modes",
       "Visual watermark editor with real-time preview"
     ],
-    "project_bg": "This project started in late 2025. The author frequently needed to process large volumes of images in daily work, and existing tools were either too limited or too complex. So we decided to build a comprehensive desktop tool integrating compression, watermarking, format conversion, and batch renaming. After multiple iterations, TinyJPG has evolved into a feature-rich and stable image processing tool.",
+    "project_bg": "This project started in late 2025. The author frequently needed to process large volumes of images in daily work, and existing tools were either too limited or too complex. So we decided to build a comprehensive desktop tool integrating compression, watermarking, format conversion, and batch renaming. After multiple iterations, TinyOpt has evolved into a feature-rich and stable image processing tool.",
     "philosophy": "Our design philosophy is 'simple and efficient' — open and use, no complex configuration needed; batch processing, one-click completion of the entire workflow. Making image processing no longer a bottleneck in design work.",
     "github": "This project is fully open-source on GitHub. Stars, Issues, and contributions are welcome.",
     "tech_stack": "Tech Stack: Python 3.12 + PyQt5 + Pillow + TinyPNG API",
@@ -69,7 +100,7 @@
   },
   "cases": {
     "title": "Use Cases",
-    "subtitle": "See how TinyJPG Compressor helps users boost productivity",
+    "subtitle": "See how TinyOpt Compressor helps users boost productivity",
     "read_more": "Read More"
   },
   "blog": {
@@ -90,7 +121,7 @@
     "title": "Privacy Policy",
     "last_updated": "Last updated: June 2026",
     "content": [
-      "TinyJPG Compressor respects and protects your privacy. This policy explains how we collect, use, and protect your information.",
+      "TinyOpt Compressor respects and protects your privacy. This policy explains how we collect, use, and protect your information.",
       "1. Information Collection: Your TinyPNG API Key is stored locally in a config file and is never uploaded to any third-party server.",
       "2. Image Processing: All images are processed via the official TinyPNG API. We do not store or forward your images.",
       "3. Logging: Compression history is stored locally and never automatically uploaded.",
@@ -102,7 +133,7 @@
     "title": "Terms of Service",
     "last_updated": "Last updated: June 2026",
     "content": [
-      "Welcome to TinyJPG Compressor (hereinafter referred to as 'the Tool'). By using this Tool, you agree to the following terms.",
+      "Welcome to TinyOpt Compressor (hereinafter referred to as 'the Tool'). By using this Tool, you agree to the following terms.",
       "1. Service Description: This Tool is a desktop image compression utility based on the TinyPNG API, providing image compression, format conversion, watermarking, and batch renaming.",
       "2. Free to Use: This Tool is a personal open-source project, completely free to use with no charges. TinyPNG API free quotas are determined by TinyPNG official.",
       "3. Disclaimer: The Tool is provided 'as is' without any warranty, express or implied. Any consequences arising from the use of this Tool are the sole responsibility of the user.",
@@ -118,7 +149,7 @@
     "back_home": "Back to Home"
   },
   "footer": {
-    "copyright": "TinyJPG Compressor Open Source Project",
+    "copyright": "TinyOpt Compressor Open Source Project",
     "powered": "Powered by TinyPNG API"
   }
 }

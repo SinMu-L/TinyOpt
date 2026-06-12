@@ -1,9 +1,9 @@
 ---
-title: Web 开发者如何使用 TinyJPG 优化网站图片
+title: Web 开发者如何使用 TinyOpt 优化网站图片
 date: 2026-06-04
 lang: zh
 translationKey: web-developer
-description: 一位前端开发者使用 TinyJPG 压缩助手将网站图片体积减少 60%，大幅提升页面加载速度。
+description: 一位前端开发者使用 TinyOpt 压缩助手将网站图片体积减少 60%，大幅提升页面加载速度。
 ---
 
 ## 背景
@@ -12,7 +12,7 @@ description: 一位前端开发者使用 TinyJPG 压缩助手将网站图片体�
 
 ## 解决方案
 
-使用 TinyJPG 压缩助手对全站图片进行批量处理：
+使用 TinyOpt 压缩助手对全站图片进行批量处理：
 
 1. 将 PNG 图标批量转换为 WebP 格式
 2. 对商品图片进行智能压缩（适配 1200px 宽）

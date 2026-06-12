@@ -2,7 +2,7 @@
 title: TinyPNG 官方客户端不好用？实测对比：这款专为中国站长定制的批量工具强在哪
 date: 2026-06-14
 lang: zh
-description: TinyPNG 官方只提供 Photoshop 插件和网页版，桌面端缺口明显。本文实测对比 TinyPNG 官方方案与 TinyJPG 桌面工具，从批量能力、格式支持、水印、重命名等维度看哪个更值得用。
+description: TinyPNG 官方只提供 Photoshop 插件和网页版，桌面端缺口明显。本文实测对比 TinyPNG 官方方案与 TinyOpt 桌面工具，从批量能力、格式支持、水印、重命名等维度看哪个更值得用。
 tags: [TinyPNG, 工具对比, 桌面工具, 批量处理, 站长工具]
 ---
 
@@ -16,9 +16,9 @@ TinyPNG 是图片压缩领域的标杆——压缩效果好、API 稳定、有�
 
 如果你不用 PS、不用 WP、也不会写代码调 API，TinyPNG 对你来说就只是一个网页——每次最多传 20 张图，每月 500 张额度。
 
-而 TinyJPG 补的正是这个缺口：一个基于 TinyPNG API 的桌面客户端，覆盖批量压缩、格式转换、水印、重命名、多 Key 管理五大模块。
+而 TinyOpt 补的正是这个缺口：一个基于 TinyPNG API 的桌面客户端，覆盖批量压缩、格式转换、水印、重命名、多 Key 管理五大模块。
 
-| 功能对比 | TinyPNG 网页版 | TinyPNG PS 插件 | TinyJPG 桌面版 |
+| 功能对比 | TinyPNG 网页版 | TinyPNG PS 插件 | TinyOpt 桌面版 |
 |---------|-------------|---------------|-------------|
 | 单次处理上限 | 20 张 | PS 打开的上限 | **无限制** |
 | 压缩引擎 | Tinify | Tinify | **Tinify（同一引擎）** |
@@ -31,13 +31,13 @@ TinyPNG 是图片压缩领域的标杆——压缩效果好、API 稳定、有�
 
 ## 01. 同一套引擎，为什么要用桌面版
 
-TinyJPG 调的是 TinyPNG 的 API，用的是同一个 Tinify 压缩引擎。压缩效果完全一致——不会更好，也不会更差。
+TinyOpt 调的是 TinyPNG 的 API，用的是同一个 Tinify 压缩引擎。压缩效果完全一致——不会更好，也不会更差。
 
 桌面版的价值不在"压缩效果更好"，而在"操作效率高一个数量级"。
 
 举个例子：你有 200 张商品图要压缩 + 转 WebP + 加水印 + 改名为 `product-{index}.webp`。
 
-| 步骤 | TinyPNG 官方方案 | TinyJPG |
+| 步骤 | TinyPNG 官方方案 | TinyOpt |
 |------|----------------|---------|
 | 压缩 | 分 10 批上传网页版 | 拖入一次 |
 | 转 WebP | 换一个在线转换工具 | 输出格式选 WebP |
@@ -51,16 +51,16 @@ TinyJPG 调的是 TinyPNG 的 API，用的是同一个 Tinify 压缩引擎。压
 
 TinyPNG 每个免费 Key 每月 500 张额度。官方没有提供任何方式来突破这个限制——你只能注册多个账号、手动切换 Key。
 
-TinyJPG 的多 Key 管理把这个过程全自动化了：
+TinyOpt 的多 Key 管理把这个过程全自动化了：
 
-- 注册 5 个免费 Key（Gmail 的 `+label` 技巧），在 TinyJPG 里粘贴进去
+- 注册 5 个免费 Key（Gmail 的 `+label` 技巧），在 TinyOpt 里粘贴进去
 - 启动压缩任务后，3 个线程各持一个 Key 并行工作
 - 某个 Key 用完额度，自动切换到下一个可用 Key
 - 5 个 Key × 500 张 = 每月 2500 张
 
 这不是什么破解，就是把你本来手动做的事情自动化了。但效率差是天壤之别。
 
-👉 [下载 TinyJPG，注册 3 个免费 Key 先试跑](https://tinify.com/developers) → [导入到 TinyJPG](/download/)
+👉 [下载 TinyOpt，注册 3 个免费 Key 先试跑](https://tinify.com/developers) → [导入到 TinyOpt](/download/)
 
 ## 03. 水印 + 重命名 + 格式转换：三个官方没有的功能
 
@@ -70,7 +70,7 @@ TinyJPG 的多 Key 管理把这个过程全自动化了：
 
 **批量重命名**：SEO。中文站长的 SEO 意识正在快速提升。文件名里带关键词对 Google 图片搜索排名有直接帮助。TinyPNG 官方没有重命名，因为它只做压缩。
 
-**格式转换**：WebP/AVIF 普及。中国互联网的 WebP 普及率低于海外（很多老版本浏览器和 APP 还在用），转格式需求更复杂。TinyJPG 支持 9 种输入和 7 种输出格式。
+**格式转换**：WebP/AVIF 普及。中国互联网的 WebP 普及率低于海外（很多老版本浏览器和 APP 还在用），转格式需求更复杂。TinyOpt 支持 9 种输入和 7 种输出格式。
 
 ## 04. 谁适合继续用 TinyPNG 官方方案
 
@@ -84,7 +84,7 @@ TinyJPG 的多 Key 管理把这个过程全自动化了：
 
 ## 04. 安全性和隐私
 
-TinyJPG 是桌面软件，图片在你的电脑上通过 API 上传到 TinyPNG 服务器压缩后自动下载。TinyPNG 承诺压缩后 1 小时内删除上传的图片。
+TinyOpt 是桌面软件，图片在你的电脑上通过 API 上传到 TinyPNG 服务器压缩后自动下载。TinyPNG 承诺压缩后 1 小时内删除上传的图片。
 
 如果你对隐私有极高要求（比如未上市产品图），可以考虑先对图片做缩放和格式转换（这些是本地 Pillow 处理，完全不上传），然后再走 Tinify API 压缩。
 
@@ -92,32 +92,32 @@ TinyJPG 是桌面软件，图片在你的电脑上通过 API 上传到 TinyPNG �
 
 TinyPNG 是一家公司，它的核心资产是 Tinify 压缩引擎，不是网页上传界面。它开放 API 的目的就是希望第三方开发者能围绕这个引擎做出更丰富的产品形态。
 
-TinyJPG 就是这个生态里的一款产品——用同一个引擎，做了 TinyPNG 官方没做的那些功能。
+TinyOpt 就是这个生态里的一款产品——用同一个引擎，做了 TinyPNG 官方没做的那些功能。
 
 ## 常见问题
 
-**01. TinyJPG 是 TinyPNG 官方开发的吗？**
+**01. TinyOpt 是 TinyPNG 官方开发的吗？**
 
-不是。TinyJPG 是一款第三方桌面工具，通过 TinyPNG 官方 API 调用 Tinify 压缩引擎。压缩效果与官方一致，但功能上有显著扩展。
+不是。TinyOpt 是一款第三方桌面工具，通过 TinyPNG 官方 API 调用 Tinify 压缩引擎。压缩效果与官方一致，但功能上有显著扩展。
 
-**02. TinyJPG 需要付费吗？**
+**02. TinyOpt 需要付费吗？**
 
-TinyJPG 桌面软件本身免费。压缩消耗的是你注册的 TinyPNG API Key 的额度（免费 Key 每月 500 张）。你不需要为软件付费，但大量使用时可能需要注册多个免费 Key 或购买付费 Key。
+TinyOpt 桌面软件本身免费。压缩消耗的是你注册的 TinyPNG API Key 的额度（免费 Key 每月 500 张）。你不需要为软件付费，但大量使用时可能需要注册多个免费 Key 或购买付费 Key。
 
-**03. TinyJPG 支持 Mac 吗？**
+**03. TinyOpt 支持 Mac 吗？**
 
 目前支持 Windows 平台。Mac 用户可以通过虚拟机或兼容层运行。
 
-**04. 用 TinyJPG 压缩的图片会不会比官网差？**
+**04. 用 TinyOpt 压缩的图片会不会比官网差？**
 
-不会。TinyJPG 调用的是同一个 Tinify API，压缩算法完全一致。图片质量取决于 Tinify 引擎，与调用方式无关。
+不会。TinyOpt 调用的是同一个 Tinify API，压缩算法完全一致。图片质量取决于 Tinify 引擎，与调用方式无关。
 
-**05. 我的 API Key 在 TinyJPG 里安全吗？**
+**05. 我的 API Key 在 TinyOpt 里安全吗？**
 
-TinyJPG 将 API Key 存储在你的本地配置文件中，不会上传到第三方服务器。Key 仅用于向 TinyPNG API 发送压缩请求。建议你将配置文件保存在安全位置，不要分享给别人。
+TinyOpt 将 API Key 存储在你的本地配置文件中，不会上传到第三方服务器。Key 仅用于向 TinyPNG API 发送压缩请求。建议你将配置文件保存在安全位置，不要分享给别人。
 
 ## 总结
 
-TinyPNG 是最好的图片压缩引擎之一。但官方只在引擎层面做到了极致，在"怎么让用户更高效地使用这个引擎"层面没有发力。TinyJPG 做了这件事。
+TinyPNG 是最好的图片压缩引擎之一。但官方只在引擎层面做到了极致，在"怎么让用户更高效地使用这个引擎"层面没有发力。TinyOpt 做了这件事。
 
-如果你还在网页版一批批地上传，试试 [下载 TinyJPG 桌面版](/download/)。同一套引擎，但有完全不同的使用体验。
+如果你还在网页版一批批地上传，试试 [下载 TinyOpt 桌面版](/download/)。同一套引擎，但有完全不同的使用体验。

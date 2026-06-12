@@ -11,7 +11,7 @@ TinyPNG gives each free account 500 compressions per month. Fine for personal us
 
 Last month I needed to compress 3,200 product images for an e-commerce project. A single key only covers 500 — I'd need 7 keys and 7 separate runs. Processing them one by one would take hours.
 
-With TinyJPG's multi-key management, I registered 7 free keys, configured them in the app, and started a single batch. 3 concurrent threads, **all 3,200 images done in under 15 minutes**.
+With TinyOpt's multi-key management, I registered 7 free keys, configured them in the app, and started a single batch. 3 concurrent threads, **all 3,200 images done in under 15 minutes**.
 
 | Metric | Single Key | Multi-Key Concurrent |
 |--------|-----------|---------------------|
@@ -22,7 +22,7 @@ With TinyJPG's multi-key management, I registered 7 free keys, configured them i
 
 ## 01. How Multi-Key Auto-Rotation Works
 
-TinyJPG's KeyManager does one thing in the background: cycles through keys, always picking one that's available.
+TinyOpt's KeyManager does one thing in the background: cycles through keys, always picking one that's available.
 
 **Core logic**:
 - Keys are arranged in a ring, tasks distributed in order
@@ -46,7 +46,7 @@ Available keys → decides concurrency (max 3)
 | Timeout | Release key, retry after 1s |
 | All keys exhausted | Clean error message, no waiting |
 
-👉 [Download TinyJPG and set up your first key](/download/)
+👉 [Download TinyOpt and set up your first key](/download/)
 
 ## 02. Where to Get Multiple Free Keys
 
@@ -86,10 +86,10 @@ The fix is straightforward:
 ## FAQ
 
 **01. Does multi-key concurrent compression hit TinyPNG's rate limits?**
-No. TinyJPG caps concurrency at 3 threads, well within TinyPNG API limits.
+No. TinyOpt caps concurrency at 3 threads, well within TinyPNG API limits.
 
 **02. What are the shared keys? Are they safe?**
-TinyJPG comes with 2 shared keys so you can try it immediately. For production use, register your own keys.
+TinyOpt comes with 2 shared keys so you can try it immediately. For production use, register your own keys.
 
 **03. What if a key runs out of quota mid-batch?**
 KeyManager automatically detects quota exhaustion, disables that key, and switches to the next available one. The compression task continues uninterrupted.
@@ -104,4 +104,4 @@ TinyPNG free quotas reset monthly based on your registration date. Click "Refres
 
 Multi-key management is the most direct way to break through TinyPNG's 500-image free limit. With minimal setup, expand your monthly capacity to thousands and cut processing time by 3x.
 
-Get started: [Download TinyJPG Compressor](/download/)
+Get started: [Download TinyOpt Compressor](/download/)

@@ -1,7 +1,7 @@
 {
   "name": "tinyjpg-compressor",
-  "version": "1.0.4",
-  "description": "TinyJPG Compressor - 图片批量压缩工具官方网站",
+  "version": "1.1.0",
+  "description": "TinyOpt - 图片批量压缩工具官方网站",
   "type": "module",
   "scripts": {
     "dev": "astro dev",

@@ -1,9 +1,9 @@
 ---
-title: How a Web Developer Reduced Image Size by 60% with TinyJPG
+title: How a Web Developer Reduced Image Size by 60% with TinyOpt
 date: 2026-06-04
 lang: en
 translationKey: web-developer
-description: A frontend developer uses TinyJPG Compressor to reduce website image size by 60%, dramatically improving page load performance.
+description: A frontend developer uses TinyOpt Compressor to reduce website image size by 60%, dramatically improving page load performance.
 ---
 
 ## Background
@@ -12,7 +12,7 @@ An e-commerce frontend team needed to optimize site performance. Images accounte
 
 ## Solution
 
-Using TinyJPG Compressor for site-wide batch processing:
+Using TinyOpt Compressor for site-wide batch processing:
 
 1. Converted PNG icons to WebP format in bulk
 2. Applied smart compression to product images (fit to 1200px width)

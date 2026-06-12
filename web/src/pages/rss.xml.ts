@@ -7,8 +7,8 @@ export const GET = async () => {
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
   return rss({
-    title: 'TinyJPG 批量压缩助手 - 新闻动态',
-    description: '了解 TinyJPG 批量压缩助手的最新版本动态、使用技巧与行业资讯',
+    title: 'TinyOpt - 新闻动态',
+    description: '了解 TinyOpt 的最新版本动态、使用技巧与行业资讯',
     site: 'https://seojeck.com',
     items: posts.map((post) => ({
       title: post.data.title,

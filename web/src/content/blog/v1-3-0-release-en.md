@@ -1,5 +1,5 @@
 ---
-title: TinyJPG Compressor v1.3.0 Released
+title: TinyOpt Compressor v1.3.0 Released
 date: 2026-06-04
 lang: en
 translationKey: v1-3-0-release
@@ -9,7 +9,7 @@ tags: [release, v1.3.0, AVIF]
 
 ## What's New in v1.3.0
 
-TinyJPG Compressor v1.3.0 is officially released! Here are the highlights:
+TinyOpt Compressor v1.3.0 is officially released! Here are the highlights:
 
 ### ✨ New Features
 

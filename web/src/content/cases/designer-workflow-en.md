@@ -3,7 +3,7 @@ title: How a Designer Protects Portfolio Copyright with Batch Watermarking
 date: 2026-06-03
 lang: en
 translationKey: designer-workflow
-description: A freelance designer uses TinyJPG's watermark tool to batch-protect portfolio images, combining compression and copyright protection in one pass.
+description: A freelance designer uses TinyOpt's watermark tool to batch-protect portfolio images, combining compression and copyright protection in one pass.
 ---
 
 ## Background
@@ -12,7 +12,7 @@ A freelance designer needed to send large batches of preview images to clients w
 
 ## Solution
 
-Using TinyJPG's watermark tool:
+Using TinyOpt's watermark tool:
 
 1. Upload design mockups and enable batch compression
 2. Add text watermark (author name + website URL)

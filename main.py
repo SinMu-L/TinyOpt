@@ -929,7 +929,7 @@ class PositionPreviewWidget(QWidget):
         self.setFixedSize(400, 280)
         self.setMouseTracking(True)
         self.setCursor(Qt.PointingHandCursor)
-        self.setStyleSheet("border: 1px solid #bbb; background: #f5f5f5;")
+        self.setStyleSheet("border: 2px dashed #cbd5e1; border-radius: 8px; background: #f8fafc;")
 
         self._base_pixmap = None
         self._wm_pixmap = None
@@ -1115,33 +1115,15 @@ class MainWindow(QMainWindow):
         root.setSpacing(0)
 
         sidebar_widget = QWidget()
-        sidebar_widget.setFixedWidth(140)
+        sidebar_widget.setObjectName('sidebarWidget')
+        sidebar_widget.setFixedWidth(180)
         sidebar_layout = QVBoxLayout(sidebar_widget)
-        sidebar_layout.setContentsMargins(0, 0, 0, 0)
+        sidebar_layout.setContentsMargins(8, 8, 8, 8)
         sidebar_layout.setSpacing(0)
 
         self.sidebar = QListWidget()
+        self.sidebar.setObjectName('sidebar')
         self.sidebar.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.sidebar.setStyleSheet("""
-            QListWidget {
-                background: #2c3e50;
-                color: #ecf0f1;
-                border: none;
-                font-size: 13px;
-                outline: none;
-            }
-            QListWidget::item {
-                padding: 14px 12px;
-                border-bottom: 1px solid #34495e;
-            }
-            QListWidget::item:selected {
-                background: #3498db;
-                color: white;
-            }
-            QListWidget::item:hover:!selected {
-                background: #34495e;
-            }
-        """)
         self.sidebar.addItem("📁  " + T("sidebar.compress").strip())
         self.sidebar.addItem("💧  " + T("sidebar.watermark").strip())
         self.sidebar.addItem("📝  " + T("sidebar.rename").strip())
@@ -1150,28 +1132,13 @@ class MainWindow(QMainWindow):
         self.sidebar.setCurrentRow(0)
         self.sidebar.currentRowChanged.connect(self.on_sidebar_changed)
         self.lang_combo = QComboBox()
+        self.lang_combo.setObjectName('langCombo')
         self.lang_combo.addItem("中文", "zh")
         self.lang_combo.addItem("English", "en")
         self.lang_combo.setCurrentIndex(0 if get_language() == "zh" else 1)
         self.lang_combo.currentIndexChanged.connect(self._on_lang_changed)
-        self.lang_combo.setStyleSheet("""
-            QComboBox {
-                background: #34495e;
-                color: #ecf0f1;
-                border: none;
-                padding: 8px;
-                font-size: 12px;
-            }
-            QComboBox::drop-down {
-                border: none;
-            }
-            QComboBox QAbstractItemView {
-                background: #2c3e50;
-                color: #ecf0f1;
-                selection-background-color: #3498db;
-            }
-        """)
         sidebar_layout.addWidget(self.sidebar, 1)
+        sidebar_layout.addSpacing(8)
         sidebar_layout.addWidget(self.lang_combo)
 
         root.addWidget(sidebar_widget)
@@ -1424,12 +1391,10 @@ class MainWindow(QMainWindow):
 
         ctrl = QHBoxLayout()
         self.compress_btn = QPushButton()
-        self.compress_btn.setStyleSheet(
-            "background-color: #4CAF50; color: white; font-weight: bold; padding: 8px 16px;"
-        )
+        self.compress_btn.setProperty('class', 'primary')
         self.cancel_btn = QPushButton()
         self.cancel_btn.setEnabled(False)
-        self.cancel_btn.setStyleSheet("background-color: #f44336; color: white; padding: 8px 16px;")
+        self.cancel_btn.setProperty('class', 'danger')
         self.compress_btn.clicked.connect(self.start_compress)
         self.cancel_btn.clicked.connect(self.cancel_compress)
         ctrl.addWidget(self.compress_btn)
@@ -1619,12 +1584,10 @@ class MainWindow(QMainWindow):
         # ── Buttons ──
         ctrl = QHBoxLayout()
         self.wm_start_btn = QPushButton()
-        self.wm_start_btn.setStyleSheet(
-            "background-color: #4CAF50; color: white; font-weight: bold; padding: 8px 16px;"
-        )
+        self.wm_start_btn.setProperty('class', 'primary')
         self.wm_cancel_btn = QPushButton()
         self.wm_cancel_btn.setEnabled(False)
-        self.wm_cancel_btn.setStyleSheet("background-color: #f44336; color: white; padding: 8px 16px;")
+        self.wm_cancel_btn.setProperty('class', 'danger')
         self.wm_start_btn.clicked.connect(self.on_wm_start)
         self.wm_cancel_btn.clicked.connect(self.on_wm_cancel)
         ctrl.addWidget(self.wm_start_btn)
@@ -1766,9 +1729,7 @@ class MainWindow(QMainWindow):
         # ── Buttons ──
         ctrl = QHBoxLayout()
         self.rn_start_btn = QPushButton()
-        self.rn_start_btn.setStyleSheet(
-            "background-color: #4CAF50; color: white; font-weight: bold; padding: 8px 16px;"
-        )
+        self.rn_start_btn.setProperty('class', 'primary')
         self.rn_start_btn.clicked.connect(self.on_rn_start)
         ctrl.addWidget(self.rn_start_btn)
         ctrl.addStretch()
@@ -1808,6 +1769,7 @@ class MainWindow(QMainWindow):
 
         btn_layout = QHBoxLayout()
         self.add_key_btn = QPushButton()
+        self.add_key_btn.setProperty('class', 'primary')
         self.add_key_btn.clicked.connect(self.add_key_dialog)
         self.edit_key_btn = QPushButton()
         self.edit_key_btn.clicked.connect(self.edit_key_dialog)
@@ -1852,6 +1814,7 @@ class MainWindow(QMainWindow):
 
         btn_bar = QHBoxLayout()
         self.refresh_history_btn = QPushButton()
+        self.refresh_history_btn.setProperty('class', 'primary')
         self.refresh_history_btn.clicked.connect(self.refresh_history_table)
         self.clear_history_btn = QPushButton()
         self.clear_history_btn.clicked.connect(self.clear_history)
@@ -2666,6 +2629,7 @@ class MainWindow(QMainWindow):
 def main():
     app = QApplication(sys.argv)
     app.setApplicationName("TinyJPG Compressor")
+    app.setStyleSheet(APP_STYLESHEET)
     icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "icon.png")
     if os.path.isfile(icon_path):
         app_icon = QIcon(icon_path)
@@ -2675,6 +2639,270 @@ def main():
         window.setWindowIcon(QIcon(icon_path))
     window.show()
     sys.exit(app.exec_())
+
+APP_STYLESHEET = """
+QMainWindow, QDialog {
+    background: #ffffff;
+}
+
+QWidget#sidebarWidget {
+    background: #f8fafc;
+}
+
+QListWidget#sidebar {
+    background: #f8fafc;
+    border: none;
+    border-right: 1px solid #e2e8f0;
+    font-size: 13px;
+    outline: none;
+}
+QListWidget#sidebar::item {
+    padding: 12px 16px 12px 14px;
+    border-left: 3px solid transparent;
+    color: #475569;
+}
+QListWidget#sidebar::item:selected {
+    background: #eff6ff;
+    color: #2563eb;
+    border-left: 3px solid #2563eb;
+    font-weight: 600;
+}
+QListWidget#sidebar::item:hover:!selected {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+QComboBox#langCombo {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #475569;
+    font-size: 12px;
+}
+QComboBox#langCombo::drop-down {
+    border: none;
+    width: 20px;
+}
+QComboBox#langCombo QAbstractItemView {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    selection-background-color: #eff6ff;
+    selection-color: #2563eb;
+}
+
+QGroupBox {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-top: 12px;
+    padding: 16px 12px 12px 12px;
+    font-weight: 600;
+    color: #1e293b;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 8px;
+    color: #2563eb;
+    font-size: 13px;
+}
+
+QPushButton {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 7px 16px;
+    background: #ffffff;
+    color: #475569;
+    font-size: 13px;
+}
+QPushButton:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+QPushButton:pressed {
+    background: #f1f5f9;
+}
+QPushButton[class="primary"] {
+    background: #2563eb;
+    color: #ffffff;
+    border: 1px solid #2563eb;
+    font-weight: 600;
+}
+QPushButton[class="primary"]:hover {
+    background: #1d4ed8;
+}
+QPushButton[class="primary"]:pressed {
+    background: #1e40af;
+}
+QPushButton[class="danger"] {
+    background: #ef4444;
+    color: #ffffff;
+    border: 1px solid #ef4444;
+    font-weight: 600;
+}
+QPushButton[class="danger"]:hover {
+    background: #dc2626;
+}
+QPushButton[class="danger"]:pressed {
+    background: #b91c1c;
+}
+QPushButton:disabled {
+    background: #f1f5f9;
+    color: #94a3b8;
+    border-color: #e2e8f0;
+}
+
+QListWidget {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 8px;
+    color: #475569;
+}
+QListWidget::item {
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+QListWidget::item:selected {
+    background: #dbeafe;
+    color: #1e40af;
+}
+QListWidget::item:hover:!selected {
+    background: #f1f5f9;
+}
+
+QLineEdit {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    background: #ffffff;
+    color: #1e293b;
+}
+QLineEdit:focus {
+    border-color: #2563eb;
+}
+
+QComboBox {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    background: #ffffff;
+    color: #1e293b;
+}
+QComboBox:hover {
+    border-color: #cbd5e1;
+}
+QComboBox::drop-down {
+    border: none;
+    width: 24px;
+}
+QComboBox QAbstractItemView {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #1e293b;
+    selection-background-color: #eff6ff;
+    selection-color: #2563eb;
+}
+
+QSpinBox {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background: #ffffff;
+    color: #1e293b;
+}
+QSpinBox:focus {
+    border-color: #2563eb;
+}
+
+QCheckBox, QRadioButton {
+    spacing: 6px;
+    color: #475569;
+}
+QCheckBox::indicator, QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+}
+
+QProgressBar {
+    border: none;
+    border-radius: 4px;
+    background: #e2e8f0;
+    height: 8px;
+    text-align: center;
+    font-size: 10px;
+    color: transparent;
+}
+QProgressBar::chunk {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #2563eb, stop:1 #3b82f6);
+    border-radius: 4px;
+}
+
+QTableWidget {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: #ffffff;
+    gridline-color: #f1f5f9;
+}
+QTableWidget::item {
+    padding: 6px 8px;
+    color: #475569;
+}
+QTableWidget::item:selected {
+    background: #eff6ff;
+    color: #2563eb;
+}
+QHeaderView::section {
+    background: #f8fafc;
+    color: #64748b;
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+QSplitter::handle {
+    background: #e2e8f0;
+    height: 2px;
+}
+QSplitter::handle:hover {
+    background: #2563eb;
+}
+
+QTextEdit {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: #f8fafc;
+    color: #475569;
+    padding: 8px;
+}
+
+QLabel {
+    color: #475569;
+}
+
+QSlider::groove:horizontal {
+    border: none;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+}
+QSlider::handle:horizontal {
+    background: #2563eb;
+    border: 2px solid #ffffff;
+    width: 16px;
+    height: 16px;
+    margin: -5px 0;
+    border-radius: 8px;
+}
+QSlider::sub-page:horizontal {
+    background: #2563eb;
+    border-radius: 3px;
+}
+"""
 
 
 if __name__ == "__main__":

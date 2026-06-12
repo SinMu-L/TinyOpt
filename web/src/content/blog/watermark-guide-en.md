@@ -3,7 +3,7 @@ title: Still Adding Watermarks One by One in Photoshop? 200 Images in 3 Minutes 
 date: 2026-06-05
 lang: en
 translationKey: watermark-guide
-description: Batch watermark images with TinyJPG's visual watermark tool. No Photoshop needed — drag to position, adjust opacity and scale, output 200 images in under 3 minutes.
+description: Batch watermark images with TinyOpt's visual watermark tool. No Photoshop needed — drag to position, adjust opacity and scale, output 200 images in under 3 minutes.
 tags: [watermark, guide, image-protection, batch-processing]
 ---
 
@@ -11,9 +11,9 @@ Watermarking is a must — designers protect their portfolio, e-commerce operato
 
 But most people still use Photoshop: record an action, adjust positions, batch process. A session takes at least 30 minutes.
 
-TinyJPG has a built-in visual watermark tool. No Photoshop, no action scripts. 200 images? Drag them in, position the watermark, click start. Done in 3 minutes.
+TinyOpt has a built-in visual watermark tool. No Photoshop, no action scripts. 200 images? Drag them in, position the watermark, click start. Done in 3 minutes.
 
-| Comparison | Photoshop | TinyJPG |
+| Comparison | Photoshop | TinyOpt |
 |-----------|----------|---------|
 | Learning curve | Need to master actions/scripts | Drag & drop |
 | 200 images | At least 30 min | ~2 min |
@@ -40,7 +40,7 @@ No need to enter pixel coordinates. Drag the watermark in the preview area:
 
 The tool auto-clamps margins (20px default), so the watermark never overflows. Position, opacity, and scale are all live-previewed — drag and see the result immediately.
 
-👉 [Download TinyJPG and watermark your images](/download/)
+👉 [Download TinyOpt and watermark your images](/download/)
 
 ## 03. Professional Watermark Parameters
 
@@ -81,6 +81,6 @@ No. Watermarked images are saved to the `compressed/` output directory. Original
 
 ## Summary
 
-TinyJPG's watermark tool isn't meant to replace Photoshop. It's meant to free you from repetitive batch work. Drag, click, done.
+TinyOpt's watermark tool isn't meant to replace Photoshop. It's meant to free you from repetitive batch work. Drag, click, done.
 
-Download now: [TinyJPG Compressor](/download/)
+Download now: [TinyOpt Compressor](/download/)

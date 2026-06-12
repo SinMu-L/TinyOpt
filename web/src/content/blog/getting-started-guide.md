@@ -1,15 +1,15 @@
 ---
-title: 第一次用 TinyJPG？从下载到压缩完 150 张图，只需 3 分钟
+title: 第一次用 TinyOpt？从下载到压缩完 150 张图，只需 3 分钟
 date: 2026-06-05
 lang: zh
 translationKey: getting-started-guide
-description: TinyJPG 批量压缩助手的新手入门教程。下载→申请 Key→首次压缩，全流程 3 分钟搞定，附常见问题解答。
+description: TinyOpt 批量压缩助手的新手入门教程。下载→申请 Key→首次压缩，全流程 3 分钟搞定，附常见问题解答。
 tags: [新手教程, 入门指南, 使用教程]
 ---
 
-第一次打开 TinyJPG 时，我手上正好有 150 张活动照片要上传公司 CMS。每张 5MB 左右，后台限制单文件最大 2MB。试过改后缀、用画图缩小，效果都不行。
+第一次打开 TinyOpt 时，我手上正好有 150 张活动照片要上传公司 CMS。每张 5MB 左右，后台限制单文件最大 2MB。试过改后缀、用画图缩小，效果都不行。
 
-朋友推荐了 TinyJPG。下载、申请 Key、拖入图片、点击压缩——从安装到跑完 150 张，**不到 10 分钟**。输出文件平均 400KB，画质看不出区别。
+朋友推荐了 TinyOpt。下载、申请 Key、拖入图片、点击压缩——从安装到跑完 150 张，**不到 10 分钟**。输出文件平均 400KB，画质看不出区别。
 
 如果你也是第一次用，下面三个步骤走完就能上手。
 
@@ -21,16 +21,16 @@ tags: [新手教程, 入门指南, 使用教程]
 
 ## 02. 申请并配置 API Key
 
-TinyJPG 用 TinyPNG 的 API 做压缩，需要申请一个免费 Key：
+TinyOpt 用 TinyPNG 的 API 做压缩，需要申请一个免费 Key：
 
 1. 打开 [TinyPNG 开发者页面](https://tinypng.com/developers)
 2. 输入姓名和邮箱，提交
 3. 去邮箱查收 API Key
-4. 复制 Key，在 TinyJPG 中点击「设置」→「API Key 管理」→「添加 Key」
+4. 复制 Key，在 TinyOpt 中点击「设置」→「API Key 管理」→「添加 Key」
 
 每个邮箱每月免费 500 张。不够用的话，可以注册多个邮箱配合使用——参考[多 Key 管理指南](/blog/multi-key-management/)。
 
-👉 [还没下载？先下载 TinyJPG](/download/)
+👉 [还没下载？先下载 TinyOpt](/download/)
 
 ## 03. 开始第一次压缩
 
@@ -71,7 +71,7 @@ TinyJPG 用 TinyPNG 的 API 做压缩，需要申请一个免费 Key：
 ## 常见问题
 
 **01. 必须要有自己的 API Key 吗？**
-TinyJPG 内置了 2 个共享 Key，打开就能用。但共享 Key 可能被多人使用，建议自行注册一个专用 Key。
+TinyOpt 内置了 2 个共享 Key，打开就能用。但共享 Key 可能被多人使用，建议自行注册一个专用 Key。
 
 **02. 压缩后图片会变模糊吗？**
 TinyPNG 采用智能有损压缩，移除人眼不易察觉的颜色数据。绝大多数情况下肉眼看不出区别。
@@ -80,13 +80,13 @@ TinyPNG 采用智能有损压缩，移除人眼不易察觉的颜色数据。绝
 输入支持 JPG、PNG、WebP、AVIF、BMP、GIF、TIFF。输出支持 9 种格式（含 ICO 和 PDF）。
 
 **04. 可以在多台电脑上用吗？**
-可以。TinyJPG 是绿色软件，把文件夹拷到另一台电脑就能用（需要配置 API Key）。
+可以。TinyOpt 是绿色软件，把文件夹拷到另一台电脑就能用（需要配置 API Key）。
 
 **05. 有 Mac 版吗？**
 目前仅支持 Windows。Mac 和 Linux 版本暂无计划。
 
 ## 总结
 
-从下载到完成第一次压缩，一个完整的流程走完不超过 3 分钟。TinyJPG 的设计目标就是"上手即用"——不需要看说明书，不需要花哨配置。
+从下载到完成第一次压缩，一个完整的流程走完不超过 3 分钟。TinyOpt 的设计目标就是"上手即用"——不需要看说明书，不需要花哨配置。
 
-立即开始：[下载 TinyJPG 压缩助手](/download/)
+立即开始：[下载 TinyOpt 压缩助手](/download/)

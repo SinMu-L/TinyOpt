@@ -1,5 +1,5 @@
 ---
-title: TinyJPG 压缩助手 v1.3.0 正式发布
+title: TinyOpt 压缩助手 v1.3.0 正式发布
 date: 2026-06-04
 lang: zh
 translationKey: v1-3-0-release
@@ -9,7 +9,7 @@ tags: [版本发布, v1.3.0, AVIF]
 
 ## v1.3.0 更新内容
 
-TinyJPG 批量压缩助手 v1.3.0 正式发布！本次更新带来了以下改进：
+TinyOpt 批量压缩助手 v1.3.0 正式发布！本次更新带来了以下改进：
 
 ### ✨ 新增功能
 

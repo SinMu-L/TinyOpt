@@ -15,9 +15,9 @@ Here are 7 scenarios. If 3 or more sound familiar, it's time to go desktop.
 
 Most online compressors limit batch uploads to 10-20 images. An e-commerce client needed to compress 500 product images last week — on an online tool, that's 25 separate upload batches, each with upload-wait-download cycles. An entire afternoon gone.
 
-TinyJPG has no batch limit. 1,000 images? Drag them in, click start, done.
+TinyOpt has no batch limit. 1,000 images? Drag them in, click start, done.
 
-| Metric | Online Tool | TinyJPG |
+| Metric | Online Tool | TinyOpt |
 |--------|-------------|---------|
 | Max batch | 10-20 images typically | Unlimited |
 | 500 images | 25 batches, ~1 hour | One drag, ~5 min |
@@ -27,39 +27,39 @@ TinyJPG has no batch limit. 1,000 images? Drag them in, click start, done.
 
 Free online tools universally cap file sizes at 5-10MB. A full-frame camera JPEG is usually 15-25MB — too big, so you either pay up or find another way.
 
-TinyJPG uses the TinyPNG API with no file size limit. A 15MB RAW export? No problem.
+TinyOpt uses the TinyPNG API with no file size limit. A 15MB RAW export? No problem.
 
 ## 03. Your images contain sensitive content
 
 Uploading product shots, design mockups, or client materials to an online compressor means handing your files to an unknown server. You don't know how long they're stored or if they get cached.
 
-TinyJPG's flow: Original → Local → TinyPNG API (compression only) → Saved locally. Images are never stored on third-party servers. TinyPNG deletes them immediately after compression.
+TinyOpt's flow: Original → Local → TinyPNG API (compression only) → Saved locally. Images are never stored on third-party servers. TinyPNG deletes them immediately after compression.
 
-👉 [TinyJPG respects your privacy. Download and try it.](/download/)
+👉 [TinyOpt respects your privacy. Download and try it.](/download/)
 
 ## 04. You need batch watermarking
 
 Online tools that can compress are common. Online tools that can watermark? Rare. Batch watermark? Nearly non-existent. Designers either add watermarks one by one in Photoshop or deliver unprotected previews.
 
-TinyJPG has a built-in visual watermark tool: image watermark, text watermark, or combined. Drag to position. 200 images in under 3 minutes.
+TinyOpt has a built-in visual watermark tool: image watermark, text watermark, or combined. Drag to position. 200 images in under 3 minutes.
 
 ## 05. You need batch renaming
 
 Camera outputs like `_DSC0001.jpg` and screenshots like `wx_capture_20260610.jpg` are useless for file management. Online tools won't rename them for you.
 
-TinyJPG supports template-based renaming: `{name}`, `{index}`, `{date}`. Configure once, done forever.
+TinyOpt supports template-based renaming: `{name}`, `{index}`, `{date}`. Configure once, done forever.
 
 ## 06. You need WebP or AVIF output
 
 Google recommends WebP. The next-gen standard is AVIF. Most online tools either don't support format conversion or only do JPEG/PNG.
 
-TinyJPG supports 9 output formats: JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF.
+TinyOpt supports 9 output formats: JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF.
 
 ## 07. You process more than 500 images per month
 
 Each free TinyPNG key gives you 500 compressions per month. For frequent users, that runs out fast.
 
-TinyJPG's multi-key rotation: register multiple keys and they're used automatically in round-robin. 7 keys = 3,500 images/month.
+TinyOpt's multi-key rotation: register multiple keys and they're used automatically in round-robin. 7 keys = 3,500 images/month.
 
 ## The pattern behind these problems
 
@@ -71,23 +71,23 @@ Quick decision guide:
 
 ## FAQ
 
-**01. Do I need to install TinyJPG?**
+**01. Do I need to install TinyOpt?**
 Yes, it's a 30MB desktop app. But once installed, local features (renaming, watermark preview) work offline.
 
 **02. Where are compressed images saved?**
 Default is a `compressed/` subfolder alongside your originals. You can customize the output directory in settings.
 
-**03. Can I use TinyJPG without my own API key?**
-TinyJPG comes with 2 shared keys pre-configured. For reliability, registering your own free key is recommended.
+**03. Can I use TinyOpt without my own API key?**
+TinyOpt comes with 2 shared keys pre-configured. For reliability, registering your own free key is recommended.
 
 **04. Can I minimize the app during batch processing?**
 Yes. Compression runs in the background. Minimize to system tray and keep working.
 
 **05. Is the compression quality different from the original TinyPNG?**
-No. TinyJPG uses the official TinyPNG API — same algorithm, same quality.
+No. TinyOpt uses the official TinyPNG API — same algorithm, same quality.
 
 ## Summary
 
 Online tools work for light, occasional use. If image processing is a regular part of your workflow, a desktop tool wins on efficiency, privacy, and feature completeness.
 
-Download now: [TinyJPG Compressor](/download/)
+Download now: [TinyOpt Compressor](/download/)
