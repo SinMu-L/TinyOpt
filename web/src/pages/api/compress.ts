@@ -1,5 +1,13 @@
 import type { APIRoute } from 'astro';
 
+function corsHeaders(): Record<string, string> {
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+}
+
 function getApiKeys(): string[] {
   const raw = process.env.TINYPNG_API_KEYS || process.env.TINYPNG_API_KEY || '';
   return raw.split(/[,;]/).map(k => k.trim()).filter(Boolean);
@@ -9,33 +17,33 @@ function makeAuth(key: string): string {
   return `Basic ${Buffer.from(`api:${key}`).toString('base64')}`;
 }
 
+function jsonError(message: string, status: number): Response {
+  return new Response(JSON.stringify({ error: message }), {
+    status,
+    headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+  });
+}
+
+export const OPTIONS: APIRoute = async () => {
+  return new Response(null, { headers: corsHeaders() });
+};
+
 export const post: APIRoute = async ({ request }) => {
   try {
     const keys = getApiKeys();
     if (keys.length === 0) {
-      return new Response(JSON.stringify({
-        error: 'API keys not configured. Set TINYPNG_API_KEYS in environment variables.',
-      }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonError('API keys not configured. Set TINYPNG_API_KEYS in environment variables.', 500);
     }
 
     const formData = await request.formData();
     const imageFile = formData.get('image') as File;
 
     if (!imageFile || imageFile.size === 0) {
-      return new Response(JSON.stringify({ error: 'No image provided' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonError('No image provided', 400);
     }
 
     if (imageFile.size > 10 * 1024 * 1024) {
-      return new Response(JSON.stringify({ error: 'File too large (max 10MB)' }), {
-        status: 413,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonError('File too large (max 10MB)', 413);
     }
 
     const format = formData.get('format') as string || 'original';
@@ -48,7 +56,6 @@ export const post: APIRoute = async ({ request }) => {
     // Try keys with rotation — skip exhausted keys (429)
     let originalInfo: any = null;
     let usedKey = '';
-    let allExhausted = true;
 
     for (const key of keys) {
       const response = await fetch('https://api.tinify.com/shrink', {
@@ -63,32 +70,21 @@ export const post: APIRoute = async ({ request }) => {
       if (response.ok) {
         originalInfo = await response.json();
         usedKey = key;
-        allExhausted = false;
         break;
       }
 
       if (response.status !== 429) {
         let detail = '';
         try { detail = await response.text(); } catch {}
-        return new Response(JSON.stringify({
-          error: `TinyPNG API error (${response.status})`,
-          detail,
-        }), {
-          status: response.status === 429 ? 429 : 502,
-          headers: { 'Content-Type': 'application/json' },
-        });
+        return jsonError(`TinyPNG API error (${response.status})${detail ? ': ' + detail : ''}`, 502);
       }
     }
 
     if (!originalInfo) {
-      return new Response(JSON.stringify({
-        error: allExhausted
-          ? 'All API keys have exhausted their monthly quota. Please try again later or add more keys.'
-          : 'No available API keys',
-      }), {
-        status: 429,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonError(
+        'All API keys have exhausted their monthly quota. Please try again later or add more keys.',
+        429
+      );
     }
 
     let outputUrl = originalInfo.output.url;
@@ -118,10 +114,7 @@ export const post: APIRoute = async ({ request }) => {
       });
 
       if (!transformResponse.ok) {
-        return new Response(JSON.stringify({ error: 'Transform failed' }), {
-          status: 502,
-          headers: { 'Content-Type': 'application/json' },
-        });
+        return jsonError('Transform failed', 502);
       }
 
       const transformResult = await transformResponse.json();
@@ -130,10 +123,7 @@ export const post: APIRoute = async ({ request }) => {
 
     const compressedResponse = await fetch(outputUrl);
     if (!compressedResponse.ok) {
-      return new Response(JSON.stringify({ error: 'Failed to download result' }), {
-        status: 502,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return jsonError('Failed to download result', 502);
     }
 
     const compressedBuffer = Buffer.from(await compressedResponse.arrayBuffer());
@@ -150,12 +140,10 @@ export const post: APIRoute = async ({ request }) => {
         'Content-Disposition': `attachment; filename="compressed.${ext}"`,
         'X-Original-Size': String(originalSize),
         'X-Compressed-Size': String(compressedBuffer.length),
+        ...corsHeaders(),
       },
     });
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message || 'Internal error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return jsonError(err.message || 'Internal error', 500);
   }
 };

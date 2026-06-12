@@ -256,7 +256,7 @@ const pathname = '/tool/';
     progressPercent.textContent = '30%';
 
     try {
-      const response = await fetch('/api/compress', { method: 'POST', body: formData });
+      const response = await fetch('/api/compress/', { method: 'POST', body: formData });
 
       progressBar.style.width = '80%';
       progressPercent.textContent = '80%';
