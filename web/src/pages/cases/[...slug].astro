@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export const prerender = true;
 
@@ -9,20 +9,20 @@ export async function getStaticPaths() {
   return items
     .filter((c) => c.data.lang === 'zh' && !c.data.draft && c.data.date <= new Date())
     .map((item) => ({
-      params: { slug: item.slug },
+      params: { slug: item.id },
       props: { item },
     }));
 }
 
 const { item } = Astro.props;
-const { Content } = await item.render();
+const { Content } = await render(item);
 
 const allItems = await getCollection('cases');
 const translationKey = item.data.translationKey;
 let langHref: string | undefined;
 if (translationKey) {
   const enItem = allItems.find((p) => p.data.translationKey === translationKey && p.data.lang === 'en');
-  langHref = enItem ? `/en/cases/${enItem.slug}/` : '/en/cases/';
+  langHref = enItem ? `/en/cases/${enItem.id}/` : '/en/cases/';
 } else {
   langHref = '/en/cases/';
 }

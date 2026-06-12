@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export const prerender = true;
 
@@ -9,20 +9,20 @@ export async function getStaticPaths() {
   return posts
     .filter((p) => p.data.lang === 'en' && !p.data.draft && p.data.date <= new Date())
     .map((post) => ({
-      params: { slug: post.slug },
+      params: { slug: post.id },
       props: { post },
     }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const allPosts = await getCollection('blog');
 const translationKey = post.data.translationKey;
 let langHref: string | undefined;
 if (translationKey) {
   const zhPost = allPosts.find((p) => p.data.translationKey === translationKey && p.data.lang === 'zh');
-  langHref = zhPost ? `/blog/${zhPost.slug}/` : '/blog/';
+  langHref = zhPost ? `/blog/${zhPost.id}/` : '/blog/';
 } else {
   langHref = '/blog/';
 }
