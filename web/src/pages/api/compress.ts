@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
 
 function getApiKeys(): string[] {
-  const keys = import.meta.env.TINYPNG_API_KEYS || import.meta.env.TINYPNG_API_KEY || '';
-  return keys.split(',').map(k => k.trim()).filter(Boolean);
+  const raw = process.env.TINYPNG_API_KEYS || process.env.TINYPNG_API_KEY || '';
+  return raw.split(/[,;]/).map(k => k.trim()).filter(Boolean);
 }
 
 function makeAuth(key: string): string {
