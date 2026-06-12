@@ -239,24 +239,32 @@ const pathname = '/tool/';
     progressBar.style.width = '10%';
     progressPercent.textContent = '10%';
 
-    const formData = new FormData();
-    formData.append('image', selectedFile);
-    formData.append('format', formatSelect.value);
+    const buffer = await selectedFile.arrayBuffer();
+
+    const headers = {
+      'Content-Type': 'application/octet-stream',
+      'X-Filename': encodeURIComponent(selectedFile.name),
+      'X-Format': formatSelect.value,
+    };
 
     const method = resizeMethod.value;
     if (method) {
-      formData.append('resizeMethod', method);
+      headers['X-Resize-Method'] = method;
       const w = parseInt(resizeWidth.value);
       const h = parseInt(resizeHeight.value);
-      if (w > 0) formData.append('resizeWidth', String(w));
-      if (h > 0) formData.append('resizeHeight', String(h));
+      if (w > 0) headers['X-Resize-Width'] = String(w);
+      if (h > 0) headers['X-Resize-Height'] = String(h);
     }
 
     progressBar.style.width = '30%';
     progressPercent.textContent = '30%';
 
     try {
-      const response = await fetch('/api/compress/', { method: 'POST', body: formData });
+      const response = await fetch('/api/compress/', {
+        method: 'POST',
+        headers: headers,
+        body: buffer,
+      });
 
       progressBar.style.width = '80%';
       progressPercent.textContent = '80%';

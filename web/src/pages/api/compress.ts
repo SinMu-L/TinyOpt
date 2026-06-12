@@ -4,7 +4,7 @@ function corsHeaders(): Record<string, string> {
   return {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, X-Format, X-Resize-Method, X-Resize-Width, X-Resize-Height, X-Filename',
   };
 }
 
@@ -35,23 +35,20 @@ export const post: APIRoute = async ({ request }) => {
       return jsonError('API keys not configured. Set TINYPNG_API_KEYS in environment variables.', 500);
     }
 
-    const formData = await request.formData();
-    const imageFile = formData.get('image') as File;
+    const buffer = Buffer.from(await request.arrayBuffer());
 
-    if (!imageFile || imageFile.size === 0) {
+    if (!buffer || buffer.length === 0) {
       return jsonError('No image provided', 400);
     }
 
-    if (imageFile.size > 10 * 1024 * 1024) {
+    if (buffer.length > 10 * 1024 * 1024) {
       return jsonError('File too large (max 10MB)', 413);
     }
 
-    const format = formData.get('format') as string || 'original';
-    const resizeMethod = formData.get('resizeMethod') as string;
-    const resizeWidth = parseInt(formData.get('resizeWidth') as string) || undefined;
-    const resizeHeight = parseInt(formData.get('resizeHeight') as string) || undefined;
-
-    const buffer = Buffer.from(await imageFile.arrayBuffer());
+    const format = request.headers.get('X-Format') || 'original';
+    const resizeMethod = request.headers.get('X-Resize-Method');
+    const resizeWidth = parseInt(request.headers.get('X-Resize-Width') || '') || undefined;
+    const resizeHeight = parseInt(request.headers.get('X-Resize-Height') || '') || undefined;
 
     // Try keys with rotation — skip exhausted keys (429)
     let originalInfo: any = null;
