@@ -7,7 +7,7 @@ export const prerender = true;
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts
-    .filter((p) => p.data.lang === 'en' && !p.data.draft && p.data.date <= new Date())
+    .filter((p) => p.data.lang === 'zh' && !p.data.draft && p.data.date <= new Date())
     .map((post) => ({
       params: { slug: post.id },
       props: { post },
@@ -21,8 +21,8 @@ const allPosts = await getCollection('blog');
 const translationKey = post.data.translationKey;
 let langHref: string | undefined;
 if (translationKey) {
-  const zhPost = allPosts.find((p) => p.data.translationKey === translationKey && p.data.lang === 'zh');
-  langHref = zhPost ? `/blog/${zhPost.id}/` : '/blog/';
+  const enPost = allPosts.find((p) => p.data.translationKey === translationKey && p.data.lang === 'en');
+  langHref = enPost ? `/blog/${enPost.id}/` : '/blog/';
 } else {
   langHref = '/blog/';
 }
@@ -31,7 +31,7 @@ if (translationKey) {
 <Layout title={post.data.title} description={post.data.description} lang={post.data.lang} langHref={langHref}>
   <article class="bg-white py-12 sm:py-20">
     <div class="mx-auto max-w-3xl px-4">
-      <div class="mb-2 text-sm text-gray-400">{post.data.date.toLocaleDateString('en-US')}</div>
+      <div class="mb-2 text-sm text-gray-400">{post.data.date.toLocaleDateString('zh-CN')}</div>
       <h1 class="mb-6 text-2xl sm:text-3xl font-bold text-gray-900">{post.data.title}</h1>
       {post.data.tags && (
         <div class="mb-8 flex flex-wrap gap-2">

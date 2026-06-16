@@ -1,5 +1,5 @@
 ---
-title: Building a Thread-Safe API Key Pool: Python Concurrency in Practice
+title: "Building a Thread-Safe API Key Pool: Python Concurrency in Practice"
 date: 2026-06-17
 lang: en
 translationKey: thread-safe-api-key-pool

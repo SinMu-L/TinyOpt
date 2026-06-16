@@ -14,7 +14,7 @@ export interface Props {
   canonical?: string;
 }
 
-const { title, description, lang = 'zh', langHref, ogImage, noindex, canonical } = Astro.props;
+const { title, description, lang = 'en', langHref, ogImage, noindex, canonical } = Astro.props;
 const _ = translation(lang);
 const siteTitle = _.site.title;
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
@@ -76,12 +76,13 @@ const autoCanonical = canonical ?? `${baseUrl}${Astro.url.pathname}`;
 
   <!-- Alternate language links -->
   <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="TinyOpt - 新闻动态" href="/rss.xml" />
-  <link rel="alternate" type="application/rss+xml" title="TinyOpt - Blog" href="/en/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title="TinyOpt - Blog" href="/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title="TinyOpt - 新闻动态" href="/zh/rss.xml" />
 
-  <link rel="alternate" hreflang="x-default" href={baseUrl} />
-  <link rel="alternate" hreflang="zh-CN" href={`${baseUrl}${Astro.url.pathname.startsWith('/en') ? Astro.url.pathname.replace(/^\/en/, '') || '/' : Astro.url.pathname}`} />
-  <link rel="alternate" hreflang="en-US" href={`${baseUrl}${Astro.url.pathname.startsWith('/en') ? Astro.url.pathname : '/en' + (Astro.url.pathname === '/' ? '' : Astro.url.pathname)}`} />
+  <link rel="alternate" hreflang="x-default" href={`${baseUrl}/`} />
+  <link rel="alternate" hreflang="en" href={`${baseUrl}${Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname}`} />
+  <link rel="alternate" hreflang="en-US" href={`${baseUrl}${Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname}`} />
+  <link rel="alternate" hreflang="zh-CN" href={`${baseUrl}${Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname : '/zh' + (Astro.url.pathname === '/' ? '' : Astro.url.pathname)}`} />
 
   <!-- Google Analytics (loaded only with cookie consent) -->
   <script>
@@ -114,11 +115,11 @@ const autoCanonical = canonical ?? `${baseUrl}${Astro.url.pathname}`;
     <div class="mx-auto flex max-w-6xl flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
       <p class="text-sm text-gray-600">
         {lang === 'en'
-          ? 'We use cookies to improve your experience and for Google AdSense. By continuing, you agree to our '
-          : '我们使用 Cookie 来提升您的体验并用于 Google AdSense。继续使用即表示您同意我们的 '}
-        <a href={lang === 'en' ? '/en/privacy/' : '/privacy/'} class="underline hover:text-primary-600">{lang === 'en' ? 'Privacy Policy' : '隐私政策'}</a>
+          ? 'We use cookies to improve your experience and for analytics. By continuing, you agree to our '
+          : '我们使用 Cookie 来提升您的体验并用于网站分析。继续使用即表示您同意我们的 '}
+        <a href={lang === 'en' ? '/privacy/' : '/zh/privacy/'} class="underline hover:text-primary-600">{lang === 'en' ? 'Privacy Policy' : '隐私政策'}</a>
         {lang === 'en' ? ' and ' : ' 和 '}
-        <a href={lang === 'en' ? '/en/terms/' : '/terms/'} class="underline hover:text-primary-600">{lang === 'en' ? 'Terms of Service' : '服务条款'}</a>.
+        <a href={lang === 'en' ? '/terms/' : '/zh/terms/'} class="underline hover:text-primary-600">{lang === 'en' ? 'Terms of Service' : '服务条款'}</a>.
       </p>
       <div class="flex shrink-0 gap-2">
         <button id="cookie-accept" class="rounded-lg bg-primary-600 px-5 py-2 text-xs font-semibold text-white hover:bg-primary-700 transition-all">{lang === 'en' ? 'Accept' : '接受'}</button>

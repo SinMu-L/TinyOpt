@@ -7,7 +7,7 @@ I18N_DIR = BASE_DIR / "i18n"
 
 
 class Translator:
-    def __init__(self, lang="zh"):
+    def __init__(self, lang="en"):
         self._lang = lang
         self._data = {}
         self._listeners = []

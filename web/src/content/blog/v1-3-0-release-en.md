@@ -30,4 +30,4 @@ TinyOpt Compressor v1.3.0 is officially released! Here are the highlights:
 
 ### Download
 
-Visit the [Download page](/en/download/) to get the latest version.
+Visit the [Download page](/download/) to get the latest version.

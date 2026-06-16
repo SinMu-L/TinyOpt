@@ -2,16 +2,16 @@
 import Layout from '@/layouts/Layout.astro';
 import { translation } from '@/i18n/utils';
 
-const _ = translation('en');
+const _ = translation('zh');
 ---
 
-<Layout title={_.about.title} description={_.site.description} lang="en">
+<Layout title={_.about.title} description={_.site.description} lang="zh">
   <section class="bg-white py-12 sm:py-20">
     <div class="mx-auto max-w-3xl px-4">
       <h1 class="mb-8 text-2xl sm:text-3xl font-bold text-gray-900">{_.about.title}</h1>
       <p class="mb-8 text-lg leading-relaxed text-gray-600">{_.about.intro}</p>
 
-      <h2 class="mb-4 text-xl font-semibold text-gray-900">{_.features_title || 'Features'}</h2>
+      <h2 class="mb-4 text-xl font-semibold text-gray-900">{_.features_title || '功能特点'}</h2>
       <ul class="mb-8 space-y-3">
         {_.about.features_list.map((item) => (
           <li class="flex items-start gap-3 text-gray-600">

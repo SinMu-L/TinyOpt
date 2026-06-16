@@ -69,6 +69,7 @@
       { "name": "Mike Wang", "role": "Digital Marketer", "content": "Simple to use, great compression ratio — 3MB down to 200KB with excellent quality. And it's free! Couldn't ask for more." }
     ]
   },
+  "features_title": "Features",
   "about": {
     "title": "About TinyOpt Compressor",
     "intro": "TinyOpt Compressor is a desktop batch image compression tool based on TinyPNG API, built with Python + PyQt5. Designed for designers, operators, and developers who need to process images in bulk.",
@@ -114,19 +115,26 @@
     "subtitle": "Questions or suggestions? Get in touch",
     "email": "Email",
     "address": "Address",
-    "wechat": "WeChat Official",
+    "wechat": "",
     "response_time": "We will respond within 24 hours"
   },
   "privacy": {
     "title": "Privacy Policy",
     "last_updated": "Last updated: June 2026",
     "content": [
-      "TinyOpt Compressor respects and protects your privacy. This policy explains how we collect, use, and protect your information.",
-      "1. Information Collection: Your TinyPNG API Key is stored locally in a config file and is never uploaded to any third-party server.",
-      "2. Image Processing: All images are processed via the official TinyPNG API. We do not store or forward your images.",
-      "3. Logging: Compression history is stored locally and never automatically uploaded.",
-      "4. Third-Party Services: This tool uses the TinyPNG API. Please refer to TinyPNG's privacy policy for their data handling.",
-      "5. Contact: For privacy-related questions, please reach out through our contact channels."
+      "TinyOpt Compressor (hereinafter \"TinyOpt\", \"we\", \"us\", or \"our\") respects and protects your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal data when you use our desktop application and website, in compliance with the General Data Protection Regulation (GDPR) and other applicable privacy laws.",
+      "1. Data Controller: The controller of your personal data is the TinyOpt project. Contact: sinmu8191@gmail.com. This is a personal open-source project operated from China.",
+      "2. Data We Collect: (a) TinyPNG API Key — stored locally on your device in a configuration file, never uploaded to our servers. (b) Images — temporarily sent to TinyPNG's official API for compression; we do not store, forward, or retain your images. (c) Usage Data — compression history is stored locally on your device. (d) Website Analytics — when you visit our website, Google Analytics collects anonymized data (page views, browser type, approximate location) via cookies, with your consent.",
+      "3. Legal Basis for Processing: (a) Consent — for cookies and Google Analytics tracking, we obtain your consent via our cookie consent banner. (b) Legitimate Interest — image compression is performed at your explicit request using your provided API Key. (c) Contractual Necessity — processing your images through the TinyPNG API is necessary to provide the compression service you request.",
+      "4. Data Retention: (a) API Keys — stored locally until you delete them. (b) Images — deleted by TinyPNG immediately after compression. (c) Google Analytics data — retained for 26 months. (d) Local compression history — retained until you clear it within the application.",
+      "5. Your Rights Under GDPR: You have the following rights regarding your personal data: (a) Right of Access — request a copy of your data. (b) Right to Rectification — correct inaccurate data. (c) Right to Erasure (Right to be Forgotten) — request deletion of your data. (d) Right to Restriction of Processing — limit how we use your data. (e) Right to Data Portability — receive your data in a structured format. (f) Right to Object — object to processing based on legitimate interests. To exercise these rights, contact us at sinmu8191@gmail.com.",
+      "6. International Data Transfers: Images are sent to TinyPNG's API servers, which may be located outside the European Economic Area (EEA), including in the United States. TinyPNG relies on Standard Contractual Clauses (SCCs) approved by the European Commission to ensure adequate data protection. Your TinyPNG API Key and local data remain on your device and are not transferred internationally.",
+      "7. Cookies: Our website uses cookies from Google Analytics to understand site usage and improve user experience. You can accept or decline cookies via our cookie banner. You may also disable cookies in your browser settings. For more information, see Google's Privacy Policy at policies.google.com/privacy.",
+      "8. Third-Party Services: (a) TinyPNG API — processes your images for compression. See TinyPNG's privacy policy at tinypng.com/privacy. (b) Google Analytics — provides website analytics. See Google's privacy policy at policies.google.com/privacy. (c) Vercel — hosts our website. See Vercel's privacy policy at vercel.com/privacy.",
+      "9. Security: We implement appropriate technical and organizational measures to protect your data. API Keys are stored locally and are not transmitted to our servers. Image transfers to TinyPNG are encrypted via HTTPS.",
+      "10. Changes to This Policy: We may update this Privacy Policy from time to time. Material changes will be announced on our website. Continued use of the tool after changes constitutes acceptance of the updated policy.",
+      "11. Complaints: If you believe your data protection rights have been violated, you have the right to lodge a complaint with your local data protection supervisory authority within the European Economic Area.",
+      "12. Contact: For any privacy-related questions or to exercise your GDPR rights, contact us at sinmu8191@gmail.com."
     ]
   },
   "terms": {
@@ -140,7 +148,7 @@
       "4. Intellectual Property: The open-source code of this Tool is released under the corresponding open-source license. Images processed using this Tool are owned by the user.",
       "5. Third-Party Services: This Tool calls the TinyPNG API for image compression. Please also comply with TinyPNG's terms of service.",
       "6. Changes to Terms: We reserve the right to modify these terms at any time. Material changes will be announced on the website.",
-      "7. Contact: For any questions, please contact us at sinmu.li@foxmail.com."
+      "7. Contact: For any questions, please contact us at sinmu8191@gmail.com."
     ]
   },
   "404": {

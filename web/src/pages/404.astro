@@ -2,9 +2,9 @@
 import Layout from '@/layouts/Layout.astro';
 import { translation } from '@/i18n/utils';
 
-const _ = translation('zh');
+const _ = translation('en');
 const pathname = Astro.url.pathname;
-const lang = pathname.startsWith('/en/') ? 'en' : 'zh';
+const lang = pathname.startsWith('/zh/') ? 'zh' : 'en';
 const t = translation(lang);
 ---
 
@@ -14,7 +14,7 @@ const t = translation(lang);
       <div class="mb-4 text-6xl sm:text-8xl font-bold text-primary-200">404</div>
       <h1 class="mb-4 text-2xl font-bold text-gray-900">{t['404'].title}</h1>
       <p class="mb-8 text-gray-500">{t['404'].message}</p>
-      <a href={lang === 'en' ? '/en/' : '/'} class="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-700 transition-all">
+      <a href={lang === 'en' ? '/' : '/zh/'} class="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-700 transition-all">
         {t['404'].back_home}
       </a>
     </div>

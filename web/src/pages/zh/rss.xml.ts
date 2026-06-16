@@ -3,18 +3,18 @@ import { getCollection } from 'astro:content';
 
 export const GET = async () => {
   const posts = (await getCollection('blog'))
-    .filter((p) => p.data.lang === 'en' && !p.data.draft && p.data.date <= new Date())
+    .filter((p) => p.data.lang === 'zh' && !p.data.draft && p.data.date <= new Date())
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
   return rss({
-    title: 'TinyOpt - Blog',
-    description: 'Latest news, tips and updates about TinyOpt batch image compressor',
-    site: 'https://seojeck.com/en',
+    title: 'TinyOpt - 新闻动态',
+    description: '了解 TinyOpt 的最新版本动态、使用技巧与行业资讯',
+    site: 'https://seojeck.com/zh',
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description,
-      link: `/en/blog/${post.id}/`,
+      link: `/zh/blog/${post.id}/`,
     })),
   });
 };

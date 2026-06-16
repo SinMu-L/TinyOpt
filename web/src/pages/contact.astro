@@ -2,10 +2,10 @@
 import Layout from '@/layouts/Layout.astro';
 import { translation } from '@/i18n/utils';
 
-const _ = translation('zh');
+const _ = translation('en');
 ---
 
-<Layout title={_.contact.title} description={_.site.description} lang="zh">
+<Layout title={_.contact.title} description={_.site.description} lang="en">
   <section class="bg-white py-12 sm:py-20">
     <div class="mx-auto max-w-3xl px-4">
       <h1 class="mb-4 text-2xl sm:text-3xl font-bold text-gray-900">{_.contact.title}</h1>
@@ -19,7 +19,7 @@ const _ = translation('zh');
             </svg>
           </div>
           <h3 class="mb-2 font-semibold text-gray-900">{_.contact.email}</h3>
-          <p class="text-sm text-gray-500">sinmu.li@foxmail.com</p>
+          <p class="text-sm text-gray-500">sinmu8191@gmail.com</p>
         </div>
 
         <div class="rounded-xl border border-gray-100 p-6 text-center">
@@ -30,7 +30,7 @@ const _ = translation('zh');
             </svg>
           </div>
           <h3 class="mb-2 font-semibold text-gray-900">{_.contact.address}</h3>
-          <p class="text-sm text-gray-500">上海市浦东新区江月路</p>
+          <p class="text-sm text-gray-500">Jiangyue Road, Pudong, Shanghai</p>
         </div>
 
         <div class="rounded-xl border border-gray-100 p-6 text-center">

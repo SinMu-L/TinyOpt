@@ -167,15 +167,15 @@ def find_font_path(family_name):
     except:
         pass
     fallback_map = {
-        "微软雅黑": "msyh.ttc",
-        "宋体": "simsun.ttc",
-        "黑体": "simhei.ttf",
-        "楷体": "simkai.ttf",
         "Arial": "arial.ttf",
         "Tahoma": "tahoma.ttf",
         "Verdana": "verdana.ttf",
         "Times New Roman": "times.ttf",
         "Courier New": "cour.ttf",
+        "微软雅黑": "msyh.ttc",
+        "宋体": "simsun.ttc",
+        "黑体": "simhei.ttf",
+        "楷体": "simkai.ttf",
     }
     if family_name in fallback_map:
         fonts_dir = os.path.join(os.environ.get('WINDIR', 'C:\\Windows'), 'Fonts')
