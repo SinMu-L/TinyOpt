@@ -20,6 +20,7 @@ const siteTitle = _.site.title;
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 const locale = lang === 'en' ? 'en-US' : 'zh-CN';
 const baseUrl = 'https://seojeck.com';
+const autoCanonical = canonical ?? `${baseUrl}${Astro.url.pathname}`;
 ---
 
 <!DOCTYPE html>
@@ -47,7 +48,7 @@ const baseUrl = 'https://seojeck.com';
   <meta name="twitter:description" content={description} />
   {ogImage && <meta name="twitter:image" content={ogImage} />}
 
-  {canonical && <link rel="canonical" href={canonical} />}
+  <link rel="canonical" href={autoCanonical} />
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify({

@@ -1,5 +1,13 @@
 {
   "framework": "astro",
   "buildCommand": "npm run build",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.seojeck.com" }],
+      "destination": "https://seojeck.com/$1",
+      "permanent": true
+    }
+  ]
 }
