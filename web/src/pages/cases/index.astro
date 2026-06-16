@@ -17,7 +17,7 @@ const cases = (await getCollection('cases'))
 
       <div class="grid gap-8 md:grid-cols-2">
         {cases.map((c) => (
-          <a href={`/cases/${c.slug}/`} class="group rounded-xl border border-gray-100 p-6 transition-all hover:-translate-y-1 hover:shadow-md">
+          <a href={`/cases/${c.id}/`} class="group rounded-xl border border-gray-100 p-6 transition-all hover:-translate-y-1 hover:shadow-md">
             <h2 class="mb-2 text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">{c.data.title}</h2>
             <p class="text-sm text-gray-500">{c.data.description}</p>
             <div class="mt-4 text-sm font-medium text-primary-600">{_.cases.read_more} →</div>

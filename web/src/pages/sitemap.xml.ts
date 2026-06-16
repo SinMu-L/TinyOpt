@@ -32,13 +32,13 @@ export const GET: APIRoute = async () => {
   const allPages = [
     ...staticPages,
     ...blogPosts.map((p) => ({
-      url: `/${p.data.lang === 'en' ? 'en/' : ''}blog/${p.slug}/`,
+      url: `/${p.data.lang === 'en' ? 'en/' : ''}blog/${p.id}/`,
       changefreq: 'monthly' as const,
       priority: '0.6' as const,
       lastmod: p.data.date.toISOString().split('T')[0],
     })),
     ...casePosts.map((p) => ({
-      url: `/${p.data.lang === 'en' ? 'en/' : ''}cases/${p.slug}/`,
+      url: `/${p.data.lang === 'en' ? 'en/' : ''}cases/${p.id}/`,
       changefreq: 'monthly' as const,
       priority: '0.6' as const,
       lastmod: p.data.date.toISOString().split('T')[0],

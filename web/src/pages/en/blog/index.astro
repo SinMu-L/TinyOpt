@@ -20,7 +20,7 @@ const posts = (await getCollection('blog'))
       ) : (
         <div class="grid gap-8 md:grid-cols-2">
           {posts.map((post) => (
-            <a href={`/en/blog/${post.slug}/`} class="group rounded-xl border border-gray-100 p-6 transition-all hover:-translate-y-1 hover:shadow-md">
+            <a href={`/en/blog/${post.id}/`} class="group rounded-xl border border-gray-100 p-6 transition-all hover:-translate-y-1 hover:shadow-md">
               <div class="mb-3 text-xs text-gray-400">{post.data.date.toLocaleDateString('en-US')}</div>
               <h2 class="mb-2 text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">{post.data.title}</h2>
               <p class="text-sm text-gray-500">{post.data.description}</p>
