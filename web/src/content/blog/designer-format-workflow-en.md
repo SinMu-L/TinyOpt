@@ -1,5 +1,5 @@
 ---
-title: Designer's Efficiency Manual: One-Click ICO Icons, PDF Previews, and 9-Format Conversion Workflow
+title: "Designer's Efficiency Manual: One-Click ICO Icons, PDF Previews, and 9-Format Conversion Workflow"
 date: 2026-06-12
 lang: en
 translationKey: designer-format-workflow

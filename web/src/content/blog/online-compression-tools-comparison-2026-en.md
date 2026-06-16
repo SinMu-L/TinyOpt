@@ -1,5 +1,5 @@
 ---
-title: 2026 Online Image Compression Tools Compared: TinyPNG vs Compressor.io vs Squoosh vs Kraken vs Imagify
+title: "2026 Online Image Compression Tools Compared: TinyPNG vs Compressor.io vs Squoosh vs Kraken vs Imagify"
 date: 2026-06-13
 lang: en
 translationKey: online-compression-tools-comparison-2026

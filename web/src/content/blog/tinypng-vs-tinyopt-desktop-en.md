@@ -1,5 +1,5 @@
 ---
-title: TinyPNG Desktop Client Isn't Great? Benchmark: Why This Batch Tool Built for Webmasters Stands Out
+title: "TinyPNG Desktop Client Isn't Great? Benchmark: Why This Batch Tool Built for Webmasters Stands Out"
 date: 2026-06-14
 lang: en
 translationKey: tinypng-vs-tinyopt-desktop

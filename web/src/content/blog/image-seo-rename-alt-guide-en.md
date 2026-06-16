@@ -1,5 +1,5 @@
 ---
-title: Image SEO Ultimate Guide: How Smart Renaming + Alt Tags Can Boost Google Image Traffic by 300%
+title: "Image SEO Ultimate Guide: How Smart Renaming + Alt Tags Can Boost Google Image Traffic by 300%"
 date: 2026-06-10
 lang: en
 translationKey: image-seo-rename-alt-guide

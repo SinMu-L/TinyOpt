@@ -1,5 +1,5 @@
 ---
-title: Shopify Too Slow? Benchmark: WebP Shrinks Images by 70% and Shaves 3 Seconds Off Load Time
+title: "Shopify Too Slow? Benchmark: WebP Shrinks Images by 70% and Shaves 3 Seconds Off Load Time"
 date: 2026-06-08
 lang: en
 translationKey: shopify-webp-optimization
