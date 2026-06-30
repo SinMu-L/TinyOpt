@@ -90,6 +90,8 @@
     "stats_saved": "节省空间: {size} MB ({percent}%)",
     "msg_done": "成功压缩 {count} 张图片！",
     "resize_label": " + 调整尺寸({method})",
+    "local_fallback": "API 不可用时使用本地压缩引擎",
+    "local_fallback_tooltip": "当所有 API 密钥额度用完或网络不通时，自动使用 PIL 本地压缩图片（压缩比低于 Tinify API，但完全免费无限制）",
     "oversize_warning_title": "文件大小警告",
     "oversize_warning_msg": "以下 {count} 个文件超过 TinyPNG 免费版 5MB 限制，可能压缩失败：\n\n{files}\n\n是否继续？",
     "and_others": "\n  ... 及其他 {count} 个"
@@ -277,7 +279,9 @@
     "rename_success": "✅ {old} → {new}",
     "rename_failed": "❌ 重命名失败: {name} - {error}",
     "cancel_compress": "⏹ 正在取消压缩...",
-    "cancel_watermark": "⏹ 正在取消水印处理..."
+    "cancel_watermark": "⏹ 正在取消水印处理...",
+    "local_fallback": "⚠ API 失败，切换到本地压缩引擎: {name}",
+    "local_fallback_failed": "❌ 本地压缩失败: {name} - {error}"
   },
   "add_key_dialog": {
     "title_add": "添加密钥",

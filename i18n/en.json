@@ -90,6 +90,8 @@
     "stats_saved": "Saved: {size} MB ({percent}%)",
     "msg_done": "Successfully compressed {count} images!",
     "resize_label": " + Resize({method})",
+    "local_fallback": "Use local compression engine when API unavailable",
+    "local_fallback_tooltip": "When all API keys are exhausted or network is down, automatically use PIL local compression (lower ratio than Tinify API, but completely free and unlimited)",
     "oversize_warning_title": "File Size Warning",
     "oversize_warning_msg": "The following {count} file(s) exceed the 5MB free tier limit and may fail:\n\n{files}\n\nContinue?",
     "and_others": "\n  ... and {count} more"
@@ -277,7 +279,9 @@
     "rename_success": "✅ {old} → {new}",
     "rename_failed": "❌ Rename failed: {name} - {error}",
     "cancel_compress": "⏹ Cancelling compression...",
-    "cancel_watermark": "⏹ Cancelling watermark task..."
+    "cancel_watermark": "⏹ Cancelling watermark task...",
+    "local_fallback": "⚠ API failed, switching to local compression engine: {name}",
+    "local_fallback_failed": "❌ Local compression failed: {name} - {error}"
   },
   "add_key_dialog": {
     "title_add": "Add API Key",

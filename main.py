@@ -289,6 +289,73 @@ def generate_rename_preview(file_paths, pattern, start_index=1, pad_digits=3, da
     return results
 
 
+LOCAL_JPEG_QUALITY = 85
+
+
+def local_compress_image(image_data, source_ext, target_format="", resize_params=None, quality=LOCAL_JPEG_QUALITY):
+    """Compress image locally using PIL. Returns (success, compressed_data, error)."""
+    try:
+        from PIL import Image as PILImg
+        from io import BytesIO as ImgBytesIO
+
+        img = PILImg.open(ImgBytesIO(image_data))
+
+        fmt = target_format if target_format else source_ext.lstrip(".")
+        fmt = fmt.lower()
+        if fmt in ("jpg", "jpeg"):
+            fmt = "jpeg"
+        elif fmt == "tif":
+            fmt = "tiff"
+
+        if resize_params:
+            method = resize_params.get("method", "fit")
+            w = resize_params.get("width", 0)
+            h = resize_params.get("height", 0)
+            if method == "scale" and w > 0:
+                pct = w / 100.0
+                img = img.resize((max(1, int(img.width * pct)), max(1, int(img.height * pct))), PILImg.LANCZOS)
+            elif method == "fit" and (w > 0 or h > 0):
+                img.thumbnail((w if w > 0 else img.width, h if h > 0 else img.height), PILImg.LANCZOS)
+            elif method == "cover" and w > 0 and h > 0:
+                ratio = max(w / img.width, h / img.height)
+                nw, nh = int(img.width * ratio), int(img.height * ratio)
+                img = img.resize((nw, nh), PILImg.LANCZOS)
+                img = img.crop(((nw - w) // 2, (nh - h) // 2, (nw - w) // 2 + w, (nh - h) // 2 + h))
+            elif method == "thumb" and w > 0 and h > 0:
+                img = img.resize((w, h), PILImg.LANCZOS)
+
+        output = ImgBytesIO()
+
+        if fmt == "jpeg":
+            if img.mode in ("RGBA", "P", "LA"):
+                img = img.convert("RGB")
+            img.save(output, format="JPEG", quality=quality, optimize=True)
+        elif fmt == "png":
+            if img.mode not in ("RGBA", "RGB", "L", "LA", "P"):
+                img = img.convert("RGBA")
+            img.save(output, format="PNG", optimize=True)
+        elif fmt == "webp":
+            if img.mode not in ("RGB", "RGBA"):
+                img = img.convert("RGB")
+            img.save(output, format="WebP", quality=quality)
+        elif fmt == "gif":
+            img.save(output, format="GIF", optimize=True)
+        elif fmt == "tiff":
+            img.save(output, format="TIFF", compression="tiff_lzw")
+        elif fmt == "bmp":
+            img.save(output, format="BMP")
+        elif fmt == "ico":
+            if img.mode != "RGBA":
+                img = img.convert("RGBA")
+            img.save(output, format="ICO", sizes=[(256, 256)])
+        else:
+            return False, None, f"Unsupported local format: {fmt}"
+
+        return True, output.getvalue(), None
+    except Exception as e:
+        return False, None, str(e)
+
+
 class KeyManager:
     def __init__(self, keys_data=None):
         self.keys = keys_data or []
@@ -486,7 +553,8 @@ class CompressWorker(QThread):
     key_usage_updated = pyqtSignal()
 
     def __init__(self, key_manager, file_paths, output_dir,
-                 overwrite=False, target_format="", resize_params=None):
+                 overwrite=False, target_format="", resize_params=None,
+                 use_local_fallback=False, local_quality=LOCAL_JPEG_QUALITY):
         super().__init__()
         self.key_manager = key_manager
         self.file_paths = file_paths
@@ -494,6 +562,8 @@ class CompressWorker(QThread):
         self.overwrite = overwrite
         self.target_format = target_format
         self.resize_params = resize_params
+        self.use_local_fallback = use_local_fallback
+        self.local_quality = local_quality
         self._is_cancelled = False
         self._completed = 0
         self._total = 0
@@ -682,6 +752,44 @@ class CompressWorker(QThread):
                     self.key_manager.release_key(key["key"])
                     self.log.emit(T("worker.key_failed", key=key_id, error=msg), True)
                     return {"success": False, "original_size": original_size, "compressed_size": 0}
+
+        if self.use_local_fallback:
+            self.log.emit(T("worker.local_fallback", name=input_path.name), False)
+            fmt = self.target_format
+            if is_bmp and not fmt:
+                fmt = "png"
+            success, compressed_data, error = local_compress_image(
+                image_data, Path(file_path).suffix.lower(),
+                target_format=fmt, resize_params=self.resize_params,
+                quality=self.local_quality,
+            )
+            if success:
+                try:
+                    fmt_for_ext = fmt or (".png" if is_bmp else Path(file_path).suffix.lower())
+                    ext_map = {"jpeg": ".jpg", "jpg": ".jpg", "jpeg": ".jpg", "tif": ".tiff"}
+                    ext = ext_map.get(fmt_for_ext, "." + fmt_for_ext) if fmt else Path(file_path).suffix.lower()
+                    output_name = input_path.stem + ext
+                    output_path = (Path(self.output_dir) / output_name) if self.output_dir else (input_path.parent / output_name)
+                    if output_path.exists() and not self.overwrite:
+                        self.log.emit(T("worker.skip_exists", path=str(output_path)), False)
+                        return None
+                    with open(output_path, "wb") as f:
+                        f.write(compressed_data)
+                except Exception as e:
+                    self.log.emit(T("worker.write_failed", path=str(output_path), error=str(e)), True)
+                    return {"success": False, "original_size": original_size, "compressed_size": 0}
+                compressed_size = os.path.getsize(output_path)
+                saved = original_size - compressed_size
+                saved_percent = (saved / original_size) * 100
+                self.log.emit(
+                    T("worker.compress_success", name=input_path.name,
+                      original=original_size // 1024, compressed=compressed_size // 1024,
+                      percent=f"{saved_percent:.1f}"),
+                    False,
+                )
+                return {"success": True, "original_size": original_size, "compressed_size": compressed_size}
+            else:
+                self.log.emit(T("worker.local_fallback_failed", name=input_path.name, error=error), True)
 
         return {"success": False, "original_size": original_size, "compressed_size": 0}
 
@@ -1205,6 +1313,7 @@ class MainWindow(QMainWindow):
         self.resize_height_input.setSuffix(T('app.px'))
         self.file_group.setTitle(T('compress.task_title'))
         self.log_group.setTitle(T('compress.log_title'))
+        self.local_fallback_checkbox.setText(T('compress.local_fallback'))
         self.compress_btn.setText(T('compress.start_btn'))
         self.cancel_btn.setText(T('compress.cancel_btn'))
         self.add_files_btn.setText(T('app.add_files'))
@@ -1301,6 +1410,13 @@ class MainWindow(QMainWindow):
         row1.addWidget(self.browse_output_btn)
         row1.addWidget(self.overwrite_checkbox)
         output_layout.addLayout(row1)
+
+        row_local = QHBoxLayout()
+        self.local_fallback_checkbox = QCheckBox()
+        self.local_fallback_checkbox.setToolTip(T('compress.local_fallback_tooltip'))
+        row_local.addWidget(self.local_fallback_checkbox)
+        row_local.addStretch()
+        output_layout.addLayout(row_local)
 
         row2 = QHBoxLayout()
         self._cp_label_format = QLabel()
@@ -2224,6 +2340,7 @@ class MainWindow(QMainWindow):
                 self.resize_method_combo.setCurrentIndex(method_idx)
             self.resize_width_input.setValue(saved_resize.get("width", 0))
             self.resize_height_input.setValue(saved_resize.get("height", 0))
+        self.local_fallback_checkbox.setChecked(self.config.get("local_fallback", False))
         saved_lang = self.config.get("language", "zh")
         idx = self.lang_combo.findData(saved_lang)
         if idx >= 0:
@@ -2240,6 +2357,7 @@ class MainWindow(QMainWindow):
             "width": self.resize_width_input.value(),
             "height": self.resize_height_input.value(),
         }
+        self.config["local_fallback"] = self.local_fallback_checkbox.isChecked()
         self.key_manager.save(self.config)
 
     def refresh_key_table(self):
@@ -2529,6 +2647,7 @@ class MainWindow(QMainWindow):
         self.worker = CompressWorker(
             self.key_manager, file_paths, output_dir, overwrite,
             target_format, resize_params,
+            use_local_fallback=self.local_fallback_checkbox.isChecked(),
         )
         self.worker.progress.connect(self.update_progress)
         self.worker.log.connect(self.log)
