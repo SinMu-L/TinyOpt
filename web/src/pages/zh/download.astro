@@ -3,6 +3,21 @@ import Layout from '@/layouts/Layout.astro';
 import { translation } from '@/i18n/utils';
 
 const _ = translation('zh');
+
+const downloadUrl = 'https://github.com/SinMu-L/TinyOpt/releases/latest/download/TinyOpt-latest.exe';
+let latestVersion = _.download.latest_version;
+let latestDate = _.download.latest_date;
+
+try {
+  const res = await fetch('https://api.github.com/repos/SinMu-L/TinyOpt/releases/latest');
+  if (res.ok) {
+    const release = await res.json();
+    latestVersion = release.tag_name || latestVersion;
+    latestDate = release.published_at?.split('T')[0] || latestDate;
+  }
+} catch {
+  // fallback to i18n values
+}
 ---
 
 <Layout title={_.download.title} description={_.site.description} lang="zh">
@@ -12,8 +27,8 @@ const _ = translation('zh');
       <p class="mb-10 text-gray-600">{_.download.subtitle}</p>
 
       <div class="mb-12 rounded-xl border border-gray-200 bg-gradient-to-r from-primary-50 to-blue-50 p-6 sm:p-8 text-center">
-        <div class="mb-2 text-sm text-gray-500">{_.download.latest_version} · {_.download.latest_date}</div>
-        <a href="https://github.com/SinMu-L/TinyOpt/releases" class="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 transition-all" target="_blank">
+        <div class="mb-2 text-sm text-gray-500">{latestVersion} · {latestDate}</div>
+        <a href={downloadUrl} class="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 transition-all" target="_blank">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>

@@ -269,11 +269,15 @@ class RenamePage(QWidget):
             return
 
         if "{name}" not in pattern and "{index}" not in pattern and "{date}" not in pattern:
-            reply = QMessageBox.question(
-                self, T("app.confirm"), T("app.no_variables_in_pattern"),
-                QMessageBox.Yes | QMessageBox.No,
-            )
-            if reply == QMessageBox.No:
+            confirm_msg = QMessageBox(self)
+            confirm_msg.setIcon(QMessageBox.Question)
+            confirm_msg.setWindowTitle(T("app.confirm"))
+            confirm_msg.setText(T("app.no_variables_in_pattern"))
+            confirm_yes = confirm_msg.addButton(T("app.yes"), QMessageBox.YesRole)
+            confirm_msg.addButton(T("app.no"), QMessageBox.NoRole)
+            confirm_msg.setDefaultButton(confirm_yes)
+            confirm_msg.exec_()
+            if confirm_msg.clickedButton() != confirm_yes:
                 return
 
         self.rn_start_btn.setEnabled(False)

@@ -68,11 +68,15 @@ class HistoryPage(QWidget):
             self.history_table.setItem(row, 5, QTableWidgetItem(format_size(record.get("compressed_size", 0))))
 
     def clear_history(self):
-        reply = QMessageBox.question(
-            self, T("history.confirm_clear"), T("app.confirm_clear_history"),
-            QMessageBox.Yes | QMessageBox.No,
-        )
-        if reply == QMessageBox.Yes:
+        clear_msg = QMessageBox(self)
+        clear_msg.setIcon(QMessageBox.Question)
+        clear_msg.setWindowTitle(T("history.confirm_clear"))
+        clear_msg.setText(T("app.confirm_clear_history"))
+        clear_yes = clear_msg.addButton(T("app.yes"), QMessageBox.YesRole)
+        clear_msg.addButton(T("app.no"), QMessageBox.NoRole)
+        clear_msg.setDefaultButton(clear_yes)
+        clear_msg.exec_()
+        if clear_msg.clickedButton() == clear_yes:
             self.config["history"] = []
             save_config(self.config)
             self.refresh_history_table()
