@@ -94,6 +94,7 @@
     "download_windows": "Download for Windows",
     "changelog": "Changelog",
     "changelog_items": [
+      { "version": "v1.7.2", "date": "2026-07-08", "changes": ["Added image ratio adjustment (crop/pad/stretch with presets)", "Direct download button — no more redirect to GitHub Releases", "Overwrite confirmation dialog with clear warning", "File list now shows full path instead of filename only", "Unified dialog buttons with i18n translations"] },
       { "version": "v1.3.0", "date": "2026-06-04", "changes": ["Added AVIF format support", "Improved watermark drag experience", "Fixed various bugs"] },
       { "version": "v1.2.4", "date": "2026-06-04", "changes": ["Optimized API quota display", "Improved queue management"] },
       { "version": "v1.2.0", "date": "2026-06-03", "changes": ["Added batch rename feature", "Added watermark tool module"] }
