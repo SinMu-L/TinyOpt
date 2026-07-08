@@ -186,7 +186,7 @@ class RatioPage(QWidget):
 
         self._ratio_fill_rgb = (255, 255, 255)
 
-    def _retranslate_ratio_page(self):
+    def retranslate(self):
         self.ratio_settings_group.setTitle(T('ratio_page.page_title'))
         self._ratio_label_mode.setText(T('ratio_page.mode_label'))
         self._ratio_label_ratio.setText(T('ratio_page.ratio_label'))
@@ -299,7 +299,7 @@ class RatioPage(QWidget):
             if self.ratio_file_list.item(i).data(Qt.UserRole) == file_path:
                 return False
         size = os.path.getsize(file_path)
-        item = QListWidgetItem(f"{Path(file_path).name}  ({self._format_size(size)})")
+        item = QListWidgetItem(f"{file_path}  ({self._format_size(size)})")
         item.setData(Qt.UserRole, file_path)
         item.setToolTip(file_path)
         self.ratio_file_list.addItem(item)

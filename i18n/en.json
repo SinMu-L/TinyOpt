@@ -11,7 +11,7 @@
     "no": "No",
     "browse": "Browse...",
     "output_dir": "Output Dir",
-    "output_dir_placeholder": "Leave empty to overwrite original files",
+    "output_dir_placeholder": "Leave empty to save in original file directories",
     "overwrite": "Overwrite existing files",
     "overwrite_original": "Overwrite original files",
     "add_files": "📎 Add Files",
@@ -61,12 +61,15 @@
     "confirm_clear_history": "Clear all compression history?",
     "no_variables_in_pattern": "The pattern contains no variables — all files will be renamed to the same name. Continue?",
     "folder_added": "✅ Folder added, found {count} file(s)",
-    "position_preview_hint": "Add an image to preview position"
+    "position_preview_hint": "Add an image to preview position",
+    "crop_preview_hint": "Add images to preview crop",
+    "add_files_first_ratio": "Please add image files first!"
   },
   "sidebar": {
     "compress": "Compression",
     "watermark": "Watermark",
     "rename": "Batch Rename",
+    "ratio": "Adjust Ratio",
     "key_manage": "API Keys",
     "history": "History"
   },
@@ -92,6 +95,8 @@
     "resize_label": " + Resize({method})",
     "local_fallback": "Use local compression engine when API unavailable",
     "local_fallback_tooltip": "When all API keys are exhausted or network is down, automatically use PIL local compression (lower ratio than Tinify API, but completely free and unlimited)",
+    "overwrite_confirm_title": "Overwrite Original Files",
+    "overwrite_confirm_msg": "When enabled, compressed files will be written directly back to their original paths, ignoring the output directory set above.\n\nOriginal files will be overwritten and irrecoverable!\n\nAre you sure you want to enable this?",
     "oversize_warning_title": "File Size Warning",
     "oversize_warning_msg": "The following {count} file(s) exceed the 5MB free tier limit and may fail:\n\n{files}\n\nContinue?",
     "and_others": "\n  ... and {count} more"
@@ -243,6 +248,32 @@
     "text": "Text Watermark",
     "both": "Image + Text"
   },
+  "ratio": {
+    "crop": "Crop",
+    "pad": "Pad",
+    "stretch": "Stretch",
+    "preset_1_1": "1:1 Square",
+    "preset_4_3": "4:3 Photo",
+    "preset_3_2": "3:2 APS-C",
+    "preset_16_9": "16:9 Widescreen",
+    "preset_21_9": "21:9 Ultra Wide",
+    "preset_9_16": "9:16 Portrait",
+    "preset_4_5": "4:5 Portrait",
+    "preset_2_3": "2:3 Phone",
+    "preset_custom": "Custom",
+    "fill_color_white": "White",
+    "fill_color_black": "Black",
+    "fill_color_custom": "Custom...",
+    "anchor_center": "Center",
+    "anchor_top_left": "Top Left",
+    "anchor_top_center": "Top Center",
+    "anchor_top_right": "Top Right",
+    "anchor_center_left": "Center Left",
+    "anchor_center_right": "Center Right",
+    "anchor_bottom_left": "Bottom Left",
+    "anchor_bottom_center": "Bottom Center",
+    "anchor_bottom_right": "Bottom Right"
+  },
   "rename_var_hint": {
     "name": "Original filename (without extension)",
     "index": "Auto-increment number",
@@ -281,7 +312,27 @@
     "cancel_compress": "⏹ Cancelling compression...",
     "cancel_watermark": "⏹ Cancelling watermark task...",
     "local_fallback": "⚠ API failed, switching to local compression engine: {name}",
-    "local_fallback_failed": "❌ Local compression failed: {name} - {error}"
+    "local_fallback_failed": "❌ Local compression failed: {name} - {error}",
+    "ratio_cancelled": "⚠ Ratio adjustment cancelled by user",
+    "ratio_processing": "🔄 Processing: {name}",
+    "ratio_skip_format": "⏭ Skipping unsupported format: {name}",
+    "ratio_skip_exists": "⏭ Skipping existing file: {name}",
+    "ratio_success": "✅ {name} | Ratio adjusted",
+    "ratio_failed": "❌ Processing failed: {name} - {error}",
+    "cancel_ratio": "⏹ Cancelling ratio adjustment..."
+  },
+  "ratio_page": {
+    "page_title": "📐 Ratio Settings",
+    "mode_label": "Mode:",
+    "ratio_label": "Ratio:",
+    "custom_ratio": "or",
+    "anchor_label": "Anchor:",
+    "fill_color_label": "Fill Color:",
+    "task_title": "📋 Image List",
+    "start_btn": "🚀 Start",
+    "cancel_btn": "⏹ Cancel",
+    "finished": "📊 Ratio adjustment complete!",
+    "done_msg": "Completed, {count} image(s) processed!"
   },
   "add_key_dialog": {
     "title_add": "Add API Key",

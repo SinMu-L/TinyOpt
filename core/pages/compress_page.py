@@ -45,6 +45,7 @@ class CompressPage(QWidget):
         self.browse_output_btn = QPushButton()
         self.browse_output_btn.clicked.connect(self.browse_output_dir)
         self.overwrite_checkbox = QCheckBox()
+        self.overwrite_checkbox.toggled.connect(self.on_overwrite_toggled)
         row1.addWidget(QLabel(T('app.output_dir')))
         row1.addWidget(self.output_dir_input)
         row1.addWidget(self.browse_output_btn)
@@ -215,6 +216,29 @@ class CompressPage(QWidget):
                   self.resize_height_input]:
             w.setEnabled(enabled)
 
+    def on_overwrite_toggled(self, checked):
+        if not checked:
+            self.output_dir_input.setEnabled(True)
+            self.browse_output_btn.setEnabled(True)
+            return
+
+        msg = QMessageBox(self)
+        msg.setIcon(QMessageBox.Warning)
+        msg.setWindowTitle(T("compress.overwrite_confirm_title"))
+        msg.setText(T("compress.overwrite_confirm_msg"))
+        yes_btn = msg.addButton(T("app.yes"), QMessageBox.YesRole)
+        no_btn = msg.addButton(T("app.no"), QMessageBox.NoRole)
+        msg.setDefaultButton(no_btn)
+        msg.exec_()
+        if msg.clickedButton() == no_btn:
+            self.overwrite_checkbox.blockSignals(True)
+            self.overwrite_checkbox.setChecked(False)
+            self.overwrite_checkbox.blockSignals(False)
+            return
+
+        self.output_dir_input.setEnabled(False)
+        self.browse_output_btn.setEnabled(False)
+
     def update_file_summary(self):
         count = self.file_list_widget.count()
         total_size = 0
@@ -232,7 +256,7 @@ class CompressPage(QWidget):
             if self.file_list_widget.item(i).data(Qt.UserRole) == file_path:
                 return
         size = os.path.getsize(file_path)
-        item = QListWidgetItem(f"{Path(file_path).name}  ({format_size(size)})")
+        item = QListWidgetItem(f"{file_path}  ({format_size(size)})")
         item.setData(Qt.UserRole, file_path)
         item.setToolTip(file_path)
         self.file_list_widget.addItem(item)
@@ -339,12 +363,15 @@ class CompressPage(QWidget):
                 for fp in oversize_files[:5]
             )
             extra = T("compress.and_others", count=len(oversize_files) - 5) if len(oversize_files) > 5 else ""
-            reply = QMessageBox.warning(
-                self, T("compress.oversize_warning_title"),
-                T("compress.oversize_warning_msg", count=len(oversize_files), files=names + extra),
-                QMessageBox.Yes | QMessageBox.No,
-            )
-            if reply == QMessageBox.No:
+            oversize_msg = QMessageBox(self)
+            oversize_msg.setIcon(QMessageBox.Warning)
+            oversize_msg.setWindowTitle(T("compress.oversize_warning_title"))
+            oversize_msg.setText(T("compress.oversize_warning_msg", count=len(oversize_files), files=names + extra))
+            oversize_yes = oversize_msg.addButton(T("app.yes"), QMessageBox.YesRole)
+            oversize_msg.addButton(T("app.no"), QMessageBox.NoRole)
+            oversize_msg.setDefaultButton(oversize_yes)
+            oversize_msg.exec_()
+            if oversize_msg.clickedButton() != oversize_yes:
                 return
 
         self._save_compress_settings()
@@ -355,8 +382,8 @@ class CompressPage(QWidget):
         self.progress_bar.setValue(0)
         self.log_text.clear()
 
-        output_dir = self.output_dir_input.text().strip()
         overwrite = self.overwrite_checkbox.isChecked()
+        output_dir = "" if overwrite else self.output_dir_input.text().strip()
         target_format = self.format_combo.currentData()
 
         resize_params = None

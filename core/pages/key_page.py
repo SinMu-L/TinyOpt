@@ -121,11 +121,15 @@ class KeyPage(QWidget):
             return
         key = self.key_manager.keys[row]
         remark = key.get("remark") or key["key"][:8]
-        reply = QMessageBox.question(
-            self, T("app.confirm"), T("key.confirm_delete", remark=remark),
-            QMessageBox.Yes | QMessageBox.No,
-        )
-        if reply == QMessageBox.Yes:
+        delete_msg = QMessageBox(self)
+        delete_msg.setIcon(QMessageBox.Question)
+        delete_msg.setWindowTitle(T("app.confirm"))
+        delete_msg.setText(T("key.confirm_delete", remark=remark))
+        delete_yes = delete_msg.addButton(T("app.yes"), QMessageBox.YesRole)
+        delete_msg.addButton(T("app.no"), QMessageBox.NoRole)
+        delete_msg.setDefaultButton(delete_yes)
+        delete_msg.exec_()
+        if delete_msg.clickedButton() == delete_yes:
             self.key_manager.remove_key(row)
             self.refresh_key_table()
             self.key_manager.save(self.config)

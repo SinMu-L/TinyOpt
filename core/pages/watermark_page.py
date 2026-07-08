@@ -227,7 +227,7 @@ class WatermarkPage(QWidget):
         self.wm_font_family = "微软雅黑"
         self.wm_font_color = (255, 255, 255)
 
-    def _retranslate_watermark_page(self):
+    def retranslate(self):
         self.wm_settings_group.setTitle(T('watermark.page_title'))
         self._wm_label_type.setText(T('watermark.type') + ':')
         self.wm_type_image.setText(T('watermark.type_image'))
@@ -325,7 +325,7 @@ class WatermarkPage(QWidget):
             if self.wm_file_list.item(i).data(Qt.UserRole) == file_path:
                 return
         size = os.path.getsize(file_path)
-        item = QListWidgetItem(f"{Path(file_path).name}  ({self._format_size(size)})")
+        item = QListWidgetItem(f"{file_path}  ({self._format_size(size)})")
         item.setData(Qt.UserRole, file_path)
         item.setToolTip(file_path)
         self.wm_file_list.addItem(item)

@@ -11,7 +11,7 @@
     "no": "否",
     "browse": "浏览...",
     "output_dir": "输出目录",
-    "output_dir_placeholder": "留空则覆盖原文件",
+    "output_dir_placeholder": "留空则保存到原文件所在目录",
     "overwrite": "覆盖已存在的文件",
     "overwrite_original": "覆盖原文件",
     "add_files": "📎 添加图片",
@@ -61,12 +61,15 @@
     "confirm_clear_history": "确定要清空所有压缩历史记录吗？",
     "no_variables_in_pattern": "命名模式中未包含任何变量，所有文件将被重命名为相同名称，是否继续？",
     "folder_added": "✅ 已添加文件夹，共找到 {count} 个文件",
-    "position_preview_hint": "添加图片后可预览位置"
+    "position_preview_hint": "添加图片后可预览位置",
+    "crop_preview_hint": "添加图片后可预览裁剪",
+    "add_files_first_ratio": "请先添加图片文件！"
   },
   "sidebar": {
     "compress": "压缩任务",
     "watermark": "水印工具",
     "rename": "批量重命名",
+    "ratio": "调整比例",
     "key_manage": "密钥管理",
     "history": "压缩历史"
   },
@@ -92,6 +95,8 @@
     "resize_label": " + 调整尺寸({method})",
     "local_fallback": "API 不可用时使用本地压缩引擎",
     "local_fallback_tooltip": "当所有 API 密钥额度用完或网络不通时，自动使用 PIL 本地压缩图片（压缩比低于 Tinify API，但完全免费无限制）",
+    "overwrite_confirm_title": "覆盖原始文件",
+    "overwrite_confirm_msg": "启用后，压缩结果将直接写回原始文件所在路径并替换原文件，不会使用上方设置的输出目录。\n\n原始文件将被覆盖且不可恢复！\n\n确定要启用吗？",
     "oversize_warning_title": "文件大小警告",
     "oversize_warning_msg": "以下 {count} 个文件超过 TinyPNG 免费版 5MB 限制，可能压缩失败：\n\n{files}\n\n是否继续？",
     "and_others": "\n  ... 及其他 {count} 个"
@@ -243,6 +248,32 @@
     "text": "文字水印",
     "both": "图片+文字"
   },
+  "ratio": {
+    "crop": "裁剪",
+    "pad": "填充",
+    "stretch": "拉伸",
+    "preset_1_1": "1:1 正方形",
+    "preset_4_3": "4:3 传统照片",
+    "preset_3_2": "3:2 APS-C",
+    "preset_16_9": "16:9 宽屏",
+    "preset_21_9": "21:9 超宽",
+    "preset_9_16": "9:16 竖屏",
+    "preset_4_5": "4:5 竖版",
+    "preset_2_3": "2:3 手机",
+    "preset_custom": "自定义",
+    "fill_color_white": "白色",
+    "fill_color_black": "黑色",
+    "fill_color_custom": "自定义...",
+    "anchor_center": "居中",
+    "anchor_top_left": "左上",
+    "anchor_top_center": "中上",
+    "anchor_top_right": "右上",
+    "anchor_center_left": "左中",
+    "anchor_center_right": "右中",
+    "anchor_bottom_left": "左下",
+    "anchor_bottom_center": "中下",
+    "anchor_bottom_right": "右下"
+  },
   "rename_var_hint": {
     "name": "原文件名（不含后缀）",
     "index": "自动序号",
@@ -281,7 +312,27 @@
     "cancel_compress": "⏹ 正在取消压缩...",
     "cancel_watermark": "⏹ 正在取消水印处理...",
     "local_fallback": "⚠ API 失败，切换到本地压缩引擎: {name}",
-    "local_fallback_failed": "❌ 本地压缩失败: {name} - {error}"
+    "local_fallback_failed": "❌ 本地压缩失败: {name} - {error}",
+    "ratio_cancelled": "⚠ 用户取消了比例调整任务",
+    "ratio_processing": "🔄 处理中: {name}",
+    "ratio_skip_format": "⏭ 跳过不支持格式: {name}",
+    "ratio_skip_exists": "⏭ 跳过已存在文件: {name}",
+    "ratio_success": "✅ {name} | 比例调整完成",
+    "ratio_failed": "❌ 处理失败: {name} - {error}",
+    "cancel_ratio": "⏹ 正在取消比例调整..."
+  },
+  "ratio_page": {
+    "page_title": "📐 比例设置",
+    "mode_label": "模式:",
+    "ratio_label": "比例:",
+    "custom_ratio": "或",
+    "anchor_label": "锚点:",
+    "fill_color_label": "填充色:",
+    "task_title": "📋 待处理图片列表",
+    "start_btn": "🚀 开始调整",
+    "cancel_btn": "⏹ 取消",
+    "finished": "📊 比例调整完成！",
+    "done_msg": "比例调整完成，成功 {count} 张！"
   },
   "add_key_dialog": {
     "title_add": "添加密钥",
