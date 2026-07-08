@@ -15,7 +15,7 @@ import pytest
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).parent))
-from main import local_compress_image
+from core.image_utils import local_compress_image, adjust_aspect_ratio
 
 
 @pytest.fixture
@@ -162,3 +162,48 @@ def test_output_valid_image(rgb_image_bytes):
         with Image.open(BytesIO(data)) as img:
             assert img.width > 0
             assert img.height > 0
+
+
+def test_ratio_crop_horizontal_to_square():
+    img = Image.new("RGB", (200, 100), (255, 0, 0))
+    result = adjust_aspect_ratio(img, 1, 1, mode="crop")
+    assert result.size == (100, 100)
+
+
+def test_ratio_crop_vertical_to_square():
+    img = Image.new("RGB", (100, 200), (0, 255, 0))
+    result = adjust_aspect_ratio(img, 1, 1, mode="crop")
+    assert result.size == (100, 100)
+
+
+def test_ratio_already_correct():
+    img = Image.new("RGB", (100, 100), (0, 0, 255))
+    result = adjust_aspect_ratio(img, 1, 1, mode="crop")
+    assert result.size == (100, 100)
+
+
+def test_ratio_pad_square_to_wide():
+    img = Image.new("RGB", (100, 100), (255, 0, 0))
+    result = adjust_aspect_ratio(img, 16, 9, mode="pad", fill_color=(255, 255, 255))
+    assert result.size[0] > result.size[1]
+    assert abs(result.size[0] / result.size[1] - 16/9) < 0.01
+
+
+def test_ratio_pad_tall_to_wide():
+    img = Image.new("RGB", (100, 200), (0, 255, 0))
+    result = adjust_aspect_ratio(img, 16, 9, mode="pad", fill_color=(0, 0, 0))
+    assert abs(result.size[0] / result.size[1] - 16/9) < 0.01
+
+
+def test_ratio_stretch():
+    img = Image.new("RGB", (200, 100), (128, 128, 128))
+    result = adjust_aspect_ratio(img, 100, 100, mode="stretch")
+    assert result.size == (100, 100)
+
+
+def test_ratio_crop_with_anchor():
+    img = Image.new("RGB", (300, 100), (255, 0, 0))
+    result_center = adjust_aspect_ratio(img, 1, 1, mode="crop", anchor="center")
+    result_left = adjust_aspect_ratio(img, 1, 1, mode="crop", anchor="center_left")
+    assert result_center.size == (100, 100)
+    assert result_left.size == (100, 100)
