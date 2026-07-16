@@ -86,6 +86,7 @@ Pre-built executables are available in the `dist/` directory — download and do
 
 ## 更新日志 / Changelog
 
+- **v1.7.3** — 修复构建后 exe 无法切换中英文的问题，i18n 翻译文件现已正确打包 / Fixed i18n translation files not bundled in PyInstaller build
 - **v1.3.0** — 新增 AVIF/ICO/PDF 输出格式，优化压缩队列管理 / Added AVIF/ICO/PDF support, improved queue management
 - **v1.2.0** — 新增批量重命名功能 / Added batch rename feature
 - **v1.1.0** — 新增水印工具，支持可视化拖拽定位 / Added watermark tool with drag-and-drop positioning
