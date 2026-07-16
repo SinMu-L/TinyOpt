@@ -1,5 +1,5 @@
 ---
-title: Professional SEO Audit With Zero Budget: GSC + Screaming Frog + Lighthouse Complete Workflow
+title: "Professional SEO Audit With Zero Budget: GSC + Screaming Frog + Lighthouse Complete Workflow"
 date: 2026-07-21
 lang: en
 translationKey: free-seo-audit-tools

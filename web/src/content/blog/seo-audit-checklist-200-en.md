@@ -1,5 +1,5 @@
 ---
-title: Independent Site SEO Audit Checklist: 200 Checkpoints Across 10 Categories
+title: "Independent Site SEO Audit Checklist: 200 Checkpoints Across 10 Categories"
 date: 2026-07-19
 lang: en
 translationKey: seo-audit-checklist-200

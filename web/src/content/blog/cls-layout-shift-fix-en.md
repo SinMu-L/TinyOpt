@@ -1,5 +1,5 @@
 ---
-title: Fix CLS Layout Shifts: 5 Common Causes and a 3-Step Solution for a Perfect Score
+title: "Fix CLS Layout Shifts: 5 Common Causes and a 3-Step Solution for a Perfect Score"
 date: 2026-07-17
 lang: en
 translationKey: cls-layout-shift-fix

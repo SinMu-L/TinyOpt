@@ -1,5 +1,5 @@
 ---
-title: How Google Ranks Images in 2026: 7 Ranking Signals Beyond Alt Text
+title: "How Google Ranks Images in 2026: 7 Ranking Signals Beyond Alt Text"
 date: 2026-07-18
 lang: en
 translationKey: google-image-ranking-factors-2026

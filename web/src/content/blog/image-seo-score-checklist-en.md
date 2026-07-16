@@ -1,5 +1,5 @@
 ---
-title: Score Your Image SEO in 8 Steps: A Self-Audit Checklist to Stop Losing Traffic
+title: "Score Your Image SEO in 8 Steps: A Self-Audit Checklist to Stop Losing Traffic"
 date: 2026-07-16
 lang: en
 translationKey: image-seo-score-checklist
