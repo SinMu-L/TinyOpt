@@ -6,7 +6,7 @@ import datetime
 current_date = datetime.datetime.now().strftime('%Y%m%d')
 
 # 定义你的基础版本号
-version = "v1.7.2"
+version = "v1.7.3"
 
 # 拼接成最终的程序名称：TinyJPG_Compressor_v1.0.0_20260529
 app_name = f"TinyJPG_Compressor_{version}_{current_date}"
@@ -16,7 +16,9 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('icon.png', '.')],
+    # 将 i18n/ 目录打包进 exe，确保 PyInstaller 构建后中英文切换功能正常
+    # 格式为 (源路径, 目标路径)，目标路径 'i18n' 对应 sys._MEIPASS/i18n/
+    datas=[('icon.png', '.'), ('i18n', 'i18n')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

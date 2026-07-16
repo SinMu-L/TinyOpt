@@ -1,8 +1,11 @@
 import os
+import sys
 import json
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent
+# 处理 PyInstaller 打包后的路径：frozen 模式下使用 sys._MEIPASS 作为资源根目录
+# 非 frozen 模式（python main.py 直接运行）则使用 i18n.py 所在目录
+BASE_DIR = Path(sys._MEIPASS) if getattr(sys, 'frozen', False) else Path(__file__).parent
 I18N_DIR = BASE_DIR / "i18n"
 
 
