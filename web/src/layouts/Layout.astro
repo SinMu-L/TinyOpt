@@ -80,9 +80,9 @@ const autoCanonical = canonical ?? `${baseUrl}${Astro.url.pathname}`;
   <link rel="alternate" type="application/rss+xml" title="TinyOpt - 新闻动态" href="/zh/rss.xml" />
 
   <link rel="alternate" hreflang="x-default" href={`${baseUrl}/`} />
-  <link rel="alternate" hreflang="en" href={`${baseUrl}${Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname}`} />
-  <link rel="alternate" hreflang="en-US" href={`${baseUrl}${Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname}`} />
-  <link rel="alternate" hreflang="zh-CN" href={`${baseUrl}${Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname : '/zh' + (Astro.url.pathname === '/' ? '' : Astro.url.pathname)}`} />
+  <link rel="alternate" hreflang="en" href={`${baseUrl}${lang === 'zh' && langHref ? langHref : (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname)}`} />
+  <link rel="alternate" hreflang="en-US" href={`${baseUrl}${lang === 'zh' && langHref ? langHref : (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname)}`} />
+  <link rel="alternate" hreflang="zh-CN" href={`${baseUrl}${lang === 'en' && langHref ? langHref : (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname : '/zh' + (Astro.url.pathname === '/' ? '' : Astro.url.pathname))}`} />
 
   <!-- Google Analytics (loaded only with cookie consent) -->
   <script>

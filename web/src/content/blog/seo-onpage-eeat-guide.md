@@ -2,6 +2,7 @@
 title: 站内优化完全指南：从 Title 标签到 E-E-A-T，Google 如何评估你的页面质量
 date: 2026-06-22
 lang: zh
+translationKey: seo-onpage-eeat-guide
 description: 页面SEO是独立站获取搜索流量的基本功。本文从Title、Meta Description、标题层级到E-E-A-T框架，结合实战案例和Google官方指南，拆解每个优化要素的具体做法和常见错误。
 tags: [页面SEO, E-E-A-T, Title标签, 标题层级, 内容优化]
 ---

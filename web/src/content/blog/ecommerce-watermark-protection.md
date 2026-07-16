@@ -2,6 +2,7 @@
 title: 电商卖家防搬运指南：实测 4 种加水印方式，这一种 200 张产品图 3 分钟搞定
 date: 2026-06-11
 lang: zh
+translationKey: ecommerce-watermark-protection
 description: 原创产品图被同行盗用怎么办？本文实测对比 Photoshop、在线水印工具、手机 App、TinyOpt 四种加水印方案，从效率、隐蔽性、批量能力三个维度给出选择建议。
 tags: [水印, 电商, 图片保护, 批量处理, 防搬运]
 ---

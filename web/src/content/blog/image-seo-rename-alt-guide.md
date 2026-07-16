@@ -2,6 +2,7 @@
 title: 图片 SEO 终极指南：如何用智能重命名 + Alt 标签让 Google 图片搜索流量暴涨 300%
 date: 2026-06-10
 lang: zh
+translationKey: image-seo-rename-alt-guide
 description: 图片文件名就是你的免费 SEO 广告位。本文教你如何用 TinyOpt 的变量模板批量重命名，将关键词写入几百张图片的文件名和 Alt 文本，截获 Google 图片搜索流量。
 tags: [图片SEO, 批量重命名, Google搜索, Alt标签, 流量增长]
 ---

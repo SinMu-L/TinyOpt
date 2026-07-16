@@ -2,6 +2,7 @@
 title: 设计师效率手册：一键生成网站 .ico 图标、PDF 预览和 9 种格式互转的完整工作流
 date: 2026-06-12
 lang: zh
+translationKey: designer-format-workflow
 description: 前端设计和交付中频繁需要 ICO 图标、PDF 预览、WebP 导出等 9 种格式转换。本文分享一套 TinyOpt 一站搞定所有特殊格式的工作流，告别格式工厂和在线转换器。
 tags: [格式转换, 设计师, ICO, PDF, 工作效率]
 ---

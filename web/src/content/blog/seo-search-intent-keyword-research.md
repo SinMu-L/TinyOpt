@@ -2,6 +2,7 @@
 title: SEO 基石：搜索意图与关键词研究——80% 的站长第一步就做错了
 date: 2026-06-22
 lang: zh
+translationKey: seo-search-intent-keyword-research
 description: 关键词研究的核心不是找到搜索量大的词，而是理解搜索意图。本文从搜索意图四分类出发，结合关键词映射与内耗规避，给出完整的B2B独立站关键词研究实战流程。
 tags: [搜索意图, 关键词研究, SEO基础, 长尾词, 关键词内耗]
 ---

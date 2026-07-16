@@ -2,6 +2,7 @@
 title: TinyPNG 官方客户端不好用？实测对比：这款专为中国站长定制的批量工具强在哪
 date: 2026-06-14
 lang: zh
+translationKey: tinypng-vs-tinyopt-desktop
 description: TinyPNG 官方只提供 Photoshop 插件和网页版，桌面端缺口明显。本文实测对比 TinyPNG 官方方案与 TinyOpt 桌面工具，从批量能力、格式支持、水印、重命名等维度看哪个更值得用。
 tags: [TinyPNG, 工具对比, 桌面工具, 批量处理, 站长工具]
 ---

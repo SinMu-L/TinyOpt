@@ -2,6 +2,7 @@
 title: Shopify 网站太慢？实测对比：WebP 格式让图片体积暴降 70%，加载速度快 3 秒
 date: 2026-06-08
 lang: zh
+translationKey: shopify-webp-optimization
 description: 用实测数据对比 WebP/AVIF 与传统 JPG 的压缩差距，分享 Shopify 商品图批量格式转换和压缩的完整方案，附 TinyOpt 实操步骤。
 tags: [图片格式, 性能优化, Shopify, WebP, 电商]
 ---

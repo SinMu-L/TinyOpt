@@ -2,6 +2,7 @@
 title: SEO 数据监控与持续优化：从 Search Console 到 GA4 的增长闭环
 date: 2026-06-22
 lang: zh
+translationKey: seo-data-monitoring-optimization-cycle
 description: SEO不是一次性工作，而是一个持续优化的循环。本文手把手教你如何使用Google Search Console和GA4建立数据驱动的SEO增长系统，从关键词排名到转化追踪，形成完整的优化闭环。
 tags: [Google Search Console, GA4, SEO数据分析, 持续优化, 数据驱动]
 ---
