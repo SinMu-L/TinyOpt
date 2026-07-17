@@ -1,12 +1,13 @@
 {
   "name": "tinyjpg-compressor",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "TinyOpt - 图片批量压缩工具官方网站",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "postbuild": "node submit-indexnow.js",
     "astro": "astro"
   },
   "engines": {
