@@ -217,6 +217,9 @@ function getArticleSchema(
   <link rel="alternate" hreflang="en-US" href={`${baseUrl}${lang === 'zh' && langHref ? langHref : (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname)}`} />
   <link rel="alternate" hreflang="zh-CN" href={`${baseUrl}${lang === 'en' && langHref ? langHref : (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname : '/zh' + (Astro.url.pathname === '/' ? '' : Astro.url.pathname))}`} />
 
+  <!-- Ahrefs Analytics (cookieless) -->
+  <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="u7AA4DeV1SI8yuf2HXAuLw" async></script>
+
   <!-- Google Analytics (loaded only with cookie consent) -->
   <script>
     window.__loadGA = function() {
