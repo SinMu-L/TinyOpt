@@ -25,6 +25,7 @@ from core.pages.rename_page import RenamePage
 from core.pages.ratio_page import RatioPage
 from core.pages.key_page import KeyPage
 from core.pages.history_page import HistoryPage
+from core.pages.website_page import WebsitePage
 
 
 class MainWindow(QMainWindow):
@@ -63,6 +64,7 @@ class MainWindow(QMainWindow):
         self.sidebar.addItem("\U0001f4d0  " + T("sidebar.ratio").strip())
         self.sidebar.addItem("\U0001f511  " + T("sidebar.key_manage").strip())
         self.sidebar.addItem("\U0001f4ca  " + T("sidebar.history").strip())
+        self.sidebar.addItem("\U0001f310  " + T("sidebar.website").strip())
         self.sidebar.setCurrentRow(0)
         self.sidebar.currentRowChanged.connect(self.on_sidebar_changed)
         self.lang_combo = QComboBox()
@@ -84,12 +86,14 @@ class MainWindow(QMainWindow):
         self.ratio_page = RatioPage()
         self.key_page = KeyPage(self.config, self.key_manager)
         self.history_page = HistoryPage(self.config)
+        self.website_page = WebsitePage(self.config)
 
         self.compress_page.log_message.connect(self._on_page_log)
         self.compress_page.keys_changed.connect(self._on_keys_changed)
         self.compress_page.history_updated.connect(self._on_history_updated)
         self.key_page.log_message.connect(self._on_page_log)
         self.key_page.keys_changed.connect(self._on_keys_changed)
+        self.website_page.log_message.connect(self._on_page_log)
 
         self.stack = QStackedWidget()
         self.stack.addWidget(self.compress_page)   # 0
@@ -98,6 +102,7 @@ class MainWindow(QMainWindow):
         self.stack.addWidget(self.ratio_page)       # 3
         self.stack.addWidget(self.key_page)         # 4
         self.stack.addWidget(self.history_page)     # 5
+        self.stack.addWidget(self.website_page)     # 6
         root.addWidget(self.stack, 1)
 
     def _on_lang_changed(self, idx):
@@ -114,8 +119,10 @@ class MainWindow(QMainWindow):
         self.sidebar.item(3).setText('\U0001f4d0  ' + T('sidebar.ratio').strip())
         self.sidebar.item(4).setText('\U0001f511  ' + T('sidebar.key_manage').strip())
         self.sidebar.item(5).setText('\U0001f4ca  ' + T('sidebar.history').strip())
+        self.sidebar.item(6).setText('\U0001f310  ' + T('sidebar.website').strip())
         for page in [self.compress_page, self.watermark_page, self.rename_page,
-                     self.ratio_page, self.key_page, self.history_page]:
+                     self.ratio_page, self.key_page, self.history_page,
+                     self.website_page]:
             page.retranslate()
 
     def on_sidebar_changed(self, index):
