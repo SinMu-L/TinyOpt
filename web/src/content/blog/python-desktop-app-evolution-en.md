@@ -1,9 +1,9 @@
 ---
-title: "From 200-Line Script to 3000-Line Product: A Python Desktop App Architecture Journey"
+title: "Python Desktop App Refactoring: 200 to 3000 Lines"
 date: 2026-06-16
 lang: en
 translationKey: python-desktop-app-evolution
-description: A real refactoring story -- how a simple image compression script evolved into a 3000-line PyQt5 desktop app with watermarking, batch rename, multi-key concurrency, and bilingual i18n. Plus 5 lessons learned along the way.
+description: "Refactoring journey: 200-line script to 3000-line PyQt5 desktop app. Watermarking, batch rename, multi-key concurrency, i18n, and 5 key lessons learned."
 tags: [Python, PyQt5, architecture, desktop-app, refactoring]
 ---
 

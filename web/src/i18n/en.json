@@ -4,6 +4,16 @@
     "title": "TinyOpt - Batch Image Optimizer",
     "description": "A desktop batch image processing tool powered by TinyPNG API, supporting batch compression, watermark, format conversion, and batch renaming. Free, efficient, and secure."
   },
+  "meta": {
+    "home": "TinyOpt is a free desktop tool for batch image compression powered by the TinyPNG API, with watermarking, format conversion, and batch renaming built in.",
+    "about": "Learn about TinyOpt, a free open-source desktop batch image compression tool built with Python and PyQt5 for designers, marketers, and developers.",
+    "download": "Download TinyOpt for Windows free. Batch compress PNG, JPEG, WebP, and AVIF images, add watermarks, convert formats, and rename files in bulk.",
+    "contact": "Contact the TinyOpt team with questions, suggestions, or bug reports about our free batch image compression tool. We usually respond within 24 hours.",
+    "privacy": "Read the TinyOpt privacy policy: how our desktop image compression tool and website collect, use, and protect your data in compliance with GDPR.",
+    "terms": "Read the TinyOpt terms of service covering free use, disclaimers, intellectual property, and third-party TinyPNG API terms for our image tool.",
+    "blog": "TinyOpt blog: release notes, image compression tips, image SEO guides, and web performance tutorials for designers, developers, and site owners.",
+    "cases": "Real-world TinyOpt use cases: how designers and web developers batch compress images, add watermarks, and speed up their daily workflows."
+  },
   "nav": {
     "home": "Home",
     "about": "About",

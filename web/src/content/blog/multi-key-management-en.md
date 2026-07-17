@@ -1,9 +1,9 @@
 ---
-title: Only 500 Free Compressions Per Month? 3 Tricks to Process 3,500 Images with Multi-Key Management
+title: "500 Free Compressions? 3 Tricks to Scale to 3,500"
 date: 2026-06-04
 lang: en
 translationKey: multi-key-management
-description: Stuck with TinyPNG's 500-image monthly limit? Use multi-key management and concurrent compression to scale your monthly capacity to thousands and cut processing time by 3x.
+description: Break TinyPNG's 500-image monthly cap with multi-key rotation. Scale to thousands using concurrent compression, Gmail aliases, and automatic key scheduling.
 tags: [API Key, productivity, optimization, batch-processing]
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: "Designer's Efficiency Manual: One-Click ICO Icons, PDF Previews, and 9-Format Conversion Workflow"
+title: "Format Conversion for Designers: ICO, PDF, WebP"
 date: 2026-06-12
 lang: en
 translationKey: designer-format-workflow
-description: Front-end designers frequently need ICO icons, PDF previews, WebP exports and more. This guide shows how to handle all format conversions in one tool instead of juggling five.
+description: Designers frequently need ICO, PDF, WebP and more. Handle 9 format conversions in TinyOpt — one tool instead of juggling five different converters.
 tags: [format conversion, designer, ICO, PDF, workflow]
 ---
 

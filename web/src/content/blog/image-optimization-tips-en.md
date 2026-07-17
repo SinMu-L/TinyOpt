@@ -1,9 +1,9 @@
 ---
-title: Images Slowing Down Your Site? 5 Compression Tips to Cut Size by 80% Without Visible Loss
+title: "5 Compression Tips to Cut Image Size by 80%"
 date: 2026-06-03
 lang: en
 translationKey: image-optimization-tips
-description: 5 proven image compression techniques — from format selection to parameter tuning — that dramatically reduce file size without sacrificing visual quality. Real benchmark data included.
+description: "5 proven tips to cut image sizes by 80%: format choice, proper resizing, quality tuning, batch processing, and workflow integration. Benchmarks included."
 tags: [optimization, tips, webperf, guide]
 ---
 

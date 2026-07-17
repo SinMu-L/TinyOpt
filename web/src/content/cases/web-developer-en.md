@@ -1,5 +1,5 @@
 ---
-title: How a Web Developer Reduced Image Size by 60% with TinyOpt
+title: How a Developer Cut Image Size 60% with TinyOpt
 date: 2026-06-04
 lang: en
 translationKey: web-developer

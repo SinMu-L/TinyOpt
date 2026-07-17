@@ -1,9 +1,9 @@
 ---
-title: 站群运营必读：如何用 TinyPNG API 一次性处理 10000 张图片，突破每月 500 张限制
+title: 站群图片优化：用 TinyPNG 多 Key 并发突破 500 张月限额
 date: 2026-06-09
 lang: zh
 translationKey: bulk-image-seo-station-group
-description: 玩站群、做批量博客的站长最头疼图片批量压缩。本文详解 TinyPNG API 申请、多 Key 并发轮询、万张图片一次性处理方案，附实测耗时数据。
+description: 玩站群、做批量博客的站长最头疼图片批量压缩。本文详解 TinyPNG API 免费 Key 申请方法、多 Key 并发轮询机制、万张图片一次性处理方案，附 3 线程 8 Key 实测耗时数据与完整部署工作流，帮你在免费额度内完成站群图片优化。
 tags: [API Key, 站群, 批量处理, 效率优化, SEO]
 ---
 

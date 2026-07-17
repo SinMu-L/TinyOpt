@@ -1,5 +1,5 @@
 ---
-title: "Shopify Too Slow? Benchmark: WebP Shrinks Images by 70% and Shaves 3 Seconds Off Load Time"
+title: "Shopify WebP: Cut Image Size 70%, Load 3s Faster"
 date: 2026-06-08
 lang: en
 translationKey: shopify-webp-optimization

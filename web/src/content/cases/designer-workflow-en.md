@@ -1,5 +1,5 @@
 ---
-title: How a Designer Protects Portfolio Copyright with Batch Watermarking
+title: Protect Design Work with Batch Watermarking
 date: 2026-06-03
 lang: en
 translationKey: designer-workflow

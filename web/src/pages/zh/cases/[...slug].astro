@@ -28,7 +28,17 @@ if (translationKey) {
 }
 ---
 
-<Layout title={item.data.title} description={item.data.description} lang={item.data.lang} langHref={langHref}>
+<Layout
+  title={item.data.title}
+  description={item.data.description}
+  lang={item.data.lang}
+  langHref={langHref}
+  pageType="article"
+  articleDate={item.data.date.toISOString()}
+  articleAuthor="TinyOpt Team"
+  articleImage={item.data.image}
+  ogImage={item.data.image}
+>
   <article class="bg-white py-12 sm:py-20">
     <div class="mx-auto max-w-3xl px-4">
       <div class="mb-2 text-sm text-gray-400">{item.data.date.toLocaleDateString('zh-CN')}</div>

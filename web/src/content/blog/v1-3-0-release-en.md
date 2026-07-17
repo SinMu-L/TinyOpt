@@ -3,7 +3,7 @@ title: TinyOpt Compressor v1.3.0 Released
 date: 2026-06-04
 lang: en
 translationKey: v1-3-0-release
-description: Version 1.3.0 is now available with AVIF support, improved watermark tool, and various bug fixes.
+description: TinyOpt Compressor v1.3.0 released with AVIF support, improved watermark tool, enhanced batch processing, and fixes for high-DPI and special image formats.
 tags: [release, v1.3.0, AVIF]
 ---
 

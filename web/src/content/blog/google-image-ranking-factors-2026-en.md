@@ -1,9 +1,9 @@
 ---
-title: "How Google Ranks Images in 2026: 7 Ranking Signals Beyond Alt Text"
+title: "Google Image Ranking: 7 Signals Beyond Alt Text"
 date: 2026-07-18
 lang: en
 translationKey: google-image-ranking-factors-2026
-description: Google image search has its own ranking signal system. Dive into 7 key factors — surrounding text, page relevance, structured data, Image Sitemap, load performance, originality, and user behavior — to capture more image search traffic.
+description: "7 signals decide Google image rankings: surrounding text, page relevance, schema, sitemaps, speed, originality, and user behavior. Full strategy inside."
 tags: [Google image search, ranking factors, Image SEO, structured data, search traffic]
 ---
 

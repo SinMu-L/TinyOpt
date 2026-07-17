@@ -3,7 +3,7 @@ title: 500 张照片还在 F2 一张张改名？10 秒搞定，模板变量一�
 date: 2026-06-04
 lang: zh
 translationKey: batch-rename-productivity
-description: 用 TinyOpt 的批量重命名功能，{name}、{index}、{date} 三个模板变量搞定上千张图片命名，手动改需要半小时，模板改只要 10 秒。
+description: 用 TinyOpt 的批量重命名功能，{name}、{index}、{date} 三个模板变量 10 秒搞定上千张图片命名。支持自定义起始编号与日期格式，手动逐一改名需要半小时，适合摄影交付和电商运营的批量文件管理场景，配合批量压缩可一次完成全部交付。
 tags: [批量重命名, 工作效率, 文件管理]
 ---
 

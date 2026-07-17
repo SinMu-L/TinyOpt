@@ -9,7 +9,7 @@ const cases = (await getCollection('cases'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Layout title={_.cases.title} description={_.cases.subtitle} lang="en">
+<Layout title={_.cases.title} description={_.meta.cases} lang="en">
   <section class="bg-white py-20">
     <div class="mx-auto max-w-4xl px-4">
       <h1 class="mb-4 text-3xl font-bold text-gray-900">{_.cases.title}</h1>

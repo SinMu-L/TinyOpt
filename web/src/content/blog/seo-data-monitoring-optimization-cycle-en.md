@@ -1,9 +1,9 @@
 ---
-title: "SEO Data Monitoring & Continuous Optimization: Building a Growth Loop with Search Console and GA4"
+title: "SEO Data Loop: Ranking Growth with GSC & GA4"
 date: 2026-06-22
 lang: en
 translationKey: seo-data-monitoring-optimization-cycle
-description: SEO isn't a one-time project — it's a continuous optimization cycle. This guide walks through using Google Search Console and GA4 to build a data-driven SEO system, from keyword ranking analysis to conversion tracking.
+description: Use Google Search Console and GA4 to build a data-driven SEO loop. Track keyword rankings, analyze traffic, and turn insights into lasting ranking gains.
 tags: [Google Search Console, GA4, SEO Analytics, Continuous Optimization, Data-Driven SEO]
 ---
 

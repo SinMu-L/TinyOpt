@@ -1,9 +1,9 @@
 ---
-title: "Image SEO Ultimate Guide: How Smart Renaming + Alt Tags Can Boost Google Image Traffic by 300%"
+title: "Image SEO: File Renaming and Alt Tag Guide"
 date: 2026-06-10
 lang: en
 translationKey: image-seo-rename-alt-guide
-description: Your image filenames are free SEO real estate. Learn how to batch-rename hundreds of images with keyword-rich filenames using TinyOpt's variable templates and capture Google Image Search traffic.
+description: Batch rename images with keyword-rich filenames using TinyOpt templates. Gain Google traffic with Alt text strategies and our complete image SEO checklist.
 tags: [Image SEO, batch rename, Google Search, Alt tags, traffic growth]
 ---
 

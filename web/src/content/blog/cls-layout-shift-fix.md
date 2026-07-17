@@ -3,7 +3,7 @@ title: 图还没加载完按钮就飞了？CLS 布局偏移 5 大元凶和 3 步
 date: 2026-07-17
 lang: zh
 translationKey: cls-layout-shift-fix
-description: 图片没设宽高、第三方广告、动态注入内容都是 CLS 布局偏移的常见原因。本文逐一拆解 5 个罪魁祸首，给出 3 步修复流程，附带修复前后 CLS 实测数据对比。
+description: 图片没设宽高、广告位和动态注入内容是 CLS 布局偏移最常见的原因。本文拆解 5 个罪魁祸首和 3 步修复流程，从为图片补齐宽高属性到为动态区域预留空间，附修复前后实测数据与代码示例，帮你把 CLS 降到 0.1 以内，稳住排名与转化。
 tags: [CLS, Core Web Vitals, 布局偏移, 性能优化, PageSpeed]
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: First Time Using TinyOpt? From Download to Compressing 150 Images in Under 10 Minutes
+title: "Getting Started: Compress 150 Images with TinyOpt"
 date: 2026-06-05
 lang: en
 translationKey: getting-started-guide
@@ -29,7 +29,7 @@ TinyOpt uses the TinyPNG API for compression. You'll need a free API key:
 4. In TinyOpt, go to "Settings" → "API Key Management" → "Add Key"
 5. Paste and save
 
-Each email gives you 500 free compressions per month. Need more? Register multiple email accounts — see the [multi-key management guide](/blog/multi-key-management/).
+Each email gives you 500 free compressions per month. Need more? Register multiple email accounts — see the [multi-key management guide](/blog/multi-key-management-en/).
 
 👉 [Haven't downloaded yet? Get TinyOpt](/download/)
 

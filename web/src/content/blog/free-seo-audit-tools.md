@@ -1,9 +1,9 @@
 ---
-title: 不花一分钱做专业级 SEO 审计：GSC + Screaming Frog + Lighthouse 三件套实操流程
+title: 免费 SEO 审计：GSC、SF 和 Lighthouse 全流程
 date: 2026-07-21
 lang: zh
 translationKey: free-seo-audit-tools
-description: 不用 Semrush 和 Ahrefs 也能做 80% 的专业 SEO 审计。本文用 Google Search Console、Screaming Frog SEO Spider 和 Lighthouse 三件免费工具，带你走完从全站扫描到页面诊断的完整流程，附审计报告模板。
+description: 无需 Semrush 或 Ahrefs 也能完成专业 SEO 审计。Google Search Console、Screaming Frog 和 Lighthouse 三件免费工具，带你走完从全站扫描、索引检查到页面诊断的完整流程，附审计报告模板。
 tags: [SEO审计, 免费工具, Google Search Console, Screaming Frog, Lighthouse]
 ---
 

@@ -3,7 +3,7 @@ title: 你的图片SEO能打几分？8 项自查清单测完就知道每天漏�
 date: 2026-07-16
 lang: zh
 translationKey: image-seo-score-checklist
-description: 用8个维度给网站图片SEO打分，从文件名、Alt标签到结构化数据和CDN，逐项给出评分标准和修复方法。附评分卡，自测你的图片搜索流量损失了多少。
+description: 用8个维度给网站图片SEO打分，从文件名、Alt标签、格式与体积，到图片站点地图、结构化数据和CDN配置，逐项给出评分标准和具体修复方法。附完整评分卡，自测你的网站每天在图片搜索里损失了多少免费流量，测完就知道下一步该修什么。
 tags: [图片SEO, SEO检查, Alt标签, 图片优化, Google搜索]
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: "Independent Site SEO Audit Checklist: 200 Checkpoints Across 10 Categories"
+title: "SEO Audit Checklist: 200 Points in 10 Categories"
 date: 2026-07-19
 lang: en
 translationKey: seo-audit-checklist-200
-description: A complete SEO self-audit checklist covering crawl & index, technical infrastructure, on-page optimization, content quality, image SEO, structured data, internal links, backlinks, mobile adaptation, and analytics — 10 categories in total. If you only have 30 minutes, start with the 20 high-risk items.
+description: A complete SEO self-audit checklist with 200 checkpoints in 10 categories, covering crawling, indexing, on-page, images, structured data, and backlinks.
 tags: [SEO audit, SEO checklist, independent site, technical SEO, on-page SEO]
 ---
 

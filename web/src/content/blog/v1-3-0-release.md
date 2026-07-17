@@ -3,7 +3,7 @@ title: TinyOpt 压缩助手 v1.3.0 正式发布
 date: 2026-06-04
 lang: zh
 translationKey: v1-3-0-release
-description: 新版本 v1.3.0 正式发布，新增 AVIF 格式支持，优化水印工具体验，修复多个 Bug。
+description: TinyOpt 压缩助手 v1.3.0 正式发布：新增 AVIF 格式压缩支持，输出体积比 WebP 更小；优化水印工具的透明度与位置调节体验；修复批量重命名、格式转换中的多个已知问题。欢迎免费升级体验，用更高效的批量压缩流程节省时间。
 tags: [版本发布, v1.3.0, AVIF]
 ---
 

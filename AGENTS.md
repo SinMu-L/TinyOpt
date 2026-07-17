@@ -2,6 +2,7 @@
 - 每次更新/修改功能的时候，先更新版本号。其标准格式为：X.Y.Z（主版本号.次版本号.修订号）。
 - Python 版版本号在 TinyJPG_Compressor.spec 中维护。
 - Electron 版版本号在 package.json 中维护。
+- 官网（Astro，web/ 目录）版本号在 web/package.json 中维护。
 - 修改博客内容要和我确认，禁止自行删除博客。
 
 # Vercel 环境

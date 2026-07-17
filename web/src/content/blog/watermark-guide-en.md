@@ -1,9 +1,9 @@
 ---
-title: Still Adding Watermarks One by One in Photoshop? 200 Images in 3 Minutes with Drag & Drop
+title: Watermark 200 Images in 3 Minutes — No Photoshop
 date: 2026-06-05
 lang: en
 translationKey: watermark-guide
-description: Batch watermark images with TinyOpt's visual watermark tool. No Photoshop needed — drag to position, adjust opacity and scale, output 200 images in under 3 minutes.
+description: Batch watermark images with TinyOpt's visual tool — no Photoshop needed. Drag to position, adjust opacity and scale, and output 200 images in under 3 minutes.
 tags: [watermark, guide, image-protection, batch-processing]
 ---
 

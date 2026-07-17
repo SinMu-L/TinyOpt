@@ -1,9 +1,9 @@
 ---
-title: 手写一个线程安全的 API Key 池：Python 并发编程最佳实践
+title: 线程安全的 API Key 池：Python 并发编程实战
 date: 2026-06-17
 lang: zh
 translationKey: thread-safe-api-key-pool
-description: TinyPNG 每个账号每月免费 500 张，但多 Key 并发压缩时遇到了线程安全问题。本文详细拆解 KeyManager 的设计——轮询调度、线程安全、自动禁用——附完整代码和性能对比。
+description: TinyPNG 多 Key 并发压缩面临线程安全问题：竞态条件、额度超用、失效 Key 拖垮任务。本文拆解 KeyManager 的轮询调度、锁机制与自动禁用设计，附完整 Python 代码实现和多线程性能测试数据，可直接复用到你的项目。
 tags: [Python, 并发编程, 线程安全, API Key, 设计模式]
 ---
 

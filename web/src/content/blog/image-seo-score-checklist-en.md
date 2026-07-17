@@ -1,9 +1,9 @@
 ---
-title: "Score Your Image SEO in 8 Steps: A Self-Audit Checklist to Stop Losing Traffic"
+title: "8-Step Image SEO Audit: Stop Losing Image Traffic"
 date: 2026-07-16
 lang: en
 translationKey: image-seo-score-checklist
-description: Audit your website's image SEO across 8 dimensions — file names, alt text, format, size, CDN, and more. Includes a scoring card to measure how much image search traffic you're leaving on the table.
+description: "Score your image SEO across 8 dimensions: filenames, alt text, format, size, compression, sitemaps, schema, and CDN. With a scoring card to find lost traffic."
 tags: [Image SEO, SEO audit, Alt text, image optimization, Google search]
 ---
 

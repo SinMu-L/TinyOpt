@@ -1,9 +1,9 @@
 ---
-title: Google 图片搜索排名靠什么？除了 Alt 标签，还有 6 个你可能不知道的关键信号
+title: Google 图片搜索排名靠什么？7 个你不知的关键信号
 date: 2026-07-18
 lang: zh
 translationKey: google-image-ranking-factors-2026
-description: 图片搜索排名有独立的信号体系。本文深挖 7 大排名因素：周围文字、页面相关性、结构化数据、Image Sitemap、加载性能、原创性和用户行为信号，帮你截获图片搜索流量。
+description: 图片搜索排名有独立的信号体系，Alt 标签只是入场券不是终点。本文深度解析 7 大排名因素：周围文字、页面相关性、结构化数据、Image Sitemap、加载性能、原创性和用户行为信号，附完整优化策略和实测数据对比表格。
 tags: [Google图片搜索, 排名因素, Image SEO, 结构化数据, 搜索流量]
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: 外贸独立站测速低于 60 分？Google PageSpeed 图片延迟加载全攻略（附 300 张产品图批量优化方案）
+title: 外贸站 PageSpeed 低于 60？图片延迟加载全攻略（附批量优化方案）
 date: 2026-06-08
 lang: zh
 translationKey: pagespeed-lazy-loading-guide
-description: 直击跨境电商 PageSpeed 低分痛点，从技术原理到实操步骤，详解图片延迟加载如何将 LCP 从 8 秒降到 2 秒。附 TinyOpt 批量处理几百张产品图的完整方案。
+description: 外贸独立站 PageSpeed 低分根因分析与完整解决方案：从技术原理到实操步骤详解图片延迟加载如何将 LCP 从 8 秒降到 2 秒以内。附 TinyOpt 批量处理数百张产品图的完整优化方案和 LCP 实测数据对比。
 tags: [PageSpeed, 性能优化, 延迟加载, 跨境电商, 批量处理]
 ---
 

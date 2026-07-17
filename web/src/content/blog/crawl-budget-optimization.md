@@ -1,9 +1,9 @@
 ---
-title: 你的网站 Google 根本没看完——Crawl Budget 抓取预算浪费的 6 种方式和修复方案
+title: Google 抓取预算：6 种浪费原因与实战修复指南
 date: 2026-07-20
 lang: zh
 translationKey: crawl-budget-optimization
-description: Google 每天只给你的网站分配有限的抓取次数。本文详解抓取预算的工作机制、6种最常见的浪费方式和修复方法，附 Search Console 检查清单，确保每个新页面都能被及时发现和收录。
+description: Google 给网站分配有限抓取配额。详解 Crawl Budget 工作机制与 6 种浪费修复，附 Search Console 清单，助新页面收录。
 tags: [Crawl Budget, 技术SEO, Google抓取, 索引优化, Sitemap]
 ---
 

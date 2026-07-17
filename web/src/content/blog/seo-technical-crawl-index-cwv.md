@@ -1,9 +1,9 @@
 ---
-title: 技术 SEO 实战：从 Google 爬虫抓取到 Core Web Vitals，让你的网站被正确收录
+title: 技术SEO指南：从爬虫抓取到Core Web Vitals
 date: 2026-06-22
 lang: zh
 translationKey: seo-technical-crawl-index-cwv
-description: 技术SEO决定了搜索引擎能否发现和理解你的内容。本文从抓取与索引、Sitemap、robots.txt、Canonical、Core Web Vitals到结构化数据，逐个拆解配置方法和常见陷阱。
+description: 技术SEO决定了搜索引擎能否发现和理解你的内容。本文从抓取与索引原理讲起，逐个拆解 Sitemap、robots.txt、Canonical、Core Web Vitals 与结构化数据的正确配置方法和常见陷阱，附自查工具清单，帮你打好独立站技术地基。
 tags: [技术SEO, Core Web Vitals, Sitemap, 结构化数据, 爬虫抓取]
 ---
 

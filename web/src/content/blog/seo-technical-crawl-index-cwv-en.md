@@ -1,9 +1,9 @@
 ---
-title: "Technical SEO Handbook: From Googlebot Crawling to Core Web Vitals — Getting Your Site Properly Indexed"
+title: "Technical SEO: Crawl, Index & Core Web Vitals"
 date: 2026-06-22
 lang: en
 translationKey: seo-technical-crawl-index-cwv
-description: Technical SEO determines whether search engines can find and understand your content. This guide covers crawl & index mechanics, Sitemap, robots.txt, Canonical, Core Web Vitals, and structured data with configuration tips and common pitfalls.
+description: Master technical SEO from crawling and indexing to Core Web Vitals. Covers Sitemap, robots.txt, canonical tags, and structured data with configuration tips.
 tags: [Technical SEO, Core Web Vitals, Sitemap, Structured Data, Crawl & Index]
 ---
 

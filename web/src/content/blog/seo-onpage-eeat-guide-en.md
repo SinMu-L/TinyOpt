@@ -1,9 +1,9 @@
 ---
-title: "The Complete On-Page SEO Guide: From Title Tags to E-E-A-T — How Google Evaluates Your Page Quality"
+title: "On-Page SEO Guide: Title Tags to E-E-A-T"
 date: 2026-06-22
 lang: en
 translationKey: seo-onpage-eeat-guide
-description: On-page SEO is the bedrock of organic search traffic. This guide covers Title tags, Meta Description, heading hierarchy, and the E-E-A-T framework with real-world case studies and Google's official guidelines.
+description: Learn on-page SEO from Title tags to E-E-A-T. Covers heading hierarchy, meta descriptions, and content quality with case studies and Google best practices.
 tags: [On-Page SEO, E-E-A-T, Title Tag, Heading Hierarchy, Content Optimization]
 ---
 
@@ -31,7 +31,7 @@ According to Google's official guidance, every page must have a unique, descript
 | Wrong | Problem |
 |-------|---------|
 | `<title>Home</title>` | No keywords, not business-relevant |
-| `<title>MCCB | MCCB Supplier | MCCB Price | Best MCCB</title>` | Keyword stuffing |
+| `<title>MCCB \| MCCB Supplier \| MCCB Price \| Best MCCB</title>` | Keyword stuffing |
 | Single Title across all pages | Search engines can't differentiate pages |
 
 ### Real-World Case

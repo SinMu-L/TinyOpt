@@ -3,7 +3,7 @@ title: 单 Key 每月只有 500 额度？3 个技巧突破限制，一次处理 
 date: 2026-06-04
 lang: zh
 translationKey: multi-key-management
-description: TinyPNG 免费 Key 每月只有 500 张额度？用多 Key 管理 + 并发压缩，把每月处理量扩展到数千张，时间缩短 3 倍。
+description: TinyPNG 免费 Key 每月只有 500 张额度？用多 Key 轮询管理加并发压缩技术将月处理量轻松扩展到数千张，配合 Gmail 别名注册技巧、KeyManager 自动调度原理和实测时间对比，处理效率提升 3 倍。
 tags: [API Key, 使用技巧, 效率提升, 批量处理]
 ---
 

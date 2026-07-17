@@ -29,12 +29,23 @@ const {
 } = Astro.props;
 const _ = translation(lang);
 const siteTitle = _.site.title;
-const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+const brandSuffix = pageType === 'article' ? 'TinyOpt' : siteTitle;
+const fullTitle = title === siteTitle ? title : `${title} | ${brandSuffix}`;
 const locale = lang === 'en' ? 'en-US' : 'zh-CN';
 const baseUrl = 'https://seojeck.com';
 const autoCanonical = canonical ?? `${baseUrl}${Astro.url.pathname}`;
 const ogType = pageType === 'article' ? 'article' : 'website';
 const authorName = articleAuthor ?? 'TinyOpt Team';
+const defaultOgImage = `${baseUrl}/images/og-default.png`;
+const ogImageUrl = ogImage ? (ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`) : defaultOgImage;
+const enPath = lang === 'zh'
+  ? (langHref ?? (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname))
+  : Astro.url.pathname;
+const zhPath = lang === 'en'
+  ? (langHref ?? (Astro.url.pathname === '/' ? '/zh/' : `/zh${Astro.url.pathname}`))
+  : Astro.url.pathname;
+const enHref = `${baseUrl}${enPath}`;
+const zhHref = `${baseUrl}${zhPath}`;
 
 function getDefaultSchema(baseUrl: string, siteTitle: string, description: string) {
   return {
@@ -172,19 +183,18 @@ function getArticleSchema(
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={autoCanonical} />
   <meta property="og:locale" content={locale} />
   <meta property="og:site_name" content={siteTitle} />
-  {ogImage && <>
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-  </>}
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
-  {ogImage && <meta name="twitter:image" content={ogImage} />}
+  <meta name="twitter:image" content={ogImageUrl} />
 
   <!-- Article meta tags (for blog/case pages) -->
   {pageType === 'article' && articleDate && <meta property="article:published_time" content={articleDate} />}
@@ -212,11 +222,10 @@ function getArticleSchema(
   <link rel="alternate" type="application/rss+xml" title="TinyOpt - Blog" href="/rss.xml" />
   <link rel="alternate" type="application/rss+xml" title="TinyOpt - 新闻动态" href="/zh/rss.xml" />
 
-  <link rel="alternate" hreflang="x-default" href={`${baseUrl}/`} />
-  <link rel="alternate" hreflang="en" href={`${baseUrl}${lang === 'zh' && langHref ? langHref : (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname)}`} />
-  <link rel="alternate" hreflang="en-US" href={`${baseUrl}${lang === 'zh' && langHref ? langHref : (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname)}`} />
-  <link rel="alternate" hreflang="zh-CN" href={`${baseUrl}${lang === 'en' && langHref ? langHref : (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname : '/zh' + (Astro.url.pathname === '/' ? '' : Astro.url.pathname))}`} />
-
+  <link rel="alternate" hreflang="x-default" href={enHref} />
+  <link rel="alternate" hreflang="en" href={enHref} />
+  <link rel="alternate" hreflang="en-US" href={enHref} />
+  <link rel="alternate" hreflang="zh-CN" href={zhHref} />
   <!-- Ahrefs Analytics (cookieless) -->
   <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="u7AA4DeV1SI8yuf2HXAuLw" async></script>
 

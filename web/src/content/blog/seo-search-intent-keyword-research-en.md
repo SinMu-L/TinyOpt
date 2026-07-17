@@ -1,9 +1,9 @@
 ---
-title: "SEO Foundation: Search Intent & Keyword Research — 80% of Site Owners Get This Wrong"
+title: "SEO Keyword Research: Search Intent & Strategy"
 date: 2026-06-22
 lang: en
 translationKey: seo-search-intent-keyword-research
-description: Keyword research isn't about finding high-volume terms — it's about understanding search intent. This guide breaks down the four intent types, keyword mapping, cannibalization avoidance, and a proven workflow for B2B sites.
+description: Master keyword research by understanding search intent. Covers four intent types, keyword mapping, cannibalization avoidance, and a proven B2B workflow.
 tags: [Search Intent, Keyword Research, SEO Basics, Long-tail Keywords, Keyword Cannibalization]
 ---
 

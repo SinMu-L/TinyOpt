@@ -3,7 +3,7 @@ title: Web 开发者如何使用 TinyOpt 优化网站图片
 date: 2026-06-04
 lang: zh
 translationKey: web-developer
-description: 一位前端开发者使用 TinyOpt 压缩助手将网站图片体积减少 60%，大幅提升页面加载速度。
+description: 一位前端开发者使用 TinyOpt 压缩助手优化电商网站图片，将图片总体积减少 60%，LCP 从 3.2s 降至 1.8s。本文分享他的批量压缩方案、格式转换策略和工具配置经验，帮助开发者对照自己的项目，快速找到性能瓶颈与优化思路。
 ---
 
 ## 背景

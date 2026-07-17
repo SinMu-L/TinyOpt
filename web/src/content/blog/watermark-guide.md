@@ -3,7 +3,7 @@ title: 还在 PS 一张张加水印？200 张图 3 分钟搞定，拖拽定位�
 date: 2026-06-05
 lang: zh
 translationKey: watermark-guide
-description: 用 TinyOpt 的可视化水印工具批量为图片添加版权水印，无需 Photoshop，拖拽定位、透明度和缩放可调，200 张图不到 3 分钟。
+description: 使用 TinyOpt 可视化水印工具快速批量为图片添加版权水印。无需 Photoshop，支持拖拽定位、实时预览，可自由调节透明度与缩放比例，同时支持图片水印和文字水印，200 张图片不到 3 分钟完成处理，适合电商、摄影和设计场景。
 tags: [水印工具, 使用指南, 图片保护, 批量处理]
 ---
 

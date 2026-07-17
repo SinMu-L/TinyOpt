@@ -1,9 +1,9 @@
 ---
-title: 站内优化完全指南：从 Title 标签到 E-E-A-T，Google 如何评估你的页面质量
+title: 站内SEO优化指南：从Title标签到E-E-A-T
 date: 2026-06-22
 lang: zh
 translationKey: seo-onpage-eeat-guide
-description: 页面SEO是独立站获取搜索流量的基本功。本文从Title、Meta Description、标题层级到E-E-A-T框架，结合实战案例和Google官方指南，拆解每个优化要素的具体做法和常见错误。
+description: 页面SEO是独立站获取搜索流量的基本功。本文从Title、Meta Description、标题层级到E-E-A-T框架，结合外贸网站实战案例和Google官方指南，逐一拆解每个站内优化要素的具体做法、常见错误与自查方法。
 tags: [页面SEO, E-E-A-T, Title标签, 标题层级, 内容优化]
 ---
 
@@ -31,7 +31,7 @@ Title（标题标签）是搜索引擎结果页（SERP）中显示的可点击�
 | 错误做法 | 问题 |
 |---------|------|
 | `<title>Home</title>` | 无关键词，不与业务相关 |
-| `<title>MCCB | MCCB Supplier | MCCB Price | Best MCCB</title>` | 关键词堆砌 |
+| `<title>MCCB \| MCCB Supplier \| MCCB Price \| Best MCCB</title>` | 关键词堆砌 |
 | 全站统一 `<title>ABC Electric Company</title>` | 所有页面无区分，搜索引擎无法判断相关性 |
 
 ### 实战案例

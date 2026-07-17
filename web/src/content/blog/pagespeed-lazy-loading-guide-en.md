@@ -1,5 +1,5 @@
 ---
-title: Google PageSpeed Score Under 60? Complete Guide to Image Lazy Loading (Plus 300-Product Batch Optimization)
+title: "Fix Low PageSpeed Scores: Image Lazy Loading Guide"
 date: 2026-06-08
 lang: en
 translationKey: pagespeed-lazy-loading-guide

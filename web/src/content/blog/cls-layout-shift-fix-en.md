@@ -1,9 +1,9 @@
 ---
-title: "Fix CLS Layout Shifts: 5 Common Causes and a 3-Step Solution for a Perfect Score"
+title: "Fix CLS Layout Shifts: 5 Causes and a 3-Step Fix"
 date: 2026-07-17
 lang: en
 translationKey: cls-layout-shift-fix
-description: Images without width/height, third-party ads, and dynamic content injections are leading causes of CLS layout shifts. Learn the 5 culprits and a 3-step fix with real before/after CLS data.
+description: Images without dimensions, ads, and dynamic content are leading CLS causes. This guide covers the 5 culprits and a 3-step fix with real before/after data.
 tags: [CLS, Core Web Vitals, layout shift, performance optimization, PageSpeed]
 ---
 

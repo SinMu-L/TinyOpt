@@ -3,7 +3,7 @@ title: 第一次用 TinyOpt？从下载到压缩完 150 张图，只需 3 分钟
 date: 2026-06-05
 lang: zh
 translationKey: getting-started-guide
-description: TinyOpt 批量压缩助手的新手入门教程。下载→申请 Key→首次压缩，全流程 3 分钟搞定，附常见问题解答。
+description: TinyOpt 批量压缩助手新手入门完整教程，涵盖下载安装、API Key 申请与配置操作、首次压缩操作步骤流程、压缩参数参考与推荐值、9 种格式互转技巧、功能速查表格和常见问题解答，三分钟快速上手搞定批量图片压缩优化。
 tags: [新手教程, 入门指南, 使用教程]
 ---
 
@@ -28,7 +28,7 @@ TinyOpt 用 TinyPNG 的 API 做压缩，需要申请一个免费 Key：
 3. 去邮箱查收 API Key
 4. 复制 Key，在 TinyOpt 中点击「设置」→「API Key 管理」→「添加 Key」
 
-每个邮箱每月免费 500 张。不够用的话，可以注册多个邮箱配合使用——参考[多 Key 管理指南](/blog/multi-key-management/)。
+每个邮箱每月免费 500 张。不够用的话，可以注册多个邮箱配合使用——参考[多 Key 管理指南](/zh/blog/multi-key-management/)。
 
 👉 [还没下载？先下载 TinyOpt](/download/)
 

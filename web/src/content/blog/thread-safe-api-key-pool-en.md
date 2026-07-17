@@ -1,9 +1,9 @@
 ---
-title: "Building a Thread-Safe API Key Pool: Python Concurrency in Practice"
+title: "Thread-Safe API Key Pool: Python Concurrency Guide"
 date: 2026-06-17
 lang: en
 translationKey: thread-safe-api-key-pool
-description: TinyPNG gives 500 free compressions per key per month, but concurrent multi-key compression introduces thread-safety issues. A deep dive into KeyManager design — round-robin scheduling, thread safety, auto-disable — with complete code and performance benchmarks.
+description: Build a thread-safe API key pool for TinyPNG multi-key use. Covers round-robin scheduling, thread safety, and auto-disable with complete Python code.
 tags: [Python, concurrency, thread-safe, API Key, design-pattern]
 ---
 

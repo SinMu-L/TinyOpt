@@ -1,9 +1,9 @@
 ---
-title: 2026 年 5 款网页图片在线压缩工具横评：谁才是速度与画质的性价比之王？
+title: 2026 在线图片压缩工具横评：TinyPNG 等 5 款谁最值得用？
 date: 2026-06-13
 lang: zh
 translationKey: online-compression-tools-comparison-2026
-description: 用同一组 50 张照片实测 TinyPNG、Compressor.io、Squoosh、Kraken.io、Imagify 五款在线压缩工具，从压缩率、画质、速度、免费额度四个维度打分，帮你选到最适合的工具。
+description: 用 50 张混合场景图片实测 5 款主流在线压缩工具：TinyPNG、Compressor.io、Squoosh、Kraken.io、Imagify。从压缩率、画质、速度和免费额度四个维度横向对比，帮你选出最适合的在线图片压缩方案。
 tags: [工具对比, 在线压缩, 实测, TinyPNG, 性价比]
 ---
 

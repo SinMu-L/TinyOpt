@@ -1,9 +1,9 @@
 ---
-title: Google Isn't Finishing Crawling Your Site — 6 Ways You're Wasting Crawl Budget and How to Fix It
+title: 6 Crawl Budget Wastes and How to Fix Them
 date: 2026-07-20
 lang: en
 translationKey: crawl-budget-optimization
-description: Google allocates limited crawl capacity to each site daily. Learn how crawl budget works, 6 common ways it's wasted, and how to fix each one. Includes a Search Console checklist to ensure every new page gets discovered and indexed.
+description: Google limits crawl capacity per site. Learn how crawl budget works, 6 common ways it's wasted, and how to fix each with a Search Console checklist.
 tags: [Crawl Budget, technical SEO, Google crawl, index optimization, Sitemap]
 ---
 

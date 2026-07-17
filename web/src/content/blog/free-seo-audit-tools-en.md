@@ -1,9 +1,9 @@
 ---
-title: "Professional SEO Audit With Zero Budget: GSC + Screaming Frog + Lighthouse Complete Workflow"
+title: "Free SEO Audit: GSC, Screaming Frog & Lighthouse"
 date: 2026-07-21
 lang: en
 translationKey: free-seo-audit-tools
-description: You don't need Semrush or Ahrefs for 80% of professional SEO auditing. This guide walks you through a complete workflow using three free tools — Google Search Console, Screaming Frog SEO Spider, and Lighthouse — from full-site crawling to page-level diagnostics.
+description: "Ditch Semrush and Ahrefs: run a complete SEO audit with GSC, Screaming Frog, and Lighthouse. Full workflow from site crawl to page diagnostics included."
 tags: [SEO audit, free tools, Google Search Console, Screaming Frog, Lighthouse]
 ---
 
