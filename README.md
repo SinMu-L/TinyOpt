@@ -54,7 +54,7 @@ Pre-built executables are available in the `dist/` directory — download and do
 - 多 API Key 自动轮转，最高 3 线程并行压缩
 - 实时用量监控，自动禁用额度耗尽的 Key
 
-![压缩任务页面](images/压缩任务页面截图.png)
+![压缩任务页面](images/压缩任务.png)
 
 ### 水印工具
 - 支持图片水印、文字水印、图文混合水印
@@ -62,7 +62,7 @@ Pre-built executables are available in the `dist/` directory — download and do
 - 可调节透明度、缩放比例、边距
 - 自由选择字体与颜色
 
-![水印工具](images/水印工具截图.png)
+![水印工具](images/水印工具.png)
 
 ### 批量重命名
 - 支持模板变量：`{name}`、`{index}`、`{date}`
