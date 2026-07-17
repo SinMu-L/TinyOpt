@@ -12,15 +12,151 @@ export interface Props {
   ogImage?: string;
   noindex?: boolean;
   canonical?: string;
+  pageType?: 'home' | 'article' | 'page';
+  articleDate?: string;
+  articleModifiedDate?: string;
+  articleAuthor?: string;
+  articleTags?: string[];
+  articleImage?: string;
+  faqItems?: { q: string; a: string }[];
 }
 
-const { title, description, lang = 'en', langHref, ogImage, noindex, canonical } = Astro.props;
+const {
+  title, description, lang = 'en', langHref, ogImage, noindex, canonical,
+  pageType = 'page',
+  articleDate, articleModifiedDate, articleAuthor, articleTags, articleImage,
+  faqItems,
+} = Astro.props;
 const _ = translation(lang);
 const siteTitle = _.site.title;
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 const locale = lang === 'en' ? 'en-US' : 'zh-CN';
 const baseUrl = 'https://seojeck.com';
 const autoCanonical = canonical ?? `${baseUrl}${Astro.url.pathname}`;
+const ogType = pageType === 'article' ? 'article' : 'website';
+const authorName = articleAuthor ?? 'TinyOpt Team';
+
+function getDefaultSchema(baseUrl: string, siteTitle: string, description: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": siteTitle,
+    "url": baseUrl,
+    "description": description,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${baseUrl}/blog/?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
+}
+
+function getHomeSchema(baseUrl: string, siteTitle: string, description: string, locale: string, faqItems?: { q: string; a: string }[]) {
+  const schemas: any[] = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": siteTitle,
+      "url": baseUrl,
+      "description": description,
+      "email": "sinmu8191@gmail.com",
+      "sameAs": ["https://github.com/SinMu-L/TinyOpt"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": siteTitle,
+      "url": baseUrl,
+      "inLanguage": locale,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${baseUrl}/blog/?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": siteTitle,
+      "operatingSystem": "Windows 10/11",
+      "applicationCategory": "MultimediaApplication",
+      "description": description,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "TinyOpt Team"
+      }
+    }
+  ];
+
+  if (faqItems && faqItems.length > 0) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map((item) => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.a
+        }
+      }))
+    });
+  }
+
+  return schemas.length === 1 ? schemas[0] : { "@context": "https://schema.org", "@graph": schemas };
+}
+
+function getArticleSchema(
+  baseUrl: string, siteTitle: string, fullTitle: string, description: string,
+  articleUrl: string, articleDate?: string, articleModifiedDate?: string,
+  articleAuthor?: string, articleImage?: string, articleTags?: string[], locale?: string
+) {
+  const article: any = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": fullTitle,
+    "description": description,
+    "url": articleUrl,
+    "author": {
+      "@type": "Person",
+      "name": articleAuthor ?? "TinyOpt Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": siteTitle,
+      "url": baseUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/images/logo.svg`
+      }
+    }
+  };
+
+  if (articleDate) {
+    article.datePublished = articleDate;
+    article.dateModified = articleModifiedDate ?? articleDate;
+  }
+  if (articleImage) article.image = articleImage;
+  if (locale) article.inLanguage = locale;
+  if (articleTags && articleTags.length > 0) article.keywords = articleTags.join(", ");
+
+  const breadcrumb: any = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": siteTitle, "item": baseUrl },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${baseUrl}/blog/` },
+      { "@type": "ListItem", "position": 3, "name": fullTitle }
+    ]
+  };
+
+  return { "@context": "https://schema.org", "@graph": [article, breadcrumb] };
+}
 ---
 
 <!DOCTYPE html>
@@ -35,12 +171,14 @@ const autoCanonical = canonical ?? `${baseUrl}${Astro.url.pathname}`;
   <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
   <meta property="og:locale" content={locale} />
   <meta property="og:site_name" content={siteTitle} />
-  {ogImage && <meta property="og:image" content={ogImage} />}
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  {ogImage && <>
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+  </>}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -48,26 +186,21 @@ const autoCanonical = canonical ?? `${baseUrl}${Astro.url.pathname}`;
   <meta name="twitter:description" content={description} />
   {ogImage && <meta name="twitter:image" content={ogImage} />}
 
+  <!-- Article meta tags (for blog/case pages) -->
+  {pageType === 'article' && articleDate && <meta property="article:published_time" content={articleDate} />}
+  {pageType === 'article' && articleModifiedDate && <meta property="article:modified_time" content={articleModifiedDate} />}
+  {pageType === 'article' && articleAuthor && <meta property="article:author" content={articleAuthor} />}
+  {pageType === 'article' && articleTags?.map((tag) => <meta property="article:tag" content={tag} />)}
+
   <link rel="canonical" href={autoCanonical} />
+  <link rel="alternate" type="text/markdown" title="LLMs full content" href="/llms-full.txt" />
 
   <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": siteTitle,
-    "operatingSystem": "Windows 10/11",
-    "applicationCategory": "MultimediaApplication",
-    "description": description,
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "TinyOpt Team"
-    }
-  })}></script>
+  <script type="application/ld+json" set:html={JSON.stringify(
+    pageType === 'home' ? getHomeSchema(baseUrl, siteTitle, description, locale, faqItems) :
+    pageType === 'article' ? getArticleSchema(baseUrl, siteTitle, fullTitle, description, autoCanonical, articleDate, articleModifiedDate, articleAuthor, articleImage, articleTags, locale) :
+    getDefaultSchema(baseUrl, siteTitle, description)
+  )}></script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />

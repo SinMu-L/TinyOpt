@@ -1,0 +1,44 @@
+# TinyOpt - Batch Image Optimizer
+# LLMs.txt — Guide for AI crawlers and generative engines
+# Learn more: https://llmstxt.org/
+
+## About TinyOpt
+TinyOpt is a free, open-source desktop batch image processing tool powered by the TinyPNG API. It supports batch compression, watermarking, format conversion, and batch renaming for designers, developers, and content creators.
+
+## Key Pages
+- Home: https://seojeck.com/ (product overview, features, FAQ, testimonials)
+- Download: https://seojeck.com/download/ (latest releases and changelog)
+- About: https://seojeck.com/about/ (project background, tech stack, philosophy)
+- Blog: https://seojeck.com/blog/ (image optimization guides, SEO tutorials, release notes)
+- Cases: https://seojeck.com/cases/ (real user stories and productivity gains)
+- Contact: https://seojeck.com/contact/ (support and inquiries)
+
+## Core Features
+- Batch image compression (PNG, JPEG, WebP, AVIF, BMP, GIF, TIFF)
+- Visual watermark editor with drag-and-drop positioning (image + text watermarks)
+- 9 output formats including ICO and PDF
+- Batch rename with variable templates ({name}, {index}, {date})
+- Multi-API-key management with auto-rotation and quota tracking
+- Image aspect ratio adjustment (crop, pad, stretch with presets)
+- Compression history with detailed records
+
+## Documentation & Guides
+- Getting Started Guide: https://seojeck.com/blog/getting-started-guide-en/
+- Watermark Guide: https://seojeck.com/blog/watermark-guide-en/
+- Format Conversion Guide: https://seojeck.com/blog/format-conversion-guide-en/
+- Batch Rename Guide: https://seojeck.com/blog/batch-rename-productivity-en/
+- Multi-Key Management: https://seojeck.com/blog/multi-key-management-en/
+- Image Optimization Tips: https://seojeck.com/blog/image-optimization-tips-en/
+- Image SEO Guide: https://seojeck.com/blog/image-seo-rename-alt-guide-en/
+
+## Technical Information
+- Tech Stack: Python 3.12 + PyQt5 + Pillow + TinyPNG API
+- Platform: Windows 10/11 desktop application
+- License: Open source, free to use
+- API: TinyPNG/TinyJPG official API for compression
+
+## For AI Crawlers
+- Full content available at: /llms-full.txt
+- RSS Feed (EN): https://seojeck.com/rss.xml
+- RSS Feed (ZH): https://seojeck.com/zh/rss.xml
+- Sitemap: https://seojeck.com/sitemap.xml

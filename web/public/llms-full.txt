@@ -1,0 +1,114 @@
+# TinyOpt — Full Content for AI Crawlers
+# This file contains comprehensive information about TinyOpt for generative AI engines.
+# Generated: 2026-07-16
+
+---
+
+## PRODUCT OVERVIEW
+
+TinyOpt (TinyOpt Compressor) is a free, open-source desktop batch image processing tool powered by the TinyPNG API. It provides batch compression, watermarking, format conversion, and batch renaming for designers, front-end developers, digital marketers, and content creators who need to process large volumes of images efficiently.
+
+### Tech Stack
+- Python 3.12
+- PyQt5 (desktop GUI framework)
+- Pillow (PIL) for local image processing
+- TinyPNG/TinyJPG API for lossy compression
+- PyInstaller for Windows .exe packaging
+
+### Platform Support
+- Windows 10/11 (primary)
+- Desktop application, no browser required
+- Fully offline client — images only sent to TinyPNG API for processing
+
+---
+
+## CORE FEATURES
+
+### 1. Batch Compression
+Compress PNG, JPEG, WebP, AVIF, BMP, GIF, TIFF images in bulk. Supports multi-threaded concurrent compression with up to 3 workers. Uses TinyPNG's smart lossy compression that significantly reduces file size while preserving visual quality. Falls back to PIL-based local compression when API keys are exhausted.
+
+Supported resize methods:
+- fit: Scale to fit within dimensions (maintains aspect ratio)
+- scale: Scale by percentage
+- cover: Crop to exact dimensions
+- thumb: Fixed resize
+
+### 2. Watermark Tool
+Visual watermark editor with drag-and-drop WYSIWYG preview. Supports three modes:
+- Image watermark (PNG with transparency support)
+- Text watermark (custom font, size, color)
+- Both (combined image + text)
+
+Features: adjustable opacity (0-100%), scale control, margin settings, 9 position anchors (top-left, top-center, top-right, center-left, center, center-right, bottom-left, bottom-center, bottom-right).
+
+### 3. Format Conversion
+Converts between 9 output formats:
+- JPEG (.jpg) — via TinyPNG API
+- PNG (.png) — via TinyPNG API
+- WebP (.webp) — via TinyPNG API
+- GIF (.gif) — PIL local conversion
+- TIFF (.tiff) — PIL local conversion
+- BMP (.bmp) — PIL local conversion
+- AVIF (.avif) — PIL local conversion
+- ICO (.ico) — PIL local conversion (256x256)
+- PDF (.pdf) — PIL local conversion
+
+Input formats: .jpg, .jpeg, .png, .webp, .avif, .bmp, .gif, .tiff, .tif
+
+### 4. Batch Rename
+Smart renaming with variable templates. Template variables:
+- {name} — original filename without extension
+- {index} — sequential number (1, 2, 3...)
+- {date} — current date (YYYY-MM-DD format)
+
+Example: `photo_{index}_{name}` → `photo_1_beach`, `photo_2_sunset`
+
+### 5. Multi-Key Management
+Manage multiple TinyPNG API keys with automatic switching. Features:
+- Round-robin key rotation for load distribution
+- Thread-safe key pool implementation
+- Automatic key disable on quota exceeded
+- Monthly compression count tracking per key
+- Visual quota monitoring
+
+### 6. Image Aspect Ratio Adjustment
+Three adjustment modes:
+- Crop: Crop to target ratio with 9 anchor positions
+- Pad: Add padding with configurable fill color
+- Stretch: Stretch image to target dimensions (distorts)
+
+Built-in presets: 1:1 (Square), 4:3, 16:9, 3:2, 9:16 (Portrait), custom ratio input.
+
+### 7. Compression History
+Complete task history with: original filename, original size, compressed size, compression ratio percentage, timestamp, output format used.
+
+---
+
+## HOW IT WORKS
+
+1. Download and install TinyOpt desktop client
+2. Get a free TinyPNG API key from tinypng.com/developers (500 free compressions/month)
+3. Drag images or folders into the application
+4. Configure output settings (format, resize, output directory)
+5. Click "Compress" for batch processing
+
+Images are sent to TinyPNG's official API over HTTPS encrypted connections. The tool does not store or forward your images — they are deleted after processing.
+
+---
+
+## PRICING
+
+- TinyOpt: Completely free and open source
+- TinyPNG API: Free tier provides 500 image compressions per month per API key
+- Multiple API keys can be used to scale beyond 500 compressions/month
+
+---
+
+## KEY LINKS
+
+- Website: https://seojeck.com/
+- GitHub: https://github.com/SinMu-L/TinyOpt
+- Download: https://seojeck.com/download/
+- Blog: https://seojeck.com/blog/
+- Contact: sinmu8191@gmail.com
+- TinyPNG API: https://tinypng.com/developers

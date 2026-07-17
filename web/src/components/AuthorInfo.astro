@@ -1,0 +1,29 @@
+---
+export interface Props {
+  lang?: 'zh' | 'en';
+}
+const { lang = 'en' } = Astro.props;
+---
+
+<div class="mt-12 rounded-xl border border-gray-200 bg-gray-50 p-6">
+  <div class="flex items-start gap-4">
+    <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary-600 text-xl font-bold text-white">
+      T
+    </div>
+    <div>
+      <p class="font-semibold text-gray-900">
+        {lang === 'zh' ? 'TinyOpt 团队' : 'TinyOpt Team'}
+      </p>
+      <p class="mt-1 text-sm leading-relaxed text-gray-600">
+        {lang === 'zh'
+          ? 'TinyOpt 开源项目的维护团队，专注于桌面端图片处理工具的开发与优化。我们致力于为设计师、前端开发者和内容创作者提供高效、免费的批量图片处理解决方案。'
+          : 'The team behind the TinyOpt open-source project, focused on building and optimizing desktop image processing tools. We help designers, front-end developers, and content creators process images in bulk — efficiently and for free.'}
+      </p>
+      <div class="mt-2 flex items-center gap-3 text-xs text-gray-400">
+        <a href="https://github.com/SinMu-L/TinyOpt" class="hover:text-primary-600 transition-colors">GitHub</a>
+        <span class="text-gray-300">|</span>
+        <a href="mailto:sinmu8191@gmail.com" class="hover:text-primary-600 transition-colors">sinmu8191@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</div>
