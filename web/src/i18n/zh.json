@@ -27,40 +27,33 @@
     "terms_short": "条款"
   },
   "home": {
-    "hero_title": "TinyOpt 批量图片处理",
-    "hero_subtitle": "基于 TinyPNG API 的桌面端批量图片处理工具，支持批量压缩、水印添加、格式转换、重命名",
+    "hero_title": "批量压缩，不设上限。一切在你桌面上完成。",
+    "hero_subtitle": "TinyOpt 是一款基于 TinyPNG 的免费桌面端批量图片处理工具。批量压缩、水印、格式转换、重命名，一步到位。告别浏览器上传队列，告别文件大小限制，告别隐形收费。丢进文件夹，按下压缩，完事。",
     "hero_cta": "免费下载",
-    "hero_secondary": "了解功能",
-    "features_title": "核心功能",
-    "features": [
-      { "title": "批量压缩", "desc": "支持 PNG、JPEG、WebP、AVIF 等多种格式，一键批量压缩，保留最佳画质" },
-      { "title": "水印工具", "desc": "图片水印 + 文字水印，拖拽预览所见即所得，自由调节透明度与位置" },
-      { "title": "格式转换", "desc": "支持 9 种输出格式互转，包括 ICO、PDF 等特殊格式" },
-      { "title": "批量重命名", "desc": "基于变量模板的智能重命名，支持序号、日期、自定义前缀" },
-      { "title": "多 Key 管理", "desc": "支持多个 API Key 管理，自动切换，实时查看月度配额" },
-      { "title": "压缩历史", "desc": "完整记录压缩任务，随时查看原始大小、压缩率等详细信息" }
-    ],
+    "hero_secondary": "工作原理",
     "how_title": "三步搞定图片压缩",
     "how_steps": [
-      { "icon": "download", "title": "下载安装", "desc": "下载 TinyOpt 桌面客户端，安装即用，无需复杂配置" },
-      { "icon": "upload", "title": "拖入图片", "desc": "拖动图片或文件夹到应用中，自动识别格式，支持批量添加" },
-      { "icon": "check", "title": "一键压缩", "desc": "点击压缩按钮，批量处理自动完成，高效输出最佳画质图片" }
+      { "icon": "download", "title": "下载安装", "desc": "下载安装包，双击运行，搞定。无需注册，无捆绑软件。" },
+      { "icon": "upload", "title": "拖入图片", "desc": "拖入图片或整个文件夹，自动识别格式，自动排队。" },
+      { "icon": "check", "title": "一键压缩", "desc": "点击压缩。多线程处理即刻启动——回来就能看到优化好的文件。" }
     ],
     "features_title": "核心功能",
     "features": [
-      { "title": "批量压缩", "desc": "支持 PNG、JPEG、WebP、AVIF 等多种格式，一键批量压缩，保留最佳画质" },
-      { "title": "水印工具", "desc": "图片水印 + 文字水印，拖拽预览所见即所得，自由调节透明度与位置" },
-      { "title": "格式转换", "desc": "支持 9 种输出格式互转，包括 ICO、PDF 等特殊格式" },
-      { "title": "批量重命名", "desc": "基于变量模板的智能重命名，支持序号、日期、自定义前缀" },
-      { "title": "多 Key 管理", "desc": "支持多个 API Key 管理，自动切换，实时查看月度配额" },
-      { "title": "压缩历史", "desc": "完整记录压缩任务，随时查看原始大小、压缩率等详细信息" }
+      { "title": "批量压缩", "desc": "支持 PNG、JPEG、WebP、AVIF 等格式批量压缩，体积减少 50-80%，画质肉眼几乎无差异。" },
+      { "title": "水印工具", "desc": "文字水印 + 图片水印，拖拽预览所见即所得。批量打水印 200 张只需几分钟，无需打开 Photoshop。" },
+      { "title": "格式转换", "desc": "支持 9 种输出格式：JPEG、PNG、WebP、GIF、TIFF、BMP、AVIF、ICO、PDF。做 favicon？转 PDF？一键批量搞定。" },
+      { "title": "批量重命名", "desc": "使用模板批量重命名：序号、日期、自定义前缀。告别一张张手动重命名的痛苦。" },
+      { "title": "多 Key 管理", "desc": "添加多个 TinyPNG API Key，额度耗尽自动切换。轻松突破每月 500 张的限制。" },
+      { "title": "压缩历史", "desc": "每次压缩完整记录：原始大小、输出大小、压缩率。方便对账，也方便感受省了多少流量。" }
     ],
-    "stats_title": "项目数据",
+    "pain_title": "为什么需要桌面端工具？",
+    "pain_text": "在线压缩工具不是不能用——直到你遇到 5MB 的文件大小限制。或者 20 张的批量上限。或者看着浏览器艰难地上传 50 张图。如果你每周需要处理超过几十张图片，TinyOpt 在本地帮你管理这一切——没有浏览器瓶颈，不用排队等上传。",
+    "stats_title": "设计师和开发者的信赖之选",
     "stats": [
-      { "value": "50+", "label": "API 压缩次数每日" },
-      { "value": "9", "label": "支持输出格式" },
-      { "value": "99%", "label": "用户满意度" },
-      { "value": "免费", "label": "开源免费" }
+      { "value": "9", "label": "输出格式" },
+      { "value": "7+", "label": "输入格式" },
+      { "value": "MIT", "label": "开源许可证" },
+      { "value": "500/月", "label": "TinyPNG 免费额度" }
     ],
     "faq_title": "常见问题",
     "faq_items": [
@@ -99,7 +92,7 @@
   "download": {
     "title": "下载中心",
     "subtitle": "选择适合你的版本",
-    "latest_version": "v1.7.1",
+    "latest_version": "v1.7.2",
     "latest_date": "2026-07-08",
     "download_windows": "下载 Windows 版",
     "changelog": "更新日志",
@@ -108,6 +101,34 @@
       { "version": "v1.3.0", "date": "2026-06-04", "changes": ["新增 AVIF 格式支持", "优化水印拖拽体验", "修复部分已知 Bug"] },
       { "version": "v1.2.4", "date": "2026-06-04", "changes": ["优化 API 配额显示", "改进压缩队列管理"] },
       { "version": "v1.2.0", "date": "2026-06-03", "changes": ["新增批量重命名功能", "新增水印工具模块"] }
+    ],
+    "requirements_title": "系统要求",
+    "requirements": [
+      { "label": "操作系统", "value": "Windows 10 或 11（64 位）" },
+      { "label": "磁盘空间", "value": "安装后约 50MB" },
+      { "label": "API Key", "value": "免费 TinyPNG API Key（500 张/月）" },
+      { "label": "网络", "value": "仅 API 调用时需要联网" }
+    ],
+    "getting_started_title": "从下载到首次压缩",
+    "getting_started_steps": [
+      "运行安装程序 — 双击打开，跟随提示完成安装。",
+      "获取 API Key — 前往 tinypng.com/developers，免费注册，复制你的 Key。",
+      "粘贴 Key — 打开 TinyOpt，进入 设置 → API Key，粘贴并保存。",
+      "开始压缩 — 拖入图片或文件夹，点击压缩按钮。"
+    ],
+    "comparison_title": "桌面端 vs 在线工具",
+    "comparison_rows": [
+      { "feature": "文件大小限制", "online": "5–20MB", "tinyopt": "无限制" },
+      { "feature": "批量上限", "online": "10–50 张", "tinyopt": "无上限" },
+      { "feature": "操作流程", "online": "上传 → 等待 → 下载", "tinyopt": "本地排队，无需等待" },
+      { "feature": "隐私安全", "online": "图片保存在对方服务器", "tinyopt": "仅通过 TinyPNG API 处理" },
+      { "feature": "功能范围", "online": "仅压缩", "tinyopt": "压缩 + 水印 + 转换 + 重命名" }
+    ],
+    "faq_title": "下载常见问题",
+    "faq_items": [
+      { "q": "需要 TinyPNG API Key 吗？", "a": "是的。TinyOpt 使用 TinyPNG 的压缩引擎。免费版每月可压缩 500 张图片。超出后，付费方案从 $0.008/张起。" },
+      { "q": "我的数据安全吗？", "a": "图片仅通过加密连接发送到 TinyPNG API 进行压缩，压缩完成后立即删除。我们不会记录、存储或追踪您的图片。API Key 仅保存在您的本地设备上。" },
+      { "q": "有 Mac 或 Linux 版本吗？", "a": "暂时只有 Windows 版。Mac 和 Linux 版本已在开发计划中。" }
     ]
   },
   "cases": {

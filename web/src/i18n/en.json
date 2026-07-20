@@ -27,40 +27,33 @@
     "terms_short": "Terms"
   },
   "home": {
-    "hero_title": "TinyOpt - Batch Image Processing",
-    "hero_subtitle": "A desktop batch image processing tool powered by TinyPNG API — compression, watermark, format conversion, renaming",
+    "hero_title": "Batch Compress Hundreds of Images. All From Your Desktop.",
+    "hero_subtitle": "TinyOpt is a free desktop app for batch image compression, powered by TinyPNG. Compress, watermark, convert, and rename hundreds of images at once — no browser upload queues, no file-size caps, no hidden costs. Just drop your folder and go.",
     "hero_cta": "Download Free",
-    "hero_secondary": "Learn More",
+    "hero_secondary": "How It Works",
     "features_title": "Core Features",
     "features": [
-      { "title": "Batch Compression", "desc": "Support PNG, JPEG, WebP, AVIF and more. Batch compress with one click while preserving quality" },
-      { "title": "Watermark Tool", "desc": "Image & text watermark with drag-and-drop WYSIWYG preview. Adjust opacity and position freely" },
-      { "title": "Format Conversion", "desc": "Convert between 9 output formats including ICO and PDF" },
-      { "title": "Batch Rename", "desc": "Smart renaming with variable templates — supports index, date, and custom prefixes" },
-      { "title": "Multi-Key Management", "desc": "Manage multiple API keys with auto-switching and monthly quota monitoring" },
-      { "title": "Compression History", "desc": "Full task history with original size, compression ratio, and detailed records" }
+      { "title": "Batch Compression", "desc": "Compress PNG, JPEG, WebP, AVIF, and more in bulk. Typically 50-80% smaller files with virtually no visible quality loss." },
+      { "title": "Watermark Tool", "desc": "Add text or image watermarks with drag-and-drop preview. Batch watermark 200 images in minutes — no Photoshop needed." },
+      { "title": "Format Conversion", "desc": "9 output formats: JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF. Need a favicon? A PDF? One click converts the entire batch." },
+      { "title": "Batch Rename", "desc": "Rename hundreds of files using templates: index numbers, dates, custom prefixes. Stop renaming screenshots one by one." },
+      { "title": "Multi-Key Management", "desc": "Add multiple TinyPNG API keys, auto-switch when quotas run out. Scale past the 500-image monthly limit." },
+      { "title": "Compression History", "desc": "Every compression logged: original size, saved size, ratio. Useful for client billing or tracking savings." }
     ],
     "how_title": "Three Steps to Compress Images",
     "how_steps": [
-      { "icon": "download", "title": "Download & Install", "desc": "Download TinyOpt desktop client and install — no complex setup required" },
-      { "icon": "upload", "title": "Drag & Drop Images", "desc": "Drag images or folders into the app. Auto-detects formats, supports batch adding" },
-      { "icon": "check", "title": "One-Click Compress", "desc": "Hit the compress button and let batch processing do the work — fast, efficient, quality results" }
+      { "icon": "download", "title": "Download & Install", "desc": "Grab the installer, double-click, done. No signup, no bloatware." },
+      { "icon": "upload", "title": "Drag & Drop Images", "desc": "Drop images or folders — TinyOpt auto-detects formats and queues them up." },
+      { "icon": "check", "title": "One-Click Compress", "desc": "Hit Compress. Multi-threaded processing kicks in — come back to optimized files." }
     ],
-    "features_title": "Core Features",
-    "features": [
-      { "title": "Batch Compression", "desc": "Support PNG, JPEG, WebP, AVIF and more. Batch compress with one click while preserving quality" },
-      { "title": "Watermark Tool", "desc": "Image & text watermark with drag-and-drop WYSIWYG preview. Adjust opacity and position freely" },
-      { "title": "Format Conversion", "desc": "Convert between 9 output formats including ICO and PDF" },
-      { "title": "Batch Rename", "desc": "Smart renaming with variable templates — supports index, date, and custom prefixes" },
-      { "title": "Multi-Key Management", "desc": "Manage multiple API keys with auto-switching and monthly quota monitoring" },
-      { "title": "Compression History", "desc": "Full task history with original size, compression ratio, and detailed records" }
-    ],
-    "stats_title": "Project Stats",
+    "pain_title": "Why a Desktop Tool?",
+    "pain_text": "Online image compressors work — until you hit the 5MB limit. Or the 20-image batch cap. Or watch your browser struggle through 50 uploads. If you process more than a few dozen images each week, TinyOpt does it all locally managed — no browser bottlenecks, no waiting in queues.",
+    "stats_title": "Trusted by Designers & Developers",
     "stats": [
-      { "value": "50+", "label": "Daily API Compressions" },
       { "value": "9", "label": "Output Formats" },
-      { "value": "99%", "label": "User Satisfaction" },
-      { "value": "Free", "label": "Open Source" }
+      { "value": "7+", "label": "Input Formats" },
+      { "value": "MIT", "label": "Open Source License" },
+      { "value": "500/mo", "label": "Free TinyPNG Tier" }
     ],
     "faq_title": "Frequently Asked Questions",
     "faq_items": [
@@ -99,7 +92,7 @@
   "download": {
     "title": "Download",
     "subtitle": "Choose your version",
-    "latest_version": "v1.7.1",
+    "latest_version": "v1.7.2",
     "latest_date": "2026-07-08",
     "download_windows": "Download for Windows",
     "changelog": "Changelog",
@@ -108,6 +101,34 @@
       { "version": "v1.3.0", "date": "2026-06-04", "changes": ["Added AVIF format support", "Improved watermark drag experience", "Fixed various bugs"] },
       { "version": "v1.2.4", "date": "2026-06-04", "changes": ["Optimized API quota display", "Improved queue management"] },
       { "version": "v1.2.0", "date": "2026-06-03", "changes": ["Added batch rename feature", "Added watermark tool module"] }
+    ],
+    "requirements_title": "System Requirements",
+    "requirements": [
+      { "label": "OS", "value": "Windows 10 or 11 (64-bit)" },
+      { "label": "Storage", "value": "~50MB after install" },
+      { "label": "API Key", "value": "Free TinyPNG API key (500 imgs/month free)" },
+      { "label": "Internet", "value": "Required for API calls only" }
+    ],
+    "getting_started_title": "From Download to First Compression",
+    "getting_started_steps": [
+      "Run the installer — double-click, follow the prompts, done.",
+      "Get your API key — visit tinypng.com/developers, register free, copy your key.",
+      "Paste the key — open TinyOpt, go to Settings → API Key, paste and save.",
+      "Start compressing — drag in images or folders, hit Compress."
+    ],
+    "comparison_title": "Why a Desktop App Over Online Tools",
+    "comparison_rows": [
+      { "feature": "File Size Limit", "online": "5–20MB", "tinyopt": "No limit" },
+      { "feature": "Batch Cap", "online": "10–50 images", "tinyopt": "Unlimited" },
+      { "feature": "Workflow", "online": "Upload → wait → download", "tinyopt": "Local queue, no waiting" },
+      { "feature": "Privacy", "online": "Images sit on their server", "tinyopt": "Processed by TinyPNG API only" },
+      { "feature": "Features", "online": "Compression only", "tinyopt": "Compress + watermark + convert + rename" }
+    ],
+    "faq_title": "Download FAQ",
+    "faq_items": [
+      { "q": "Do I need a TinyPNG API key?", "a": "Yes. TinyOpt uses TinyPNG's compression engine. The free tier gives you 500 compressions/month. If you exceed that, paid plans start at $0.008/image." },
+      { "q": "How is my data handled?", "a": "Images are sent only to TinyPNG's API for compression over encrypted connections and deleted immediately after. We do not log, store, or track your images. Your API key stays on your machine." },
+      { "q": "Is there a Mac or Linux version?", "a": "Not yet — Windows only. Mac and Linux builds are on the roadmap." }
     ]
   },
   "cases": {

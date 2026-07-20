@@ -18,6 +18,7 @@ export interface Props {
   articleAuthor?: string;
   articleTags?: string[];
   articleImage?: string;
+  softwareVersion?: string;
   faqItems?: { q: string; a: string }[];
 }
 
@@ -25,7 +26,7 @@ const {
   title, description, lang = 'en', langHref, ogImage, noindex, canonical,
   pageType = 'page',
   articleDate, articleModifiedDate, articleAuthor, articleTags, articleImage,
-  faqItems,
+  softwareVersion, faqItems,
 } = Astro.props;
 const _ = translation(lang);
 const siteTitle = _.site.title;
@@ -62,6 +63,28 @@ function getDefaultSchema(baseUrl: string, siteTitle: string, description: strin
   };
 }
 
+function getSoftwareSchema(baseUrl: string, siteTitle: string, description: string, version?: string) {
+  const schema: any = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": siteTitle,
+    "operatingSystem": "Windows 10/11",
+    "applicationCategory": "MultimediaApplication",
+    "description": description,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "TinyOpt Team"
+    }
+  };
+  if (version) schema.version = version;
+  return schema;
+}
+
 function getHomeSchema(baseUrl: string, siteTitle: string, description: string, locale: string, faqItems?: { q: string; a: string }[]) {
   const schemas: any[] = [
     {
@@ -85,23 +108,7 @@ function getHomeSchema(baseUrl: string, siteTitle: string, description: string, 
         "query-input": "required name=search_term_string"
       }
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": siteTitle,
-      "operatingSystem": "Windows 10/11",
-      "applicationCategory": "MultimediaApplication",
-      "description": description,
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "TinyOpt Team"
-      }
-    }
+    getSoftwareSchema(baseUrl, siteTitle, description)
   ];
 
   if (faqItems && faqItems.length > 0) {
@@ -130,9 +137,14 @@ function getArticleSchema(
   const article: any = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": articleUrl
+    },
     "headline": fullTitle,
     "description": description,
     "url": articleUrl,
+    "isAccessibleForFree": true,
     "author": {
       "@type": "Person",
       "name": articleAuthor ?? "TinyOpt Team"
@@ -143,7 +155,9 @@ function getArticleSchema(
       "url": baseUrl,
       "logo": {
         "@type": "ImageObject",
-        "url": `${baseUrl}/images/logo.svg`
+        "url": `${baseUrl}/images/logo.svg`,
+        "width": 512,
+        "height": 512
       }
     }
   };
@@ -152,7 +166,14 @@ function getArticleSchema(
     article.datePublished = articleDate;
     article.dateModified = articleModifiedDate ?? articleDate;
   }
-  if (articleImage) article.image = articleImage;
+  if (articleImage) {
+    article.image = {
+      "@type": "ImageObject",
+      "url": articleImage.startsWith("http") ? articleImage : `${baseUrl}${articleImage}`,
+      "width": 1200,
+      "height": 630
+    };
+  }
   if (locale) article.inLanguage = locale;
   if (articleTags && articleTags.length > 0) article.keywords = articleTags.join(", ");
 
@@ -209,6 +230,10 @@ function getArticleSchema(
   <script type="application/ld+json" set:html={JSON.stringify(
     pageType === 'home' ? getHomeSchema(baseUrl, siteTitle, description, locale, faqItems) :
     pageType === 'article' ? getArticleSchema(baseUrl, siteTitle, fullTitle, description, autoCanonical, articleDate, articleModifiedDate, articleAuthor, articleImage, articleTags, locale) :
+    pageType === 'download' ? { "@context": "https://schema.org", "@graph": [
+      getDefaultSchema(baseUrl, siteTitle, description),
+      getSoftwareSchema(baseUrl, siteTitle, description, softwareVersion)
+    ]} :
     getDefaultSchema(baseUrl, siteTitle, description)
   )}></script>
 

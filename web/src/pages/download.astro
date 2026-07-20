@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
 import { translation } from '@/i18n/utils';
 
 const _ = translation('en');
@@ -20,7 +21,7 @@ try {
 }
 ---
 
-<Layout title={_.download.title} description={_.meta.download} lang="en">
+<Layout title={_.download.title} description={_.meta.download} lang="en" pageType="download" softwareVersion={latestVersion}>
   <section class="bg-white py-12 sm:py-20">
     <div class="mx-auto max-w-3xl px-4">
       <h1 class="mb-4 text-2xl sm:text-3xl font-bold text-gray-900">{_.download.title}</h1>
@@ -34,6 +35,61 @@ try {
           </svg>
           {_.download.download_windows}
         </a>
+      </div>
+
+      <!-- System Requirements -->
+      <h2 class="mb-4 text-xl font-bold text-gray-900">{_.download.requirements_title}</h2>
+      <div class="mb-12 overflow-hidden rounded-lg border border-gray-200">
+        <table class="w-full text-sm">
+          <tbody>
+            {_.download.requirements.map((req) => (
+              <tr class="border-b border-gray-100 last:border-0">
+                <td class="w-40 bg-gray-50 px-4 py-3 font-medium text-gray-700">{req.label}</td>
+                <td class="px-4 py-3 text-gray-600">{req.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Getting Started -->
+      <h2 class="mb-4 text-xl font-bold text-gray-900">{_.download.getting_started_title}</h2>
+      <ol class="mb-12 space-y-3">
+        {_.download.getting_started_steps.map((step, i) => (
+          <li class="flex gap-3">
+            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-600 text-xs font-bold text-white">{i + 1}</span>
+            <span class="text-gray-600">{step}</span>
+          </li>
+        ))}
+      </ol>
+
+      <!-- Comparison Table -->
+      <h2 class="mb-4 text-xl font-bold text-gray-900">{_.download.comparison_title}</h2>
+      <div class="mb-12 overflow-hidden rounded-lg border border-gray-200">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gray-50">
+              <th class="px-4 py-3 text-left font-semibold text-gray-700">Feature</th>
+              <th class="px-4 py-3 text-left font-semibold text-gray-500">Online Tool</th>
+              <th class="px-4 py-3 text-left font-semibold text-primary-700">TinyOpt</th>
+            </tr>
+          </thead>
+          <tbody>
+            {_.download.comparison_rows.map((row) => (
+              <tr class="border-t border-gray-100">
+                <td class="px-4 py-3 font-medium text-gray-700">{row.feature}</td>
+                <td class="px-4 py-3 text-gray-500">{row.online}</td>
+                <td class="px-4 py-3 font-medium text-primary-700">{row.tinyopt}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Download FAQ -->
+      <h2 class="mb-4 text-xl font-bold text-gray-900">{_.download.faq_title}</h2>
+      <div class="mb-12">
+        <FaqAccordion items={_.download.faq_items} />
       </div>
 
       <h2 class="mb-6 text-2xl font-bold text-gray-900">{_.download.changelog}</h2>
