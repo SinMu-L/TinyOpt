@@ -8,6 +8,41 @@
       "has": [{ "type": "host", "value": "www.seojeck.com" }],
       "destination": "https://seojeck.com/$1",
       "permanent": true
+    },
+    {
+      "source": "/en",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/image-seo-rename-alt-guide/",
+      "destination": "/zh/blog/image-seo-rename-alt-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/bulk-image-seo-station-group/",
+      "destination": "/zh/blog/bulk-image-seo-station-group/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ecommerce-watermark-protection/",
+      "destination": "/zh/blog/ecommerce-watermark-protection/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/batch-rename-productivity/",
+      "destination": "/zh/blog/batch-rename-productivity/",
+      "permanent": true
+    },
+    {
+      "source": "/off-page-seo/introduction",
+      "destination": "/blog/",
+      "permanent": true
     }
   ]
 }
