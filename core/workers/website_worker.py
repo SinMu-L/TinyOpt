@@ -89,6 +89,23 @@ class WebsiteWorker(QThread):
                 return sitemap_url
         return None
 
+    def _get_domain_root(self, url):
+        parsed = urlparse(url)
+        return f"{parsed.scheme}://{parsed.netloc}"
+
+    def _try_as_sitemap(self, url):
+        resp = self._request("get", url)
+        if not resp or resp.status_code != 200:
+            return False
+        if "xml" not in resp.headers.get("Content-Type", "").lower():
+            return False
+        try:
+            root = ET.fromstring(resp.content)
+            tag = root.tag.split("}")[-1] if "}" in root.tag else root.tag
+            return tag in ("urlset", "sitemapindex")
+        except Exception:
+            return False
+
     def _parse_sitemap(self, sitemap_url):
         page_urls = []
         try:
@@ -178,7 +195,14 @@ class WebsiteWorker(QThread):
         base_url = self._normalize_url(self.domain_url)
         self.log.emit(T("website.checking_sitemap", url=base_url), False)
 
-        sitemap_url = self._find_sitemap(base_url)
+        sitemap_url = None
+        if self._try_as_sitemap(base_url):
+            sitemap_url = base_url
+            self.log.emit(T("website.sitemap_found", url=base_url), False)
+        else:
+            domain_root = self._get_domain_root(base_url)
+            sitemap_url = self._find_sitemap(domain_root)
+
         if self._is_cancelled:
             self.finished_signal.emit(stats)
             return
