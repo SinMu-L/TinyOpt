@@ -118,6 +118,7 @@
     "margin_y": "Y",
     "opacity": "Opacity",
     "scale": "Scale",
+    "rotation": "Rotation",
     "percent": "%",
     "task_title": "📋 Image List",
     "start_btn": "🚀 Start Watermark",

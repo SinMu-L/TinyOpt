@@ -118,6 +118,7 @@
     "margin_y": "Y",
     "opacity": "透明度",
     "scale": "缩放",
+    "rotation": "旋转角度",
     "percent": "%",
     "task_title": "📋 待处理图片列表",
     "start_btn": "🚀 开始添加水印",

@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QSizePolicy
 from PyQt5.QtCore import Qt, QRect, pyqtSignal
 from PyQt5.QtGui import QPainter, QPen, QColor, QPixmap
 
@@ -10,7 +10,8 @@ class PositionPreviewWidget(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setFixedSize(400, 280)
+        self.setMinimumSize(280, 200)
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setMouseTracking(True)
         self.setCursor(Qt.PointingHandCursor)
         self.setStyleSheet("border: 2px dashed #cbd5e1; border-radius: 8px; background: #f8fafc;")

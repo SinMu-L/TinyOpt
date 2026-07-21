@@ -16,7 +16,9 @@ class WatermarkWorker(QThread):
     def __init__(self, file_paths, output_dir, overwrite,
                  watermark_type, watermark_image_path,
                  watermark_text, font_path, font_size, font_color,
-                 x_ratio, y_ratio, opacity, scale, margin_x, margin_y):
+                 x_ratio, y_ratio, opacity,
+                 image_scale, text_scale, margin_x, margin_y,
+                 image_rotation, text_rotation):
         super().__init__()
         self.file_paths = file_paths
         self.output_dir = output_dir
@@ -30,9 +32,12 @@ class WatermarkWorker(QThread):
         self.x_ratio = x_ratio
         self.y_ratio = y_ratio
         self.opacity = opacity
-        self.scale = scale
+        self.image_scale = image_scale
+        self.text_scale = text_scale
         self.margin_x = margin_x
         self.margin_y = margin_y
+        self.image_rotation = image_rotation
+        self.text_rotation = text_rotation
         self._is_cancelled = False
         self._loaded_wm_image = None
 
@@ -75,7 +80,10 @@ class WatermarkWorker(QThread):
                         img, self.watermark_type, self._loaded_wm_image,
                         self.watermark_text, self.font_path, self.font_size,
                         self.font_color, self.x_ratio, self.y_ratio,
-                        self.opacity, self.scale, self.margin_x, self.margin_y,
+                        self.opacity,
+                        self.image_scale, self.text_scale,
+                        self.margin_x, self.margin_y,
+                        self.image_rotation, self.text_rotation,
                     )
 
                 if self.output_dir:

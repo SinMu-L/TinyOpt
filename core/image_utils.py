@@ -32,7 +32,10 @@ def render_text_watermark(text, font_path, font_size, font_color):
 def apply_watermark_to_image(image, watermark_type, watermark_img=None,
                               watermark_text="", font_path=None, font_size=48,
                               font_color=(255, 255, 255), x_ratio=0.85, y_ratio=0.85,
-                              opacity=80, scale=15, margin_x=20, margin_y=20):
+                              opacity=80,
+                              image_scale=15, text_scale=15,
+                              margin_x=20, margin_y=20,
+                              image_rotation=0, text_rotation=0):
     """Apply watermark to a PIL Image, return watermarked Image."""
     if watermark_type not in ("image", "text", "both"):
         return image
@@ -44,26 +47,42 @@ def apply_watermark_to_image(image, watermark_type, watermark_img=None,
         wm = watermark_img.copy()
         if wm.mode != 'RGBA':
             wm = wm.convert('RGBA')
-        wm_w = max(1, int(img_w * scale / 100))
+        wm_w = max(1, int(img_w * image_scale / 100))
         wm_h = max(1, int(wm.height * wm_w / wm.width))
         wm = wm.resize((wm_w, wm_h), Image.LANCZOS)
+        if image_rotation:
+            wm = wm.rotate(image_rotation, expand=True, resample=Image.BICUBIC)
 
     elif watermark_type == "text" and watermark_text:
         wm = render_text_watermark(watermark_text, font_path, font_size, font_color)
+        wm_w = max(1, int(img_w * text_scale / 100))
+        wm_h = max(1, int(wm.height * wm_w / wm.width))
+        wm = wm.resize((wm_w, wm_h), Image.LANCZOS)
+        if text_rotation:
+            wm = wm.rotate(text_rotation, expand=True, resample=Image.BICUBIC)
 
     elif watermark_type == "both" and watermark_img is not None and watermark_text:
-        wm_img = watermark_img.copy()
-        if wm_img.mode != 'RGBA':
-            wm_img = wm_img.convert('RGBA')
-        wm_w = max(1, int(img_w * scale / 100))
-        wm_h = max(1, int(wm_img.height * wm_w / wm_img.width))
-        wm_img = wm_img.resize((wm_w, wm_h), Image.LANCZOS)
-        wm_txt = render_text_watermark(watermark_text, font_path, font_size, font_color)
-        combined_w = max(wm_img.width, wm_txt.width)
-        combined_h = wm_img.height + 5 + wm_txt.height
+        im = watermark_img.copy()
+        if im.mode != 'RGBA':
+            im = im.convert('RGBA')
+        im_w = max(1, int(img_w * image_scale / 100))
+        im_h = max(1, int(im.height * im_w / im.width))
+        im = im.resize((im_w, im_h), Image.LANCZOS)
+        if image_rotation:
+            im = im.rotate(image_rotation, expand=True, resample=Image.BICUBIC)
+
+        tx = render_text_watermark(watermark_text, font_path, font_size, font_color)
+        tx_w = max(1, int(img_w * text_scale / 100))
+        tx_h = max(1, int(tx.height * tx_w / tx.width))
+        tx = tx.resize((tx_w, tx_h), Image.LANCZOS)
+        if text_rotation:
+            tx = tx.rotate(text_rotation, expand=True, resample=Image.BICUBIC)
+
+        combined_w = max(im.width, tx.width)
+        combined_h = im.height + 5 + tx.height
         wm = Image.new('RGBA', (combined_w, combined_h), (0, 0, 0, 0))
-        wm.paste(wm_img, ((combined_w - wm_img.width) // 2, 0), wm_img)
-        wm.paste(wm_txt, ((combined_w - wm_txt.width) // 2, wm_img.height + 5), wm_txt)
+        wm.paste(im, ((combined_w - im.width) // 2, 0), im)
+        wm.paste(tx, ((combined_w - tx.width) // 2, im.height + 5), tx)
 
     if wm is None:
         return image
