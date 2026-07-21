@@ -59,11 +59,18 @@ class CompressPage(QWidget):
         left_col = QVBoxLayout()
         left_col.setSpacing(12)
 
+        # ── empty state: drop zone ──
         self.drop_zone = DropZone()
         self.drop_zone.add_files_clicked.connect(self.add_files)
         self.drop_zone.add_folder_clicked.connect(self.add_folder)
         self.drop_zone.files_dropped.connect(self._on_paths_dropped)
-        left_col.addWidget(self.drop_zone)
+        outer.addWidget(self.drop_zone, 1)
+
+        # ── files state: content area ──
+        self.content_widget = QWidget()
+        content_root = QVBoxLayout(self.content_widget)
+        content_root.setContentsMargins(0, 0, 0, 0)
+        content_root.setSpacing(0)
 
         self.file_card = QFrame()
         self.file_card.setObjectName("card")
@@ -223,7 +230,8 @@ class CompressPage(QWidget):
 
         split.addWidget(self.settings_panel, 3)
 
-        outer.addLayout(split, 1)
+        content_root.addLayout(split)
+        outer.addWidget(self.content_widget, 1)
 
         self._sync_empty_state()
 
@@ -286,8 +294,7 @@ class CompressPage(QWidget):
     def _sync_empty_state(self):
         has_files = self.file_list_widget.count() > 0
         self.drop_zone.setVisible(not has_files)
-        self.file_card.setVisible(has_files)
-        self.ready_bar.setVisible(has_files)
+        self.content_widget.setVisible(has_files)
 
     def update_file_summary(self):
         count = self.file_list_widget.count()
