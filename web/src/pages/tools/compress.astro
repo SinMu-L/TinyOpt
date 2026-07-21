@@ -1,16 +1,59 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import CompressTool from '@/components/CompressTool.tsx';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import FeatureCard from '@/components/FeatureCard.astro';
 import { translation } from '@/i18n/utils';
 
 const _ = translation('en');
+const t = _.tools.compress;
 ---
 
 <Layout
-  title="Online Image Compressor"
-  description="Free online image compressor. Compress JPEG, PNG, WebP images directly in your browser — no upload, no server, 100% private."
+  title={t.title}
+  description={t.description}
   lang="en"
   pageType="page"
+  faqItems={t.faq_items}
 >
   <CompressTool client:load />
+
+  <!-- How It Works -->
+  <section class="bg-gray-50 py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{t.how_title}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {t.how_steps.map((step, i) => (
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary-600 text-lg font-bold text-white">{i + 1}</div>
+            <h3 class="mb-2 font-semibold text-gray-900">{step.title}</h3>
+            <p class="text-sm text-gray-500">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Use Our Compressor -->
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{t.why_title}</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {t.why_items.map((item) => (
+          <div class="rounded-xl border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <h3 class="mb-2 font-semibold text-gray-900">{item.title}</h3>
+            <p class="text-sm text-gray-500">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-16">
+    <div class="mx-auto max-w-3xl px-4">
+      <h2 class="mb-8 text-center text-2xl sm:text-3xl font-bold text-gray-900">{t.faq_title}</h2>
+      <FaqAccordion items={t.faq_items} />
+    </div>
+  </section>
 </Layout>

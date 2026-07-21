@@ -192,5 +192,35 @@
   "footer": {
     "copyright": "TinyOpt Compressor Open Source Project",
     "powered": "Powered by TinyPNG API"
+  },
+  "tools": {
+    "compress": {
+      "title": "Free Online Image Compressor — Compress JPEG, PNG, WebP Without Upload",
+      "description": "Compress JPEG, PNG, WebP images online for free. 100% private — all processing happens in your browser. No upload, no server, no file size limits. Reduce image size by up to 80%.",
+      "how_title": "How It Works",
+      "how_steps": [
+        { "title": "Upload Your Image", "desc": "Click or drag an image into the tool. Supports JPEG, PNG, WebP, AVIF, GIF, BMP, TIFF — up to 50MB per file." },
+        { "title": "Choose Format & Quality", "desc": "Select output format (JPEG, PNG, or WebP) and adjust the quality slider. PNG uses smart color quantization for maximum compression." },
+        { "title": "Download Compressed Image", "desc": "Compare original vs compressed with the side-by-side slider, then download your optimized image. All processing happens locally in your browser." }
+      ],
+      "why_title": "Why Use Our Image Compressor",
+      "why_items": [
+        { "title": "100% Private & Secure", "desc": "Your images never leave your device. All compression runs locally in your browser using WebAssembly — no upload to any server." },
+        { "title": "No File Size Limits", "desc": "Unlike most online tools that cap at 5–20MB, we process images of any size. The only limit is your browser's memory." },
+        { "title": "Professional Compression", "desc": "Powered by WebAssembly-based encoders. PNG compression uses pngquant's color quantization algorithm for dramatic size reduction with minimal quality loss." },
+        { "title": "Instant Before/After Comparison", "desc": "Drag the comparison slider to see exactly how compression affects your image. Zoom in and inspect every detail before downloading." },
+        { "title": "Multi-Format Support", "desc": "Convert between JPEG, PNG, and WebP formats. Optimize for web performance, social media, or email attachments." },
+        { "title": "No Registration Required", "desc": "Start compressing immediately. No signup, no ads, no watermarks. Just upload and compress." }
+      ],
+      "faq_title": "Frequently Asked Questions",
+      "faq_items": [
+        { "q": "Are my images uploaded to a server?", "a": "No. All image compression happens entirely in your browser using WebAssembly and Canvas API. Your images never leave your device, making this one of the most private online image compressors available." },
+        { "q": "What image formats are supported?", "a": "You can upload JPEG, PNG, WebP, AVIF, GIF, BMP, and TIFF images. You can compress to three output formats: JPEG (best for photos), PNG (best for graphics with transparency), and WebP (best for web performance)." },
+        { "q": "How does PNG compression work?", "a": "Our PNG compressor uses WebAssembly-powered color quantization (pngquant algorithm). It intelligently reduces the number of colors in your image while preserving visual quality. Lower quality settings use fewer colors, resulting in smaller files. The image resolution stays the same." },
+        { "q": "What quality setting should I use?", "a": "For JPEG photos, quality 75–85 offers the best balance of quality and file size. For PNG graphics, quality 60–80 typically reduces file size by 50–70% with no visible difference. WebP at quality 80 usually matches JPEG at quality 85 but with smaller files." },
+        { "q": "Can I compress transparent PNG images?", "a": "Yes. PNG compression preserves the alpha (transparency) channel. When converting to JPEG, transparent areas will be filled with white since JPEG does not support transparency." },
+        { "q": "Is this tool really free?", "a": "Yes, completely free. There are no usage limits, no hidden costs, and no premium tiers. The tool is open source and runs entirely in your browser." }
+      ]
+    }
   }
 }
