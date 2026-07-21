@@ -44,6 +44,7 @@ interface Translations {
   backToSettings: string;
   clearAll: string;
   noImages: string;
+  dragHint: string;
 }
 
 const POSITIONS: Position[] = [
@@ -503,6 +504,9 @@ export default function WatermarkTool({ t }: { t: Translations }) {
                 <p class="text-gray-400 text-sm">{t.noImages}</p>
               )}
             </div>
+            {previewImg && (
+              <p class="text-center text-xs text-gray-400 mt-2">{t.dragHint}</p>
+            )}
           </div>
 
           {/* Right: Controls */}
