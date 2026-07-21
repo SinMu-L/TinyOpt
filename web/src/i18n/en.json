@@ -12,7 +12,9 @@
     "privacy": "Read the TinyOpt privacy policy: how our desktop image compression tool and website collect, use, and protect your data in compliance with GDPR.",
     "terms": "Read the TinyOpt terms of service covering free use, disclaimers, intellectual property, and third-party TinyPNG API terms for our image tool.",
     "blog": "TinyOpt blog: release notes, image compression tips, image SEO guides, and web performance tutorials for designers, developers, and site owners.",
-    "cases": "Real-world TinyOpt use cases: how designers and web developers batch compress images, add watermarks, and speed up their daily workflows."
+    "cases": "Real-world TinyOpt use cases: how designers and web developers batch compress images, add watermarks, and speed up their daily workflows.",
+    "toolsIndex": "Free online image tools: compress JPEG, PNG, WebP and add watermarks — all 100% in your browser. No upload, no server, no limits.",
+    "watermark": "Free online watermark tool: add text or image watermarks to multiple photos at once in your browser. Batch process, download as ZIP. No upload required."
   },
   "nav": {
     "home": "Home",
@@ -220,6 +222,65 @@
         { "q": "What quality setting should I use?", "a": "For JPEG photos, quality 75–85 offers the best balance of quality and file size. For PNG graphics, quality 60–80 typically reduces file size by 50–70% with no visible difference. WebP at quality 80 usually matches JPEG at quality 85 but with smaller files." },
         { "q": "Can I compress transparent PNG images?", "a": "Yes. PNG compression preserves the alpha (transparency) channel. When converting to JPEG, transparent areas will be filled with white since JPEG does not support transparency." },
         { "q": "Is this tool really free?", "a": "Yes, completely free. There are no usage limits, no hidden costs, and no premium tiers. The tool is open source and runs entirely in your browser." }
+      ]
+    },
+    "index": {
+      "title": "Free Online Image Tools — No Upload Required",
+      "description": "Free online image tools that run 100% in your browser. Compress images, add watermarks — no upload, no server, no file limits. Private, fast, and free.",
+      "subtitle": "Choose a tool below",
+      "tools": [
+        {
+          "title": "Image Compressor",
+          "desc": "Compress JPEG, PNG, WebP images. Adjust quality and format — all processing happens locally in your browser.",
+          "link": "/tools/compress/",
+          "icon": "compress"
+        },
+        {
+          "title": "Image Watermark",
+          "desc": "Add text or image watermarks to your photos. Batch process multiple images and download as a ZIP file — entirely in your browser.",
+          "link": "/tools/watermark/",
+          "icon": "watermark"
+        }
+      ]
+    },
+    "watermark": {
+      "title": "Free Online Image Watermark Tool — Add Watermarks Without Upload",
+      "description": "Add text or image watermarks to your photos online for free. 100% private — all processing in your browser. Batch watermark multiple images, download as ZIP. No upload, no server.",
+      "how_title": "How It Works",
+      "how_steps": [
+        { "title": "Upload Your Images", "desc": "Click or drag multiple images into the tool. Supports JPEG, PNG, WebP, BMP, and more." },
+        { "title": "Customize Your Watermark", "desc": "Choose text or image watermark. Adjust font, size, color, opacity, position, and rotation. Preview updates in real time." },
+        { "title": "Download Watermarked Images", "desc": "Review results in the gallery, download individual images or grab everything as a ZIP file. All processing stays in your browser." }
+      ],
+      "why_title": "Why Use Our Watermark Tool",
+      "why_items": [
+        { "title": "100% Private & Secure", "desc": "Your images never leave your device. All watermark processing runs locally in your browser using Canvas API — no upload to any server." },
+        { "title": "Batch Processing", "desc": "Add watermarks to multiple images at once. Apply the same watermark configuration to an entire batch and download everything as a ZIP file." },
+        { "title": "Text & Image Watermarks", "desc": "Choose between text watermarks with custom fonts, colors, and rotation, or upload your own logo/image to use as a watermark." },
+        { "title": "Real-Time Preview", "desc": "See your watermark changes instantly as you adjust settings. No save-and-reload — the preview updates as you type." },
+        { "title": "Full Control Over Position", "desc": "Place your watermark anywhere with the 9-position grid. Set custom opacity and rotation for the perfect look." },
+        { "title": "No Registration Required", "desc": "Start watermarking immediately. No signup, no ads, no watermarks added by us. Just upload and process." }
+      ],
+      "faq_title": "Frequently Asked Questions",
+      "faq_items": [
+        { "q": "Are my images uploaded to a server?", "a": "No. All watermark processing happens entirely in your browser using the Canvas API. Your images never leave your device, making this one of the most private online watermark tools available." },
+        { "q": "What image formats are supported?", "a": "You can upload JPEG, PNG, WebP, BMP, and TIFF images. The output will be in PNG format to preserve the best quality and transparency of your watermark." },
+        { "q": "Can I add both text and image watermarks at once?", "a": "Currently you can apply one watermark type per batch — either text or image. You can run the tool twice if you need both." },
+        { "q": "How do I get the best watermark quality?", "a": "For image watermarks, use a PNG logo with a transparent background. For text watermarks, use a bold font at a readable size. Adjust opacity to balance visibility with image aesthetics." },
+        { "q": "Can I batch process images with different watermarks?", "a": "Our tool applies the same watermark to all images in a batch. If you need different watermarks, process them in separate batches." },
+        { "q": "Is this tool really free?", "a": "Yes, completely free. There are no usage limits, no hidden costs, and no premium tiers. The tool is open source and runs entirely in your browser." }
+      ]
+    },
+    "cta": {
+      "title": "Need Batch Processing? Get the Desktop App",
+      "subtitle": "The online tool is great for quick, one-off tasks. For heavy daily workloads, our desktop app offers much more power.",
+      "button": "Download Desktop App",
+      "comparison_rows": [
+        { "feature": "Batch Processing", "online": "One image at a time", "tinyopt": "Unlimited batch processing" },
+        { "feature": "Watermark", "online": "Basic text & image", "tinyopt": "Advanced placement with drag preview" },
+        { "feature": "Format Conversion", "online": "JPEG / PNG / WebP", "tinyopt": "9 formats (incl. AVIF, ICO, PDF)" },
+        { "feature": "Batch Rename", "online": "Not available", "tinyopt": "Templates, sequences, date stamps" },
+        { "feature": "Compression Engine", "online": "Browser-based (WASM)", "tinyopt": "TinyPNG API (industry standard)" }
       ]
     }
   }
