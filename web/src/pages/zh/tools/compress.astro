@@ -1,0 +1,16 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import CompressTool from '@/components/CompressTool.tsx';
+import { translation } from '@/i18n/utils';
+
+const _ = translation('zh');
+---
+
+<Layout
+  title="在线图片压缩"
+  description="免费在线图片压缩工具。直接在浏览器中压缩 JPEG、PNG、WebP 图片——无需上传，无需服务器，100% 保护隐私。"
+  lang="zh"
+  pageType="page"
+>
+  <CompressTool client:load />
+</Layout>
