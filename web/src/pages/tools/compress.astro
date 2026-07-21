@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import CompressTool from '@/components/CompressTool.tsx';
 import FaqAccordion from '@/components/FaqAccordion.astro';
+import DesktopCtaBanner from '@/components/DesktopCtaBanner.astro';
 import { translation } from '@/i18n/utils';
 
 const _ = translation('en');
@@ -72,6 +73,9 @@ const tc = _.tools.compress;
       </div>
     </div>
   </section>
+
+  <!-- Desktop CTA -->
+  <DesktopCtaBanner lang="en" />
 
   <!-- FAQ -->
   <section class="bg-gray-50 py-16">

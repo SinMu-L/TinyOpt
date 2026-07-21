@@ -23,7 +23,7 @@ const navItems = [
   { label: _.nav.cases, href: lang === 'en' ? '/cases/' : '/zh/cases/', active: isActive('/cases') },
   { label: _.nav.blog, href: lang === 'en' ? '/blog/' : '/zh/blog/', active: isActive('/blog') },
   { label: _.nav.contact, href: lang === 'en' ? '/contact/' : '/zh/contact/', active: isActive('/contact') },
-  { label: _.nav.tools, href: lang === 'en' ? '/tools/compress/' : '/zh/tools/compress/', active: isActive('/tools') },
+  { label: _.nav.tools, href: lang === 'en' ? '/tools/' : '/zh/tools/', active: isActive('/tools') },
   { label: _.nav.terms_short, href: lang === 'en' ? '/terms/' : '/zh/terms/', active: isActive('/terms') },
 ];
 const fallbackLangHref = lang === 'en'
@@ -59,7 +59,7 @@ const langLabel = lang === 'en' ? '中文' : 'EN';
       <a href={lang === 'en' ? '/contact/' : '/zh/contact/'} class={`hover:text-primary-600 transition-colors ${isActive('/contact') ? 'text-primary-600' : ''}`}>
         {_.nav.contact}
       </a>
-      <a href={lang === 'en' ? '/tools/compress/' : '/zh/tools/compress/'} class={`hover:text-primary-600 transition-colors ${isActive('/tools') ? 'text-primary-600' : ''}`}>
+      <a href={lang === 'en' ? '/tools/' : '/zh/tools/'} class={`hover:text-primary-600 transition-colors ${isActive('/tools') ? 'text-primary-600' : ''}`}>
         {_.nav.tools}
       </a>
       <a href={lang === 'en' ? '/terms/' : '/zh/terms/'} class={`hover:text-primary-600 transition-colors ${isActive('/terms') ? 'text-primary-600' : ''}`}>
