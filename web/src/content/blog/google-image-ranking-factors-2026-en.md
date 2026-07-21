@@ -1,17 +1,17 @@
 ---
-title: "Google Image Ranking: 7 Signals Beyond Alt Text"
+title: "How Product Images Rank on Google: 7 Signals Beyond Alt Text"
 date: 2026-07-18
 lang: en
 translationKey: google-image-ranking-factors-2026
-description: "7 signals decide Google image rankings: surrounding text, page relevance, schema, sitemaps, speed, originality, and user behavior. Full strategy inside."
-tags: [Google image search, ranking factors, Image SEO, structured data, search traffic]
+description: "Why do your competitor's product images always outrank yours? Google Images and Google Shopping use their own ranking signals. 7 factors that decide whether shoppers find your products — or your competitors'."
+tags: [Product Image Ranking, Google Shopping, Image SEO, structured data, e-commerce SEO]
 ---
 
-You wrote Alt text, renamed files, and compressed your images. Yet the competitor still ranks above you — and their Alt text isn't even better than yours. Why?
+You sell handmade leather goods. Your product photos are gorgeous. Your copy is sharp. But when someone Googles "handmade leather wallet", the top image result is your competitor's phone-shot, poorly-lit product photo. Why?
 
-Because image search ranking ≠ web page ranking. Google evaluates images using an independent signal system.
+Because product image ranking ≠ web page ranking. Google evaluates product images using a different set of signals than your blog or category page SEO.
 
-Treating image SEO as "fill in Alt text and you're done" is your biggest traffic misconception.
+Treating product image SEO as "fill in Alt text and you're done" is the biggest traffic mistake e-commerce sellers make.
 
 ## An Independent Ranking Signal System
 

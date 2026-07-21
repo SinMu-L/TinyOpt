@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import ArchiveBanner from '@/components/ArchiveBanner.astro';
 import { getCollection, render } from 'astro:content';
 
 export const prerender = true;
@@ -39,9 +40,11 @@ if (translationKey) {
   articleTags={post.data.tags}
   articleImage={post.data.image}
   ogImage={post.data.image}
+  noindex={post.data.noindex}
 >
   <article class="bg-white py-12 sm:py-20">
     <div class="mx-auto max-w-3xl px-4">
+      {post.data.noindex && <ArchiveBanner lang={post.data.lang} />}
       <div class="mb-2 text-sm text-gray-400">{post.data.date.toLocaleDateString('zh-CN')}</div>
       <h1 class="mb-6 text-2xl sm:text-3xl font-bold text-gray-900">{post.data.title}</h1>
       {post.data.tags && (

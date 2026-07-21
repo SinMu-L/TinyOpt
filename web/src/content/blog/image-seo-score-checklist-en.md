@@ -1,22 +1,23 @@
 ---
-title: "8-Step Image SEO Audit: Stop Losing Image Traffic"
+title: "Product Image SEO Audit: 8-Step Checklist for Shopify & E-Commerce"
 date: 2026-07-16
 lang: en
 translationKey: image-seo-score-checklist
-description: "Score your image SEO across 8 dimensions: filenames, alt text, format, size, compression, sitemaps, schema, and CDN. With a scoring card to find lost traffic."
-tags: [Image SEO, SEO audit, Alt text, image optimization, Google search]
+description: "Score your product image SEO across 8 dimensions: filenames, alt text, format, size, compression, sitemaps, schema, and CDN. Includes a scoring card to find traffic your store is losing every day."
+tags: [Product Image SEO, Shopify SEO, Alt text, image optimization, Google Shopping]
 ---
 
-Last week, I ran a technical audit on an outdoor gear e-commerce site. 3,200 product images on the site. Monthly clicks from Google Image Search: 47. A competitor in the same niche? 8,000+ per month.
+Last month, a Shopify store owner reached out. 1,200 product images, 43 monthly clicks from Google Images. A competitor in the same niche? 8,000+ per month.
 
-Where's the gap?
+He wasn't ignoring SEO — he just hadn't touched product image SEO. And product image rankings are the easiest free traffic channel for e-commerce.
 
-I systematically audited the image SEO of 50 international e-commerce sites. The results were alarming:
+I systematically audited 50 online stores across 8 dimensions:
 
-- 92% of image filenames were `IMG_3829.jpg` or `DSC_0001.jpg`
-- 78% of images had no Alt attribute
+- 92% of product image filenames were `IMG_3829.jpg` or phone defaults
+- 78% had no Alt attribute
 - 65% were raw PNG files, over 600KB each
 - 0% had submitted an image sitemap
+- None had Product schema markup on product pages
 
 These sites aren't short on traffic — they're actively abandoning an entire traffic channel.
 

@@ -1,17 +1,17 @@
 ---
-title: Google 图片搜索排名靠什么？7 个你不知的关键信号
+title: Google 产品图排名靠什么？7 个让商品图片排到首页的关键信号
 date: 2026-07-18
 lang: zh
 translationKey: google-image-ranking-factors-2026
-description: 图片搜索排名有独立的信号体系，Alt 标签只是入场券不是终点。本文深度解析 7 大排名因素：周围文字、页面相关性、结构化数据、Image Sitemap、加载性能、原创性和用户行为信号，附完整优化策略和实测数据对比表格。
-tags: [Google图片搜索, 排名因素, Image SEO, 结构化数据, 搜索流量]
+description: 为什么竞争对手的产品图总排在你前面？图片搜索排名有独立的信号体系，Alt 标签只是入场券。本文深度解析产品图在 Google Images 和 Google Shopping 中的 7 大排名因素及优化策略。
+tags: [产品图排名, Google Shopping, Image SEO, 结构化数据, 电商SEO]
 ---
 
-你写了 Alt 标签，改了文件名，压缩了图片体积。结果竞争对手还是排在你前面——他的 Alt 写得甚至没你好。为什么？
+你卖的是手工皮具，写了一手好文案，产品图拍得比竞品精致。但在 Google 搜 `handmade leather wallet`，排在最前面的图片偏偏是竞品那张用手机拍的、文案也一般的产品图。为什么？
 
-因为图片搜索排名不等于网页排名。Google 评估图片时，用的是一套独立的信号体系。
+因为产品图排名不等于网页排名。Google 评估产品图片时，用的是一套独立于你店铺博客 SEO 的信号体系。
 
-把 Image SEO 等同于"填 Alt 标签"，是你对流量的最大误解。
+把产品图 SEO 等同于"填个 Alt 标签"，是电商卖家对流量的最大浪费。
 
 ## 图片排名信号的独立体系
 

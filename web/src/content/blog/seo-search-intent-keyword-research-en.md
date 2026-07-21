@@ -5,9 +5,10 @@ lang: en
 translationKey: seo-search-intent-keyword-research
 description: Master keyword research by understanding search intent. Covers four intent types, keyword mapping, cannibalization avoidance, and a proven B2B workflow.
 tags: [Search Intent, Keyword Research, SEO Basics, Long-tail Keywords, Keyword Cannibalization]
+noindex: true
 ---
 
-Earlier this month I ran an SEO audit for an industrial valve manufacturer. Their site had been live for 8 months with 60+ product articles. Google Search Console showed 200+ indexed pages, but only 11 keywords were driving organic traffic. What went wrong? "Every article targets our core product term â€” `industrial valve`," the owner told me.
+Earlier this month I ran an SEO audit for an industrial valve manufacturer. Their site had been live for 8 months with 60+ product articles. Google Search Console showed 200+ indexed pages, but only 11 keywords were driving organic traffic. What went wrong? "Every article targets our core product term â€?`industrial valve`," the owner told me.
 
 This is the most common SEO mistake: **treating search volume as the only metric while ignoring search intent**.
 
@@ -15,7 +16,7 @@ This is the most common SEO mistake: **treating search volume as the only metric
 
 Search intent describes the goal a user has when typing a query. Google's Search Quality Rater Guidelines categorize intent into four types: Informational, Navigational, Commercial Investigation, and Transactional (Google's internal taxonomy: Know, Do, Website, Visit-in-Person) [^1].
 
-According to Search Engine Land, over half of all searches are informational â€” which is why content marketing is the core battleground [^2].
+According to Search Engine Land, over half of all searches are informational â€?which is why content marketing is the core battleground [^2].
 
 | Intent Type | What the User Wants | Keyword Examples | Best Page Format |
 |------------|-------------------|-----------------|-----------------|
@@ -24,11 +25,11 @@ According to Search Engine Land, over half of all searches are informational â€”
 | Transactional | Complete an action | "buy 630a mccb" / "valve price list" | Product pages, landing pages |
 | Navigational | Find a specific site | "siemens mccb" / "facebook login" | Brand homepage, login pages |
 
-We restructured the keywords for an electrical equipment B2B site last year. They had 15 pages all targeting "circuit breaker" â€” none ranked in the top 3. After re-mapping by intent:
+We restructured the keywords for an electrical equipment B2B site last year. They had 15 pages all targeting "circuit breaker" â€?none ranked in the top 3. After re-mapping by intent:
 
-- Informational â†’ Blog: "How to Choose the Right Circuit Breaker"
-- Commercial â†’ Comparison: "Top 5 Circuit Breaker Brands Compared"
-- Transactional â†’ Product page: "Buy Molded Case Circuit Breaker Online"
+- Informational â†?Blog: "How to Choose the Right Circuit Breaker"
+- Commercial â†?Comparison: "Top 5 Circuit Breaker Brands Compared"
+- Transactional â†?Product page: "Buy Molded Case Circuit Breaker Online"
 
 Three months later, the primary keyword moved from position 11 to 3. Organic traffic grew 170%.
 
@@ -48,11 +49,11 @@ Gather 10-20 terms from each of five dimensions:
 
 **Step 2: Validate with Data**
 
-Don't guess â€” cross-validate using free tools:
+Don't guess â€?cross-validate using free tools:
 
-- Google Search Console â†’ Keywords already generating impressions
-- Google Search autocomplete â†’ Type seed terms and record suggestions
-- "People Also Ask" boxes â†’ Real user questions
+- Google Search Console â†?Keywords already generating impressions
+- Google Search autocomplete â†?Type seed terms and record suggestions
+- "People Also Ask" boxes â†?Real user questions
 
 For paid tools, Semrush's Keyword Magic Tool and Ahrefs' Keywords Explorer provide search volume, Keyword Difficulty (KD), and CPC data [^3]. Budget-conscious teams can start with Google's free tool stack.
 
@@ -64,7 +65,7 @@ For every candidate keyword, ask three questions:
 2. What page types dominate the current SERP? (blog posts, product pages, category pages?)
 3. Which page on my site best matches this intent?
 
-On B2B sites, commercial-investigation keywords typically convert best â€” these users are comparing options and need expert comparison content, not price quotes [^4].
+On B2B sites, commercial-investigation keywords typically convert best â€?these users are comparing options and need expert comparison content, not price quotes [^4].
 
 **Step 4: Keyword Mapping**
 
@@ -73,12 +74,12 @@ This is where most B2B sites stumble. The golden rule: **one primary search inte
 Example mapping structure:
 
 ```
-Keyword: mccb circuit breaker â†’ Intent: Informational â†’ Target: Blog "What is MCCB"
-Keyword: best mccb brand â†’ Intent: Commercial â†’ Target: Comparison "Top MCCB Brands 2025"
-Keyword: mccb price 630a â†’ Intent: Transactional â†’ Target: Product page "630A MCCB"
+Keyword: mccb circuit breaker â†?Intent: Informational â†?Target: Blog "What is MCCB"
+Keyword: best mccb brand â†?Intent: Commercial â†?Target: Comparison "Top MCCB Brands 2025"
+Keyword: mccb price 630a â†?Intent: Transactional â†?Target: Product page "630A MCCB"
 ```
 
-## 03. Keyword Cannibalization â€” The Silent Rank Killer
+## 03. Keyword Cannibalization â€?The Silent Rank Killer
 
 Keyword cannibalization occurs when multiple pages on the same domain target the same or similar keywords, causing them to compete against each other [^5].
 
@@ -104,7 +105,7 @@ In December 2022, Google expanded E-A-T to E-E-A-T, adding "Experience" to empha
 
 How does this affect keyword strategy?
 
-If you only target broad product terms (e.g., "industrial valve"), your content will resemble every competitor's â€” no unique experience, no reason for Google to rank you higher.
+If you only target broad product terms (e.g., "industrial valve"), your content will resemble every competitor's â€?no unique experience, no reason for Google to rank you higher.
 
 Instead, organize keywords around real customer scenarios:
 
@@ -112,7 +113,7 @@ Instead, organize keywords around real customer scenarios:
 - "how to test valve sealing performance"
 - "valve maintenance checklist for chemical plants"
 
-These long-tail queries demand real-world experience. Content that addresses them naturally carries EEAT advantages â€” only someone who has actually done maintenance can write authoritatively about it.
+These long-tail queries demand real-world experience. Content that addresses them naturally carries EEAT advantages â€?only someone who has actually done maintenance can write authoritatively about it.
 
 ## 05. Action Checklist
 
@@ -122,10 +123,11 @@ Keyword research is not about finding the highest-volume term. It's about unders
 
 1. List 10+ primary product and service terms your site targets
 2. Validate them using Search Console or Google autocomplete
-3. Check for keyword cannibalization â€” if multiple pages compete for the same term, plan consolidation or differentiation
+3. Check for keyword cannibalization â€?if multiple pages compete for the same term, plan consolidation or differentiation
 
 The biggest illusion in B2B SEO is: "I'll optimize keywords later." The truth is, your first direction determines 90% of your SEO results.
 
+noindex: true
 ---
 
 [^1]: Google Search Central, "Search Quality Rater Guidelines", 2024, https://developers.google.com/search/docs/fundamentals/creating-helpful-content

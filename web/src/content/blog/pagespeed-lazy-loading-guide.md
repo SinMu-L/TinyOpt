@@ -1,17 +1,17 @@
 ---
-title: 外贸站 PageSpeed 低于 60？图片延迟加载全攻略（附批量优化方案）
+title: Shopify 店铺 PageSpeed 低于 60？图片延迟加载让你 LCP 降 70%
 date: 2026-06-08
 lang: zh
 translationKey: pagespeed-lazy-loading-guide
-description: 外贸独立站 PageSpeed 低分根因分析与完整解决方案：从技术原理到实操步骤详解图片延迟加载如何将 LCP 从 8 秒降到 2 秒以内。附 TinyOpt 批量处理数百张产品图的完整优化方案和 LCP 实测数据对比。
-tags: [PageSpeed, 性能优化, 延迟加载, 跨境电商, 批量处理]
+description: Shopify 店铺 PageSpeed 低分根因分析与完整解决方案：图片延迟加载如何将产品页 LCP 从 8 秒降到 2 秒以内。附 TinyOpt 批量处理数百张产品图的完整优化流程和实测数据对比。
+tags: [Shopify性能, 延迟加载, PageSpeed, 电商, 批量处理]
 ---
 
-打开 Google PageSpeed Insights，输入你的外贸独立站 URL，看到红色 40 多分的时候是什么心情，我太清楚了。
+打开 Google PageSpeed Insights，输入你的 Shopify 店铺 URL，看到红色 40 多分的时候是什么心情，我太清楚了。
 
-上个月一个做服装外贸的客户找我，站点首页 LCP（最大内容绘制）高达 8.2 秒，PageSpeed 移动端评分 31 分。谷歌对低分站点的爬取频率已经明显下降，自然流量半年掉了 40%。
+上个月一个做服装的 Shopify 卖家找我，单店 320 件商品、近 1000 张产品图，首页 LCP 高达 8.2 秒，PageSpeed 移动端评分 31 分。谷歌对低分站点爬取频率明显下降，自然流量半年掉了 40%。
 
-排查下来，三个图片问题占了扣分项的 70%：图片未压缩、未使用现代格式、首屏图片未做延迟加载。客户有 320 张产品图，手动处理根本不可能。
+排查下来，三个图片问题占了扣分项 70%：产品图未压缩、未使用 WebP 格式、首屏图片未做延迟加载。手动处理 1000 张图根本不可能。
 
 但这个问题，其实一个下午就能搞定。
 

@@ -5,17 +5,18 @@ lang: en
 translationKey: python-desktop-app-evolution
 description: "Refactoring journey: 200-line script to 3000-line PyQt5 desktop app. Watermarking, batch rename, multi-key concurrency, i18n, and 5 key lessons learned."
 tags: [Python, PyQt5, architecture, desktop-app, refactoring]
+noindex: true
 ---
 
 Six months ago I wrote a Python script: call the TinyPNG API, compress images, done. Roughly 200 lines. It worked.
 
-Then users started asking éˆ¥?"Can you add watermarking?" "Batch rename?" "Support multiple API keys?"
+Then users started asking éˆ?"Can you add watermarking?" "Batch rename?" "Support multiple API keys?"
 
 Each request looked small on its own. But stacked together, that 200-line script became unmanageable. Fix one feature, break another. Global variables everywhere. No module boundaries, no state management.
 
 So I started refactoring. Six months later, it's a 3000-line PyQt5 desktop application with 3 independent modules, bilingual i18n, and automated CI/CD builds.
 
-This isn't a tutorial éˆ¥?it's a real refactoring postmortem. What I chose, why I chose it, and what it cost.
+This isn't a tutorial éˆ?it's a real refactoring postmortem. What I chose, why I chose it, and what it cost.
 
 ## 01. Phase One: Single Script, Just Ship It
 
@@ -29,11 +30,11 @@ The original architecture was minimal:
 | State | None |
 | Error handling | Basic try/except |
 
-It used `requests` to call the TinyPNG API éˆ¥?read file, upload, download compressed result, save.
+It used `requests` to call the TinyPNG API éˆ?read file, upload, download compressed result, save.
 
 **Biggest problem**: compressing a different directory meant editing the script.
 
-That was fine when I was the only user. When I shared it with friends, they couldn't éˆ¥?and shouldn't need to éˆ¥?edit Python scripts.
+That was fine when I was the only user. When I shared it with friends, they couldn't éˆ?and shouldn't need to éˆ?edit Python scripts.
 
 ## 02. Phase Two: Added GUI, Did Not Add Architecture
 
@@ -55,7 +56,7 @@ def on_compress_clicked(self):
 
 One function doing 5 things. Adding a progress bar felt dangerous.
 
-Worse, PyQt's GUI thread can't block. QThread was necessary éˆ¥?but every feature built its own threading mechanism. State sync relied on signals. Debugging meant guessing which Worker misbehaved.
+Worse, PyQt's GUI thread can't block. QThread was necessary éˆ?but every feature built its own threading mechanism. State sync relied on signals. Debugging meant guessing which Worker misbehaved.
 
 | Problem | Symptom |
 |---------|---------|
@@ -80,7 +81,7 @@ Each expensive operation became a dedicated QThread Worker:
 | `WatermarkWorker` | Image loading, watermark compositing, output | `progress`, `file_done`, `all_done` |
 | `RenameWorker` | Template substitution, conflict detection, rename | `progress`, `file_done`, `all_done` |
 
-They share the same base pattern with identical signal interfaces. MainWindow connects signals éˆ¥?no need to understand internal logic.
+They share the same base pattern with identical signal interfaces. MainWindow connects signals éˆ?no need to understand internal logic.
 
 ### 3.2 KeyManager as Central State
 
@@ -117,7 +118,7 @@ When users asked for an English version, I didn't want to write two UIs. A simpl
 
 - JSON-based translation storage with dot-notation lookup
 - `{variable}` substitution
-- Language switch triggers callbacks éˆ¥?UI refreshes in place
+- Language switch triggers callbacks éˆ?UI refreshes in place
 
 ```python
 class Translator:
@@ -138,11 +139,11 @@ class Translator:
             cb()
 ```
 
-Windows register callbacks on init. After a language switch, all labels, buttons, and table headers update automatically éˆ¥?no restart needed.
+Windows register callbacks on init. After a language switch, all labels, buttons, and table headers update automatically éˆ?no restart needed.
 
 ## 04. Phase Four: CI/CD and Automated Releases
 
-After modularization, releases became the bottleneck éˆ¥?manual PyInstaller builds, uploading to cloud storage, notifying users.
+After modularization, releases became the bottleneck éˆ?manual PyInstaller builds, uploading to cloud storage, notifying users.
 
 GitHub Actions fixed it:
 
@@ -168,20 +169,20 @@ The pipeline automatically:
 
 If I could start over, I'd tell myself this:
 
-**éˆ¶?Small tools still need architecture**
+**éˆ?Small tools still need architecture**
 A 200-line script doesn't need modules. But before adding a GUI, spend a day designing boundaries. It saves two months of refactoring.
 
-**éˆ¶?Worker pattern is PyQt best practice**
-QThread isn't scary éˆ¥?what's scary is every feature reinventing it. One base Worker class with clear signal interfaces solves all threading problems in one place.
+**éˆ?Worker pattern is PyQt best practice**
+QThread isn't scary éˆ?what's scary is every feature reinventing it. One base Worker class with clear signal interfaces solves all threading problems in one place.
 
-**éˆ¶?Global variables are evil**
-An API Key read in 3 places, state modified in 5 places éˆ¥?this coupling makes changes impossible. Centralize state in a single manager class. Minimal cost, maximum gain.
+**éˆ?Global variables are evil**
+An API Key read in 3 places, state modified in 5 places éˆ?this coupling makes changes impossible. Centralize state in a single manager class. Minimal cost, maximum gain.
 
-**éˆ¶?Add i18n early**
+**éˆ?Add i18n early**
 My app was Chinese-only. When users asked for English, it took 3 days to extract all hardcoded strings. If I'd used JSON from day one, it would have taken 3 hours.
 
-**éˆ¶?CI/CD isn't just for big teams**
-After 3 manual releases, humans make mistakes éˆ¥?wrong version, forgotten deps, missed uploads. Half a day to set up GitHub Actions, then every release is one button.
+**éˆ?CI/CD isn't just for big teams**
+After 3 manual releases, humans make mistakes éˆ?wrong version, forgotten deps, missed uploads. Half a day to set up GitHub Actions, then every release is one button.
 
 ## 06. Current Architecture Overview
 
@@ -195,4 +196,4 @@ After 3 manual releases, humans make mistakes éˆ¥?wrong version, forgotten deps,
 
 3000 lines, 5 modules. Each module does one thing.
 
-é¦ƒæ†  **Building a desktop app?** [Download TinyOpt](/) and see the result. Or browse the source éˆ¥?the architecture isn't perfect, but every refactoring decision had a reason. And those reasons are worth more than the code itself.
+é¦ƒæ†  **Building a desktop app?** [Download TinyOpt](/) and see the result. Or browse the source éˆ?the architecture isn't perfect, but every refactoring decision had a reason. And those reasons are worth more than the code itself.

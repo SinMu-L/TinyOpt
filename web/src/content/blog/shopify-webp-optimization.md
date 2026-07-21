@@ -1,10 +1,10 @@
 ---
-title: Shopify 图片优化：WebP 格式让体积暴降 70%
+title: Shopify 产品图优化：WebP 格式让体积暴降 70%，加载快 3 秒
 date: 2026-06-08
 lang: zh
 translationKey: shopify-webp-optimization
-description: 用实测数据对比 WebP、AVIF 与传统 JPG/PNG 格式的压缩差距，分享 Shopify 商品图批量格式转换与压缩的完整方案，附 TinyOpt 实操步骤与主题配置建议，把商品图体积降低 70%，有效提升店铺加载速度与转化率。
-tags: [图片格式, 性能优化, Shopify, WebP, 电商]
+description: 实测对比 WebP、AVIF 与传统 JPEG/PNG 格式的压缩差距。教你用 TinyOpt 批量转换 Shopify 产品图格式与压缩，附实操步骤，把产品页体积降低 70%，加载更快、转化更高。
+tags: [产品图格式, Shopify优化, WebP, 电商转化, 批量处理]
 ---
 
 Shopify 店铺的加载速度每慢 1 秒，转化率就下降 7%。而图片通常是 Shopify 页面体积的罪魁祸首——平均占了页面总大小的 60% 以上。

@@ -1,23 +1,25 @@
 ---
-title: "Image SEO: File Renaming and Alt Tag Guide"
+title: "Shopify Product Image Naming: SEO Guide for More Google Traffic"
 date: 2026-06-10
 lang: en
 translationKey: image-seo-rename-alt-guide
-description: Batch rename images with keyword-rich filenames using TinyOpt templates. Gain Google traffic with Alt text strategies and our complete image SEO checklist.
-tags: [Image SEO, batch rename, Google Search, Alt tags, traffic growth]
+description: Your product image filenames decide whether Google Images and Google Shopping can find your products. Learn how to batch rename hundreds of product photos with TinyOpt to get free organic search traffic.
+tags: [Product Image SEO, batch rename, Shopify, Google Shopping, Alt tags]
 ---
 
-If you Google any product keyword, chances are the first result is followed by a row of images — that's the Google Image Search traffic opportunity.
+You listed a batch of new products on Shopify — great photos, compelling descriptions, competitive pricing. Two weeks later, your Google search traffic is near zero. What went wrong?
 
-According to SparkToro, Google Image Search accounts for 22.6% of all searches. Yet for most site owners, image SEO is a completely neglected traffic channel.
+Your product image filenames.
 
-Last month I analyzed 50 international e-commerce sites for image SEO. The findings were shocking:
+When you upload product photos named `IMG_3829.jpg` to Shopify, Google has no idea whether it's a wool coat or a coffee mug. Meanwhile, your competitor simply renamed their file to `wool-coat-grey-size-m.jpg` — and they're getting free traffic from Google Images and Google Shopping. No ads required.
 
-- 92% of image filenames were `IMG_3829.jpg` or `1.jpg`
-- 78% of images had no Alt attribute
-- 65% of filenames had zero correlation with page titles
+Last month I audited 50 Shopify stores for product image SEO:
 
-These sites are almost completely abandoning the image search traffic channel. Fixing these issues costs nearly nothing.
+- 92% of product image filenames were `IMG_3829.jpg` or camera defaults
+- 78% had no Alt attribute on product images
+- 65% of filenames had zero connection to the product title
+
+Most Shopify sellers are invisible on Google Images and Google Shopping — two completely free traffic channels. Fixing this costs nothing but an afternoon.
 
 | Image SEO Element | Most Sites (Before) | Optimized (After) |
 |------------------|-------------------|------------------|

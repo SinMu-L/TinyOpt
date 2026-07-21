@@ -1,0 +1,23 @@
+---
+export interface Props {
+  lang?: 'zh' | 'en';
+  compact?: boolean;
+}
+const { lang = 'en', compact = false } = Astro.props;
+---
+
+{
+  compact ? (
+    <span class="text-xs text-gray-400">
+      {lang === 'zh' ? '（含联盟链接）' : '(affiliate link)'}
+    </span>
+  ) : (
+    <div class="my-8 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3">
+      <p class="text-sm text-gray-500">
+        {lang === 'zh'
+          ? '声明：本文中的部分链接为联盟营销链接。如果你通过它们购买，我们可能获得少量佣金，你不需要支付额外费用。这不会影响我们的推荐——我们只推荐真正使用过的产品。'
+          : 'Disclosure: Some links in this article are affiliate links. If you purchase through them, we may earn a small commission at no extra cost to you. This does not affect our recommendations — we only recommend products we genuinely use.'}
+      </p>
+    </div>
+  )
+}

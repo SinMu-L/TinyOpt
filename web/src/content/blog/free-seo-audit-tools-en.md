@@ -5,9 +5,10 @@ lang: en
 translationKey: free-seo-audit-tools
 description: "Ditch Semrush and Ahrefs: run a complete SEO audit with GSC, Screaming Frog, and Lighthouse. Full workflow from site crawl to page diagnostics included."
 tags: [SEO audit, free tools, Google Search Console, Screaming Frog, Lighthouse]
+noindex: true
 ---
 
-**Semrush** costs **$139/month**. **Ahrefs** costs **$129/month**. For solo site owners and freelancers, that's serious money â€” nearly **$1,700/year**, equivalent to hosting costs for a mid-size site.
+**Semrush** costs **$139/month**. **Ahrefs** costs **$129/month**. For solo site owners and freelancers, that's serious money â€?nearly **$1,700/year**, equivalent to hosting costs for a mid-size site.
 
 The good news: three free tools cover **80%** of a professional SEO audit. That $139/month you save can go toward links, ads, or just staying profitable.
 
@@ -23,7 +24,7 @@ The tools: **Google Search Console**, **Screaming Frog SEO Spider**, and **Light
 
 These three complement each other: GSC shows trends, Screaming Frog finds bugs, Lighthouse diagnoses depth. You need all three.
 
-## 01. GSC â€” Macro Health Check (30 min)
+## 01. GSC â€?Macro Health Check (30 min)
 
 GSC is the only tool that tells you how Google sees your site. It's your SEO health screening center.
 
@@ -34,18 +35,18 @@ Open the "Pages" report in the left sidebar. Watch two numbers:
 - **Valid pages**: Is the count growing or shrinking? Two consecutive months of decline = a problem.
 - **Excluded pages**: Focus on "Crawled but not indexed" count.
 
-If the exclusion ratio exceeds **20%**, you have a serious issue. Google crawled your pages but decided they weren't worth indexing â€” usually a content quality problem.
+If the exclusion ratio exceeds **20%**, you have a serious issue. Google crawled your pages but decided they weren't worth indexing â€?usually a content quality problem.
 
 ### 1.2 Performance Report
 
-Set filters: last **3 months**, sort by position. Find keywords at positions **4-10** â€” the "low-hanging fruit" of SEO.
+Set filters: last **3 months**, sort by position. Find keywords at positions **4-10** â€?the "low-hanging fruit" of SEO.
 
 Keywords at positions 4-10 only need minor tweaks (title optimization, content expansion, internal links) to break into the top 3. Keywords at positions 11-20 are a tier harder. Don't start with them.
 
 Export CSV, add a "Priority" column using these rules:
-- Position 4-7 â†’ High priority
-- Position 8-10 â†’ Medium priority
-- Impressions > 100 and position > 10 â†’ Monitor
+- Position 4-7 â†?High priority
+- Position 8-10 â†?Medium priority
+- Impressions > 100 and position > 10 â†?Monitor
 
 ### 1.3 Core Web Vitals Report
 
@@ -66,7 +67,7 @@ Ratio < **50%** = crawl budget or content quality issue. Go back to Screaming Fr
 
 > What GSC can't do: find 404s, detect duplicate titles, identify missing H1s, or surface oversized images. That's what offline tools are for.
 
-## 02. Screaming Frog â€” Micro Issue Scan (1 hour)
+## 02. Screaming Frog â€?Micro Issue Scan (1 hour)
 
 **Screaming Frog SEO Spider** free version handles **500 URLs**. For most personal sites and SMBs, that's enough.
 
@@ -75,10 +76,10 @@ Ratio < **50%** = crawl budget or content quality issue. Go back to Screaming Fr
 Three steps before you start:
 
 1. Enter site URL, click "Start"
-2. Configuration â†’ Spider â†’ Check "Crawl Images", "Crawl CSS", "Crawl JavaScript"
-3. Configuration â†’ User-Agent â†’ Select "Googlebot (Smartphone)"
+2. Configuration â†?Spider â†?Check "Crawl Images", "Crawl CSS", "Crawl JavaScript"
+3. Configuration â†?User-Agent â†?Select "Googlebot (Smartphone)"
 
-Using Googlebot's User-Agent shows you what Google sees â€” not what users see. Some JS rendering issues only surface from the crawler's perspective.
+Using Googlebot's User-Agent shows you what Google sees â€?not what users see. Some JS rendering issues only surface from the crawler's perspective.
 
 Crawl time: ~**5-10 minutes** for 500 URLs.
 
@@ -102,7 +103,7 @@ After crawling, export CSV. Focus on these columns:
 Filter "Images" under the Internal tab. Three checks:
 
 - **File size > 500KB**: These images directly bloat LCP. An 800KB product photo isn't worth it.
-- **Dimensions > 2000px wide**: Display width is usually 800px â€” you're wasting **60%** of bandwidth.
+- **Dimensions > 2000px wide**: Display width is usually 800px â€?you're wasting **60%** of bandwidth.
 - **No Alt text**: SEO blind spot. Google Image Search uses Alt text to understand image content.
 
 ðŸ‘‰ [TinyOpt batch-compresses + converts format, shrinking >500KB images to <150KB](/download/)
@@ -116,13 +117,13 @@ If your site is multilingual, check hreflang tags:
 
 Wrong hreflang = Google might serve English pages to French users.
 
-## 03. Lighthouse â€” Page-Level Diagnostics (30 min)
+## 03. Lighthouse â€?Page-Level Diagnostics (30 min)
 
 Lighthouse is built into Chrome DevTools. Completely free, unlimited use.
 
 ### 3.1 How to Run
 
-Open Chrome DevTools (F12) â†’ Lighthouse tab â†’ Run Desktop + Mobile separately.
+Open Chrome DevTools (F12) â†?Lighthouse tab â†?Run Desktop + Mobile separately.
 
 Recommended pages: homepage + 3 core landing pages + 1 blog post. These 5 pages represent your site's typical performance.
 
@@ -135,7 +136,7 @@ Performance score < **50** = serious issues. Check two key areas:
 - Is the format WebP/AVIF or JPEG/PNG?
 - Does it have `loading="lazy"` and explicit dimensions?
 
-**Opportunities** â†’ "Serve images in next-gen formats": This is Lighthouse's #1 image-related suggestion. Switch to WebP/AVIF to resolve it instantly.
+**Opportunities** â†?"Serve images in next-gen formats": This is Lighthouse's #1 image-related suggestion. Switch to WebP/AVIF to resolve it instantly.
 
 ðŸ‘‰ [TinyOpt converts to WebP/AVIF in one click, eliminating Lighthouse image warnings](/download/)
 
@@ -174,8 +175,8 @@ Sort by impact Ã— fix difficulty. High impact + easy fix = do first.
 
 | Week | Planned Fixes | Completed | Notes |
 |------|--------------|-----------|-------|
-| Week 1 | 404s + image compression | âœ“ | One-time fixes |
-| Week 2 | Titles + H1s | âœ“ | Page by page |
+| Week 1 | 404s + image compression | âœ?| One-time fixes |
+| Week 2 | Titles + H1s | âœ?| Page by page |
 | Week 3 | Canonical + Schema | Pending | Needs dev help |
 
 ## Pattern Summary
@@ -193,7 +194,7 @@ Recommended path: start with free tools. Only upgrade when your site exceeds 500
 
 **Q1: Can Screaming Frog crawl large sites?**
 
-Free version caps at **500 URLs**. Beyond that, you need a license (**ï¿¡199/year**, ~**$260**). For most personal sites and SMBs, 500 URLs is sufficient.
+Free version caps at **500 URLs**. Beyond that, you need a license (**ï¿?99/year**, ~**$260**). For most personal sites and SMBs, 500 URLs is sufficient.
 
 **Q2: Are Lighthouse scores the same as real-user experience?**
 
@@ -201,13 +202,13 @@ Not exactly. Lighthouse is **lab data** (simulated environment); GSC Core Web Vi
 
 **Q3: Do I need Screaming Frog if I already use GSC?**
 
-Yes. GSC won't tell you which pages have duplicate titles, which images exceed 500KB, or which pages are orphans. GSC is macro, Screaming Frog is micro â€” you need both.
+Yes. GSC won't tell you which pages have duplicate titles, which images exceed 500KB, or which pages are orphans. GSC is macro, Screaming Frog is micro â€?you need both.
 
-**Q4: What if I find 50 image issues â€” how do I batch-fix them?**
+**Q4: What if I find 50 image issues â€?how do I batch-fix them?**
 
-Manual fixes are impractical. Use **TinyOpt** for batch import â€” compress, convert format, and resize all at once. 50 images fixed in minutes.
+Manual fixes are impractical. Use **TinyOpt** for batch import â€?compress, convert format, and resize all at once. 50 images fixed in minutes.
 
-ðŸ‘‰ [TinyOpt batch processing â€” one click solves all your image optimization issues](/download/)
+ðŸ‘‰ [TinyOpt batch processing â€?one click solves all your image optimization issues](/download/)
 
 **Q5: How often should I run this audit?**
 
@@ -217,7 +218,7 @@ Manual fixes are impractical. Use **TinyOpt** for batch import â€” compress, con
 
 2 hours. 3 free tools. 80% coverage of a professional SEO audit.
 
-This is the best 2 hours you'll spend on SEO each month. Better than chasing trends, better than fretting over algorithm updates, better than any other SEO investment â€” because it tells you exactly what's wrong, how to fix it, and what will happen when you do.
+This is the best 2 hours you'll spend on SEO each month. Better than chasing trends, better than fretting over algorithm updates, better than any other SEO investment â€?because it tells you exactly what's wrong, how to fix it, and what will happen when you do.
 
 Remember the workflow:
 - **GSC** shows you how Google sees your site
@@ -226,8 +227,9 @@ Remember the workflow:
 
 Open GSC this afternoon. Follow Step 1 from this guide. In 30 minutes, you'll spot an issue you hadn't noticed before.
 
-ðŸ‘‰ [Download TinyOpt â€” fix every image issue Lighthouse flagged, all at once](/download/)
+ðŸ‘‰ [Download TinyOpt â€?fix every image issue Lighthouse flagged, all at once](/download/)
 
+noindex: true
 ---
 
 [^1]: Google Search Central, "Google Search Console Help", https://support.google.com/webmasters/answer/9128668

@@ -1,15 +1,17 @@
 ---
-title: "Fix CLS Layout Shifts: 5 Causes and a 3-Step Fix"
+title: "Fix CLS Layout Shifts on Product Pages: Keep 'Add to Cart' Where It Belongs"
 date: 2026-07-17
 lang: en
 translationKey: cls-layout-shift-fix
-description: Images without dimensions, ads, and dynamic content are leading CLS causes. This guide covers the 5 culprits and a 3-step fix with real before/after data.
-tags: [CLS, Core Web Vitals, layout shift, performance optimization, PageSpeed]
+description: Product images without dimensions and dynamic review sections are top CLS causes for e-commerce stores. 5 shift culprits and a 3-step fix for Shopify/WooCommerce product pages.
+tags: [CLS, Shopify optimization, layout shift, product page performance, PageSpeed]
 ---
 
-You compressed your images, switched to WebP, enabled a CDN. You open PageSpeed Insights. The score is still yellow. You check CLS: 0.38 (failing).
+Your Shopify store: product images compressed, WebP enabled, CDN running. You open PageSpeed Insights. Still yellow. You check CLS: 0.38 (failing).
 
 The problem isn't image size — it's layout shift.
+
+Your product page loads. The "Add to Cart" button appears. Customer moves their thumb to tap. Product image finishes loading — and the button jumps halfway down the page. That's a lost sale.
 
 This is the most frustrating part. You've done every optimization people told you about, but the metric won't budge. That's because you fixed file size, while CLS penalizes page jank.
 

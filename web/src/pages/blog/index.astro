@@ -22,7 +22,10 @@ const posts = (await getCollection('blog'))
           {posts.map((post) => (
             <a href={`/blog/${post.id}/`} class="group rounded-xl border border-gray-100 p-6 transition-all hover:-translate-y-1 hover:shadow-md">
               <div class="mb-3 text-xs text-gray-400">{post.data.date.toLocaleDateString('en-US')}</div>
-              <h2 class="mb-2 text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">{post.data.title}</h2>
+              <h2 class="mb-2 text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+                {post.data.title}
+                {post.data.noindex && <span class="ml-2 text-xs font-normal text-amber-500">[Archived]</span>}
+              </h2>
               <p class="text-sm text-gray-500">{post.data.description}</p>
               {post.data.tags && (
                 <div class="mt-4 flex flex-wrap gap-2">

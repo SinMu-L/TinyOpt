@@ -5,6 +5,7 @@ lang: en
 translationKey: thread-safe-api-key-pool
 description: Build a thread-safe API key pool for TinyPNG multi-key use. Covers round-robin scheduling, thread safety, and auto-disable with complete Python code.
 tags: [Python, concurrency, thread-safe, API Key, design-pattern]
+noindex: true
 ---
 
 TinyPNG's free API gives each account 500 compressions per month. To handle more images, the straightforward solution is registering multiple keys.
@@ -18,7 +19,7 @@ But multiple keys introduce a new problem: **when multiple threads grab keys con
 | Key quota exhausted but still used | Wasted requests, all return 429 |
 | More threads than keys | Some threads starve waiting forever |
 
-This article breaks down the complete `KeyManager` implementation from TinyOpt â€” a production-validated, thread-safe API key pool.
+This article breaks down the complete `KeyManager` implementation from TinyOpt â€?a production-validated, thread-safe API key pool.
 
 ## 01. Requirements: What We Need
 
@@ -27,7 +28,7 @@ A key management module must satisfy 5 requirements:
 | # | Requirement | Why |
 |---|-------------|-----|
 | 1 | Thread-safe | N Workers fetch keys concurrently without conflict |
-| 2 | Fair round-robin | All keys used evenly â€” no single key exhausts early |
+| 2 | Fair round-robin | All keys used evenly â€?no single key exhausts early |
 | 3 | Auto-disable | Skip exhausted or invalid keys automatically |
 | 4 | No double-booking | One key held by exactly one Worker at a time |
 | 5 | Lock-efficient | Key acquisition doesn't become a bottleneck under load |
@@ -57,7 +58,7 @@ class KeyManager:
 ```
 
 Design rationale:
-- `Lock` instead of `RLock` â€” key acquisition is mutually exclusive, no reentrancy needed
+- `Lock` instead of `RLock` â€?key acquisition is mutually exclusive, no reentrancy needed
 - `in_use` flag prevents the same key from being held by two Workers simultaneously
 - `disabled` flag lets exhausted keys be permanently skipped
 
@@ -84,13 +85,13 @@ def acquire_key(self) -> APIKey | None:
 
 Key details:
 
-**â‘  Scan all keys, not just the next one**
+**â‘?Scan all keys, not just the next one**
 Starting from `_index`, it scans the full circle. This guarantees it finds an available key even if the current pointer lands on one that's in use.
 
-**â‘¡ Pointer advancement ensures fairness**
-After each allocation, the pointer moves forward by one. The next allocation starts from the following position. Keys are used evenly â€” no single key gets drained before others.
+**â‘?Pointer advancement ensures fairness**
+After each allocation, the pointer moves forward by one. The next allocation starts from the following position. Keys are used evenly â€?no single key gets drained before others.
 
-**â‘¢ Return None instead of blocking**
+**â‘?Return None instead of blocking**
 When no keys are available, return `None`. The caller decides whether to wait, retry, or degrade. This prevents deadlocks in thread pools.
 
 `release_key` is symmetric:
@@ -151,10 +152,10 @@ Three limits, take the minimum:
 | 3 keys, 3 threads (no lock) | ~6 min | 62% (conflicts) | ~73% |
 | 3 keys, 3 threads (KeyManager) | ~5 min | 100% | 100% |
 
-The 62% success rate and 73% quota utilization in the lock-free version say it all â€” threads grabbing keys without control waste both requests and quota.
+The 62% success rate and 73% quota utilization in the lock-free version say it all â€?threads grabbing keys without control waste both requests and quota.
 
 With KeyManager:
-- 500 images: 15 minutes â†’ 5 minutes
+- 500 images: 15 minutes â†?5 minutes
 - All 3 keys fully utilized
 - Zero quota waste, zero conflicts
 
@@ -173,7 +174,7 @@ The core idea is always the same: **protect state changes with a lock, ensure fa
 
 ## 08. Summary
 
-The biggest lesson from writing KeyManager: **the hard part of concurrent programming isn't the lock â€” it's realizing you need one.**
+The biggest lesson from writing KeyManager: **the hard part of concurrent programming isn't the lock â€?it's realizing you need one.**
 
 Adding a lock is trivial when KeyManager is 50 lines. By the time you realize you need one, the key is already being passed around 3 classes and modified in 5 places. Good luck covering all paths then.
 

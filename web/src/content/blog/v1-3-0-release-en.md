@@ -5,16 +5,17 @@ lang: en
 translationKey: v1-3-0-release
 description: TinyOpt Compressor v1.3.0 released with AVIF support, improved watermark tool, enhanced batch processing, and fixes for high-DPI and special image formats.
 tags: [release, v1.3.0, AVIF]
+noindex: true
 ---
 
 ## What's New in v1.3.0
 
 TinyOpt Compressor v1.3.0 is officially released! Here are the highlights:
 
-### âœ¨ New Features
+### âœ?New Features
 
-1. **AVIF Format Support** â€” Added AVIF image format output for smaller file sizes while maintaining quality
-2. **Enhanced Format Conversion** â€” Now supports 9 formats: JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF
+1. **AVIF Format Support** â€?Added AVIF image format output for smaller file sizes while maintaining quality
+2. **Enhanced Format Conversion** â€?Now supports 9 formats: JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF
 
 ### ðŸŽ¨ Improvements
 

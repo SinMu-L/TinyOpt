@@ -1,17 +1,17 @@
 ---
-title: "Fix Low PageSpeed Scores: Image Lazy Loading Guide"
+title: "Shopify PageSpeed Below 60? Image Lazy Loading Cuts LCP 70%"
 date: 2026-06-08
 lang: en
 translationKey: pagespeed-lazy-loading-guide
-description: Tackle the most common PageSpeed pain point for e-commerce sites — from lazy loading principles to batch image optimization, cut LCP from 8 seconds to 2.
-tags: [PageSpeed, performance optimization, lazy loading, e-commerce, batch processing]
+description: "Root cause fix for low Shopify PageSpeed scores: lazy loading product images to cut LCP from 8s to under 2s. Full batch optimization workflow for hundreds of product photos."
+tags: [Shopify performance, lazy loading, PageSpeed, e-commerce, batch processing]
 ---
 
-You know that feeling when you run Google PageSpeed Insights on your e-commerce site and see a red score in the 40s? I know it all too well.
+You know that feeling when you run Google PageSpeed Insights on your Shopify store and see a red score in the 40s? I know it all too well.
 
-Last month, a fashion e-commerce client came to me. The homepage LCP (Largest Contentful Paint) was 8.2 seconds. PageSpeed mobile score: 31. Google had already reduced crawl frequency for the low-scoring site, and organic traffic had dropped 40% in six months.
+Last month, a Shopify seller in fashion came to me. Single store, 320 products, nearly 1,000 product images. Homepage LCP was 8.2 seconds. PageSpeed mobile score: 31. Google had already reduced crawl frequency, and organic traffic dropped 40% in six months.
 
-After investigation, three image issues accounted for 70% of the penalties: uncompressed images, no modern format, and first-screen images not lazy-loaded. The client had 320 product photos — manual processing was impossible.
+After investigation, three image issues accounted for 70% of the penalties: uncompressed product photos, no WebP format, and first-screen images not lazy-loaded. The store had 320 products — manual processing was impossible.
 
 But this problem can be solved in an afternoon.
 

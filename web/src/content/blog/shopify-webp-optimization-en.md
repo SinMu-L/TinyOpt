@@ -4,7 +4,7 @@ date: 2026-06-08
 lang: en
 translationKey: shopify-webp-optimization
 description: Real-world benchmark comparing WebP/AVIF vs traditional JPEG compression. Complete guide for batch-converting Shopify product images to WebP with TinyOpt.
-tags: [image format, performance optimization, Shopify, WebP, e-commerce]
+tags: [product image format, Shopify optimization, WebP, e-commerce conversion, batch processing]
 ---
 
 A 1-second delay in Shopify store load time reduces conversion rates by 7%. And images are usually the biggest culprit — accounting for 60%+ of total page size on average.
