@@ -1,23 +1,18 @@
 import sys
 import os
-from datetime import datetime
 from pathlib import Path
 
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
-    QHBoxLayout, QLabel, QListWidget, QStackedWidget, QComboBox, QSplitter,
-    QMessageBox, QAbstractItemView, QCheckBox, QSpinBox, QGroupBox, QPushButton,
-    QTextEdit, QLineEdit, QFileDialog, QTableWidget, QTableWidgetItem,
-    QHeaderView, QFrame, QSlider, QDialog, QFormLayout, QSpinBox,
-    QDialogButtonBox, QFontDialog, QColorDialog, QButtonGroup, QRadioButton,
-    QGraphicsView, QGraphicsScene, QProgressBar, QListWidgetItem)
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QMimeData, QRect, QRectF, QPointF
-from PyQt5.QtGui import (QDragEnterEvent, QDropEvent, QFont, QColor, QBrush, QIcon,
-    QPixmap, QPainter, QPen, QPolygonF, QPainterPath, QTransform)
-from PIL import Image, ImageDraw, ImageFont
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel,
+    QListWidget, QStackedWidget, QComboBox, QFrame,
+)
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QDragEnterEvent, QDropEvent, QIcon
 
 from i18n import T, set_language, get_language, on_language_change
+from styles.theme import APP_STYLESHEET
 
-from core.config import SUPPORTED_EXTENSIONS, FORMATS, DEFAULT_FORMAT, RESIZE_METHODS, DEFAULT_RESIZE_METHOD, load_config, save_config
+from core.config import SUPPORTED_EXTENSIONS, load_config, save_config
 from core.key_manager import KeyManager
 from core.pages.compress_page import CompressPage
 from core.pages.watermark_page import WatermarkPage
@@ -31,7 +26,8 @@ from core.pages.website_page import WebsitePage
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setMinimumSize(900, 700)
+        self.setMinimumSize(1000, 720)
+        self.setAcceptDrops(True)
         self.worker = None
         self.config = load_config()
         self.key_manager = KeyManager.from_config(self.config)
@@ -49,10 +45,22 @@ class MainWindow(QMainWindow):
 
         sidebar_widget = QWidget()
         sidebar_widget.setObjectName('sidebarWidget')
-        sidebar_widget.setFixedWidth(180)
+        sidebar_widget.setFixedWidth(170)
         sidebar_layout = QVBoxLayout(sidebar_widget)
-        sidebar_layout.setContentsMargins(8, 8, 8, 8)
-        sidebar_layout.setSpacing(0)
+        sidebar_layout.setContentsMargins(12, 16, 12, 12)
+        sidebar_layout.setSpacing(8)
+
+        brand = QFrame()
+        brand_layout = QVBoxLayout(brand)
+        brand_layout.setContentsMargins(8, 0, 8, 8)
+        brand_layout.setSpacing(2)
+        self.brand_title = QLabel()
+        self.brand_title.setObjectName('brandTitle')
+        self.brand_subtitle = QLabel()
+        self.brand_subtitle.setObjectName('brandSubtitle')
+        brand_layout.addWidget(self.brand_title)
+        brand_layout.addWidget(self.brand_subtitle)
+        sidebar_layout.addWidget(brand)
 
         self.sidebar = QListWidget()
         self.sidebar.setObjectName('sidebar')
@@ -69,16 +77,20 @@ class MainWindow(QMainWindow):
         self.sidebar.currentRowChanged.connect(self.on_sidebar_changed)
         self.lang_combo = QComboBox()
         self.lang_combo.setObjectName('langCombo')
-        self.lang_combo.addItem("中文", "zh")
-        self.lang_combo.addItem("English", "en")
+        self.lang_combo.addItem("\U0001f310  中文", "zh")
+        self.lang_combo.addItem("\U0001f310  English", "en")
         self.lang_combo.setCurrentIndex(0 if get_language() == "zh" else 1)
         self.lang_combo.currentIndexChanged.connect(self._on_lang_changed)
-        self.lang_combo.setMaximumWidth(164)
         sidebar_layout.addWidget(self.sidebar, 1)
-        sidebar_layout.addSpacing(8)
         sidebar_layout.addWidget(self.lang_combo)
 
         root.addWidget(sidebar_widget)
+
+        content_host = QWidget()
+        content_host.setObjectName('contentHost')
+        content_layout = QVBoxLayout(content_host)
+        content_layout.setContentsMargins(0, 0, 0, 0)
+        content_layout.setSpacing(0)
 
         self.compress_page = CompressPage(self.config, self.key_manager)
         self.watermark_page = WatermarkPage()
@@ -103,7 +115,8 @@ class MainWindow(QMainWindow):
         self.stack.addWidget(self.key_page)         # 4
         self.stack.addWidget(self.history_page)     # 5
         self.stack.addWidget(self.website_page)     # 6
-        root.addWidget(self.stack, 1)
+        content_layout.addWidget(self.stack)
+        root.addWidget(content_host, 1)
 
     def _on_lang_changed(self, idx):
         lang = self.lang_combo.itemData(idx)
@@ -113,6 +126,8 @@ class MainWindow(QMainWindow):
 
     def retranslate_ui(self):
         self.setWindowTitle(T('app.title'))
+        self.brand_title.setText(T('app.brand_name'))
+        self.brand_subtitle.setText(T('app.brand_tagline'))
         self.sidebar.item(0).setText('\U0001f4c1  ' + T('sidebar.compress').strip())
         self.sidebar.item(1).setText('\U0001f4a7  ' + T('sidebar.watermark').strip())
         self.sidebar.item(2).setText('\U0001f4dd  ' + T('sidebar.rename').strip())
@@ -202,7 +217,7 @@ class MainWindow(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
-    app.setApplicationName("TinyJPG Compressor")
+    app.setApplicationName("TinyOpt")
     app.setStyleSheet(APP_STYLESHEET)
     icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "icon.png")
     if os.path.isfile(icon_path):
@@ -213,270 +228,6 @@ def main():
         window.setWindowIcon(QIcon(icon_path))
     window.show()
     sys.exit(app.exec_())
-
-APP_STYLESHEET = """
-QMainWindow, QDialog {
-    background: #ffffff;
-}
-
-QWidget#sidebarWidget {
-    background: #f8fafc;
-}
-
-QListWidget#sidebar {
-    background: #f8fafc;
-    border: none;
-    border-right: 1px solid #e2e8f0;
-    font-size: 13px;
-    outline: none;
-}
-QListWidget#sidebar::item {
-    padding: 12px 16px 12px 14px;
-    border-left: 3px solid transparent;
-    color: #475569;
-}
-QListWidget#sidebar::item:selected {
-    background: #eff6ff;
-    color: #2563eb;
-    border-left: 3px solid #2563eb;
-    font-weight: 600;
-}
-QListWidget#sidebar::item:hover:!selected {
-    background: #f1f5f9;
-    color: #334155;
-}
-
-QComboBox#langCombo {
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 6px 10px;
-    color: #475569;
-    font-size: 12px;
-}
-QComboBox#langCombo::drop-down {
-    border: none;
-    width: 20px;
-}
-QComboBox#langCombo QAbstractItemView {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    color: #475569;
-    selection-background-color: #eff6ff;
-    selection-color: #2563eb;
-}
-
-QGroupBox {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    margin-top: 12px;
-    padding: 16px 12px 12px 12px;
-    font-weight: 600;
-    color: #1e293b;
-}
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-    padding: 0 8px;
-    color: #2563eb;
-    font-size: 13px;
-}
-
-QPushButton {
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 7px 16px;
-    background: #ffffff;
-    color: #475569;
-    font-size: 13px;
-}
-QPushButton:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-}
-QPushButton:pressed {
-    background: #f1f5f9;
-}
-QPushButton[class="primary"] {
-    background: #2563eb;
-    color: #ffffff;
-    border: 1px solid #2563eb;
-    font-weight: 600;
-}
-QPushButton[class="primary"]:hover {
-    background: #1d4ed8;
-}
-QPushButton[class="primary"]:pressed {
-    background: #1e40af;
-}
-QPushButton[class="danger"] {
-    background: #ef4444;
-    color: #ffffff;
-    border: 1px solid #ef4444;
-    font-weight: 600;
-}
-QPushButton[class="danger"]:hover {
-    background: #dc2626;
-}
-QPushButton[class="danger"]:pressed {
-    background: #b91c1c;
-}
-QPushButton:disabled {
-    background: #f1f5f9;
-    color: #94a3b8;
-    border-color: #e2e8f0;
-}
-
-QListWidget {
-    background: #f8fafc;
-    border: 2px dashed #cbd5e1;
-    border-radius: 8px;
-    padding: 8px;
-    color: #475569;
-}
-QListWidget::item {
-    padding: 6px 8px;
-    border-radius: 4px;
-}
-QListWidget::item:selected {
-    background: #dbeafe;
-    color: #1e40af;
-}
-QListWidget::item:hover:!selected {
-    background: #f1f5f9;
-}
-
-QLineEdit {
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 6px 10px;
-    background: #ffffff;
-    color: #1e293b;
-}
-QLineEdit:focus {
-    border-color: #2563eb;
-}
-
-QComboBox {
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 6px 10px;
-    background: #ffffff;
-    color: #1e293b;
-}
-QComboBox:hover {
-    border-color: #cbd5e1;
-}
-QComboBox::drop-down {
-    border: none;
-    width: 24px;
-}
-QComboBox QAbstractItemView {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    color: #1e293b;
-    selection-background-color: #eff6ff;
-    selection-color: #2563eb;
-}
-
-QSpinBox {
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 4px 8px;
-    background: #ffffff;
-    color: #1e293b;
-}
-QSpinBox:focus {
-    border-color: #2563eb;
-}
-
-QCheckBox, QRadioButton {
-    spacing: 6px;
-    color: #475569;
-}
-QCheckBox::indicator, QRadioButton::indicator {
-    width: 16px;
-    height: 16px;
-}
-
-QProgressBar {
-    border: none;
-    border-radius: 4px;
-    background: #e2e8f0;
-    height: 8px;
-    text-align: center;
-    font-size: 10px;
-    color: transparent;
-}
-QProgressBar::chunk {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #2563eb, stop:1 #3b82f6);
-    border-radius: 4px;
-}
-
-QTableWidget {
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    background: #ffffff;
-    gridline-color: #f1f5f9;
-}
-QTableWidget::item {
-    padding: 6px 8px;
-    color: #475569;
-}
-QTableWidget::item:selected {
-    background: #eff6ff;
-    color: #2563eb;
-}
-QHeaderView::section {
-    background: #f8fafc;
-    color: #64748b;
-    border: none;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 8px;
-    font-weight: 600;
-    font-size: 12px;
-}
-
-QSplitter::handle {
-    background: #e2e8f0;
-    height: 2px;
-}
-QSplitter::handle:hover {
-    background: #2563eb;
-}
-
-QTextEdit {
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    background: #f8fafc;
-    color: #475569;
-    padding: 8px;
-}
-
-QLabel {
-    color: #475569;
-}
-
-QSlider::groove:horizontal {
-    border: none;
-    height: 6px;
-    background: #e2e8f0;
-    border-radius: 3px;
-}
-QSlider::handle:horizontal {
-    background: #2563eb;
-    border: 2px solid #ffffff;
-    width: 16px;
-    height: 16px;
-    margin: -5px 0;
-    border-radius: 8px;
-}
-QSlider::sub-page:horizontal {
-    background: #2563eb;
-    border-radius: 3px;
-}
-"""
 
 
 if __name__ == "__main__":
