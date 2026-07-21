@@ -204,7 +204,7 @@ export default function WatermarkTool({ t }: { t: Translations }) {
   const [wmType, setWmType] = useState<WatermarkType>('text');
   const [wmText, setWmText] = useState('Watermark');
   const [wmFontSize, setWmFontSize] = useState(48);
-  const [wmColor, setWmColor] = useState('#ffffff');
+  const [wmColor, setWmColor] = useState('#ff0000');
   const [wmOpacity, setWmOpacity] = useState(0.6);
   const [wmRotation, setWmRotation] = useState(0);
   const [wmPosX, setWmPosX] = useState(0.5);
@@ -505,7 +505,7 @@ export default function WatermarkTool({ t }: { t: Translations }) {
               )}
             </div>
             {previewImg && (
-              <p class="text-center text-xs text-gray-400 mt-2">{t.dragHint}</p>
+              <p class="text-center text-xs text-primary-600 font-medium mt-2 bg-primary-50 rounded-lg py-1.5">{t.dragHint}</p>
             )}
           </div>
 
