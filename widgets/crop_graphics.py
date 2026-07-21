@@ -197,7 +197,7 @@ class CropGraphicsScene(QGraphicsScene):
 
         if self._drag_handle == self.HANDLE_NONE:
             new_rect = r.translated(delta.x(), delta.y())
-        elif self._ratio:
+        elif self._ratio and (event.modifiers() & Qt.ShiftModifier):
             new_rect = self._resize_constrained(r, self._drag_handle, delta)
         else:
             new_rect = self._resize_freeform(r, self._drag_handle, delta)
