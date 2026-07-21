@@ -186,7 +186,7 @@ class MainWindow(QMainWindow):
                     elif current_idx == 1:
                         self.watermark_page._wm_add_item(file_path)
                     elif current_idx == 3:
-                        self.ratio_page._ratio_add_item(file_path)
+                        self.ratio_page.ratio_add_item_direct(file_path)
             elif os.path.isdir(file_path):
                 supported_ext = SUPPORTED_EXTENSIONS
                 for root, dirs, files in os.walk(file_path):
@@ -200,7 +200,7 @@ class MainWindow(QMainWindow):
                             elif current_idx == 1:
                                 self.watermark_page._wm_add_item(full)
                             elif current_idx == 3:
-                                self.ratio_page._ratio_add_item(full)
+                                self.ratio_page.ratio_add_item_direct(full)
         if current_idx == 0:
             self.compress_page.update_file_summary()
         elif current_idx == 1:
@@ -209,8 +209,7 @@ class MainWindow(QMainWindow):
         elif current_idx == 2:
             self.rename_page.rn_refresh_after_drop()
         elif current_idx == 3:
-            self.ratio_page._ratio_update_count()
-            self.ratio_page._ratio_update_preview()
+            self.ratio_page.ratio_refresh_after_drop()
         event.acceptProposedAction()
 
 

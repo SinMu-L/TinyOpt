@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import (
     QWidget, QLabel, QGraphicsView, QGraphicsScene, QGraphicsPixmapItem, QFrame,
+    QSizePolicy,
 )
 from PyQt5.QtCore import Qt, QRectF, QPointF, pyqtSignal
 from PyQt5.QtGui import (
@@ -302,7 +303,8 @@ class CropGraphicsPreview(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setFixedSize(480, 320)
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.setMinimumHeight(200)
         self.setStyleSheet("border: 2px dashed #cbd5e1; border-radius: 8px; background: #f8fafc;")
 
         self._scene = CropGraphicsScene(self)
