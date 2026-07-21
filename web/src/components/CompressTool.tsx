@@ -33,6 +33,136 @@ function formatPercent(saved: number): string {
   return `${saved > 0 ? '-' : ''}${Math.abs(saved).toFixed(1)}%`;
 }
 
+/* ─── Comparison Modal ─────────────────────────────────── */
+
+function ComparisonModal({
+  ogUrl,
+  cmpUrl,
+  ogLabel,
+  cmpLabel,
+  onClose,
+}: {
+  ogUrl: string;
+  cmpUrl: string;
+  ogLabel: string;
+  cmpLabel: string;
+  onClose: () => void;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dragging = useRef(false);
+  const [pos, setPos] = useState(50);
+
+  const updatePos = useCallback((clientX: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const pct = Math.max(5, Math.min(95, ((clientX - rect.left) / rect.width) * 100));
+    setPos(pct);
+  }, []);
+
+  const onMouseDown = (e: MouseEvent) => {
+    e.preventDefault();
+    dragging.current = true;
+  };
+  const onMouseMove = (e: MouseEvent) => {
+    if (!dragging.current) return;
+    updatePos(e.clientX);
+  };
+  const onMouseUp = () => { dragging.current = false; };
+  const onTouchMove = (e: TouchEvent) => {
+    if (e.touches.length === 1) updatePos(e.touches[0].clientX);
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handler);
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', handler);
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      class="fixed inset-0 z-50 bg-black/90 flex flex-col"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      {/* Header */}
+      <div class="flex items-center justify-between px-4 py-3 shrink-0">
+        <div class="flex items-center gap-6 text-sm">
+          <span class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-white/80 border-2 border-white" />
+            <span class="text-white/60">{ogLabel}</span>
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-primary-400 border-2 border-white" />
+            <span class="text-white/60">{cmpLabel}</span>
+          </span>
+        </div>
+        <button
+          onClick={onClose}
+          class="text-white/70 hover:text-white text-2xl leading-none px-2 py-1"
+        >
+          &#x2715;
+        </button>
+      </div>
+
+      {/* Slider */}
+      <div
+        ref={containerRef}
+        class="flex-1 relative select-none cursor-col-resize overflow-hidden"
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onMouseUp}
+      >
+        {/* Hint */}
+        <div class="absolute top-4 left-1/2 -translate-x-1/2 z-20 bg-black/50 text-white/70 text-xs px-3 py-1.5 rounded-full pointer-events-none">
+          &#8592; Drag to compare &#8594;
+        </div>
+
+        {/* Compressed (base layer) */}
+        <img
+          src={cmpUrl}
+          alt="Compressed"
+          class="absolute inset-0 w-full h-full object-contain"
+          draggable={false}
+        />
+
+        {/* Original (clipped overlay) */}
+        <div class="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
+          <img
+            src={ogUrl}
+            alt="Original"
+            class="absolute inset-0 w-auto h-full max-w-none object-contain"
+            style={{ width: `${100 / (pos / 100)}%` }}
+            draggable={false}
+          />
+        </div>
+
+        {/* Divider line */}
+        <div
+          class="absolute top-0 bottom-0 z-10 pointer-events-none"
+          style={{ left: `${pos}%` }}
+        >
+          <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-white shadow-lg" />
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round">
+              <polyline points="15 18 9 12 15 6" />
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main Component ──────────────────────────────────── */
+
 export default function CompressTool() {
   const [file, setFile] = useState<File | null>(null);
   const [ogUrl, setOgUrl] = useState<string>('');
@@ -42,6 +172,7 @@ export default function CompressTool() {
   const [error, setError] = useState('');
   const [result, setResult] = useState<CompressResult | null>(null);
   const [cmpUrl, setCmpUrl] = useState<string>('');
+  const [showCompare, setShowCompare] = useState(false);
   const workerRef = useRef<Worker | null>(null);
   const msgIdRef = useRef(0);
   const pendingRef = useRef(false);
@@ -125,6 +256,7 @@ export default function CompressTool() {
     setResult(null);
     setCmpUrl('');
     setError('');
+    setShowCompare(false);
   };
 
   const handleDrop = (e: DragEvent) => {
@@ -197,8 +329,12 @@ export default function CompressTool() {
                 Change Image
               </button>
             </div>
-            <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
-              <img src={ogUrl} alt="Original" class="max-w-full max-h-full object-contain" />
+            <div
+              class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden cursor-zoom-in group"
+              onClick={() => setShowCompare(true)}
+              title="Click to compare"
+            >
+              <img src={ogUrl} alt="Original" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-200" />
             </div>
             <div class="mt-2 flex items-center gap-3 text-sm text-gray-500">
               <span>{file.name}</span>
@@ -219,14 +355,18 @@ export default function CompressTool() {
                 <span class="text-sm text-gray-400">No reduction</span>
               )}
             </div>
-            <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden relative">
+            <div
+              class={`aspect-video bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden relative ${status === 'done' ? 'cursor-zoom-in group' : ''}`}
+              onClick={() => status === 'done' && setShowCompare(true)}
+              title={status === 'done' ? 'Click to compare' : undefined}
+            >
               {status === 'processing' && (
                 <div class="absolute inset-0 bg-white/60 flex items-center justify-center">
                   <div class="w-8 h-8 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
                 </div>
               )}
               {status === 'done' && cmpUrl && (
-                <img src={cmpUrl} alt="Compressed" class="max-w-full max-h-full object-contain" />
+                <img src={cmpUrl} alt="Compressed" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-200" />
               )}
               {status === 'error' && (
                 <p class="text-red-500 text-sm">{error}</p>
@@ -238,12 +378,20 @@ export default function CompressTool() {
             {result && (
               <div class="mt-2 flex items-center justify-between text-sm">
                 <span class="text-gray-500">{formatSize(result.compressedSize)}</span>
-                <button
-                  onClick={handleDownload}
-                  class="px-4 py-1.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
-                >
-                  Download
-                </button>
+                <div class="flex items-center gap-2">
+                  <button
+                    onClick={() => setShowCompare(true)}
+                    class="px-3 py-1.5 border border-gray-300 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+                  >
+                    Compare
+                  </button>
+                  <button
+                    onClick={handleDownload}
+                    class="px-4 py-1.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
+                  >
+                    Download
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -301,6 +449,17 @@ export default function CompressTool() {
             </p>
           )}
         </div>
+      )}
+
+      {/* Comparison Modal */}
+      {showCompare && ogUrl && cmpUrl && (
+        <ComparisonModal
+          ogUrl={ogUrl}
+          cmpUrl={cmpUrl}
+          ogLabel={file ? `${file.name} (${formatSize(file.size)})` : 'Original'}
+          cmpLabel={result ? `Compressed ${FORMAT_LABELS[result.format]} (${formatSize(result.compressedSize)})` : 'Compressed'}
+          onClose={() => setShowCompare(false)}
+        />
       )}
     </div>
   );
