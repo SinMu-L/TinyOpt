@@ -69,19 +69,18 @@ function renderWatermark(
     color: string;
     opacity: number;
     rotation: number;
-    posIndex: number;
+    posX: number;
+    posY: number;
     watermarkImg: HTMLImageElement | null;
     imageScale: number;
     imageOpacity: number;
   }
 ) {
-  const pos = POSITIONS[config.posIndex] ?? POSITIONS[4];
-
   ctx.save();
   ctx.globalAlpha = config.type === 'text' ? config.opacity : config.imageOpacity;
 
-  const centerX = imgWidth * pos.x;
-  const centerY = imgHeight * pos.y;
+  const centerX = imgWidth * config.posX;
+  const centerY = imgHeight * config.posY;
 
   const angleRad = (config.rotation * Math.PI) / 180;
   ctx.translate(centerX, centerY);
@@ -115,7 +114,8 @@ function drawPreview(
     color: string;
     opacity: number;
     rotation: number;
-    posIndex: number;
+    posX: number;
+    posY: number;
     watermarkImg: HTMLImageElement | null;
     imageScale: number;
     imageOpacity: number;
@@ -145,7 +145,8 @@ async function processImage(
     color: string;
     opacity: number;
     rotation: number;
-    posIndex: number;
+    posX: number;
+    posY: number;
     watermarkImg: HTMLImageElement | null;
     imageScale: number;
     imageOpacity: number;
@@ -205,7 +206,8 @@ export default function WatermarkTool({ t }: { t: Translations }) {
   const [wmColor, setWmColor] = useState('#ffffff');
   const [wmOpacity, setWmOpacity] = useState(0.6);
   const [wmRotation, setWmRotation] = useState(0);
-  const [wmPosIndex, setWmPosIndex] = useState(4);
+  const [wmPosX, setWmPosX] = useState(0.5);
+  const [wmPosY, setWmPosY] = useState(0.5);
 
   const [wmImage, setWmImage] = useState<HTMLImageElement | null>(null);
   const [wmImageUrl, setWmImageUrl] = useState('');
@@ -218,6 +220,7 @@ export default function WatermarkTool({ t }: { t: Translations }) {
   const [enlargedIdx, setEnlargedIdx] = useState<number | null>(null);
 
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  const isDragging = useRef(false);
 
   const config = {
     type: wmType,
@@ -226,7 +229,8 @@ export default function WatermarkTool({ t }: { t: Translations }) {
     color: wmColor,
     opacity: wmOpacity,
     rotation: wmRotation,
-    posIndex: wmPosIndex,
+    posX: wmPosX,
+    posY: wmPosY,
     watermarkImg: wmImage,
     imageScale: wmImageScale,
     imageOpacity: wmImageOpacity,
@@ -236,6 +240,80 @@ export default function WatermarkTool({ t }: { t: Translations }) {
     const img = new Image();
     img.onload = () => setPreviewImg(img);
     img.src = url;
+  }, []);
+
+  const getCanvasCoords = (canvas: HTMLCanvasElement, clientX: number, clientY: number) => {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY,
+    };
+  };
+
+  const handleCanvasDown = (clientX: number, clientY: number) => {
+    const canvas = previewCanvasRef.current;
+    if (!canvas) return;
+    const { x, y } = getCanvasCoords(canvas, clientX, clientY);
+    const dist = Math.hypot(x - canvas.width * wmPosX, y - canvas.height * wmPosY);
+    if (dist < 50) {
+      isDragging.current = true;
+    }
+  };
+
+  const handleCanvasMouseDown = (e: MouseEvent) => {
+    handleCanvasDown(e.clientX, e.clientY);
+  };
+
+  const handleCanvasMouseMove = (e: MouseEvent) => {
+    const canvas = previewCanvasRef.current;
+    if (!canvas) return;
+    const { x, y } = getCanvasCoords(canvas, e.clientX, e.clientY);
+    if (isDragging.current) {
+      setWmPosX(Math.max(0, Math.min(1, x / canvas.width)));
+      setWmPosY(Math.max(0, Math.min(1, y / canvas.height)));
+      canvas.style.cursor = 'grabbing';
+    } else {
+      const dist = Math.hypot(x - canvas.width * wmPosX, y - canvas.height * wmPosY);
+      canvas.style.cursor = dist < 50 ? 'grab' : 'crosshair';
+    }
+  };
+
+  const handleCanvasMouseUp = () => {
+    isDragging.current = false;
+    const canvas = previewCanvasRef.current;
+    if (canvas) canvas.style.cursor = 'crosshair';
+  };
+
+  const handleCanvasTouchStart = (e: TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    handleCanvasDown(e.touches[0].clientX, e.touches[0].clientY);
+    if (isDragging.current) e.preventDefault();
+  };
+
+  const handleCanvasTouchMove = (e: TouchEvent) => {
+    const canvas = previewCanvasRef.current;
+    if (!canvas || !isDragging.current || e.touches.length !== 1) return;
+    e.preventDefault();
+    const touch = e.touches[0];
+    const { x, y } = getCanvasCoords(canvas, touch.clientX, touch.clientY);
+    setWmPosX(Math.max(0, Math.min(1, x / canvas.width)));
+    setWmPosY(Math.max(0, Math.min(1, y / canvas.height)));
+  };
+
+  const handleCanvasTouchEnd = () => {
+    isDragging.current = false;
+  };
+
+  useEffect(() => {
+    const up = () => { isDragging.current = false; };
+    window.addEventListener('mouseup', up);
+    window.addEventListener('touchend', up);
+    return () => {
+      window.removeEventListener('mouseup', up);
+      window.removeEventListener('touchend', up);
+    };
   }, []);
 
   useEffect(() => {
@@ -249,7 +327,7 @@ export default function WatermarkTool({ t }: { t: Translations }) {
     const canvas = previewCanvasRef.current;
     if (!canvas || !previewImg) return;
     drawPreview(canvas, previewImg, config);
-  }, [previewImg, wmText, wmFontSize, wmColor, wmOpacity, wmRotation, wmPosIndex, wmImage, wmImageScale, wmImageOpacity, wmType]);
+  }, [previewImg, wmText, wmFontSize, wmColor, wmOpacity, wmRotation, wmPosX, wmPosY, wmImage, wmImageScale, wmImageOpacity, wmType]);
 
   const handleFiles = (fileList: FileList | null) => {
     if (!fileList) return;
@@ -420,7 +498,7 @@ export default function WatermarkTool({ t }: { t: Translations }) {
             <h3 class="font-semibold text-gray-800 mb-3">{t.preview}</h3>
             <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
               {previewImg ? (
-                <canvas ref={previewCanvasRef} class="max-w-full max-h-full object-contain" />
+                <canvas ref={previewCanvasRef} class="max-w-full max-h-full object-contain cursor-crosshair" onMouseDown={handleCanvasMouseDown} onMouseMove={handleCanvasMouseMove} onMouseUp={handleCanvasMouseUp} onMouseLeave={handleCanvasMouseUp} onTouchStart={handleCanvasTouchStart} onTouchMove={handleCanvasTouchMove} onTouchEnd={handleCanvasTouchEnd} />
               ) : (
                 <p class="text-gray-400 text-sm">{t.noImages}</p>
               )}
@@ -553,15 +631,18 @@ export default function WatermarkTool({ t }: { t: Translations }) {
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">{t.position}</label>
                 <div class="grid grid-cols-3 gap-1">
-                  {POSITIONS.map((pos, i) => (
-                    <button
-                      key={i}
-                      class={`py-2 rounded text-sm font-medium transition-colors ${i === wmPosIndex ? 'bg-primary-600 text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
-                      onClick={() => setWmPosIndex(i)}
-                    >
-                      {pos.label}
-                    </button>
-                  ))}
+                  {POSITIONS.map((pos, i) => {
+                    const active = Math.abs(pos.x - wmPosX) < 0.005 && Math.abs(pos.y - wmPosY) < 0.005;
+                    return (
+                      <button
+                        key={i}
+                        class={`py-2 rounded text-sm font-medium transition-colors ${active ? 'bg-primary-600 text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
+                        onClick={() => { setWmPosX(pos.x); setWmPosY(pos.y); }}
+                      >
+                        {pos.label}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
