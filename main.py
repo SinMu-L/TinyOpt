@@ -179,7 +179,7 @@ class MainWindow(QMainWindow):
             if os.path.isfile(file_path):
                 ext = Path(file_path).suffix.lower()
                 if current_idx == 2:
-                    self.rename_page._rn_add_item(file_path)
+                    self.rename_page.rn_add_item_direct(file_path)
                 elif ext in SUPPORTED_EXTENSIONS:
                     if current_idx == 0:
                         self.compress_page.add_item_to_list(file_path)
@@ -193,7 +193,7 @@ class MainWindow(QMainWindow):
                     for file in files:
                         full = os.path.join(root, file)
                         if current_idx == 2:
-                            self.rename_page._rn_add_item(full)
+                            self.rename_page.rn_add_item_direct(full)
                         elif Path(file).suffix.lower() in supported_ext:
                             if current_idx == 0:
                                 self.compress_page.add_item_to_list(full)
@@ -207,8 +207,7 @@ class MainWindow(QMainWindow):
             self.watermark_page._wm_update_count()
             self.watermark_page._wm_update_preview()
         elif current_idx == 2:
-            self.rename_page._rn_update_count()
-            self.rename_page.on_rn_preview()
+            self.rename_page.rn_refresh_after_drop()
         elif current_idx == 3:
             self.ratio_page._ratio_update_count()
             self.ratio_page._ratio_update_preview()
