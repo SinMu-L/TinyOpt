@@ -148,9 +148,9 @@ function ComparisonModal({
           class="absolute top-0 bottom-0 z-10 pointer-events-none"
           style={{ left: `${pos}%` }}
         >
-          <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-white shadow-lg" />
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round">
+          <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 bg-gray-700/80 shadow-[0_0_6px_rgba(0,0,0,0.3)]" />
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-gray-800 rounded-full shadow-lg border-2 border-white/90 flex items-center justify-center">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">
               <polyline points="15 18 9 12 15 6" />
               <polyline points="9 18 15 12 9 6" />
             </svg>
