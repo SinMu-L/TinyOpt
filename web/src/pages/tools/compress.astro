@@ -2,28 +2,52 @@
 import Layout from '@/layouts/Layout.astro';
 import CompressTool from '@/components/CompressTool.tsx';
 import FaqAccordion from '@/components/FaqAccordion.astro';
-import FeatureCard from '@/components/FeatureCard.astro';
 import { translation } from '@/i18n/utils';
 
 const _ = translation('en');
-const t = _.tools.compress;
+const tc = _.tools.compress;
 ---
 
 <Layout
-  title={t.title}
-  description={t.description}
+  title={tc.title}
+  description={tc.description}
   lang="en"
   pageType="page"
-  faqItems={t.faq_items}
+  faqItems={tc.faq_items}
 >
-  <CompressTool client:load />
+  <CompressTool
+    client:load
+    t={{
+      title: "Online Image Compressor",
+      subtitle: "Compress JPEG, PNG, WebP images directly in your browser",
+      uploadHint: "Click or drag an image here",
+      uploadFormats: "Supports PNG, JPEG, WebP, AVIF, GIF, BMP, TIFF",
+      original: "Original",
+      changeImage: "Change Image",
+      compressed: "Compressed",
+      noReduction: "No reduction",
+      processing: "Processing...",
+      compare: "Compare",
+      download: "Download",
+      format: "Format:",
+      quality: "Quality:",
+      clickToCompare: "Click to compare",
+      dragToCompare: "\u2190 Drag to compare \u2192",
+      jpegNote: "JPEG removes fine details at lower quality settings. Quality 80+ is recommended for photos.",
+      pngNote: "PNG uses color quantization \u2014 lower quality = fewer colors = smaller file. The image will always be full resolution and sharp, just with a reduced color palette.",
+      webpNote: "WebP offers better compression than JPEG/PNG. Supports both lossy and lossless modes.",
+      invalidFile: "Please select an image file",
+      workerError: "Compression worker error",
+      browserUnsupported: "Your browser does not support this tool. Please use Chrome, Edge, or Opera.",
+    }}
+  />
 
   <!-- How It Works -->
   <section class="bg-gray-50 py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{t.how_title}</h2>
+      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{tc.how_title}</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {t.how_steps.map((step, i) => (
+        {tc.how_steps.map((step, i) => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary-600 text-lg font-bold text-white">{i + 1}</div>
             <h3 class="mb-2 font-semibold text-gray-900">{step.title}</h3>
@@ -37,9 +61,9 @@ const t = _.tools.compress;
   <!-- Why Use Our Compressor -->
   <section class="bg-white py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{t.why_title}</h2>
+      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{tc.why_title}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {t.why_items.map((item) => (
+        {tc.why_items.map((item) => (
           <div class="rounded-xl border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
             <h3 class="mb-2 font-semibold text-gray-900">{item.title}</h3>
             <p class="text-sm text-gray-500">{item.desc}</p>
@@ -52,8 +76,8 @@ const t = _.tools.compress;
   <!-- FAQ -->
   <section class="bg-gray-50 py-16">
     <div class="mx-auto max-w-3xl px-4">
-      <h2 class="mb-8 text-center text-2xl sm:text-3xl font-bold text-gray-900">{t.faq_title}</h2>
-      <FaqAccordion items={t.faq_items} />
+      <h2 class="mb-8 text-center text-2xl sm:text-3xl font-bold text-gray-900">{tc.faq_title}</h2>
+      <FaqAccordion items={tc.faq_items} />
     </div>
   </section>
 </Layout>

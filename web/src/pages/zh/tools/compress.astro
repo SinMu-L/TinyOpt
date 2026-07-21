@@ -5,24 +5,49 @@ import FaqAccordion from '@/components/FaqAccordion.astro';
 import { translation } from '@/i18n/utils';
 
 const _ = translation('zh');
-const t = _.tools.compress;
+const tc = _.tools.compress;
 ---
 
 <Layout
-  title={t.title}
-  description={t.description}
+  title={tc.title}
+  description={tc.description}
   lang="zh"
   pageType="page"
-  faqItems={t.faq_items}
+  faqItems={tc.faq_items}
 >
-  <CompressTool client:load />
+  <CompressTool
+    client:load
+    t={{
+      title: "在线图片压缩",
+      subtitle: "直接在浏览器中压缩 JPEG、PNG、WebP 图片",
+      uploadHint: "点击或拖拽图片到此处",
+      uploadFormats: "支持 PNG、JPEG、WebP、AVIF、GIF、BMP、TIFF 格式",
+      original: "原图",
+      changeImage: "更换图片",
+      compressed: "压缩后",
+      noReduction: "无压缩效果",
+      processing: "处理中...",
+      compare: "对比",
+      download: "下载",
+      format: "格式：",
+      quality: "质量：",
+      clickToCompare: "点击对比",
+      dragToCompare: "\u2190 拖拽对比 \u2192",
+      jpegNote: "JPEG 在较低质量设置下会丢失细节。建议照片使用质量 80+。",
+      pngNote: "PNG 采用颜色量化技术 \u2014 质量越低，颜色越少，文件越小。图片分辨率始终保持不变，只是调色板精简。",
+      webpNote: "WebP 比 JPEG/PNG 压缩率更高，同时支持有损和无损两种模式。",
+      invalidFile: "请选择图片文件",
+      workerError: "压缩工作线程出错",
+      browserUnsupported: "您的浏览器不支持此工具，请使用 Chrome、Edge 或 Opera。",
+    }}
+  />
 
   <!-- 使用方法 -->
   <section class="bg-gray-50 py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{t.how_title}</h2>
+      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{tc.how_title}</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {t.how_steps.map((step, i) => (
+        {tc.how_steps.map((step, i) => (
           <div class="text-center">
             <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary-600 text-lg font-bold text-white">{i + 1}</div>
             <h3 class="mb-2 font-semibold text-gray-900">{step.title}</h3>
@@ -36,9 +61,9 @@ const t = _.tools.compress;
   <!-- 为什么选择我们 -->
   <section class="bg-white py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{t.why_title}</h2>
+      <h2 class="mb-10 text-center text-2xl sm:text-3xl font-bold text-gray-900">{tc.why_title}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {t.why_items.map((item) => (
+        {tc.why_items.map((item) => (
           <div class="rounded-xl border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
             <h3 class="mb-2 font-semibold text-gray-900">{item.title}</h3>
             <p class="text-sm text-gray-500">{item.desc}</p>
@@ -51,8 +76,8 @@ const t = _.tools.compress;
   <!-- 常见问题 -->
   <section class="bg-gray-50 py-16">
     <div class="mx-auto max-w-3xl px-4">
-      <h2 class="mb-8 text-center text-2xl sm:text-3xl font-bold text-gray-900">{t.faq_title}</h2>
-      <FaqAccordion items={t.faq_items} />
+      <h2 class="mb-8 text-center text-2xl sm:text-3xl font-bold text-gray-900">{tc.faq_title}</h2>
+      <FaqAccordion items={tc.faq_items} />
     </div>
   </section>
 </Layout>

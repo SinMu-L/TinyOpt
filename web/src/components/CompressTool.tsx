@@ -11,6 +11,30 @@ interface CompressResult {
   mimeType: string;
 }
 
+interface Translations {
+  title: string;
+  subtitle: string;
+  uploadHint: string;
+  uploadFormats: string;
+  original: string;
+  changeImage: string;
+  compressed: string;
+  noReduction: string;
+  processing: string;
+  compare: string;
+  download: string;
+  format: string;
+  quality: string;
+  clickToCompare: string;
+  dragToCompare: string;
+  jpegNote: string;
+  pngNote: string;
+  webpNote: string;
+  invalidFile: string;
+  workerError: string;
+  browserUnsupported: string;
+}
+
 const FORMAT_LABELS: Record<OutputFormat, string> = {
   jpeg: 'JPEG',
   png: 'PNG',
@@ -40,12 +64,14 @@ function ComparisonModal({
   cmpUrl,
   ogLabel,
   cmpLabel,
+  hint,
   onClose,
 }: {
   ogUrl: string;
   cmpUrl: string;
   ogLabel: string;
   cmpLabel: string;
+  hint: string;
   onClose: () => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -121,13 +147,13 @@ function ComparisonModal({
       >
         {/* Hint */}
         <div class="absolute top-4 left-1/2 -translate-x-1/2 z-20 bg-black/50 text-white/70 text-xs px-3 py-1.5 rounded-full pointer-events-none">
-          &#8592; Drag to compare &#8594;
+          {hint}
         </div>
 
         {/* Compressed (base layer) */}
         <img
           src={cmpUrl}
-          alt="Compressed"
+          alt="compressed"
           class="absolute inset-0 w-full h-full object-contain"
           draggable={false}
         />
@@ -136,7 +162,7 @@ function ComparisonModal({
         <div class="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
           <img
             src={ogUrl}
-            alt="Original"
+            alt="original"
             class="absolute inset-0 w-auto h-full max-w-none object-contain"
             style={{ width: `${100 / (pos / 100)}%` }}
             draggable={false}
@@ -163,7 +189,7 @@ function ComparisonModal({
 
 /* ─── Main Component ──────────────────────────────────── */
 
-export default function CompressTool() {
+export default function CompressTool({ t }: { t: Translations }) {
   const [file, setFile] = useState<File | null>(null);
   const [ogUrl, setOgUrl] = useState<string>('');
   const [format, setFormat] = useState<OutputFormat>('jpeg');
@@ -186,7 +212,12 @@ export default function CompressTool() {
       pendingRef.current = false;
       if (e.data.error) {
         setStatus('error');
-        setError(e.data.error);
+        const msg = e.data.error;
+        if (msg === 'Browser not supported' || msg.includes('does not support')) {
+          setError(t.browserUnsupported);
+        } else {
+          setError(msg);
+        }
         return;
       }
       const res: CompressResult = {
@@ -205,7 +236,7 @@ export default function CompressTool() {
     worker.onerror = () => {
       pendingRef.current = false;
       setStatus('error');
-      setError('Worker error');
+      setError(t.workerError);
     };
     workerRef.current = worker;
     return () => { worker.terminate(); };
@@ -246,7 +277,7 @@ export default function CompressTool() {
   const handleFile = (f: File | null) => {
     if (!f) return;
     if (!f.type.startsWith('image/')) {
-      setError('Please select an image file');
+      setError(t.invalidFile);
       return;
     }
     if (ogUrl) URL.revokeObjectURL(ogUrl);
@@ -287,11 +318,19 @@ export default function CompressTool() {
     ? ((1 - result.compressedSize / result.originalSize) * 100)
     : 0;
 
+  const ogLabel = file
+    ? `${file.name} (${formatSize(file.size)})`
+    : t.original;
+
+  const cmpLabel = result
+    ? `${FORMAT_LABELS[result.format]} ${formatSize(result.compressedSize)}`
+    : t.compressed;
+
   return (
     <div class="w-full max-w-6xl mx-auto px-4 py-8">
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">Online Image Compressor</h1>
-        <p class="text-gray-500">Compress JPEG, PNG, WebP images directly in your browser</p>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">{t.title}</h1>
+        <p class="text-gray-500">{t.subtitle}</p>
       </div>
 
       {/* Upload Area */}
@@ -303,8 +342,8 @@ export default function CompressTool() {
           onClick={() => document.getElementById('file-input')?.click()}
         >
           <div class="text-4xl mb-3 text-gray-400">&#128247;</div>
-          <p class="text-gray-600 font-medium">Click or drag an image here</p>
-          <p class="text-gray-400 text-sm mt-1">Supports PNG, JPEG, WebP, AVIF, GIF, BMP, TIFF</p>
+          <p class="text-gray-600 font-medium">{t.uploadHint}</p>
+          <p class="text-gray-400 text-sm mt-1">{t.uploadFormats}</p>
           <input
             id="file-input"
             type="file"
@@ -321,20 +360,20 @@ export default function CompressTool() {
           {/* Left: Original */}
           <div class="bg-white rounded-xl border border-gray-200 p-4">
             <div class="flex items-center justify-between mb-3">
-              <h3 class="font-semibold text-gray-800">Original</h3>
+              <h3 class="font-semibold text-gray-800">{t.original}</h3>
               <button
                 class="text-sm text-primary-600 hover:text-primary-700 font-medium"
                 onClick={() => { setFile(null); setResult(null); }}
               >
-                Change Image
+                {t.changeImage}
               </button>
             </div>
             <div
               class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden cursor-zoom-in group"
               onClick={() => setShowCompare(true)}
-              title="Click to compare"
+              title={t.clickToCompare}
             >
-              <img src={ogUrl} alt="Original" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-200" />
+              <img src={ogUrl} alt={t.original} class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-200" />
             </div>
             <div class="mt-2 flex items-center gap-3 text-sm text-gray-500">
               <span>{file.name}</span>
@@ -345,20 +384,20 @@ export default function CompressTool() {
           {/* Right: Result */}
           <div class="bg-white rounded-xl border border-gray-200 p-4">
             <div class="flex items-center justify-between mb-3">
-              <h3 class="font-semibold text-gray-800">Compressed</h3>
+              <h3 class="font-semibold text-gray-800">{t.compressed}</h3>
               {status === 'done' && savedPercent > 0 && (
                 <span class="text-sm font-semibold text-green-600">
                   {formatPercent(savedPercent)}
                 </span>
               )}
               {status === 'done' && savedPercent <= 0 && (
-                <span class="text-sm text-gray-400">No reduction</span>
+                <span class="text-sm text-gray-400">{t.noReduction}</span>
               )}
             </div>
             <div
               class={`aspect-video bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden relative ${status === 'done' ? 'cursor-zoom-in group' : ''}`}
               onClick={() => status === 'done' && setShowCompare(true)}
-              title={status === 'done' ? 'Click to compare' : undefined}
+              title={status === 'done' ? t.clickToCompare : undefined}
             >
               {status === 'processing' && (
                 <div class="absolute inset-0 bg-white/60 flex items-center justify-center">
@@ -366,13 +405,13 @@ export default function CompressTool() {
                 </div>
               )}
               {status === 'done' && cmpUrl && (
-                <img src={cmpUrl} alt="Compressed" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-200" />
+                <img src={cmpUrl} alt={t.compressed} class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-200" />
               )}
               {status === 'error' && (
                 <p class="text-red-500 text-sm">{error}</p>
               )}
               {status === 'idle' && !cmpUrl && (
-                <p class="text-gray-400 text-sm">Processing...</p>
+                <p class="text-gray-400 text-sm">{t.processing}</p>
               )}
             </div>
             {result && (
@@ -383,13 +422,13 @@ export default function CompressTool() {
                     onClick={() => setShowCompare(true)}
                     class="px-3 py-1.5 border border-gray-300 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
                   >
-                    Compare
+                    {t.compare}
                   </button>
                   <button
                     onClick={handleDownload}
                     class="px-4 py-1.5 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
                   >
-                    Download
+                    {t.download}
                   </button>
                 </div>
               </div>
@@ -404,7 +443,7 @@ export default function CompressTool() {
           <div class="flex flex-wrap items-center gap-6">
             {/* Format */}
             <div class="flex items-center gap-2">
-              <label class="text-sm font-medium text-gray-700">Format:</label>
+              <label class="text-sm font-medium text-gray-700">{t.format}</label>
               <select
                 value={format}
                 onChange={(e) => setFormat((e.target as HTMLSelectElement).value as OutputFormat)}
@@ -418,7 +457,7 @@ export default function CompressTool() {
 
             {/* Quality */}
             <div class="flex items-center gap-2 flex-1 min-w-[200px]">
-              <label class="text-sm font-medium text-gray-700 shrink-0">Quality:</label>
+              <label class="text-sm font-medium text-gray-700 shrink-0">{t.quality}</label>
               <input
                 type="range"
                 min="1"
@@ -433,20 +472,13 @@ export default function CompressTool() {
 
           {/* Format-specific notes */}
           {format === 'png' && (
-            <p class="mt-3 text-xs text-gray-400">
-              PNG uses color quantization — lower quality = fewer colors = smaller file.
-              The image will always be full resolution and sharp, just with a reduced color palette.
-            </p>
+            <p class="mt-3 text-xs text-gray-400">{t.pngNote}</p>
           )}
           {format === 'jpeg' && (
-            <p class="mt-3 text-xs text-gray-400">
-              JPEG removes fine details at lower quality settings. Quality 80+ is recommended for photos.
-            </p>
+            <p class="mt-3 text-xs text-gray-400">{t.jpegNote}</p>
           )}
           {format === 'webp' && (
-            <p class="mt-3 text-xs text-gray-400">
-              WebP offers better compression than JPEG/PNG. Supports both lossy and lossless modes.
-            </p>
+            <p class="mt-3 text-xs text-gray-400">{t.webpNote}</p>
           )}
         </div>
       )}
@@ -456,8 +488,9 @@ export default function CompressTool() {
         <ComparisonModal
           ogUrl={ogUrl}
           cmpUrl={cmpUrl}
-          ogLabel={file ? `${file.name} (${formatSize(file.size)})` : 'Original'}
-          cmpLabel={result ? `Compressed ${FORMAT_LABELS[result.format]} (${formatSize(result.compressedSize)})` : 'Compressed'}
+          ogLabel={ogLabel}
+          cmpLabel={cmpLabel}
+          hint={t.dragToCompare}
           onClose={() => setShowCompare(false)}
         />
       )}
