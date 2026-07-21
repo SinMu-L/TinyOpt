@@ -2,9 +2,17 @@
 
 > 🌐 [seojeck.com](https://seojeck.com) — 官方网站 / Official Website
 
----
+<div class="tab-container">
 
-**English | [中文](#tinyjpg-批量压缩助手)**
+<input type="radio" id="tab-en" name="tab-lang" checked>
+<input type="radio" id="tab-zh" name="tab-lang">
+
+<div class="tab-bar">
+  <label for="tab-en">English</label>
+  <label for="tab-zh">中文</label>
+</div>
+
+<div class="tab-panel" id="panel-en">
 
 TinyOpt is a **free, open-source Windows desktop tool** for batch image optimization powered by the TinyPNG API. It integrates **compression, watermarking, format conversion, and batch renaming** into one efficient workflow.
 
@@ -41,11 +49,13 @@ TinyOpt is a **free, open-source Windows desktop tool** for batch image optimiza
 
 Pre-built executables are available in the `dist/` directory — download and double-click to run.
 
----
+</div>
 
-## TinyJPG 批量压缩助手
+<div class="tab-panel" id="panel-zh">
 
-一款 Windows 桌面工具，集**图片批量压缩**、**水印添加**、**批量重命名**于一体，基于 TinyPNG API 实现高效的图片无损压缩。
+一款 Windows 桌面工具，集**图片批量压缩**、**水印添加**、**格式转换**、**批量重命名**于一体，基于 TinyPNG API 实现高效的图片无损压缩。
+
+## 功能
 
 ### 图片压缩
 - 支持 JPG、PNG、WebP、AVIF、BMP、GIF、TIFF 等格式输入
@@ -71,7 +81,7 @@ Pre-built executables are available in the `dist/` directory — download and do
 
 ![批量重命名](images/批量重命名.png)
 
-### 快速使用
+## 快速使用
 
 1. 从 [Releases](https://github.com/SinMu-L/TinyOpt/releases) 下载最新版 exe，直接运行（无需安装）
 2. 在「密钥管理」中添加你的 TinyPNG API Key（免费申请：https://tinypng.com/developers）
@@ -80,9 +90,13 @@ Pre-built executables are available in the `dist/` directory — download and do
 
 > 每月 500 张免费额度，多 Key 可叠加。
 
-### 下载
+## 下载
 
 预编译的 exe 文件在 `dist/` 目录中，下载后双击即可运行。
+
+</div>
+
+</div>
 
 ## 更新日志 / Changelog
 
@@ -91,3 +105,46 @@ Pre-built executables are available in the `dist/` directory — download and do
 - **v1.2.0** — 新增批量重命名功能 / Added batch rename feature
 - **v1.1.0** — 新增水印工具，支持可视化拖拽定位 / Added watermark tool with drag-and-drop positioning
 - **v1.0.0** — 基础压缩功能上线 / Initial compression release
+
+<style>
+.tab-container { margin-top: 16px; }
+
+.tab-container input[type="radio"] { display: none; }
+
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #d0d7de;
+  margin-bottom: 24px;
+}
+
+.tab-bar label {
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #656d76;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab-bar label:hover { color: #1f2328; }
+
+#tab-en:checked ~ .tab-bar label[for="tab-en"],
+#tab-zh:checked ~ .tab-bar label[for="tab-zh"] {
+  color: #1f2328;
+  background: #fff;
+  border-color: #d0d7de;
+  border-bottom-color: #fff;
+  cursor: default;
+}
+
+.tab-panel { display: none; }
+
+#tab-en:checked ~ #panel-en,
+#tab-zh:checked ~ #panel-zh { display: block; }
+</style>
