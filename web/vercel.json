@@ -21,22 +21,37 @@
     },
     {
       "source": "/blog/image-seo-rename-alt-guide/",
-      "destination": "/zh/blog/image-seo-rename-alt-guide/",
+      "destination": "/blog/image-seo-rename-alt-guide-en/",
       "permanent": true
     },
     {
       "source": "/blog/bulk-image-seo-station-group/",
-      "destination": "/zh/blog/bulk-image-seo-station-group/",
+      "destination": "/blog/bulk-image-seo-station-group-en/",
       "permanent": true
     },
     {
       "source": "/blog/ecommerce-watermark-protection/",
-      "destination": "/zh/blog/ecommerce-watermark-protection/",
+      "destination": "/blog/ecommerce-watermark-protection-en/",
       "permanent": true
     },
     {
       "source": "/blog/batch-rename-productivity/",
-      "destination": "/zh/blog/batch-rename-productivity/",
+      "destination": "/blog/batch-rename-productivity-en/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pagespeed-lazy-loading-guide/",
+      "destination": "/blog/pagespeed-lazy-loading-guide-en/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/shopify-webp-optimization/",
+      "destination": "/blog/shopify-webp-optimization-en/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/multi-key-management/",
+      "destination": "/blog/multi-key-management-en/",
       "permanent": true
     },
     {

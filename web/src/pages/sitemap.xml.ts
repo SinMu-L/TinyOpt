@@ -6,9 +6,9 @@ const SITE = 'https://seojeck.com';
 export const GET: APIRoute = async () => {
   const now = new Date();
   const blogPosts = (await getCollection('blog'))
-    .filter((p) => !p.data.draft && p.data.date <= now);
+    .filter((p) => !p.data.draft && !p.data.noindex && p.data.date <= now);
   const casePosts = (await getCollection('cases'))
-    .filter((p) => !p.data.draft && p.data.date <= now);
+    .filter((p) => !p.data.draft && !p.data.noindex && p.data.date <= now);
 
   const staticPages = [
     { url: '/', changefreq: 'weekly', priority: '1.0' },
