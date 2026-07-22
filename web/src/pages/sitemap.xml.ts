@@ -28,18 +28,26 @@ export const GET: APIRoute = async () => {
     { url: '/zh/blog/', changefreq: 'weekly', priority: '0.7' },
   ];
 
+  const daysAgo = (d: Date) => Math.floor((now.getTime() - d.getTime()) / 86400000);
+  const contentPriority = (d: Date) => {
+    const age = daysAgo(d);
+    if (age <= 30) return '0.8';
+    if (age <= 90) return '0.7';
+    return '0.6';
+  };
+
   const allPages = [
     ...staticPages,
     ...blogPosts.map((p) => ({
       url: `/${p.data.lang === 'en' ? '' : 'zh/'}blog/${p.id}/`,
       changefreq: 'monthly' as const,
-      priority: '0.6' as const,
+      priority: contentPriority(p.data.date) as string,
       lastmod: p.data.date.toISOString().split('T')[0],
     })),
     ...casePosts.map((p) => ({
       url: `/${p.data.lang === 'en' ? '' : 'zh/'}cases/${p.id}/`,
       changefreq: 'monthly' as const,
-      priority: '0.6' as const,
+      priority: contentPriority(p.data.date) as string,
       lastmod: p.data.date.toISOString().split('T')[0],
     })),
   ];

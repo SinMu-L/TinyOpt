@@ -67,6 +67,8 @@
       { "q": "如何获取 TinyPNG API Key？", "a": "访问 tinypng.com/developers，注册后即可免费获取 API Key，每月可免费压缩 500 张图片。" },
       { "q": "支持批量处理吗？", "a": "支持！您可以同时拖入多张图片或整个文件夹，工具支持多线程并发批量压缩，大幅提升处理效率。" }
     ],
+    "blog_title": "最新文章",
+    "blog_desc": "使用技巧、行业指南与版本动态，助你充分发挥 TinyOpt 的能力",
     "social_title": "深受用户信赖",
     "social_desc": "来自设计师和开发者的真实评价",
     "social_testimonials": [

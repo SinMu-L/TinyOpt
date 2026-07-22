@@ -3,8 +3,14 @@ import Layout from '@/layouts/Layout.astro';
 import FeatureCard from '@/components/FeatureCard.astro';
 import FaqAccordion from '@/components/FaqAccordion.astro';
 import { translation } from '@/i18n/utils';
+import { getCollection } from 'astro:content';
 
 const _ = translation('zh');
+
+const blogPosts = (await getCollection('blog'))
+  .filter((p) => p.data.lang === 'zh' && !p.data.draft && !p.data.noindex && p.data.date <= new Date())
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
 ---
 
 <Layout
@@ -148,6 +154,33 @@ const _ = translation('zh');
             <div class="mt-2 text-sm text-primary-100">{s.label}</div>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-4 text-center text-3xl font-bold text-gray-900">{_.home.blog_title}</h2>
+      <p class="mx-auto mb-12 max-w-xl text-center text-gray-500">{_.home.blog_desc}</p>
+      <div class="grid gap-8 md:grid-cols-3">
+        {blogPosts.map((p) => (
+          <a href={`/zh/blog/${p.id}/`} class="group rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+            <div class="mb-3 text-xs text-gray-400">{p.data.date.toLocaleDateString('zh-CN')}</div>
+            <h3 class="mb-2 text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">{p.data.title}</h3>
+            <p class="text-sm text-gray-500">{p.data.description}</p>
+            {p.data.tags && (
+              <div class="mt-4 flex flex-wrap gap-2">
+                {p.data.tags.slice(0, 3).map((tag) => (
+                  <span class="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">{tag}</span>
+                ))}
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/zh/blog/" class="inline-block rounded-lg border border-gray-300 bg-white px-8 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all">查看全部文章</a>
       </div>
     </div>
   </section>

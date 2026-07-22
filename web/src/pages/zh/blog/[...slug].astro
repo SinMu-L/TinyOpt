@@ -20,6 +20,17 @@ const { Content } = await render(post);
 
 const allPosts = await getCollection('blog');
 const translationKey = post.data.translationKey;
+
+const relatedPosts = allPosts
+  .filter((p) => p.data.lang === 'zh' && !p.data.draft && !p.data.noindex && p.id !== post.id && p.data.date <= new Date())
+  .map((p) => ({
+    post: p,
+    score: post.data.tags ? post.data.tags.filter((t) => p.data.tags?.includes(t)).length : 0,
+  }))
+  .filter((p) => p.score > 0)
+  .sort((a, b) => b.score - a.score || b.post.data.date.getTime() - a.post.data.date.getTime())
+  .slice(0, 3)
+  .map((p) => p.post);
 let langHref: string | undefined;
 if (translationKey) {
   const enPost = allPosts.find((p) => p.data.translationKey === translationKey && p.data.lang === 'en');
@@ -59,4 +70,20 @@ if (translationKey) {
       </div>
     </div>
   </article>
+  {relatedPosts.length > 0 && (
+    <section class="bg-gray-50 py-12">
+      <div class="mx-auto max-w-3xl px-4">
+        <h2 class="mb-8 text-2xl font-bold text-gray-900">相关文章</h2>
+        <div class="grid gap-6 md:grid-cols-3">
+          {relatedPosts.map((rp) => (
+            <a href={`/zh/blog/${rp.id}/`} class="group rounded-xl border border-gray-100 bg-white p-5 transition-all hover:-translate-y-1 hover:shadow-md">
+              <div class="mb-2 text-xs text-gray-400">{rp.data.date.toLocaleDateString('zh-CN')}</div>
+              <h3 class="text-sm font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">{rp.data.title}</h3>
+              <p class="mt-2 text-xs text-gray-500 line-clamp-2">{rp.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 </Layout>

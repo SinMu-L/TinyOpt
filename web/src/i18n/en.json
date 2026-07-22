@@ -67,6 +67,8 @@
       { "q": "How do I get a TinyPNG API Key?", "a": "Visit tinypng.com/developers, register an account, and get your free API Key — 500 free compressions per month." },
       { "q": "Does it support batch processing?", "a": "Absolutely! Drag in multiple images or entire folders — the tool supports multi-threaded batch compression for maximum efficiency." }
     ],
+    "blog_title": "Latest from Our Blog",
+    "blog_desc": "Tips, guides, and product updates to help you get the most out of TinyOpt",
     "social_title": "Trusted by Users",
     "social_desc": "Real reviews from designers and developers",
     "social_testimonials": [
