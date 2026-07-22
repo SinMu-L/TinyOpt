@@ -222,8 +222,6 @@ def main():
         app_icon = QIcon(icon_path)
         app.setWindowIcon(app_icon)
     window = MainWindow()
-    if os.path.isfile(icon_path):
-        window.setWindowIcon(QIcon(icon_path))
     window.show()
     sys.exit(app.exec_())
 

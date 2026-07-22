@@ -1,7 +1,9 @@
 {
   "app": {
-    "title": "🐼 TinyJPG Batch Compressor",
-    "name": "TinyJPG Compressor",
+    "title": "TinyOpt - Batch Image Compressor",
+    "name": "TinyOpt",
+    "brand_name": "TinyOpt",
+    "brand_tagline": "Batch Image Compressor",
     "warning": "Warning",
     "confirm": "Confirm",
     "done": "Done",
@@ -36,6 +38,7 @@
     "all_files_filter": "All Files (*.*)",
     "watermark_image_filter": "Image Files (*.png *.jpg *.jpeg *.webp *.gif *.bmp);;All Files (*.*)",
     "format": "Format",
+    "more_settings": "More Settings",
     "resize": "Resize",
     "resize_method": "Method",
     "width": "Width",
@@ -75,6 +78,11 @@
     "website": "Website Images"
   },
   "compress": {
+    "hero_title": "TinyOpt - Batch Image Compressor",
+    "hero_subtitle": "Drag and drop images here to compress them with TinyPNG API",
+    "drop_title": "Add Images",
+    "drop_hint": "Drag & drop images or folders, or use the buttons below",
+    "files_ready": "{count} file(s) ready to compress",
     "page_title": "📁 Output Settings",
     "task_title": "📋 Image List",
     "log_title": "📝 Compression Log",
