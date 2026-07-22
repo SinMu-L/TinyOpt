@@ -1,7 +1,9 @@
 {
   "app": {
-    "title": "🐼 TinyJPG 批量压缩助手",
-    "name": "TinyJPG Compressor",
+    "title": "TinyOpt - 批量压缩助手",
+    "name": "TinyOpt",
+    "brand_name": "TinyOpt",
+    "brand_tagline": "批量图片压缩助手",
     "warning": "警告",
     "confirm": "确认",
     "done": "完成",
@@ -36,6 +38,7 @@
     "all_files_filter": "所有文件 (*.*)",
     "watermark_image_filter": "图片文件 (*.png *.jpg *.jpeg *.webp *.gif *.bmp);;所有文件 (*.*)",
     "format": "格式",
+    "more_settings": "更多设置",
     "resize": "调整尺寸",
     "resize_method": "方法",
     "width": "宽",
@@ -75,6 +78,11 @@
     "website": "网站图片"
   },
   "compress": {
+    "hero_title": "TinyOpt - 批量压缩助手",
+    "hero_subtitle": "拖放图片到这里，使用 TinyPNG API 进行压缩",
+    "drop_title": "添加图片",
+    "drop_hint": "拖放图片或文件夹，或使用下方按钮添加",
+    "files_ready": "已添加 {count} 个文件，准备压缩",
     "page_title": "📁 输出设置",
     "task_title": "📋 待压缩图片列表",
     "log_title": "📝 压缩日志",
