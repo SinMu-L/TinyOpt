@@ -12,10 +12,10 @@ noindex: true
 
 TinyOpt Compressor v1.3.0 is officially released! Here are the highlights:
 
-### âœ?New Features
+### âœ…New Features
 
-1. **AVIF Format Support** â€?Added AVIF image format output for smaller file sizes while maintaining quality
-2. **Enhanced Format Conversion** â€?Now supports 9 formats: JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF
+1. **AVIF Format Support** â€”Added AVIF image format output for smaller file sizes while maintaining quality
+2. **Enhanced Format Conversion** â€”Now supports 9 formats: JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF
 
 ### ðŸŽ¨ Improvements
 

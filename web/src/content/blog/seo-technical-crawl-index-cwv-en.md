@@ -8,7 +8,7 @@ tags: [Technical SEO, Core Web Vitals, Sitemap, Structured Data, Crawl & Index]
 noindex: true
 ---
 
-In 2018 I took over a puzzling project: "Our site has been live for two months, and Google hasn't indexed a single page." Everything checked out â€?WordPress wasn't set to discourage indexing, the server returned 200 status codes, content was complete.
+In 2018 I took over a puzzling project: "Our site has been live for two months, and Google hasn't indexed a single page." Everything checked out â€”WordPress wasn't set to discourage indexing, the server returned 200 status codes, content was complete.
 
 After an hour, I found the culprit in the root directory. The `robots.txt` contained one line:
 
@@ -18,15 +18,15 @@ Disallow: /
 
 The hosting provider had pre-loaded this default file, and no one had modified it after installing WordPress. One character, sixty days of zero indexing.
 
-Technical SEO isn't as glamorous as content marketing, but when it breaks, it breaks catastrophically â€?**if search engines can't access your site, no amount of great content matters**.
+Technical SEO isn't as glamorous as content marketing, but when it breaks, it breaks catastrophically â€”**if search engines can't access your site, no amount of great content matters**.
 
-## 01. Crawl and Index â€?How Google Discovers Your Pages
+## 01. Crawl and Index â€”How Google Discovers Your Pages
 
 Google's process has two stages:
 
-**Crawl** â€?Googlebot follows links from page to page, downloading content.
+**Crawl** â€”Googlebot follows links from page to page, downloading content.
 
-**Index** â€?Google analyzes the downloaded content and stores it in its search database. When users search, Google matches queries against this index.
+**Index** â€”Google analyzes the downloaded content and stores it in its search database. When users search, Google matches queries against this index.
 
 A widely cited study found that the average crawl depth (clicks from the homepage) directly correlates with how quickly and how often Google discovers a page [^1].
 
@@ -41,18 +41,18 @@ Google allocates a limited daily crawl quota per site, known as the Crawl Budget
 | Site authority | High-authority sites get more crawl requests | New sites crawl less frequently |
 | Update frequency | Frequently updated pages are crawled more | Static pages see reduced crawl frequency |
 | Server response | Fast servers encourage more crawling | 500 errors reduce crawl rate |
-| Broken link ratio | â€?| Many 404s waste crawl budget |
+| Broken link ratio | â€”| Many 404s waste crawl budget |
 
 ### How to Check Your Index Status
 
 In Google Search Console, open the "Pages" report. Focus on:
 
-- **Valid pages** â€?successfully indexed count
-- **Excluded pages** â€?pages not indexed, with reasons (common: Page with redirect, Crawled but not indexed, Not found 404)
+- **Valid pages** â€”successfully indexed count
+- **Excluded pages** â€”pages not indexed, with reasons (common: Page with redirect, Crawled but not indexed, Not found 404)
 
 **Warning**: A page being publicly accessible does NOT mean it's indexed. Always verify in Search Console.
 
-## 02. Sitemap.xml â€?Your Indexing Roadmap
+## 02. Sitemap.xml â€”Your Indexing Roadmap
 
 A Sitemap is an XML file listing all URLs you want indexed, along with their last modification dates. It's not a ranking factor, but it significantly accelerates new page discovery [^3].
 
@@ -72,7 +72,7 @@ A Sitemap is an XML file listing all URLs you want indexed, along with their las
 | Includes pagination/filter URLs | Massive duplicate content generation |
 | Sitemap submitted once and never updated | New pages go undiscovered |
 
-## 03. Core Web Vitals â€?Google's UX Scorecard
+## 03. Core Web Vitals â€”Google's UX Scorecard
 
 Core Web Vitals are three metrics measuring real-world user experience. They became a ranking signal with the June 2021 Page Experience update [^4].
 
@@ -82,23 +82,23 @@ In March 2024, Google replaced FID (First Input Delay) with INP (Interaction to 
 
 | Metric | What It Measures | Good | Poor | Source |
 |--------|-----------------|------|------|--------|
-| LCP (Largest Contentful Paint) | Loading speed | â‰?.5s | >4.0s | 75th percentile |
-| INP (Interaction to Next Paint) | Responsiveness | â‰?00ms | >500ms | 75th percentile |
-| CLS (Cumulative Layout Shift) | Visual stability | â‰?.1 | >0.25 | 75th percentile |
+| LCP (Largest Contentful Paint) | Loading speed | â‰ .5s | >4.0s | 75th percentile |
+| INP (Interaction to Next Paint) | Responsiveness | â‰ 00ms | >500ms | 75th percentile |
+| CLS (Cumulative Layout Shift) | Visual stability | â‰ .1 | >0.25 | 75th percentile |
 
 ### How to Diagnose and Optimize
 
 **Step 1: Check the Core Web Vitals Report in Search Console**
 
-This groups URLs by mobile and desktop performance using **field data** (real Chrome users over a 28-day window) â€?not Lighthouse lab data. These are fundamentally different: lab data simulates an environment, field data measures actual user experiences.
+This groups URLs by mobile and desktop performance using **field data** (real Chrome users over a 28-day window) â€”not Lighthouse lab data. These are fundamentally different: lab data simulates an environment, field data measures actual user experiences.
 
 **Step 2: Prioritize Fixes**
 
-Recommended order: LPC â†?CLS â†?INP. Rationale:
+Recommended order: LPC â†’CLS â†’INP. Rationale:
 
-- LCP is usually caused by unoptimized images â€?the most common issue
-- CLS is cheap to fix â€?always set explicit dimensions for images and ad slots
-- INP typically involves JavaScript optimization â€?technically harder
+- LCP is usually caused by unoptimized images â€”the most common issue
+- CLS is cheap to fix â€”always set explicit dimensions for images and ad slots
+- INP typically involves JavaScript optimization â€”technically harder
 
 **Step 3: Targeted Solutions**
 
@@ -110,7 +110,7 @@ Recommended order: LPC â†?CLS â†?INP. Rationale:
 
 Regarding ranking weight, Google states that Core Web Vitals are one signal among many. Content relevance far outweighs perfect scores. Poor content with great Core Web Vitals won't rank; authoritative content with slightly subpar Vitals still can [^6].
 
-## 04. Structured Data (Schema) â€?Stand Out in Search Results
+## 04. Structured Data (Schema) â€”Stand Out in Search Results
 
 Structured data tells search engines what type of content your page contains using a standard format. It doesn't affect ranking but enables rich results (star ratings, prices, expandable FAQ) that significantly boost CTR [^7].
 
@@ -132,9 +132,9 @@ Structured data tells search engines what type of content your page contains usi
 }
 ```
 
-**FAQ Schema** â€?B2B sites can use this on FAQ pages or product-page FAQ sections to enable expandable answers directly in search results.
+**FAQ Schema** â€”B2B sites can use this on FAQ pages or product-page FAQ sections to enable expandable answers directly in search results.
 
-**BreadcrumbList Schema** â€?Helps Google understand page hierarchy and displays breadcrumb paths in SERPs, improving CTR.
+**BreadcrumbList Schema** â€”Helps Google understand page hierarchy and displays breadcrumb paths in SERPs, improving CTR.
 
 ### Testing Tools
 
@@ -142,13 +142,13 @@ Google's Rich Results Test (https://search.google.com/test/rich-results) and Sch
 
 ## 05. Hreflang for Multi-Language Sites
 
-If your site has multiple language versions (e.g., English, Chinese, Spanish), `hreflang` tags tell Google which pages correspond to which language â€?preventing duplicate content penalties [^8].
+If your site has multiple language versions (e.g., English, Chinese, Spanish), `hreflang` tags tell Google which pages correspond to which language â€”preventing duplicate content penalties [^8].
 
 ### Common Mistakes
 
-- Mixing languages on the same page â€?each language version needs its own URL
-- Missing hreflang â€?Google may index only one version
-- Pointing hreflang to wrong or non-existent pages â€?verify after configuration
+- Mixing languages on the same page â€”each language version needs its own URL
+- Missing hreflang â€”Google may index only one version
+- Pointing hreflang to wrong or non-existent pages â€”verify after configuration
 
 ### Correct Setup
 
@@ -167,11 +167,11 @@ Both Rank Math and Yoast SEO support hreflang configuration directly in their se
 
 Spend 30 minutes on the first of each month:
 
-1. **Search Console â†?Pages report** â€?verify no unexpected drop in indexed page count
-2. **Search Console â†?Sitemaps** â€?confirm status is "Success"
-3. **Sitebulb / Screaming Frog full scan** â€?check for 404s, 301s, and redirect chain length
-4. **Pagespeed Insights on 3-5 core pages** â€?confirm Core Web Vitals haven't degraded
-5. **Check HTTPS certificate expiry** â€?schedule renewal if under 30 days
+1. **Search Console â†’Pages report** â€”verify no unexpected drop in indexed page count
+2. **Search Console â†’Sitemaps** â€”confirm status is "Success"
+3. **Sitebulb / Screaming Frog full scan** â€”check for 404s, 301s, and redirect chain length
+4. **Pagespeed Insights on 3-5 core pages** â€”confirm Core Web Vitals haven't degraded
+5. **Check HTTPS certificate expiry** â€”schedule renewal if under 30 days
 
 Technical SEO lacks the dopamine hit of "publish now," but it underlies everything else. Without it, search engines simply can't see your work.
 

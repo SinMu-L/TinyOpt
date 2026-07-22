@@ -8,15 +8,15 @@ tags: [Google Search Console, GA4, SEO Analytics, Continuous Optimization, Data-
 noindex: true
 ---
 
-Three years ago, I was handling SEO for a laboratory instrument manufacturer. For the first six months, we executed a standard strategy â€?keyword research, content output, technical optimization. Traffic was growing steadily. Everything looked on track.
+Three years ago, I was handling SEO for a laboratory instrument manufacturer. For the first six months, we executed a standard strategy â€”keyword research, content output, technical optimization. Traffic was growing steadily. Everything looked on track.
 
 Month seven, I opened Search Console for a granular review. Impressions and clicks were both rising, but in the "Average Position" report, 15 core product keywords had slipped from positions 4-5 to positions 7-9.
 
-If I had only looked at aggregate traffic, this decline would have gone completely unnoticed â€?long-tail keyword gains masked the loss. But if left unchecked, those 15 keywords would have been permanently taken over by competitors.
+If I had only looked at aggregate traffic, this decline would have gone completely unnoticed â€”long-tail keyword gains masked the loss. But if left unchecked, those 15 keywords would have been permanently taken over by competitors.
 
-The biggest SEO trap: **rising total traffic â‰?everything is working**. Without segmented data, you can't see where you're leaking.
+The biggest SEO trap: **rising total traffic â‰ everything is working**. Without segmented data, you can't see where you're leaking.
 
-## 01. Google Search Console â€?The Tool You Should Open Every Day
+## 01. Google Search Console â€”The Tool You Should Open Every Day
 
 Google Search Console (GSC) is Google's free SEO monitoring tool. It doesn't improve your rankings directly, but it answers two essential questions: what Google can see on your site, and what users searched to find you.
 
@@ -35,15 +35,15 @@ This is the daily driver. Key metrics:
 
 **The Most Valuable Action: Filter by Query**
 
-Sort by Average Position and focus on keywords ranked 4-10. These are one step from the top 3 â€?optimized Titles, content updates, and internal links can push them up within 4-6 weeks.
+Sort by Average Position and focus on keywords ranked 4-10. These are one step from the top 3 â€”optimized Titles, content updates, and internal links can push them up within 4-6 weeks.
 
 **Pages Report**
 
 This shows indexing status. Common states:
 
-- **Error** â€?Google can't access the page normally
-- **Valid with warnings** â€?Indexed but has warnings (e.g., canonicalized to another URL)
-- **Excluded** â€?Not indexed, with the reason provided
+- **Error** â€”Google can't access the page normally
+- **Valid with warnings** â€”Indexed but has warnings (e.g., canonicalized to another URL)
+- **Excluded** â€”Not indexed, with the reason provided
 
 Most common "Excluded" reasons we've encountered in client work [^1]:
 
@@ -56,9 +56,9 @@ Most common "Excluded" reasons we've encountered in client work [^1]:
 
 ### Submitting Your Sitemap
 
-Submit your Sitemap URL (typically `/sitemap.xml`) in GSC's Sitemaps section. Compare "Submitted URLs" vs "Indexed URLs" â€?a large gap means many submitted pages aren't being indexed, requiring investigation.
+Submit your Sitemap URL (typically `/sitemap.xml`) in GSC's Sitemaps section. Compare "Submitted URLs" vs "Indexed URLs" â€”a large gap means many submitted pages aren't being indexed, requiring investigation.
 
-## 02. Google Analytics 4 (GA4) â€?Tracking Traffic to Conversion
+## 02. Google Analytics 4 (GA4) â€”Tracking Traffic to Conversion
 
 Search Console tells you "what users searched" and "whether they saw you." GA4 tells you "what they did after arriving."
 
@@ -85,7 +85,7 @@ Typical B2B site conversions include:
 - Email newsletter signups
 - Clicks on WhatsApp/WeChat buttons
 
-After setting up event tracking in GA4, you can trace back to **which keywords and landing pages drive the most conversions**. This is far more valuable than raw traffic â€?a keyword bringing 200 daily clicks with zero conversions is less useful than one bringing 20 clicks with a 10% conversion rate.
+After setting up event tracking in GA4, you can trace back to **which keywords and landing pages drive the most conversions**. This is far more valuable than raw traffic â€”a keyword bringing 200 daily clicks with zero conversions is less useful than one bringing 20 clicks with a 10% conversion rate.
 
 In our experience, 80% of conversions typically concentrate on 20% of landing pages. Identifying and expanding content around those pages is the highest-ROI SEO strategy [^2].
 
@@ -94,7 +94,7 @@ In our experience, 80% of conversions typically concentrate on 20% of landing pa
 SEO is never "finished." It's an endless cycle. Here's the six-step loop we've validated across dozens of client campaigns:
 
 ```
-Keyword Research â†?Page Planning â†?Content Creation â†?Technical Audit â†?Publish & Submit â†?Monitor Data â†?Identify Issues â†?Back to Step 1
+Keyword Research â†’Page Planning â†’Content Creation â†’Technical Audit â†’Publish & Submit â†’Monitor Data â†’Identify Issues â†’Back to Step 1
 ```
 
 ### Recommended Rhythm
@@ -136,10 +136,10 @@ If we had only tracked aggregate traffic, we would never have noticed "hydraulic
 SEO's ultimate form is a flywheel:
 
 ```
-More quality content â†?More keyword coverage â†?More impressions & clicks â†?More traffic â†?
-More internal linking opportunities â†?Higher page authority â†?Better rankings â†?More backlinks â†?
-Higher domain authority â†?Lifts all pages â†?Inspires higher-quality content â†?
-â†?Loop back
+More quality content â†’More keyword coverage â†’More impressions & clicks â†’More traffic â†’
+More internal linking opportunities â†’Higher page authority â†’Better rankings â†’More backlinks â†’
+Higher domain authority â†’Lifts all pages â†’Inspires higher-quality content â†’
+â†’Loop back
 ```
 
 Data monitoring is the flywheel's governor. Without it, you can't tell whether the wheel is accelerating or stuck.
@@ -150,12 +150,12 @@ Data monitoring is the flywheel's governor. Without it, you can't tell whether t
 2. **This week**: Set up at least 3 conversion events in GA4 (form submission, button click, PDF download)
 3. **This month**: Run a full GSC + GA4 cross-analysis to identify which keywords drive conversions, not just traffic
 
-Data doesn't lie â€?but you have to look at it.
+Data doesn't lie â€”but you have to look at it.
 
 noindex: true
 ---
 
-[^1]: Google Search Central, "Crawl and Index your Site â€?Common Issues", https://developers.google.com/search/docs/crawling-indexing/common-crawl-issues
+[^1]: Google Search Central, "Crawl and Index your Site â€”Common Issues", https://developers.google.com/search/docs/crawling-indexing/common-crawl-issues
 
 [^2]: Search Engine Land, "The 80/20 Rule of SEO Content", 2024
 

@@ -8,11 +8,11 @@ tags: [Crawl Budget, technical SEO, Google crawl, index optimization, Sitemap]
 noindex: true
 ---
 
-You published 200 articles. Three months later, Google Search Console shows 40 of them stuck in "Discovered â€?currently not indexed."
+You published 200 articles. Three months later, Google Search Console shows 40 of them stuck in "Discovered â€”currently not indexed."
 
 The content isn't the problem. Google never came to crawl them.
 
-Those 40 articles are like plates waiting in the kitchen â€?the food is fine, but the server never walked into that corner.
+Those 40 articles are like plates waiting in the kitchen â€”the food is fine, but the server never walked into that corner.
 
 ## Core Concept: What Is Crawl Budget
 
@@ -30,15 +30,15 @@ Waste one crawl on a useless page, and a real article waits one more day for ind
 Crawl Budget = Crawl Rate Limit Ã— Crawl Demand
 ```
 
-**Crawl Rate Limit** depends on server response speed. Faster responses â†?more concurrent requests. Slow servers, 5xx errors â†?Google proactively throttles.
+**Crawl Rate Limit** depends on server response speed. Faster responses â†’more concurrent requests. Slow servers, 5xx errors â†’Google proactively throttles.
 
-**Crawl Demand** depends on page popularity and freshness. Frequently updated pages, pages with more backlinks â†?Google wants to crawl them more.
+**Crawl Demand** depends on page popularity and freshness. Frequently updated pages, pages with more backlinks â†’Google wants to crawl them more.
 
 Google allocates budget based on: site authority, update frequency, and server response speed[^2].
 
 ## 01. Low-Quality Pages Consuming Budget
 
-Tag pages, author archives, internal search results, paginated parameter URLs â€?near-zero SEO value, yet they devour crawl budget.
+Tag pages, author archives, internal search results, paginated parameter URLs â€”near-zero SEO value, yet they devour crawl budget.
 
 ### Real Example
 
@@ -57,11 +57,11 @@ Noindexing tag pages alone typically frees 15-25% of crawl budget.
 
 ## 02. Broken Links (404) and Long Redirect Chains
 
-Googlebot follows an internal link to a 404 â†?1 crawl wasted. Follows a 3+ hop redirect chain â†?3+ crawls wasted.
+Googlebot follows an internal link to a 404 â†’1 crawl wasted. Follows a 3+ hop redirect chain â†’3+ crawls wasted.
 
 ### The Math
 
-Page A â†?301 â†?Page B â†?301 â†?Page C â†?301 â†?Page D
+Page A â†’301 â†’Page B â†’301 â†’Page C â†’301 â†’Page D
 
 Googlebot follows 4 URLs. Only 1 delivers content. 3 crawls wasted.
 
@@ -69,33 +69,33 @@ Got 80 redirect chains with 3+ hops? That's 240 wasted crawls per day.
 
 ### Fix
 
-1. Screaming Frog full-site scan â†?export all 404s and redirect chains
+1. Screaming Frog full-site scan â†’export all 404s and redirect chains
 2. 404 pages: 301 redirect to the most relevant page (not the homepage)
 3. Redirect chains: shorten to 1 hop
 
-Screaming Frog's free version scans 500 URLs â€?enough for most independent sites and small ecommerce stores.
+Screaming Frog's free version scans 500 URLs â€”enough for most independent sites and small ecommerce stores.
 
 ## 03. Slow Server Response or 5xx Errors
 
-Google monitors server health. Two consecutive days of 5xx errors â†?crawl rate cut in half.
+Google monitors server health. Two consecutive days of 5xx errors â†’crawl rate cut in half.
 
 ### Key Data Point
 
-Server response time > 2 seconds â†?Google reduces crawl frequency by ~30%[^3].
+Server response time > 2 seconds â†’Google reduces crawl frequency by ~30%[^3].
 
-Response time > 4 seconds â†?crawl volume may drop to 30-40% of original.
+Response time > 4 seconds â†’crawl volume may drop to 30-40% of original.
 
-This isn't a penalty â€?it's economics. Spending 10 seconds on a slow server makes no sense when you could crawl 3 fast sites instead.
+This isn't a penalty â€”it's economics. Spending 10 seconds on a slow server makes no sense when you could crawl 3 fast sites instead.
 
 ### Fix
 
-1. Check GSC â†?Settings â†?Crawl Stats â†?review response time trends
+1. Check GSC â†’Settings â†’Crawl Stats â†’review response time trends
 2. If average response time > 800ms, upgrade hosting or enable caching
 3. Investigate server error logs for 5xx root causes
 
 ## 04. Faceted Navigation URL Explosion
 
-`?sort=price&color=red&size=large` â€?each parameter combination generates a unique URL.
+`?sort=price&color=red&size=large` â€”each parameter combination generates a unique URL.
 
 ### Ecommerce Nightmare
 
@@ -108,16 +108,16 @@ Googlebot gets lost in the parameter maze. Real product pages go uncrawled.
 ### Fix
 
 1. Set canonical on all parameter URLs pointing to clean URLs
-2. Use GSC â†?URL Parameters tool to tell Google which params to ignore
+2. Use GSC â†’URL Parameters tool to tell Google which params to ignore
 3. Disallow parameter paths in robots.txt
 
 Cleaning up parameter URLs typically yields a 20-35% improvement in indexing coverage for ecommerce sites.
 
 ## 05. Unoptimized Images Slowing Crawl
 
-A 5MB original product image â†?Googlebot spends time and bandwidth downloading it.
+A 5MB original product image â†’Googlebot spends time and bandwidth downloading it.
 
-Googlebot has an implicit "time budget" per page â€?typically around 15 seconds. Large images eat into that budget, leaving less time for HTML content and link discovery.
+Googlebot has an implicit "time budget" per page â€”typically around 15 seconds. Large images eat into that budget, leaving less time for HTML content and link discovery.
 
 ### This Isn't Theory
 
@@ -127,21 +127,21 @@ A 150KB compressed WebP downloads 33Ã— faster than a 5MB PNG original. That 33Ã—
 
 ### Fix
 
-1. TinyOpt batch compression â†?60-80% size reduction
+1. TinyOpt batch compression â†’60-80% size reduction
 2. Convert to WebP/AVIF format
 3. Set output dimensions to match page display width
 4. Configure CDN for faster image delivery
 
-ðŸ‘‰ [Download TinyOpt â€?Compress Images by 80%, Free Up Crawl Budget for Content Pages](/download/)
+ðŸ‘‰ [Download TinyOpt â€”Compress Images by 80%, Free Up Crawl Budget for Content Pages](/download/)
 
 ## 06. JavaScript Rendering Too Slow
 
-For client-side rendered (CSR) sites, Googlebot needs an additional trip through the rendering queue â€?a separate, significantly slower pipeline than HTML crawling[^5].
+For client-side rendered (CSR) sites, Googlebot needs an additional trip through the rendering queue â€”a separate, significantly slower pipeline than HTML crawling[^5].
 
 ### Two-Stage Crawl Process
 
-1. HTML crawl â†?completes in seconds to minutes
-2. JS rendering â†?executes hours to days later
+1. HTML crawl â†’completes in seconds to minutes
+2. JS rendering â†’executes hours to days later
 
 If your core content depends on JS rendering, Google may see your content 5-10 days later than HTML-delivered pages.
 
@@ -158,13 +158,13 @@ Note: If your site runs on WordPress, Shopify, or similar traditional CMS, this 
 Don't fix all 6 at once. Follow this order:
 
 **Priority 1**: 01 (noindex low-quality pages) + 03 (speed up server response)
-â†?Biggest impact on total budget pool
+â†’Biggest impact on total budget pool
 
 **Priority 2**: 02 (fix 404s + shorten redirect chains) + 04 (clean up parameter URLs)
-â†?Stop the waste, direct existing budget where it matters
+â†’Stop the waste, direct existing budget where it matters
 
 **Priority 3**: 05 (compress images) + 06 (optimize JS rendering)
-â†?Incremental efficiency gains â€?less time per page = more pages crawled
+â†’Incremental efficiency gains â€”less time per page = more pages crawled
 
 **Expected results**: Sites following this order typically see 30-50% more pages indexed within 4-6 weeks.
 
@@ -175,9 +175,9 @@ Spend 5 minutes weekly checking these 4 metrics:
 | Report | What to Check | Good Signal | Warning Signal |
 |--------|--------------|-------------|----------------|
 | Crawl Stats | Daily crawl count trend | Stable or rising | Sudden 30%+ drop |
-| Pages report | "Discovered â€?not indexed" count | Decreasing | Steadily growing |
+| Pages report | "Discovered â€”not indexed" count | Decreasing | Steadily growing |
 | Sitemap report | Submitted vs indexed ratio | > 80% | < 50% |
-| Index coverage | Excluded pages by reason | No new additions | "Crawled â€?not indexed" spike |
+| Index coverage | Excluded pages by reason | No new additions | "Crawled â€”not indexed" spike |
 
 ## Core Pattern
 
@@ -193,7 +193,7 @@ Reframe the problem: you're not "fighting for more crawls." You're "wasting fewe
 
 **01. How do I check my site's crawl budget?**
 
-GSC â†?Settings â†?Crawl Stats. This report shows daily crawl requests, download volume, and response time. Track it for 2 weeks to establish your baseline average.
+GSC â†’Settings â†’Crawl Stats. This report shows daily crawl requests, download volume, and response time. Track it for 2 weeks to establish your baseline average.
 
 **02. Can new sites request more crawl budget?**
 
@@ -201,7 +201,7 @@ You can't request it directly. But you can earn it: 1) Submit a complete, update
 
 **03. Does submitting a Sitemap increase crawl frequency?**
 
-Sitemaps don't directly increase crawl frequency. But they help Googlebot make smarter crawl decisions â€?knowing which pages are new and which are updated. Result: same crawl volume, faster new-content indexing.
+Sitemaps don't directly increase crawl frequency. But they help Googlebot make smarter crawl decisions â€”knowing which pages are new and which are updated. Result: same crawl volume, faster new-content indexing.
 
 **04. How long after fixing issues will Google increase crawl rate?**
 
@@ -209,11 +209,11 @@ Server response improvements typically show in Crawl Stats within 1-2 weeks. Ind
 
 **05. Do small sites (< 500 pages) need to worry about crawl budget?**
 
-Under 500 pages, most sites aren't budget-constrained â€?Google's few dozen daily crawls are sufficient. But if new pages consistently take 2+ weeks to get indexed, the waste patterns in this article likely apply and are worth investigating.
+Under 500 pages, most sites aren't budget-constrained â€”Google's few dozen daily crawls are sufficient. But if new pages consistently take 2+ weeks to get indexed, the waste patterns in this article likely apply and are worth investigating.
 
 ## Summary
 
-Crawl budget isn't about getting more â€?it's about wasting less.
+Crawl budget isn't about getting more â€”it's about wasting less.
 
 Fix the 6 waste sources and your existing budget goes much further:
 
@@ -221,9 +221,9 @@ Fix the 6 waste sources and your existing budget goes much further:
 - Content updates detected sooner
 - Index coverage steadily climbing
 
-Open Search Console right now. Look at the "Discovered â€?currently not indexed" number. If it exceeds 15% of your total articles, pick direction 01 from this list and start today.
+Open Search Console right now. Look at the "Discovered â€”currently not indexed" number. If it exceeds 15% of your total articles, pick direction 01 from this list and start today.
 
-ðŸ‘‰ [Download TinyOpt â€?Start Freeing Up Crawl Budget With Image Compression](/download/)
+ðŸ‘‰ [Download TinyOpt â€”Start Freeing Up Crawl Budget With Image Compression](/download/)
 
 noindex: true
 ---

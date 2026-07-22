@@ -8,13 +8,13 @@ tags: [On-Page SEO, E-E-A-T, Title Tag, Heading Hierarchy, Content Optimization]
 noindex: true
 ---
 
-Last year I audited a B2B export site generating $20M in annual revenue. Technically it was sound �?fast server, HTTPS enabled, mobile-friendly. Yet Google had indexed 400+ pages, and fewer than 30 keywords had rankings.
+Last year I audited a B2B export site generating $20M in annual revenue. Technically it was sound —fast server, HTTPS enabled, mobile-friendly. Yet Google had indexed 400+ pages, and fewer than 30 keywords had rankings.
 
 The problem was obvious once I looked at the pages: **80% of the site's Title tags were auto-generated. Every H1 matched its page title verbatim. The 400 pages shared only 3 Meta Description templates.**
 
 This is classic "tech-heavy, page-light" SEO imbalance. On-page SEO is the most direct signal of relevance, and it's also the most systematically fixable.
 
-## 01. The Title Tag �?Your First Impression in Search Results
+## 01. The Title Tag —Your First Impression in Search Results
 
 The Title tag (title element) is the clickable blue headline in SERPs and the highest-weighted on-page SEO element.
 
@@ -22,10 +22,10 @@ According to Google's official guidance, every page must have a unique, descript
 
 ### Best Practices
 
-- **Primary keyword near the front** �?within the first 60 characters. Google typically displays 50-60 characters (approx 580-600px) before truncating
-- **Every page unique** �?no two pages should share the same Title
-- **No keyword stuffing** �?Google explicitly classifies this as a spam policy violation [^2]
-- **Include brand name** �?at the end, separated by a pipe, e.g., "MCCB 630A 3-Pole | ABC Electric"
+- **Primary keyword near the front** —within the first 60 characters. Google typically displays 50-60 characters (approx 580-600px) before truncating
+- **Every page unique** —no two pages should share the same Title
+- **No keyword stuffing** —Google explicitly classifies this as a spam policy violation [^2]
+- **Include brand name** —at the end, separated by a pipe, e.g., "MCCB 630A 3-Pole | ABC Electric"
 
 ### Before vs. After
 
@@ -37,9 +37,9 @@ According to Google's official guidance, every page must have a unique, descript
 
 ### Real-World Case
 
-We restructured Title tags for a packaging machinery client. Their product pages all used "Product �?Brand Name" format. After switching to individual titles with "Model + Core Selling Point | Brand", click-through rate rose from 2.1% to 4.8% in 6 weeks.
+We restructured Title tags for a packaging machinery client. Their product pages all used "Product —Brand Name" format. After switching to individual titles with "Model + Core Selling Point | Brand", click-through rate rose from 2.1% to 4.8% in 6 weeks.
 
-## 02. Meta Description �?The CTR Lever
+## 02. Meta Description —The CTR Lever
 
 Meta Description is **not a direct ranking factor**, but it significantly influences whether users click your result. Google's 2024 updates further emphasized the match between description content and search queries [^3].
 
@@ -58,14 +58,14 @@ After: `Looking for industrial gate valves for chemical plants? Our API 600 cert
 
 Result: CTR went from 1.8% to 3.5%.
 
-## 03. Heading Hierarchy (H1/H2/H3) �?Structuring Content for Search Engines
+## 03. Heading Hierarchy (H1/H2/H3) —Structuring Content for Search Engines
 
 Heading tags build the structural framework of a page and help search engines understand the topic relationships between sections [^4].
 
 ### Three Hard Rules
 
-1. **One H1 per page �?no exceptions**
-2. **Never skip heading levels** (H1 �?H3 is invalid)
+1. **One H1 per page —no exceptions**
+2. **Never skip heading levels** (H1 →H3 is invalid)
 3. **H1 should match the page's target keyword**
 
 ### Correct Structure
@@ -73,9 +73,9 @@ Heading tags build the structural framework of a page and help search engines un
 ```html
 H1: Industrial Gate Valve Selection Guide 2025
 ├── H2: What Is a Gate Valve?
-�?  └── H3: Gate Valve vs Ball Valve
+─  └── H3: Gate Valve vs Ball Valve
 ├── H2: Key Specifications to Consider
-�?  └── H3: Pressure Rating and Temperature Limits
+─  └── H3: Pressure Rating and Temperature Limits
 ├── H2: Top 5 Gate Valve Manufacturers Compared
 └── H2: Frequently Asked Questions
 ```
@@ -84,7 +84,7 @@ Google's March 2024 Core Update further integrated the Helpful Content System in
 
 ## 04. E-E-A-T: How Google Assesses Content Quality
 
-E-E-A-T stands for Experience, Expertise, Authoritativeness, and Trustworthiness �?the framework Google's quality raters use to evaluate pages [^6].
+E-E-A-T stands for Experience, Expertise, Authoritativeness, and Trustworthiness —the framework Google's quality raters use to evaluate pages [^6].
 
 In December 2022, Google expanded E-A-T to E-E-A-T by adding "Experience," emphasizing that **first-hand knowledge demonstrably improves content quality**. While E-E-A-T itself is not a direct ranking factor, it reflects the principles embedded in Google's core ranking systems [^7].
 
@@ -111,13 +111,13 @@ Three months later, the "indexed but not serving" ratio in Search Console droppe
 
 ## 05. Five Actions You Can Take Today
 
-1. **Audit Title uniqueness** �?Use Screaming Frog or Sitebulb to find duplicate or missing Titles
-2. **Establish H1 review process** �?No page goes live without confirming one unique H1
-3. **Rewrite Meta Descriptions** �?Every landing page gets an independent, CTA-included description
-4. **Add author information** �?Technical articles and product pages need bylines
-5. **Verify factual accuracy** �?Check technical specs, industry citations, and data freshness
+1. **Audit Title uniqueness** —Use Screaming Frog or Sitebulb to find duplicate or missing Titles
+2. **Establish H1 review process** —No page goes live without confirming one unique H1
+3. **Rewrite Meta Descriptions** —Every landing page gets an independent, CTA-included description
+4. **Add author information** —Technical articles and product pages need bylines
+5. **Verify factual accuracy** —Check technical specs, industry citations, and data freshness
 
-On-page SEO doesn't require a massive redesign. 80% of the impact comes from 20% of the fundamentals �?get Title, H1, and Description right, and rankings will follow.
+On-page SEO doesn't require a massive redesign. 80% of the impact comes from 20% of the fundamentals —get Title, H1, and Description right, and rankings will follow.
 
 noindex: true
 ---
@@ -128,7 +128,7 @@ noindex: true
 
 [^3]: Google Search Central, "Control your snippets", https://developers.google.com/search/docs/appearance/snippet
 
-[^4]: Google Search Central, "How Search Works �?Organizing Information", https://www.google.com/search/howsearchworks/how-search-works/
+[^4]: Google Search Central, "How Search Works —Organizing Information", https://www.google.com/search/howsearchworks/how-search-works/
 
 [^5]: Google Search Central Blog, "March 2024 Core Update & Helpful Content Update", https://developers.google.com/search/updates
 
