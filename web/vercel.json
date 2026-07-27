@@ -1,68 +1,247 @@
 {
-  "framework": "astro",
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.seojeck.com" }],
-      "destination": "https://seojeck.com/$1",
-      "permanent": true
-    },
-    {
-      "source": "/en",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/en/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/en/:path*",
-      "destination": "/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/blog/image-seo-rename-alt-guide/",
-      "destination": "/blog/image-seo-rename-alt-guide-en/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/bulk-image-seo-station-group/",
-      "destination": "/blog/bulk-image-seo-station-group-en/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/ecommerce-watermark-protection/",
-      "destination": "/blog/ecommerce-watermark-protection-en/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/batch-rename-productivity/",
-      "destination": "/blog/batch-rename-productivity-en/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/pagespeed-lazy-loading-guide/",
-      "destination": "/blog/pagespeed-lazy-loading-guide-en/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/shopify-webp-optimization/",
-      "destination": "/blog/shopify-webp-optimization-en/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/multi-key-management/",
-      "destination": "/blog/multi-key-management-en/",
-      "permanent": true
-    },
-    {
-      "source": "/off-page-seo/introduction",
-      "destination": "/blog/",
-      "permanent": true
-    }
-  ]
+    "framework": "astro",
+    "buildCommand": "npm run build",
+    "installCommand": "npm install",
+    "redirects": [
+        {
+            "source": "/off-page-seo/introduction",
+            "destination": "/blog/image-seo-score-checklist-en/",
+            "permanent": true
+        },
+        {
+            "source": "/off-page-seo/introduction/",
+            "destination": "/blog/image-seo-score-checklist-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/v1-3-0-release-en",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/v1-3-0-release-en/",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/image-seo-rename-alt-guide",
+            "destination": "/blog/image-seo-rename-alt-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/image-seo-rename-alt-guide/",
+            "destination": "/blog/image-seo-rename-alt-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/bulk-image-seo-station-group",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/bulk-image-seo-station-group/",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/ecommerce-watermark-protection",
+            "destination": "/blog/ecommerce-batch-watermark-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/ecommerce-watermark-protection/",
+            "destination": "/blog/ecommerce-batch-watermark-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/batch-rename-productivity",
+            "destination": "/blog/batch-rename-productivity-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/batch-rename-productivity/",
+            "destination": "/blog/batch-rename-productivity-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/terms",
+            "destination": "/terms/",
+            "permanent": true
+        },
+        {
+            "source": "/en/terms/",
+            "destination": "/terms/",
+            "permanent": true
+        },
+        {
+            "source": "/en",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/en/",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/batch-rename-productivity",
+            "destination": "/blog/batch-rename-productivity-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/batch-rename-productivity/",
+            "destination": "/blog/batch-rename-productivity-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/cases",
+            "destination": "/cases/",
+            "permanent": true
+        },
+        {
+            "source": "/en/cases/",
+            "destination": "/cases/",
+            "permanent": true
+        },
+        {
+            "source": "/en/download",
+            "destination": "/download/",
+            "permanent": true
+        },
+        {
+            "source": "/en/download/",
+            "destination": "/download/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/pagespeed-lazy-loading-guide",
+            "destination": "/blog/pagespeed-lazy-loading-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/pagespeed-lazy-loading-guide/",
+            "destination": "/blog/pagespeed-lazy-loading-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/shopify-webp-optimization",
+            "destination": "/blog/shopify-webp-optimization-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/shopify-webp-optimization/",
+            "destination": "/blog/shopify-webp-optimization-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/multi-key-management",
+            "destination": "/blog/multi-key-management-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/multi-key-management/",
+            "destination": "/blog/multi-key-management-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/multi-key-management",
+            "destination": "/blog/multi-key-management-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/multi-key-management/",
+            "destination": "/blog/multi-key-management-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/cases/undefined",
+            "destination": "/cases/",
+            "permanent": true
+        },
+        {
+            "source": "/en/cases/undefined/",
+            "destination": "/cases/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/undefined",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/undefined/",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/cases/undefined",
+            "destination": "/cases/",
+            "permanent": true
+        },
+        {
+            "source": "/cases/undefined/",
+            "destination": "/cases/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/undefined",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/undefined/",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/bulk-image-seo-station-group",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/bulk-image-seo-station-group/",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/ecommerce-watermark-protection",
+            "destination": "/blog/ecommerce-batch-watermark-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/ecommerce-watermark-protection/",
+            "destination": "/blog/ecommerce-batch-watermark-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/pagespeed-lazy-loading-guide",
+            "destination": "/blog/pagespeed-lazy-loading-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/pagespeed-lazy-loading-guide/",
+            "destination": "/blog/pagespeed-lazy-loading-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/image-seo-rename-alt-guide",
+            "destination": "/blog/image-seo-rename-alt-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/en/blog/image-seo-rename-alt-guide/",
+            "destination": "/blog/image-seo-rename-alt-guide-en/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/v1-3-0-release-en",
+            "destination": "/blog/",
+            "permanent": true
+        },
+        {
+            "source": "/blog/v1-3-0-release-en/",
+            "destination": "/blog/",
+            "permanent": true
+        }
+    ]
 }
