@@ -197,8 +197,7 @@ TinyOpt 批量重命名的是文件名。上传到 WordPress 等 CMS 后，系�
 
 👉 [下载 TinyOpt，免费体验图片批量优化](/download/)
 
----
-
+***
 [^1]: Google Search Central, "Google Images best practices", https://developers.google.com/search/docs/appearance/google-images
 
 [^2]: Backlinko, "Image SEO: 16 Actionable Tips for Traffic", 2025, https://backlinko.com/image-seo

@@ -274,8 +274,7 @@ iframe 没尺寸 → 浏览器不知道嵌入内容有多大 → 加载后显形
 
 这三件事做完，CLS 大概率从红变绿。
 
----
-
+***
 [^1]: Google. "The state of Core Web Vitals." web.dev, February 2023. https://web.dev/top-cwv-2023/
 [^2]: Google Chrome Developers. "Optimize Cumulative Layout Shift." web.dev, 2024. https://web.dev/optimize-cls/
 [^3]: Sistrix. "Core Web Vitals as a ranking factor — data study." sistrix.com, July 2021. https://www.sistrix.com/blog/core-web-vitals-ranking-factor-data/

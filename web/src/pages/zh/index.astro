@@ -18,6 +18,7 @@ const blogPosts = (await getCollection('blog'))
   description={_.meta.home}
   lang="zh"
   pageType="home"
+  softwareVersion={_.download.latest_version}
   faqItems={_.home.faq_items}
 >
   <!-- Hero -->

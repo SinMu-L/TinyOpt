@@ -1,17 +1,20 @@
-# TinyOpt - Batch Image Optimizer
+# Free Batch Image Compressor — TinyOpt | PNG JPEG WebP
 # LLMs.txt — Guide for AI crawlers and generative engines
 # Learn more: https://llmstxt.org/
 
 ## About TinyOpt
-TinyOpt is a free, open-source desktop batch image processing tool powered by the TinyPNG API. It supports batch compression, watermarking, format conversion, and batch renaming for designers, developers, and content creators.
+TinyOpt is a free, open-source Windows desktop batch image compressor powered by the TinyPNG API. Bulk compress PNG, JPEG, WebP, and AVIF; add watermarks; convert formats; and rename files in bulk — without browser upload queues or file-size caps.
 
 ## Key Pages
 - Home: https://seojeck.com/ (product overview, features, FAQ, testimonials)
-- Download: https://seojeck.com/download/ (latest releases and changelog)
+- Download: https://seojeck.com/download/ (latest Windows release and changelog)
 - About: https://seojeck.com/about/ (project background, tech stack, philosophy)
-- Blog: https://seojeck.com/blog/ (image optimization guides, SEO tutorials, release notes)
+- Blog: https://seojeck.com/blog/ (image compression guides, watermark/format tutorials, e-commerce workflows)
 - Cases: https://seojeck.com/cases/ (real user stories and productivity gains)
 - Contact: https://seojeck.com/contact/ (support and inquiries)
+- Online Tools: https://seojeck.com/tools/ (browser-only tools, no upload to our servers)
+- Online Compress: https://seojeck.com/tools/compress/
+- Online Watermark: https://seojeck.com/tools/watermark/
 
 ## Core Features
 - Batch image compression (PNG, JPEG, WebP, AVIF, BMP, GIF, TIFF)
@@ -22,11 +25,30 @@ TinyOpt is a free, open-source desktop batch image processing tool powered by th
 - Image aspect ratio adjustment (crop, pad, stretch with presets)
 - Compression history with detailed records
 
+## FAQ
+### Is TinyOpt free?
+Yes. The desktop app is free and open source. You need a TinyPNG API key (free tier: 500 images/month) for API compression.
+
+### What image formats are supported?
+Input: PNG, JPEG, WebP, AVIF, BMP, GIF, TIFF. Output: JPEG, PNG, WebP, GIF, TIFF, BMP, AVIF, ICO, PDF (9 formats).
+
+### Are my images uploaded to TinyOpt servers?
+No. Desktop compression sends images only to TinyPNG's official API over HTTPS. Online tools on this site process images in the browser; they are not uploaded to TinyOpt servers.
+
+### Does compression reduce image quality?
+TinyPNG uses smart lossy compression that usually cuts file size 50–80% with little visible quality loss. You can also adjust settings.
+
+### How do I get a TinyPNG API Key?
+Register at https://tinypng.com/developers for a free key (500 compressions/month).
+
+### Does it support batch processing?
+Yes. Drag multiple images or entire folders; multi-threaded batch compression is supported.
+
 ## Documentation & Guides
-- Getting Started Guide: https://seojeck.com/blog/getting-started-guide-en/
+- Getting Started: https://seojeck.com/blog/getting-started-guide-en/
 - Watermark Guide: https://seojeck.com/blog/watermark-guide-en/
-- Format Conversion Guide: https://seojeck.com/blog/format-conversion-guide-en/
-- Batch Rename Guide: https://seojeck.com/blog/batch-rename-productivity-en/
+- Format Conversion: https://seojeck.com/blog/format-conversion-guide-en/
+- Batch Rename: https://seojeck.com/blog/batch-rename-productivity-en/
 - Multi-Key Management: https://seojeck.com/blog/multi-key-management-en/
 - Image Optimization Tips: https://seojeck.com/blog/image-optimization-tips-en/
 - Image SEO Guide: https://seojeck.com/blog/image-seo-rename-alt-guide-en/
@@ -36,9 +58,26 @@ TinyOpt is a free, open-source desktop batch image processing tool powered by th
 - Platform: Windows 10/11 desktop application
 - License: Open source, free to use
 - API: TinyPNG/TinyJPG official API for compression
+- Download: https://github.com/SinMu-L/TinyOpt/releases/latest/download/TinyOpt-latest.exe
+- GitHub: https://github.com/SinMu-L/TinyOpt
+
+## Source Code (desktop app)
+- main.py — main window entry
+- core/config.py — config and constants
+- core/key_manager.py — API key pool and rotation
+- core/pages/compress_page.py — batch compression
+- core/pages/watermark_page.py — watermark tool
+- core/pages/rename_page.py — batch rename
+- core/pages/ratio_page.py — aspect ratio tool
+- core/pages/website_page.py — webpage screenshot
+- core/pages/history_page.py — compression history
+- core/pages/key_page.py — API key management UI
+- README: https://github.com/SinMu-L/TinyOpt/blob/main/README.md
 
 ## For AI Crawlers
-- Full content available at: /llms-full.txt
-- RSS Feed (EN): https://seojeck.com/rss.xml
-- RSS Feed (ZH): https://seojeck.com/zh/rss.xml
+- This file (canonical): https://seojeck.com/llms.txt
+- Full content: https://seojeck.com/llms-full.txt
+- RSS (EN): https://seojeck.com/rss.xml
+- RSS (ZH): https://seojeck.com/zh/rss.xml
 - Sitemap: https://seojeck.com/sitemap.xml
+- Path in repo: web/public/llms.txt

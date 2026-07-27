@@ -12,7 +12,7 @@ export interface Props {
   ogImage?: string;
   noindex?: boolean;
   canonical?: string;
-  pageType?: 'home' | 'article' | 'page';
+  pageType?: 'home' | 'article' | 'page' | 'download';
   articleDate?: string;
   articleModifiedDate?: string;
   articleAuthor?: string;
@@ -30,8 +30,8 @@ const {
 } = Astro.props;
 const _ = translation(lang);
 const siteTitle = _.site.title;
-const brandSuffix = pageType === 'article' ? 'TinyOpt' : siteTitle;
-const fullTitle = title === siteTitle ? title : `${title} | ${brandSuffix}`;
+const brandName = _.brand;
+const fullTitle = title === siteTitle ? title : `${title} | ${brandName}`;
 const locale = lang === 'en' ? 'en-US' : 'zh-CN';
 const baseUrl = 'https://seojeck.com';
 const autoCanonical = canonical ?? `${baseUrl}${Astro.url.pathname}`;
@@ -39,6 +39,7 @@ const ogType = pageType === 'article' ? 'article' : 'website';
 const authorName = articleAuthor ?? 'TinyOpt Team';
 const defaultOgImage = `${baseUrl}/images/og-default.png`;
 const ogImageUrl = ogImage ? (ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`) : defaultOgImage;
+const downloadUrl = 'https://github.com/SinMu-L/TinyOpt/releases/latest/download/TinyOpt-latest.exe';
 const enPath = lang === 'zh'
   ? (langHref ?? (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname))
   : Astro.url.pathname;
@@ -48,11 +49,26 @@ const zhPath = lang === 'en'
 const enHref = `${baseUrl}${enPath}`;
 const zhHref = `${baseUrl}${zhPath}`;
 
-function getDefaultSchema(baseUrl: string, siteTitle: string, description: string) {
+function getFaqSchema(items: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": items.map((item) => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.a
+      }
+    }))
+  };
+}
+
+function getDefaultSchema(baseUrl: string, brandName: string, description: string) {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": siteTitle,
+    "name": brandName,
     "url": baseUrl,
     "description": description,
     "potentialAction": {
@@ -63,34 +79,42 @@ function getDefaultSchema(baseUrl: string, siteTitle: string, description: strin
   };
 }
 
-function getSoftwareSchema(baseUrl: string, siteTitle: string, description: string, version?: string) {
+function getSoftwareSchema(baseUrl: string, brandName: string, description: string, version?: string) {
   const schema: any = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": siteTitle,
+    "name": brandName,
+    "url": baseUrl,
+    "downloadUrl": downloadUrl,
     "operatingSystem": "Windows 10/11",
+    "softwareRequirements": "Windows 10 or Windows 11",
     "applicationCategory": "MultimediaApplication",
     "description": description,
     "offers": {
       "@type": "Offer",
       "price": "0",
-      "priceCurrency": "USD"
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
     },
     "author": {
-      "@type": "Person",
-      "name": "TinyOpt Team"
+      "@type": "Organization",
+      "name": "TinyOpt Team",
+      "url": baseUrl
     }
   };
-  if (version) schema.version = version;
+  if (version) schema.softwareVersion = version;
   return schema;
 }
 
-function getHomeSchema(baseUrl: string, siteTitle: string, description: string, locale: string, faqItems?: { q: string; a: string }[]) {
+function getHomeSchema(
+  baseUrl: string, brandName: string, description: string, locale: string,
+  faqItems?: { q: string; a: string }[], version?: string
+) {
   const schemas: any[] = [
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": siteTitle,
+      "name": brandName,
       "url": baseUrl,
       "description": description,
       "email": "sinmu8191@gmail.com",
@@ -99,7 +123,7 @@ function getHomeSchema(baseUrl: string, siteTitle: string, description: string, 
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": siteTitle,
+      "name": brandName,
       "url": baseUrl,
       "inLanguage": locale,
       "potentialAction": {
@@ -108,29 +132,29 @@ function getHomeSchema(baseUrl: string, siteTitle: string, description: string, 
         "query-input": "required name=search_term_string"
       }
     },
-    getSoftwareSchema(baseUrl, siteTitle, description)
+    getSoftwareSchema(baseUrl, brandName, description, version)
   ];
 
   if (faqItems && faqItems.length > 0) {
-    schemas.push({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqItems.map((item) => ({
-        "@type": "Question",
-        "name": item.q,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": item.a
-        }
-      }))
-    });
+    schemas.push(getFaqSchema(faqItems));
   }
 
   return schemas.length === 1 ? schemas[0] : { "@context": "https://schema.org", "@graph": schemas };
 }
 
+function getPageSchema(
+  baseUrl: string, brandName: string, description: string,
+  faqItems?: { q: string; a: string }[]
+) {
+  const schemas: any[] = [getDefaultSchema(baseUrl, brandName, description)];
+  if (faqItems && faqItems.length > 0) {
+    schemas.push(getFaqSchema(faqItems));
+  }
+  return schemas.length === 1 ? schemas[0] : { "@context": "https://schema.org", "@graph": schemas };
+}
+
 function getArticleSchema(
-  baseUrl: string, siteTitle: string, fullTitle: string, description: string,
+  baseUrl: string, brandName: string, fullTitle: string, description: string,
   articleUrl: string, articleDate?: string, articleModifiedDate?: string,
   articleAuthor?: string, articleImage?: string, articleTags?: string[], locale?: string
 ) {
@@ -151,7 +175,7 @@ function getArticleSchema(
     },
     "publisher": {
       "@type": "Organization",
-      "name": siteTitle,
+      "name": brandName,
       "url": baseUrl,
       "logo": {
         "@type": "ImageObject",
@@ -181,13 +205,35 @@ function getArticleSchema(
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": siteTitle, "item": baseUrl },
+      { "@type": "ListItem", "position": 1, "name": brandName, "item": baseUrl },
       { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${baseUrl}/blog/` },
       { "@type": "ListItem", "position": 3, "name": fullTitle }
     ]
   };
 
   return { "@context": "https://schema.org", "@graph": [article, breadcrumb] };
+}
+
+function buildJsonLd() {
+  if (pageType === 'home') {
+    return getHomeSchema(baseUrl, brandName, description, locale, faqItems, softwareVersion);
+  }
+  if (pageType === 'article') {
+    return getArticleSchema(
+      baseUrl, brandName, fullTitle, description, autoCanonical,
+      articleDate, articleModifiedDate, articleAuthor, articleImage, articleTags, locale
+    );
+  }
+  if (pageType === 'download') {
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        getDefaultSchema(baseUrl, brandName, description),
+        getSoftwareSchema(baseUrl, brandName, description, softwareVersion)
+      ]
+    };
+  }
+  return getPageSchema(baseUrl, brandName, description, faqItems);
 }
 ---
 
@@ -206,7 +252,7 @@ function getArticleSchema(
   <meta property="og:type" content={ogType} />
   <meta property="og:url" content={autoCanonical} />
   <meta property="og:locale" content={locale} />
-  <meta property="og:site_name" content={siteTitle} />
+  <meta property="og:site_name" content={brandName} />
   <meta property="og:image" content={ogImageUrl} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -227,15 +273,7 @@ function getArticleSchema(
   <link rel="alternate" type="text/markdown" title="LLMs full content" href="/llms-full.txt" />
 
   <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json" set:html={JSON.stringify(
-    pageType === 'home' ? getHomeSchema(baseUrl, siteTitle, description, locale, faqItems) :
-    pageType === 'article' ? getArticleSchema(baseUrl, siteTitle, fullTitle, description, autoCanonical, articleDate, articleModifiedDate, articleAuthor, articleImage, articleTags, locale) :
-    pageType === 'download' ? { "@context": "https://schema.org", "@graph": [
-      getDefaultSchema(baseUrl, siteTitle, description),
-      getSoftwareSchema(baseUrl, siteTitle, description, softwareVersion)
-    ]} :
-    getDefaultSchema(baseUrl, siteTitle, description)
-  )}></script>
+  <script type="application/ld+json" set:html={JSON.stringify(buildJsonLd())}></script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />

@@ -9,12 +9,12 @@ export interface SEOProps {
 export const SITE_CONFIG = {
   zh: {
     url: 'https://seojeck.com/zh',
-    title: 'TinyOpt',
-    description: '基于 TinyPNG API 的桌面图片批量压缩工具，支持水印添加、格式转换、批量重命名。免费、高效、安全。',
+    title: '免费批量图片压缩工具 TinyOpt — PNG/JPEG/WebP 优化',
+    description: '免费 Windows 批量图片压缩工具。基于 TinyPNG API 批量压缩 PNG、JPEG、WebP、AVIF，支持水印、格式转换与批量重命名，无上传体积限制。',
   },
   en: {
     url: 'https://seojeck.com',
-    title: 'TinyOpt',
-    description: 'A desktop batch image compression tool based on TinyPNG API, supporting watermark, format conversion, and batch renaming.',
+    title: 'Free Batch Image Compressor — TinyOpt | PNG JPEG WebP',
+    description: 'Free batch image compressor for Windows. Bulk compress PNG, JPEG, WebP & AVIF with TinyPNG API — plus watermark, format conversion, and batch rename. No upload caps.',
   },
 };

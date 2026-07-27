@@ -197,8 +197,7 @@ Three things you can do this week:
 
 👉 [Download TinyOpt and optimize your images for free](/download/)
 
----
-
+***
 [^1]: Google Search Central, "Google Images best practices", https://developers.google.com/search/docs/appearance/google-images
 
 [^2]: Backlinko, "Image SEO: 16 Actionable Tips for Traffic", 2025, https://backlinko.com/image-seo

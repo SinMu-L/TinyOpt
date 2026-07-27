@@ -1,11 +1,11 @@
 {
   "brand": "TinyOpt",
   "site": {
-    "title": "TinyOpt 批量图片处理工具",
-    "description": "基于 TinyPNG API 的桌面端批量图片处理工具，支持批量压缩、水印添加、格式转换、批量重命名。免费、高效、安全。"
+    "title": "免费批量图片压缩工具 TinyOpt — PNG/JPEG/WebP 优化",
+    "description": "免费 Windows 批量图片压缩工具。基于 TinyPNG API 批量压缩 PNG、JPEG、WebP、AVIF，支持水印、格式转换与批量重命名，无上传体积限制。"
   },
   "meta": {
-    "home": "TinyOpt 是一款基于 TinyPNG API 的免费桌面端批量图片处理工具，支持 PNG、JPEG、WebP、AVIF 等格式批量压缩，内置水印添加、格式转换、批量重命名等功能，帮助设计师、运营和开发者高效处理大量图片。",
+    "home": "免费 Windows 批量图片压缩工具 TinyOpt：基于 TinyPNG API 批量压缩 PNG、JPEG、WebP、AVIF，内置水印、格式转换与批量重命名，适合设计师、运营与开发者高效处理大量图片。",
     "about": "了解 TinyOpt 压缩助手：一款基于 TinyPNG API、使用 Python + PyQt5 开发的免费开源桌面批量图片压缩工具，专为需要批量处理图片的设计师、运营人员和开发者打造，集压缩、水印、格式转换、重命名于一体。",
     "download": "免费下载 TinyOpt Windows 桌面客户端：批量压缩 PNG、JPEG、WebP、AVIF 图片，支持水印添加、9 种格式互转与批量重命名，安装即用无需复杂配置，欢迎查看最新版本更新日志，快速上手体验高效的批量图片处理流程。",
     "contact": "联系 TinyOpt 团队：关于免费批量图片压缩工具的任何问题、功能建议或错误反馈，欢迎通过邮箱与我们沟通，我们通常会在 24 小时内回复，也欢迎在 GitHub 上提交 Issue 参与开源共建，共同完善这款免费工具。期待你的声音。",

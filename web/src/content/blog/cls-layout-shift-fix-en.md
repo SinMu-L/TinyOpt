@@ -272,8 +272,7 @@ Three: Add `min-height` to every container wrapping a third-party script.
 
 Do these three, and CLS will likely go from red to green.
 
----
-
+***
 [^1]: Google. "The state of Core Web Vitals." web.dev, February 2023. https://web.dev/top-cwv-2023/
 [^2]: Google Chrome Developers. "Optimize Cumulative Layout Shift." web.dev, 2024. https://web.dev/optimize-cls/
 [^3]: Sistrix. "Core Web Vitals as a ranking factor — data study." sistrix.com, July 2021. https://www.sistrix.com/blog/core-web-vitals-ranking-factor-data/

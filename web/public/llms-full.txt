@@ -1,12 +1,28 @@
-# TinyOpt — Full Content for AI Crawlers
-# This file contains comprehensive information about TinyOpt for generative AI engines.
-# Generated: 2026-07-16
+# Free Batch Image Compressor — TinyOpt | PNG JPEG WebP
+# Full content for AI crawlers and generative engines
+# Updated: 2026-07-27
+
+---
+
+## FAQ (quick answers)
+
+Q: Is TinyOpt free?
+A: Yes. The desktop app is free and open source. TinyPNG API free tier is 500 images/month per key.
+
+Q: What formats does it support?
+A: Input PNG/JPEG/WebP/AVIF/BMP/GIF/TIFF; output JPEG/PNG/WebP/GIF/TIFF/BMP/AVIF/ICO/PDF.
+
+Q: Where do images go?
+A: Desktop app sends images only to TinyPNG over HTTPS. Browser tools on seojeck.com process images locally in the browser.
+
+Q: Batch processing?
+A: Yes — multi-image and folder drag-and-drop with multi-threaded compression.
 
 ---
 
 ## PRODUCT OVERVIEW
 
-TinyOpt (TinyOpt Compressor) is a free, open-source desktop batch image processing tool powered by the TinyPNG API. It provides batch compression, watermarking, format conversion, and batch renaming for designers, front-end developers, digital marketers, and content creators who need to process large volumes of images efficiently.
+TinyOpt (TinyOpt Compressor) is a free, open-source desktop batch image compressor powered by the TinyPNG API. Bulk compress PNG, JPEG, WebP, and AVIF; add watermarks; convert formats; and rename files in bulk for designers, front-end developers, digital marketers, and content creators.
 
 ### Tech Stack
 - Python 3.12
@@ -109,6 +125,11 @@ Images are sent to TinyPNG's official API over HTTPS encrypted connections. The 
 - Website: https://seojeck.com/
 - GitHub: https://github.com/SinMu-L/TinyOpt
 - Download: https://seojeck.com/download/
+- Direct EXE: https://github.com/SinMu-L/TinyOpt/releases/latest/download/TinyOpt-latest.exe
 - Blog: https://seojeck.com/blog/
+- Online tools: https://seojeck.com/tools/
+- Online compress: https://seojeck.com/tools/compress/
+- Online watermark: https://seojeck.com/tools/watermark/
 - Contact: sinmu8191@gmail.com
 - TinyPNG API: https://tinypng.com/developers
+- llms.txt: https://seojeck.com/llms.txt

@@ -77,6 +77,5 @@ WebP 支持透明通道，完全可以替代 PNG。除非目标平台强制要�
 | 社交媒体分享图（Pinterest/Instagram） | JPEG | 兼容性最高，所有平台都支持 |
 | Logo/水印素材 | PNG（带透明底） | WebP 透明通道在部分旧软件中不兼容 |
 
----
-
+***
 **相关阅读**：[9 种图片格式实测对比：JPEG、PNG、WebP 还是 AVIF？](/zh/blog/format-conversion-guide/)

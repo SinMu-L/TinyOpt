@@ -77,6 +77,5 @@ This was a real small fashion store (80 products, ~400 images). No code changes,
 | Social media previews (Pinterest/Instagram) | JPEG | Maximum compatibility across all platforms |
 | Logo/watermark assets | PNG (transparent) | WebP alpha not universally supported in older tools |
 
----
-
+***
 **Related**: [9 Image Format Benchmark: JPEG, PNG, WebP, or AVIF?](/blog/format-conversion-guide-en/)

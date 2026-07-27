@@ -79,6 +79,5 @@ Lena 在 Etsy 上卖手工编织围巾，75 款产品，每款 3 张图，共 22
 
 省下来的时间，她用来织围巾——那才是她的核心竞争力。
 
----
-
-**延伸阅读**：[电商防搬运指南：4 种水印方案实测](/zh/blog/ecommerce-watermark-protection/)
+***
+**延伸阅读**：[水印使用指南](/zh/blog/watermark-guide/)
