@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'preact/hooks';
+import { track } from '@/lib/analytics';
 
 type WatermarkType = 'text' | 'image';
 
@@ -374,6 +375,10 @@ export default function WatermarkTool({ t }: { t: Translations }) {
     setIsApplying(true);
     setApplyProgress(0);
     const processed: WatermarkedFile[] = [];
+    track('tool_watermark_start', {
+      file_count: files.length,
+      watermark_type: config.type,
+    });
 
     // Preload all images
     const imgs: HTMLImageElement[] = [];
@@ -405,6 +410,10 @@ export default function WatermarkTool({ t }: { t: Translations }) {
 
     setResults(processed);
     setIsApplying(false);
+    track('tool_watermark_done', {
+      file_count: processed.length,
+      watermark_type: config.type,
+    });
   };
 
   const handleDownloadSingle = (item: WatermarkedFile) => {

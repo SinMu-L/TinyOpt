@@ -33,9 +33,19 @@ const blogPosts = (await getCollection('blog'))
             {_.home.hero_subtitle}
           </p>
           <div class="flex flex-col sm:flex-row items-center gap-4">
-            <a href="/zh/download/" class="rounded-lg bg-primary-600 px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 transition-all">
+            <a
+              id="ga-cta-home-download"
+              href="/zh/download/"
+              class="rounded-lg bg-primary-600 px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 transition-all"
+            >
               {_.home.hero_cta}
             </a>
+            <script>
+              import { track } from '@/lib/analytics';
+              document.getElementById('ga-cta-home-download')?.addEventListener('click', () => {
+                track('cta_download', { lang: 'zh', location: 'home_hero' });
+              });
+            </script>
             <a href="/zh/about/" class="rounded-lg border border-gray-300 bg-white px-8 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all">
               {_.home.hero_secondary}
             </a>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'preact/hooks';
+import { track } from '@/lib/analytics';
 
 type OutputFormat = 'jpeg' | 'png' | 'webp';
 type Status = 'idle' | 'processing' | 'done' | 'error';
@@ -232,6 +233,16 @@ export default function CompressTool({ t }: { t: Translations }) {
       const blob = new Blob([res.data], { type: res.mimeType });
       setCmpUrl(URL.createObjectURL(blob));
       setStatus('done');
+      const saved =
+        res.originalSize > 0
+          ? Math.round((1 - res.compressedSize / res.originalSize) * 1000) / 10
+          : 0;
+      track('tool_compress_done', {
+        format: res.format,
+        original_kb: Math.round(res.originalSize / 1024),
+        compressed_kb: Math.round(res.compressedSize / 1024),
+        saved_percent: saved,
+      });
     };
     worker.onerror = () => {
       pendingRef.current = false;
@@ -242,12 +253,19 @@ export default function CompressTool({ t }: { t: Translations }) {
     return () => { worker.terminate(); };
   }, []);
 
-  const doCompress = useCallback((f: File, fmt: OutputFormat, q: number) => {
+  const doCompress = useCallback((f: File, fmt: OutputFormat, q: number, isFirst = false) => {
     if (!workerRef.current) return;
     if (pendingRef.current) return;
     pendingRef.current = true;
     setStatus('processing');
     setError('');
+    if (isFirst) {
+      track('tool_compress_start', {
+        format: fmt,
+        quality: q,
+        original_kb: Math.round(f.size / 1024),
+      });
+    }
     const reader = new FileReader();
     reader.onload = () => {
       const id = ++msgIdRef.current;
@@ -263,13 +281,13 @@ export default function CompressTool({ t }: { t: Translations }) {
 
   useEffect(() => {
     if (file && result === null) {
-      doCompress(file, format, quality);
+      doCompress(file, format, quality, true);
     }
   }, [file]);
 
   useEffect(() => {
     if (file && result) {
-      const timer = setTimeout(() => doCompress(file, format, quality), 300);
+      const timer = setTimeout(() => doCompress(file, format, quality, false), 300);
       return () => clearTimeout(timer);
     }
   }, [format, quality]);

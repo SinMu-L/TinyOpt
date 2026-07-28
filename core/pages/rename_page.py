@@ -243,10 +243,7 @@ class RenamePage(QWidget):
 
     def retranslate(self):
         self.page_title.setText(T("rename.page_title"))
-        sub = T("rename.page_title")
-        self.page_subtitle.setText(
-            sub if not sub.startswith("rename.") else "\u6279\u91cf\u91cd\u547d\u540d\u6587\u4ef6\uff0c\u7075\u6d3b\u8bbe\u7f6e\u547d\u540d\u89c4\u5219"
-        )
+        self.page_subtitle.setText(T("rename.hero_subtitle"))
         self.drop_zone.set_texts(
             T("compress.drop_title"),
             T("compress.drop_hint"),
@@ -272,6 +269,7 @@ class RenamePage(QWidget):
             T('app.original_name'), T('app.new_name'), T('app.path'),
         ])
         self._rn_update_count()
+        self._update_file_toggle()
 
     # ── empty / file state ───────────────────────────────────────────
 
@@ -283,7 +281,8 @@ class RenamePage(QWidget):
     def _update_file_toggle(self):
         count = self.rn_file_table.rowCount()
         arrow = "\u25be" if self._file_list_expanded else "\u25b8"
-        self.rn_file_toggle.setText("\u5171 {} \u4e2a\u6587\u4ef6 {}".format(count, arrow))
+        text = T("app.file_count", count=count)
+        self.rn_file_toggle.setText(f"{text} {arrow}")
 
     def _toggle_file_list(self):
         self._file_list_expanded = not self._file_list_expanded

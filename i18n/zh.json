@@ -112,6 +112,7 @@
   },
   "watermark": {
     "page_title": "💧 水印设置",
+    "hero_subtitle": "拖入多张图片，统一添加文字或图片水印",
     "type": "类型",
     "type_image": "图片水印",
     "type_text": "文字水印",
@@ -144,6 +145,7 @@
   },
   "rename": {
     "page_title": "📝 重命名规则",
+    "hero_subtitle": "批量重命名文件，灵活设置命名规则",
     "pattern": "命名模式",
     "pattern_placeholder": "例如: product_{index} 或 {name}_{index}",
     "hint": "提示: {name}=原文件名  {index}=序号  {date}=当前日期",
@@ -333,6 +335,7 @@
   },
   "ratio_page": {
     "page_title": "📐 比例设置",
+    "hero_subtitle": "调整图片比例，支持裁剪、填充、拉伸",
     "mode_label": "模式:",
     "ratio_label": "比例:",
     "custom_ratio": "或",

@@ -40,12 +40,27 @@ const downloadHref = lang === 'en' ? '/download/' : '/zh/download/';
     </div>
 
     <div class="text-center">
-      <a href={downloadHref} class="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3 text-sm font-semibold text-primary-700 shadow-lg hover:bg-primary-50 transition-all">
+      <a
+        id="ga-cta-tools-download"
+        href={downloadHref}
+        class="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3 text-sm font-semibold text-primary-700 shadow-lg hover:bg-primary-50 transition-all"
+        data-lang={lang}
+      >
         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
         {tc.button}
       </a>
     </div>
+    <script>
+      import { track } from '@/lib/analytics';
+      const el = document.getElementById('ga-cta-tools-download');
+      el?.addEventListener('click', () => {
+        track('cta_download', {
+          lang: el.getAttribute('data-lang') || 'en',
+          location: 'tools_cta_banner',
+        });
+      });
+    </script>
   </div>
 </section>

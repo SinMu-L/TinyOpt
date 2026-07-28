@@ -340,8 +340,7 @@ class WatermarkPage(QWidget):
 
     def retranslate(self):
         self.page_title.setText(T("watermark.page_title"))
-        sub = T("watermark.hero_subtitle")
-        self.page_subtitle.setText(sub if not sub.startswith("watermark.") else "\u62d6\u5165\u591a\u5f20\u56fe\u7247\uff0c\u7edf\u4e00\u6dfb\u52a0\u6587\u5b57\u6216\u56fe\u7247\u6c34\u5370")
+        self.page_subtitle.setText(T("watermark.hero_subtitle"))
         self.drop_zone.set_texts(
             T("compress.drop_title"),
             T("compress.drop_hint"),
@@ -377,6 +376,7 @@ class WatermarkPage(QWidget):
         self.wm_remove_btn.setText(T("app.remove_selected"))
         self.wm_clear_btn.setText(T("app.clear_list"))
         self._wm_update_count()
+        self._update_file_toggle()
 
     # ── empty / file state ───────────────────────────────────────────
 
@@ -388,7 +388,8 @@ class WatermarkPage(QWidget):
     def _update_file_toggle(self):
         count = self.wm_file_list.count()
         arrow = "\u25be" if self._file_list_expanded else "\u25b8"
-        self.wm_file_toggle.setText("\u5171 {} \u4e2a\u6587\u4ef6 {}".format(count, arrow))
+        text = T("app.file_count", count=count)
+        self.wm_file_toggle.setText(f"{text} {arrow}")
 
     def _toggle_file_list(self):
         self._file_list_expanded = not self._file_list_expanded
