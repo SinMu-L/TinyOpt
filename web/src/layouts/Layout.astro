@@ -293,7 +293,7 @@ function buildJsonLd() {
   <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="u7AA4DeV1SI8yuf2HXAuLw" async></script>
 
   <!-- Google Analytics (loaded only with cookie consent) -->
-  <script>
+  <script is:inline>
     window.__loadGA = function() {
       if (window.__gaLoaded) return;
       window.__gaLoaded = true;
@@ -302,9 +302,9 @@ function buildJsonLd() {
       s.src = 'https://www.googletagmanager.com/gtag/js?id=G-S9N29VS8B8';
       document.head.appendChild(s);
       window.dataLayer = window.dataLayer || [];
-      function gtag(){window.dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-S9N29VS8B8');
+      window.gtag = function(){window.dataLayer.push(arguments);};
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-S9N29VS8B8');
     };
     if (localStorage.getItem('cookie_consent') === 'accepted') {
       window.__loadGA();

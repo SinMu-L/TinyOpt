@@ -1,6 +1,6 @@
 {
   "name": "tinyjpg-compressor",
-  "version": "1.8.10",
+  "version": "1.8.11",
   "description": "TinyOpt - 图片批量压缩工具官方网站",
   "type": "module",
   "scripts": {

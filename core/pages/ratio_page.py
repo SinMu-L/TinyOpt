@@ -293,10 +293,7 @@ class RatioPage(QWidget):
 
     def retranslate(self):
         self.page_title.setText(T("ratio_page.page_title"))
-        sub = T("ratio_page.page_title")
-        self.page_subtitle.setText(
-            sub if not sub.startswith("ratio_page.") else "\u8c03\u6574\u56fe\u7247\u6bd4\u4f8b\uff0c\u652f\u6301\u88c1\u526a\u3001\u586b\u5145\u3001\u62c9\u4f38"
-        )
+        self.page_subtitle.setText(T("ratio_page.hero_subtitle"))
         self.drop_zone.set_texts(
             T("compress.drop_title"),
             T("compress.drop_hint"),
@@ -338,6 +335,7 @@ class RatioPage(QWidget):
             self.ratio_anchor_combo.setCurrentIndex(idx)
 
         self._ratio_update_count()
+        self._update_file_toggle()
 
     # ── empty / file state ───────────────────────────────────────────
 
@@ -349,7 +347,8 @@ class RatioPage(QWidget):
     def _update_file_toggle(self):
         count = self.ratio_file_list.count()
         arrow = "\u25be" if self._file_list_expanded else "\u25b8"
-        self.ratio_file_toggle.setText("\u5171 {} \u4e2a\u6587\u4ef6 {}".format(count, arrow))
+        text = T("app.file_count", count=count)
+        self.ratio_file_toggle.setText(f"{text} {arrow}")
 
     def _toggle_file_list(self):
         self._file_list_expanded = not self._file_list_expanded

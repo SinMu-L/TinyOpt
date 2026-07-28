@@ -28,14 +28,14 @@ class Translator:
         else:
             self._data = {}
 
-    def get(self, key, **kwargs):
-        parts = key.split(".")
+    def get(self, key_path, **kwargs):
+        parts = key_path.split(".")
         value = self._data
         try:
             for part in parts:
                 value = value[part]
         except (KeyError, TypeError):
-            return key
+            return key_path
         if kwargs:
             try:
                 return value.format(**kwargs)
@@ -70,8 +70,8 @@ def get_language():
     return _TRANSLATOR.lang
 
 
-def T(key, **kwargs):
-    return _TRANSLATOR.get(key, **kwargs)
+def T(key_path, **kwargs):
+    return _TRANSLATOR.get(key_path, **kwargs)
 
 
 def on_language_change(callback):

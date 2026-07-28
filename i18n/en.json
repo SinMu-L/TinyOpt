@@ -112,6 +112,7 @@
   },
   "watermark": {
     "page_title": "💧 Watermark Settings",
+    "hero_subtitle": "Drag and drop multiple images to add text or image watermarks",
     "type": "Type",
     "type_image": "Image Watermark",
     "type_text": "Text Watermark",
@@ -144,6 +145,7 @@
   },
   "rename": {
     "page_title": "📝 Rename Rules",
+    "hero_subtitle": "Batch rename files with flexible naming rules",
     "pattern": "Pattern",
     "pattern_placeholder": "e.g. product_{index} or {name}_{index}",
     "hint": "Hint: {name}=original name  {index}=sequence  {date}=current date",
@@ -333,6 +335,7 @@
   },
   "ratio_page": {
     "page_title": "📐 Ratio Settings",
+    "hero_subtitle": "Adjust image ratio with crop, pad, or stretch",
     "mode_label": "Mode:",
     "ratio_label": "Ratio:",
     "custom_ratio": "or",
