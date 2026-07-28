@@ -27,7 +27,7 @@ const navItems = [
   { label: _.nav.terms_short, href: lang === 'en' ? '/terms/' : '/zh/terms/', active: isActive('/terms') },
 ];
 const fallbackLangHref = lang === 'en'
-  ? '/zh' + (pathname === '/' ? '' : pathname)
+  ? (pathname === '/' ? '/zh/' : `/zh${pathname}`)
   : pathname.replace(/^\/zh/, '') || '/';
 const langHref = overrideLangHref ?? fallbackLangHref;
 const langLabel = lang === 'en' ? '中文' : 'EN';

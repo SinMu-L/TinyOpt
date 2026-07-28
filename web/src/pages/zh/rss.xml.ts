@@ -9,7 +9,7 @@ export const GET = async () => {
   return rss({
     title: 'TinyOpt - 新闻动态',
     description: '了解 TinyOpt 的最新版本动态、使用技巧与行业资讯',
-    site: 'https://seojeck.com/zh',
+    site: 'https://seojeck.com/zh/',
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,

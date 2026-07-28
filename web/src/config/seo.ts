@@ -8,7 +8,7 @@ export interface SEOProps {
 
 export const SITE_CONFIG = {
   zh: {
-    url: 'https://seojeck.com/zh',
+    url: 'https://seojeck.com/zh/',
     title: '免费批量图片压缩工具 TinyOpt — PNG/JPEG/WebP 优化',
     description: '免费 Windows 批量图片压缩工具。基于 TinyPNG API 批量压缩 PNG、JPEG、WebP、AVIF，支持水印、格式转换与批量重命名，无上传体积限制。',
   },
