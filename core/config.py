@@ -28,6 +28,7 @@ DEFAULT_KEYS = [
     {"key": "wB5GkcFGBzpxCGgckbjn66sCddRnCwFv", "remark": "Key-3"},
     {"key": "v0MKkFyq6VmNPQtc7rFz5Ly2ZdV9lb8M", "remark": "Key-4"},
     {"key": "hzWSy3mgjvVQH97cdBqcScCJDNp31R9Z", "remark": "Key-5"},
+    {"key": "TbwrFS17vq0PWy37rHGbDLfxKKdTCP9Q", "remark": "Key-6"},
 ]
 
 RESIZE_METHODS = {
