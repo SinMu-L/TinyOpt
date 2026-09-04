@@ -39,7 +39,7 @@ const ogType = pageType === 'article' ? 'article' : 'website';
 const authorName = articleAuthor ?? 'TinyOpt Team';
 const defaultOgImage = `${baseUrl}/images/og-default.png`;
 const ogImageUrl = ogImage ? (ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`) : defaultOgImage;
-const downloadUrl = 'https://github.com/SinMu-L/TinyOpt/releases/latest/download/TinyOpt-latest.exe';
+const downloadUrl = '/download/latest.exe';
 const enPath = lang === 'zh'
   ? (langHref ?? (Astro.url.pathname.startsWith('/zh') ? Astro.url.pathname.replace(/^\/zh/, '') || '/' : Astro.url.pathname))
   : Astro.url.pathname;

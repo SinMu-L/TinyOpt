@@ -2,6 +2,23 @@
     "framework": "astro",
     "buildCommand": "npm run build",
     "installCommand": "npm install",
+    "rewrites": [
+        {
+            "source": "/download/latest.exe",
+            "destination": "https://github.com/SinMu-L/TinyOpt/releases/latest/download/TinyOpt-latest.exe"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/download/latest.exe",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "no-store"
+                }
+            ]
+        }
+    ],
     "redirects": [
         {
             "source": "/off-page-seo/introduction",
