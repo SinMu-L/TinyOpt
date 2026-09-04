@@ -154,46 +154,6 @@
             "permanent": true
         },
         {
-            "source": "/en/cases/undefined",
-            "destination": "/cases/",
-            "permanent": true
-        },
-        {
-            "source": "/en/cases/undefined/",
-            "destination": "/cases/",
-            "permanent": true
-        },
-        {
-            "source": "/en/blog/undefined",
-            "destination": "/blog/",
-            "permanent": true
-        },
-        {
-            "source": "/en/blog/undefined/",
-            "destination": "/blog/",
-            "permanent": true
-        },
-        {
-            "source": "/cases/undefined",
-            "destination": "/cases/",
-            "permanent": true
-        },
-        {
-            "source": "/cases/undefined/",
-            "destination": "/cases/",
-            "permanent": true
-        },
-        {
-            "source": "/blog/undefined",
-            "destination": "/blog/",
-            "permanent": true
-        },
-        {
-            "source": "/blog/undefined/",
-            "destination": "/blog/",
-            "permanent": true
-        },
-        {
             "source": "/en/blog/bulk-image-seo-station-group",
             "destination": "/blog/",
             "permanent": true

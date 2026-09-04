@@ -26,6 +26,13 @@ export const GET: APIRoute = async () => {
     { url: '/zh/privacy/', changefreq: 'yearly', priority: '0.2' },
     { url: '/zh/terms/', changefreq: 'yearly', priority: '0.2' },
     { url: '/zh/blog/', changefreq: 'weekly', priority: '0.7' },
+    { url: '/blog/', changefreq: 'weekly', priority: '0.7' },
+    { url: '/tools/', changefreq: 'weekly', priority: '0.8' },
+    { url: '/tools/compress/', changefreq: 'monthly', priority: '0.7' },
+    { url: '/tools/watermark/', changefreq: 'monthly', priority: '0.7' },
+    { url: '/zh/tools/', changefreq: 'weekly', priority: '0.7' },
+    { url: '/zh/tools/compress/', changefreq: 'monthly', priority: '0.6' },
+    { url: '/zh/tools/watermark/', changefreq: 'monthly', priority: '0.6' },
   ];
 
   const daysAgo = (d: Date) => Math.floor((now.getTime() - d.getTime()) / 86400000);
