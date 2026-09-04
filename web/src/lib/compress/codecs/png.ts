@@ -33,7 +33,15 @@ async function ensureWasm(): Promise<any> {
             },
             __wbindgen_memory: () => (instance.exports as any).memory,
             __wbindgen_string_new: () => '',
-            __wbindgen_throw: (_arg0: number, _arg1: number) => { throw new Error('imagequant error'); },
+            __wbindgen_throw: (ptr: number, len: number) => {
+              let msg = '';
+              try {
+                msg = new TextDecoder('utf-8').decode(new Uint8Array((instance.exports as any).memory.buffer, ptr >>> 0, len >>> 0));
+              } catch {
+                // keep the fallback message below
+              }
+              throw new Error('imagequant error' + (msg ? `: ${msg}` : ''));
+            },
           },
         });
         instance = result.instance;
@@ -61,7 +69,15 @@ async function ensureWasm(): Promise<any> {
             },
             __wbindgen_memory: () => (instance.exports as any).memory,
             __wbindgen_string_new: () => '',
-            __wbindgen_throw: (_arg0: number, _arg1: number) => { throw new Error('imagequant error'); },
+            __wbindgen_throw: (ptr: number, len: number) => {
+              let msg = '';
+              try {
+                msg = new TextDecoder('utf-8').decode(new Uint8Array((instance.exports as any).memory.buffer, ptr >>> 0, len >>> 0));
+              } catch {
+                // keep the fallback message below
+              }
+              throw new Error('imagequant error' + (msg ? `: ${msg}` : ''));
+            },
           },
         });
         instance = result;
@@ -137,24 +153,43 @@ const codec: Codec = {
   supportsAlpha: true,
 
   async encode(imageData: ImageData, quality: number, width: number, height: number): Promise<Uint8Array> {
-    const wasm = await ensureWasm();
+    try {
+      const wasm = await ensureWasm();
 
-    const maxColors = Math.max(2, Math.min(256, Math.round(256 * quality / 100)));
-    const { data } = imageData;
+      const maxColors = Math.max(2, Math.min(256, Math.round(256 * quality / 100)));
+      const { data } = imageData;
 
-    const resultPtr = quantizeImage(wasm, new Uint8Array(data.buffer, data.byteOffset, data.byteLength), width, height, maxColors);
+      const resultPtr = quantizeImage(wasm, new Uint8Array(data.buffer, data.byteOffset, data.byteLength), width, height, maxColors);
+      if (!resultPtr) return fallbackPng(imageData, width, height);
 
-    const rgba = remapPaletteToRGBA(wasm, resultPtr, width, height);
-    freeQuantResult(wasm, resultPtr);
+      const paletteLen = (wasm.quantresult_palette_len as (p: number) => number)(resultPtr);
+      const indicesLen = (wasm.quantresult_indices_len as (p: number) => number)(resultPtr);
+      if (paletteLen === 0 || indicesLen === 0) return fallbackPng(imageData, width, height);
 
-    const id = new ImageData(rgba, width, height);
-    const canvas = new OffscreenCanvas(width, height);
-    const ctx = canvas.getContext('2d')!;
-    ctx.putImageData(id, 0, 0);
-    const blob = await canvas.convertToBlob({ type: 'image/png' });
-    const buf = await blob.arrayBuffer();
-    return new Uint8Array(buf);
+      const rgba = remapPaletteToRGBA(wasm, resultPtr, width, height);
+      try { freeQuantResult(wasm, resultPtr); } catch { /* glue mismatch — leak it */ }
+
+      const id = new ImageData(rgba, width, height);
+      const canvas = new OffscreenCanvas(width, height);
+      const ctx = canvas.getContext('2d')!;
+      ctx.putImageData(id, 0, 0);
+      const blob = await canvas.convertToBlob({ type: 'image/png' });
+      const buf = await blob.arrayBuffer();
+      return new Uint8Array(buf);
+    } catch {
+      // imagequant can fail or return empty on edge-case images / glue mismatch —
+      // fall back to a lossless canvas PNG so the file still processes.
+      return fallbackPng(imageData, width, height);
+    }
   },
 };
+
+async function fallbackPng(imageData: ImageData, width: number, height: number): Promise<Uint8Array> {
+  const canvas = new OffscreenCanvas(width, height);
+  const ctx = canvas.getContext('2d')!;
+  ctx.putImageData(imageData, 0, 0);
+  const blob = await canvas.convertToBlob({ type: 'image/png' });
+  return new Uint8Array(await blob.arrayBuffer());
+}
 
 export default codec;

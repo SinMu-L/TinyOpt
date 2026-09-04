@@ -1,8 +1,18 @@
 export type OutputFormat = 'jpeg' | 'png' | 'webp';
 
+export type ResizeMethod = 'none' | 'fit' | 'scale' | 'cover' | 'thumb';
+
+export interface ResizeOptions {
+  method: ResizeMethod;
+  width?: number;
+  height?: number;
+  percent?: number;
+}
+
 export interface CompressOptions {
   format: OutputFormat;
   quality: number;
+  resize?: ResizeOptions;
 }
 
 export interface CompressRequest {
@@ -20,6 +30,7 @@ export interface CompressResponse {
   mimeType: string;
   width: number;
   height: number;
+  error?: string;
 }
 
 export interface Codec {
